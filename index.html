@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Note for K ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px 10px;
+      background: linear-gradient(135deg, #fff0f3 0%, #ffe4e8 50%, #f0f4ff 100%);
+      font-family: 'Kanit', sans-serif;
+      color: #333333;
+      min-height: 100vh;
+    }
+
+    .cute-container {
+      max-width: 440px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .step-box {
+      animation: fadeInAnim 0.6s ease-in-out forwards;
+    }
+
+    @keyframes fadeInAnim {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 📩 แอนิเมชันซองจดหมายกลิ้งเข้ามา */
+    .envelope-box {
+      position: relative;
+      display: inline-block;
+      margin-top: 25px;
+      margin-bottom: 15px;
+    }
+
+    .roll-in-anim {
+      animation: rollIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes rollIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-150px) rotate(-360deg) scale(0.5);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg) scale(1);
+      }
+    }
+
+    .envelope-icon {
+      font-size: 75px;
+      filter: drop-shadow(0 10px 18px rgba(255, 182, 193, 0.6));
+    }
+
+    .sparkle-heart {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      font-size: 28px;
+    }
+
+    /* 🌸 การ์ดต้อนรับ */
+    .welcome-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 25px 20px;
+      margin-top: 10px;
+      box-shadow: 0 12px 30px rgba(255, 182, 193, 0.35);
+      border: 2px solid #ffffff;
+      animation: popUp 0.8s ease-out 0.8s forwards;
+      opacity: 0;
+    }
+
+    @keyframes popUp {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .morning-title {
+      font-size: 21px;
+      font-weight: 700;
+      color: #ff477e;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 4px rgba(255, 182, 193, 0.2);
+    }
+
+    .special-today-text {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #4a5568;
+      margin-bottom: 22px;
+      font-weight: 400;
+    }
+
+    /* 🔘 ปุ่มกดหน้าต่อไป */
+    .next-btn {
+      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+      color: #ffffff;
+      border: none;
+      padding: 14px 30px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Kanit', sans-serif;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 117, 140, 0.4);
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+
+    .next-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* 🎥 วิดีโอ */
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+      background: #000;
+      border: 3px solid #ffffff;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 🌧️ ฝน */
+    .big-rain-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 30px 20px;
+      margin-top: 20px;
+      box-shadow: 0 12px 30px rgba(147, 197, 253, 0.35);
+      border: 2px solid #ffffff;
+    }
+
+    .rain-icon {
+      font-size: 55px;
+      margin-bottom: 10px;
+    }
+
+    .big-rain-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2563eb;
+      margin: 0 0 10px 0;
+    }
+
+    .sub-rain-text {
+      font-size: 16px;
+      color: #475569;
+      margin: 0;
+    }
+
+    /* 📅 ปฏิทิน */
+    .calendar-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 24px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 25px rgba(255, 182, 193, 0.25);
+      border: 2px solid #ffffff;
+    }
+
+    .calendar-header {
+      font-size: 19px;
+      font-weight: 700;
+      color: #ff477e;
+      margin-bottom: 15px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .day-name {
+      font-weight: 600;
+      color: #a0aec0;
+      padding-bottom: 5px;
+    }
+
+    .day {
+      padding: 8px 0;
+      border-radius: 10px;
+      color: #4a5568;
+      font-weight: 500;
+    }
+
+    .special-day {
+      background: linear-gradient(135deg, #ff477e, #ff758c);
+      color: white;
+      font-weight: bold;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(255, 71, 126, 0.4);
+    }
+
+    /* 🎵 แผ่นเสียง */
+    .vinyl-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 24px;
+      padding: 16px 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 25px rgba(255, 182, 193, 0.25);
+      border: 2px solid #ffffff;
+    }
+
+    .vinyl-player {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+    }
+
+    .vinyl-disc {
+      width: 54px;
+      height: 54px;
+      background: radial-gradient(circle, #333 30%, #111 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      border: 3px solid #ffb6c1;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .vinyl-disc.spinning {
+      animation: spin 3s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .vinyl-info {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .song-title {
+      font-weight: 700;
+      font-size: 16px;
+      color: #2d3748;
+    }
+
+    .play-status {
+      font-size: 12.5px;
+      color: #718096;
+      margin-top: 2px;
+    }
+
+    /* 📌 โน้ต */
+    .note-card {
+      background: #fffdf0;
+      border-radius: 20px;
+      padding: 25px 20px;
+      margin-bottom: 18px;
+      position: relative;
+      box-shadow: 0 8px 25px rgba(217, 119, 6, 0.15);
+      border: 2px solid #fef3c7;
+      text-align: left;
+    }
+
+    .pin-icon {
+      position: absolute;
+      top: -12px;
+      left: 20px;
+      font-size: 22px;
+    }
+
+    .heart-sticker {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      font-size: 20px;
+    }
+
+    .note-header {
+      font-weight: 700;
+      color: #d97706;
+      margin-bottom: 12px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .note-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #374151;
+      margin: 0;
+      min-height: 60px;
+      font-weight: 500;
+    }
+
+    /* ☕ เกมเลือกน้ำ */
+    .game-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 8px 25px rgba(255, 182, 193, 0.25);
+      border: 2px solid #ffffff;
+      position: relative;
+      min-height: 240px;
+    }
+
+    .game-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #ff477e;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+
+    .choice-btn {
+      padding: 14px 18px;
+      border-radius: 16px;
+      border: 2px solid #ffe4e8;
+      font-family: 'Kanit', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #2d3748;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .bad-btn {
+      background-color: #fff5f5;
+      border-color: #fed7d7;
+      position: relative;
+      z-index: 10;
+    }
+
+    .good-btn {
+      background-color: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .best-btn {
+      background-color: #f0f9ff;
+      border-color: #bae6fd;
+    }
+
+    .result-box {
+      margin-top: 16px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #ff477e;
+      line-height: 1.5;
+    }
+
+    /* 🥰 ฉากสุดท้าย */
+    .final-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 32px 20px;
+      margin-top: 20px;
+      box-shadow: 0 12px 30px rgba(255, 182, 193, 0.35);
+      border: 2px solid #ffffff;
+    }
+
+    .final-heart {
+      font-size: 45px;
+      margin-bottom: 12px;
+    }
+
+    .final-title {
+      font-size: 21px;
+      font-weight: 700;
+      color: #ff477e;
+      margin: 0 0 10px 0;
+    }
+
+    .final-sub {
+      font-size: 15px;
+      color: #4a5568;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    /* 🎬 Animation */
+    .pulse-anim {
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    .bounce-anim {
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4px); }
+    }
+
+    .float-anim {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0px); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="main-app-container" class="cute-container">
+  
+  <!-- Step 1: ซองจดหมายกลิ้งเข้ามา -->
+  <div id="step-1-intro" class="step-box">
+    <div class="envelope-box roll-in-anim">
+      <div class="envelope-icon">✉️</div>
+      <div class="sparkle-heart pulse-anim">💖</div>
+    </div>
+
+    <div class="welcome-card">
+      <div class="morning-title">Morning น๊า พี่ เค ที่เป็นตัว K 💖✨</div>
+      <p class="special-today-text">
+        ✨ วันนี้พิเศษนิดนึง... เพราะว่าวันนี้หนูไม่อยู่ไปเข้าออฟฟิศน่าจะกลับค่ำๆเลยย 🥺<br>
+        แอบทำไว้เล่นๆเผื่อมีคนคิดถึงและคุมคนดื้อโดยเฉพาะเลย!
+      </p>
+      
+      <button class="next-btn bounce-anim" onclick="startExperience()">✨ คลิกหน้าต่อไปสิ... 🎬</button>
+    </div>
+  </div>
+
+  <!-- Step 2: วิดีโอ -->
+  <div id="step-2-video" class="step-box" style="display: none;">
+    <div class="video-wrapper">
+      <video id="myVideo" playsinline muted>
+        <source src="https://ozonemassage.com/wp-content/uploads/2026/09/download-2.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <!-- Step 3: ข้อความเรื่องฝน -->
+  <div id="step-3-rain-text" class="step-box" style="display: none;">
+    <div class="big-rain-card pulse-anim">
+      <div class="rain-icon">🌧️</div>
+      <h1 class="big-rain-title">ไม่อยากให้เปียกฝนคนเดียวแล้ว</h1>
+      <p class="sub-rain-text">เดี๋ยวไม่สบายหรอกคนดื้อ!</p>
+    </div>
+  </div>
+
+  <!-- Step 4: หน้าหลัก -->
+  <div id="step-4-main" class="step-box" style="display: none;">
+    
+    <div class="calendar-card">
+      <div class="calendar-header">September 🍁</div>
+      <div class="calendar-grid">
+        <div class="day-name">อา</div><div class="day-name">จ</div><div class="day-name">อ</div><div class="day-name">พ</div><div class="day-name">พฤ</div><div class="day-name">ศ</div><div class="day-name">ส</div>
+        
+        <div></div><div></div>
+        <div class="day">1</div>
+        <div class="day">2</div>
+        <div class="day special-day">3</div>
+        <div class="day">4</div>
+        <div class="day">5</div>
+        <div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day">11</div><div class="day">12</div>
+        <div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div>
+        <div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day">23</div><div class="day">24</div><div class="day">25</div><div class="day">26</div>
+        <div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div>
+      </div>
+    </div>
+
+    <div class="vinyl-card">
+      <div class="vinyl-player" onclick="toggleAudio()">
+        <div id="vinyl-disc" class="vinyl-disc spinning">
+          <div class="vinyl-center">🎵</div>
+        </div>
+        <div class="vinyl-info">
+          <span class="song-title">Song for You ✨</span>
+          <span id="play-status" class="play-status">▶️ กดที่แผ่นเสียงเพื่อปิด/เปิดเพลง</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card float-anim">
+      <div class="pin-icon">📌</div>
+      <div class="heart-sticker pulse-anim">💖</div>
+      
+      <div class="note-header">✨ Daily Note for K ✨</div>
+      <p id="typewriter-text" class="note-text"></p>
+    </div>
+
+    <div class="game-card" id="game-card">
+      <h3>☕ วันนี้คนดื้อจะกินน้ำอะไรดีคะ?</h3>
+      <div class="button-group">
+        <button id="bad-btn" class="choice-btn bad-btn" onmouseover="dodgeBadDrink()" onclick="dodgeBadDrink()" ontouchstart="dodgeBadDrink()">🥛 กาแฟใส่นม</button>
+        <button class="choice-btn good-btn" onclick="selectDrink('matcha')">🍵 ชาเขียวหวานน้อย</button>
+        <button class="choice-btn best-btn" onclick="selectDrink('water')">💧 น้ำเปล่าเย็นๆ</button>
+      </div>
+
+      <div id="result-box" class="result-box"></div>
+    </div>
+
+  </div>
+
+  <!-- Step 5: หน้าสุดท้าย -->
+  <div id="step-5-final" class="step-box" style="display: none;">
+    <div class="final-card float-anim">
+      <div class="final-heart pulse-anim">🥰💖✨</div>
+      <h2 class="final-title">โอเค... ไว้คุยกันตอนเย็นนะ</h2>
+      <p class="final-sub">หาเวลาพักด้วย หนูเป็นห่วง 🌸</p>
+    </div>
+  </div>
+
+  <audio id="bgMusic" src="https://ozonemassage.com/wp-content/uploads/2026/09/Y2Mate.is-RIFF-Offical-Audio.mp3" loop></audio>
+
+</div>
+
+<script>
+  let btnScale = 1; // ตัวแปรเก็บขนาดปุ่มกาแฟใส่นม
+
+  function startExperience() {
+    const bgMusic = document.getElementById('bgMusic');
+    const video = document.getElementById('myVideo');
+    const step1 = document.getElementById('step-1-intro');
+    const step2 = document.getElementById('step-2-video');
+
+    // 🎵 ตั้งค่าให้เริ่มเล่นตั้งแต่ท่อนร้อง (หน่วยเป็นวินาที)
+    // เปลี่ยนเลข 15 เป็นวินาทีท่อนร้องของเพลงคุณได้เลยค่ะ
+    bgMusic.currentTime = 15; 
+    bgMusic.play().catch(err => console.log("Audio play error:", err));
+
+    step1.style.display = 'none';
+    step2.style.display = 'block';
+
+    video.play().catch(err => console.log("Video play error:", err));
+
+    video.onended = function() {
+      step2.style.display = 'none';
+      const step3 = document.getElementById('step-3-rain-text');
+      step3.style.display = 'block';
+
+      setTimeout(function() {
+        step3.style.display = 'none';
+        const step4 = document.getElementById('step-4-main');
+        step4.style.display = 'block';
+        startTypewriter();
+      }, 3000);
+    };
+  }
+
+  function toggleAudio() {
+    const bgMusic = document.getElementById('bgMusic');
+    const disc = document.getElementById('vinyl-disc');
+    const status = document.getElementById('play-status');
+
+    if (bgMusic.paused) {
+      bgMusic.play();
+      disc.classList.add('spinning');
+      status.textContent = '⏸️ กำลังเล่นเพลงอยู่... (กดเพื่อหยุด)';
+    } else {
+      bgMusic.pause();
+      disc.classList.remove('spinning');
+      status.textContent = '▶️ กดที่แผ่นเสียงเพื่อเปิดเพลง';
+    }
+  }
+
+  const noteText = "ถึงคนดื้อ... วันนี้ตั้งใจทำงานน๊า อย่าลืมหาอะไรอร่อยๆ กินด้วยล่ะ ดื่มน้ำเยอะๆ พักผ่อนมากๆ! 💖";
+  let typeIndex = 0;
+
+  function startTypewriter() {
+    const el = document.getElementById('typewriter-text');
+    if (typeIndex < noteText.length) {
+      el.innerHTML += noteText.charAt(typeIndex);
+      typeIndex++;
+      setTimeout(startTypewriter, 50);
+    }
+  }
+
+  /* 🥛 ปุ่มกาแฟใส่นมวาร์ปหนี + ตัวเล็กลงเรื่อยๆ */
+  function dodgeBadDrink() {
+    const badBtn = document.getElementById('bad-btn');
+    const card = document.getElementById('game-card');
+    
+    // สุ่มตำแหน่งหนี
+    const cardRect = card.getBoundingClientRect();
+    const x = Math.floor(Math.random() * (cardRect.width - 150)) - (cardRect.width / 2 - 75);
+    const y = Math.floor(Math.random() * 120) - 60;
+
+    // ย่อขนาดลงทีละ 15% (จนถึงขั้นต่ำ 0.3)
+    if (btnScale > 0.3) {
+      btnScale -= 0.15;
+    }
+
+    badBtn.style.position = 'relative';
+    badBtn.style.transform = `translate(${x}px, ${y}px) scale(${btnScale})`;
+    
+    document.getElementById('result-box').innerText = '😜 ปุ่มนี้กดไม่ได้หรอก! กินอย่างอื่นสิคะ';
+  }
+
+  /* 🍵 💧 เลือกชาเขียว หรือ น้ำเปล่า แล้วไปหน้าสุดท้ายทันที */
+  function selectDrink(type) {
+    document.getElementById('step-4-main').style.display = 'none';
+    document.getElementById('step-5-final').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
