@@ -18,6 +18,19 @@
       overflow-x: hidden; position: relative;
     }
 
+    /* 🎁 หน้าต้อนรับ (Greeting Screen) */
+    #greeting-overlay {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: linear-gradient(135deg, #ffccd5 0%, #ffe4e8 100%);
+      z-index: 10005; display: flex; flex-direction: column; justify-content: center; align-items: center;
+      transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .greeting-box-icon { font-size: 90px; margin-bottom: 15px; filter: drop-shadow(0 10px 15px rgba(255, 71, 126, 0.3)); animation: bounce 2s infinite; }
+    .greeting-text { font-size: 24px; font-weight: 700; color: #ff477e; margin-bottom: 35px; text-shadow: 0 2px 4px rgba(255,71,126,0.1); text-align: center; padding: 0 20px; }
+    .open-box-btn { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); color: #ffffff; border: none; padding: 16px 35px; font-size: 18px; font-weight: 700; font-family: 'Kanit', sans-serif; border-radius: 30px; cursor: pointer; box-shadow: 0 8px 25px rgba(255, 117, 140, 0.5); transition: transform 0.2s; animation: pulseGlowPink 2s infinite; }
+    .open-box-btn:active { transform: scale(0.95); }
+    @keyframes pulseGlowPink { 0% { box-shadow: 0 0 0 0 rgba(255, 117, 140, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(255, 117, 140, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 117, 140, 0); } }
+
     /* 🏠 ปุ่มต่างๆ */
     .home-btn { position: fixed; top: 15px; left: 15px; background: rgba(255, 255, 255, 0.95); border: 2px solid #ff477e; border-radius: 50%; width: 45px; height: 45px; font-size: 20px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 71, 126, 0.3); z-index: 10000; display: none; justify-content: center; align-items: center; transition: transform 0.2s ease; }
     .home-btn:hover, .home-btn:active { transform: scale(0.9) rotate(-10deg); }
@@ -28,7 +41,7 @@
     .floating-heart-bg { position: fixed; font-size: 18px; color: rgba(255, 117, 140, 0.35); pointer-events: none; z-index: 0; animation: floatUp 6s linear infinite; }
     @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } }
 
-    #video-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease; }
+    #video-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 9999; display: none; justify-content: center; align-items: center; transition: opacity 1s ease; }
     #fullVideo { width: 100%; height: 100%; object-fit: cover; }
     .skip-btn { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(255,255,255,0.5); padding: 8px 18px; border-radius: 20px; font-family: 'Kanit', sans-serif; font-size: 14px; cursor: pointer; z-index: 10000; backdrop-filter: blur(5px); }
 
@@ -41,11 +54,9 @@
     .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .choice-btn:active { transform: scale(0.95); }
     
-    /* ปุ่มเพิ่มโน้ตวันนี้ เรืองแสงดุ๊กดิ๊ก */
     .today-btn { background: linear-gradient(135deg, #fef08a, #f59e0b); color: #78350f; border-color: #fcd34d; width: 100%; margin-bottom: 20px; font-size: 16px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); animation: pulseGlow 2s infinite; }
     @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
 
-    /* ตารางเลือกเดือนน่ารักขึ้น */
     .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 5px; }
     .month-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 5px; border-radius: 16px; border: 2px solid #ffe4e8; background: #fff; font-family: 'Kanit', sans-serif; font-size: 13.5px; font-weight: 600; color: #4a5568; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
     .month-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(255, 182, 193, 0.2); border-color: #ffb6c1; color: #ff477e; }
@@ -53,7 +64,6 @@
     .month-btn.active-sept:hover { color: white; }
     .month-icon { font-size: 16px; margin-bottom: 3px; }
 
-    /* 🗓️ ปฏิทินแบบไดนามิก */
     .calendar-header { font-size: 18px; font-weight: 700; color: #ff477e; margin-bottom: 12px; }
     .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; font-size: 13px; }
     .day-name { font-weight: 600; color: #a0aec0; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0; margin-bottom: 5px; }
@@ -61,15 +71,12 @@
     .day:hover { background: #fff0f3; border-color: #ffccd5; transform: scale(1.05); z-index: 10; box-shadow: 0 4px 8px rgba(255, 182, 193, 0.3); }
     .special-day { background: linear-gradient(135deg, #ff477e, #ff758c) !important; color: white !important; font-weight: bold; border-radius: 50%; box-shadow: 0 4px 10px rgba(255, 71, 126, 0.4); animation: pulse 1.5s infinite; border: none; }
     
-    /* 🟡 วงกลมแจ้งเตือนโน้ตบนปฏิทิน */
     .note-dot { position: absolute; bottom: 3px; right: 3px; background: #fcd34d; border-radius: 50%; box-shadow: 0 2px 4px rgba(245,158,11,0.5); z-index: 5; width: 10px; height: 10px; animation: pulse 2s infinite; pointer-events: none; }
     .note-dot.has-number { width: 16px; height: 16px; font-size: 10px; font-weight: bold; color: #92400e; display: flex; justify-content: center; align-items: center; border: 1.5px solid white; bottom: -2px; right: -2px; animation: bounce 1.5s infinite; }
 
-    /* 📝 กระดานโน้ตเฉพาะวัน */
     .shared-note-box { background: #fffdf0; border: 2px dashed #fcd34d; border-radius: 18px; padding: 15px; text-align: left; margin-bottom: 15px; position: relative; box-shadow: inset 0 0 10px rgba(245,158,11,0.05); }
     .shared-note-title { font-size: 16px; font-weight: 700; color: #d97706; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 6px; border-bottom: 1px dashed #fcd34d; padding-bottom: 10px; }
     
-    /* โครงสร้าง Dropdown (แก้ปัญหาช่องทะลุจอ) */
     .note-meta-inputs { display: flex; gap: 10px; margin-bottom: 12px; width: 100%; }
     .input-col { flex: 1; min-width: 0; display: flex; flex-direction: column; }
     .input-label { font-size: 12px; color: #b45309; font-weight: 700; margin-bottom: 4px; padding-left: 2px; }
@@ -79,7 +86,6 @@
     .note-input { width: 100%; height: 80px; border: 1px solid #fef08a; border-radius: 12px; padding: 12px; font-family: 'Kanit', sans-serif; font-size: 14px; resize: none; background: #ffffff; outline: none; transition: border 0.3s, box-shadow 0.3s; }
     .note-input:focus { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.1); }
     
-    /* ปุ่มอัปโหลดรูปและเสียง */
     .media-buttons { display: flex; gap: 8px; margin-top: 10px; }
     .record-btn, .image-upload-btn { flex: 1; border: 2px solid; padding: 10px; border-radius: 12px; font-family: 'Kanit'; font-weight: 600; cursor: pointer; transition: 0.3s; text-align: center; font-size: 13px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     .record-btn { background: #fef08a; border-color: #fcd34d; color: #92400e; }
@@ -100,13 +106,11 @@
     .save-note-btn:active { transform: translateY(2px); box-shadow: 0 2px 5px rgba(217, 119, 6, 0.3); }
     .save-note-btn:disabled { background: #cbd5e1; box-shadow: none; cursor: not-allowed; transform: none; }
 
-    /* กระดานโชว์ Mini Sticky Notes */
     .notes-board { margin-top: 25px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; border-top: 2px dashed #fef08a; padding-top: 20px; }
     .mini-note { background: linear-gradient(135deg, #fef08a, #fde047); width: calc(50% - 5px); aspect-ratio: 1.05; border-radius: 4px 20px 4px 20px; padding: 15px 10px; position: relative; cursor: pointer; box-shadow: 2px 4px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease; animation: stickNoteAnim 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
     .mini-note:hover { transform: scale(1.05) rotate(-2deg); box-shadow: 4px 8px 15px rgba(0,0,0,0.15); z-index: 10; }
     @keyframes stickNoteAnim { 0% { transform: translateY(-50px) scale(1.2) rotate(10deg); opacity: 0; } 100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; } }
     
-    /* สไตล์สำหรับโน้ตข้ามเวลาและโน้ตล็อกรหัส */
     .mini-note.time-capsule { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); border: 1px dashed #94a3b8; }
     .mini-note.locked-note { background: linear-gradient(135deg, #f8fafc, #f1f5f9); border: 1px dashed #cbd5e1; }
     
@@ -119,7 +123,6 @@
     .mini-time-stamp { font-size: 9.5px; color: #78350f; margin-top: 8px; opacity: 0.8; font-weight: 500; }
     .mini-note.locked-note .mini-time-stamp, .mini-note.time-capsule .mini-time-stamp { color: #334155; }
     
-    /* กิมมิคดาวกระจายตอนแปะโน้ต */
     @keyframes flyOut {
       0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
       100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.5) rotate(180deg); opacity: 0; }
@@ -205,10 +208,17 @@
 <div id="heart-bg-container"></div>
 <button id="home-btn" class="home-btn" onclick="goHome()">🏠</button>
 
+<!-- 🎁 หน้าต้อนรับ (Greeting Screen) เพื่อขออนุญาตเล่นเสียงวิดีโอ -->
+<div id="greeting-overlay">
+  <div class="greeting-box-icon">📦</div>
+  <div class="greeting-text">มีกล่องพัสดุพิเศษมาส่งค่ะ 💌</div>
+  <button class="open-box-btn" onclick="openPackage()">✨ แตะเพื่อเปิดกล่อง!</button>
+</div>
+
 <!-- 🎬 วิดีโอเกริ่นนำ -->
 <div id="video-overlay">
   <button class="skip-btn" onclick="skipIntroVideo()">ข้ามวิดีโอ ⏩</button>
-  <video id="fullVideo" playsinline autoplay muted>
+  <video id="fullVideo" playsinline>
     <source src="https://ozonemassage.com/wp-content/uploads/2026/09/Prompt_D_Pixar_style_animati.mp4" type="video/mp4">
   </video>
 </div>
@@ -245,7 +255,6 @@
   <!-- 🗓️ ปฏิทินแบบไดนามิก -->
   <div id="dynamic-calendar-sec" class="step-box card-base" style="display: none;">
     <div class="calendar-header" id="dynamic-cal-header">Month 2026 🍁</div>
-    <!-- ลบข้อความ "แตะวันที่ 3" ออกไป เปลี่ยนเป็นคำอธิบายรวมๆ น่ารักๆ แทน -->
     <p style="font-size: 13px; color: #718096; margin-top: 0; font-weight: 500;">แตะที่ตัวเลขวันที่ เพื่อเปิดดูความทรงจำ หรือแปะกระดาษโน้ต 💌</p>
     <div class="calendar-grid" id="dynamic-cal-grid">
       <!-- สร้างด้วย JS -->
@@ -344,7 +353,7 @@
     <audio id="bgMusic" src="https://ozonemassage.com/wp-content/uploads/2026/09/Y2Mate.is-RIFF-Offical-Audio.mp3" loop></audio>
   </div>
 
-<!-- 😾 Popup เลือกเดือนต่างๆ (ปรับให้ตรงตามรีเควสเป๊ะๆ) -->
+<!-- 😾 Popup เลือกเดือนต่างๆ -->
 <div id="monthChoiceModal" class="popup-modal">
   <div class="popup-content">
     <div id="popupAvatar" style="font-size: 55px; margin-bottom: 10px;">😾</div>
@@ -422,6 +431,31 @@
     if (currentViewingDay !== null) { renderNotesForDay(currentViewingDay); }
   });
 
+  // --- 🎁 ฟังก์ชันเปิดกล่องพัสดุ (Greeting Screen) ---
+  function openPackage() {
+    const greeting = document.getElementById('greeting-overlay');
+    const videoOverlay = document.getElementById('video-overlay');
+    const video = document.getElementById('fullVideo');
+
+    // Fade out กล่องของขวัญ
+    greeting.style.opacity = '0';
+    greeting.style.transform = 'scale(1.2)';
+    setTimeout(() => {
+      greeting.style.display = 'none';
+      videoOverlay.style.display = 'flex';
+      
+      // ตอนนี้ระบบอนุญาตให้เปิดเสียงได้แล้ว 100% เพราะถูกปลดล็อกด้วยการคลิกปุ่ม!
+      video.muted = false; 
+      video.play().catch(err => console.log("Video play error:", err));
+    }, 800);
+  }
+
+  // --- 🎬 วิดีโอเกริ่นนำ ---
+  const videoOverlay = document.getElementById('video-overlay'); const fullVideo = document.getElementById('fullVideo'); const mainApp = document.getElementById('main-app-container');
+  fullVideo.onended = function() { closeIntroVideo(); }; 
+  function skipIntroVideo() { fullVideo.pause(); closeIntroVideo(); }
+  function closeIntroVideo() { videoOverlay.style.opacity = '0'; setTimeout(() => { videoOverlay.style.display = 'none'; mainApp.style.display = 'flex'; createBackgroundHearts(); }, 1000); }
+
   // --- 📅 เลือกเดือน ---
   function requestMonthAccess(mIndex, type) {
     pendingMonthIndex = mIndex;
@@ -498,7 +532,7 @@
   // --- 📅 คลิกวันที่ ---
   function openTodayNotes() {
     pendingMonthIndex = 8; currentViewingMonthIndex = 8;
-    proceedToNotesBoard(4); // สมมติอิงวันที่ 4
+    proceedToNotesBoard(4); 
   }
 
   function clickDay(day) {
@@ -526,7 +560,7 @@
     proceedToMonth(); 
   }
 
-  // --- 📸 อัปโหลดรูปภาพแบบบีบอัด ---
+  // --- 📸 อัปโหลดรูปภาพ ---
   let imageBase64 = null;
   function handleImageUpload(event) {
     const file = event.target.files[0];
@@ -670,7 +704,7 @@
   }
 
   function isFutureNote(m, d) {
-    const realMonth = 8; const realDay = 4; // อิงจากวันที่ 4 กันยายน (index=8)
+    const realMonth = 8; const realDay = 4; // สมมติอิงวันที่ 4 กันยา
     if (m > realMonth) return true;
     if (m === realMonth && d > realDay) return true;
     return false;
@@ -799,11 +833,6 @@
   function finishScan() { hasCompletedScan = true; document.getElementById('laser').classList.remove('scanning'); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerHTML = '💓 135 BPM (หัวใจเต้นแรงมาก!)'; document.getElementById('lie-result').innerHTML = `🚨 <strong>RESULT: DETECTED!</strong><br><span style="color: #ff477e;">"ตรวจพบความคิดถึง 100% (ห้ามปฏิเสธเด็ดขาด!)" 🥰✨</span>`; const finalBtn = document.getElementById('final-btn-wrapper'); finalBtn.style.display = 'block'; setTimeout(() => { finalBtn.classList.add('show'); }, 600); }
   function goToNextSection() { document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'block'; }
 
-  // 🎬 วิดีโอเกริ่นนำ
-  const videoOverlay = document.getElementById('video-overlay'); const fullVideo = document.getElementById('fullVideo'); const mainApp = document.getElementById('main-app-container');
-  document.body.addEventListener('click', function() { if (fullVideo.muted) { fullVideo.muted = false; } }, { once: true });
-  fullVideo.onended = function() { closeIntroVideo(); }; function skipIntroVideo() { fullVideo.pause(); closeIntroVideo(); }
-  function closeIntroVideo() { videoOverlay.style.opacity = '0'; setTimeout(() => { videoOverlay.style.display = 'none'; mainApp.style.display = 'flex'; createBackgroundHearts(); }, 1000); }
   function createBackgroundHearts() { const container = document.getElementById('heart-bg-container'); const hearts = ['💖', '🌸', '✨', '💕']; for(let i=0; i<12; i++) { const heart = document.createElement('div'); heart.classList.add('floating-heart-bg'); heart.innerText = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 4 + 4) + 's'; container.appendChild(heart); } }
 </script>
 
