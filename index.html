@@ -25,7 +25,6 @@
       z-index: 10005; display: flex; flex-direction: column; justify-content: center; align-items: center;
       transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
     }
-    /* กิมมิค 1: กล่องพัสดุดุ๊กดิ๊ก */
     .greeting-box-icon { font-size: 90px; margin-bottom: 15px; filter: drop-shadow(0 10px 15px rgba(255, 71, 126, 0.3)); animation: wiggleBox 1.5s infinite; }
     @keyframes wiggleBox { 0%, 10% { transform: rotate(-10deg) scale(1); } 20% { transform: rotate(10deg) scale(1.1); } 30% { transform: rotate(-10deg) scale(1); } 40% { transform: rotate(10deg) scale(1.1); } 50%, 100% { transform: rotate(0deg) scale(1); } }
     
@@ -52,7 +51,6 @@
     .step-box { width: 100%; }
     .card-base { background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 25px 20px; margin-bottom: 18px; box-shadow: 0 8px 30px rgba(255, 182, 193, 0.3); border: 2px solid #ffffff; width: 100%; position: relative; }
     
-    /* กิมมิค 2: ข้อความหัวเรื่องลอยได้ */
     .main-title { font-size: 24px; font-weight: 700; color: #ff477e; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(255,71,126,0.1); animation: floatTitle 3s ease-in-out infinite; display: inline-block; }
     @keyframes floatTitle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
@@ -70,7 +68,7 @@
     .month-icon { font-size: 16px; margin-bottom: 3px; }
 
     /* 🗓️ ปฏิทินแบบไดนามิก */
-    .calendar-header { font-size: 18px; font-weight: 700; color: #ff477e; margin-bottom: 12px; }
+    .calendar-header { font-size: 18px; font-weight: 700; color: #ff477e; margin-bottom: 12px; text-transform: uppercase;}
     .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; font-size: 13px; }
     .day-name { font-weight: 600; color: #a0aec0; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0; margin-bottom: 5px; }
     .day { padding: 8px 0; border-radius: 10px; color: #4a5568; font-weight: 500; cursor: pointer; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 45px; background: #f8fafc; border: 1px solid #f1f5f9; transition: all 0.2s; }
@@ -83,6 +81,9 @@
     /* 📝 กระดานโน้ตเฉพาะวัน */
     .shared-note-box { background: #fffdf0; border: 2px dashed #fcd34d; border-radius: 18px; padding: 15px; text-align: left; margin-bottom: 15px; position: relative; box-shadow: inset 0 0 10px rgba(245,158,11,0.05); }
     .shared-note-title { font-size: 16px; font-weight: 700; color: #d97706; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 6px; border-bottom: 1px dashed #fcd34d; padding-bottom: 10px; }
+    
+    /* กล่องข้อความเมื่อเวลาผ่านไปแล้ว (อดีต) */
+    .past-note-message { display: none; text-align: center; padding: 20px; background: #fff0f3; border-radius: 16px; margin-bottom: 15px; border: 2px dashed #ffb6c1; color: #e11d48; font-weight: 600; box-shadow: inset 0 0 10px rgba(255,182,193,0.3); }
     
     .note-meta-inputs { display: flex; justify-content: center; margin-bottom: 12px; width: 100%; }
     .input-col { flex: 1; max-width: 220px; display: flex; flex-direction: column; text-align: center; }
@@ -115,7 +116,6 @@
 
     .notes-board { margin-top: 25px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; border-top: 2px dashed #fef08a; padding-top: 20px; }
     
-    /* กิมมิค 3: รอยสก็อตเทปแปะกระดาษโน้ต */
     .mini-note { background: linear-gradient(135deg, #fef08a, #fde047); width: calc(50% - 5px); aspect-ratio: 1.05; border-radius: 4px 20px 4px 20px; padding: 15px 10px; position: relative; cursor: pointer; box-shadow: 2px 4px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease; animation: stickNoteAnim 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
     .mini-note::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 35px; height: 14px; background: rgba(255,255,255,0.45); box-shadow: 0 1px 3px rgba(0,0,0,0.05); z-index: 3; border-radius: 2px; }
     .mini-note:hover { transform: scale(1.05) rotate(-2deg); box-shadow: 4px 8px 15px rgba(0,0,0,0.15); z-index: 10; }
@@ -226,7 +226,7 @@
 <div id="video-overlay">
   <button class="skip-btn" onclick="skipIntroVideo()">ข้ามวิดีโอ ⏩</button>
   <video id="fullVideo" playsinline>
-    <source src="https://ozonemassage.com/wp-content/uploads/2026/09/download-3.mp4" type="video/mp4">
+    <source src="https://ozonemassage.com/wp-content/uploads/2026/09/Prompt_D_Pixar_style_animati.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -273,55 +273,63 @@
     <div class="shared-note-box">
       <div class="shared-note-title" id="daily-note-title">📌 กระดานโน้ตวันที่ X</div>
       
-      <!-- ฟอร์มสร้างโน้ต (เอาช่อง "ส่งถึงใคร" ออกไปแล้ว) -->
-      <div class="note-meta-inputs" style="justify-content: center;">
-        <div class="input-col" style="max-width: 220px;">
-          <div class="input-label" style="text-align: center;">📝 โน้ตแผ่นนี้จาก:</div>
-          <select id="noteFrom" class="note-input-small" style="text-align: center;">
-            <option value="มาย">👧 มาย</option>
-            <option value="พี่เค">👦 พี่เค</option>
-          </select>
+      <!-- ส่วนฟอร์มสร้างโน้ต (ซ่อนได้ถ้าเป็นวันในอดีต) -->
+      <div id="note-creation-form">
+        <div class="note-meta-inputs" style="justify-content: center;">
+          <div class="input-col" style="max-width: 220px;">
+            <div class="input-label" style="text-align: center;">📝 โน้ตแผ่นนี้จาก:</div>
+            <select id="noteFrom" class="note-input-small" style="text-align: center;">
+              <option value="มาย">👧 มาย</option>
+              <option value="พี่เค">👦 พี่เค</option>
+            </select>
+          </div>
+        </div>
+
+        <textarea id="sharedNoteInput" class="note-input" placeholder="พิมพ์ความรู้สึกไว้ตรงนี้นะ 💌..."></textarea>
+        
+        <div class="media-buttons">
+          <button id="recordBtn" class="record-btn" onclick="toggleRecording()">
+            <span style="font-size:18px;">🎤</span> อัดเสียง
+          </button>
+          <label for="imageInput" class="image-upload-btn">
+            <span style="font-size:18px;">📸</span> ใส่รูปภาพ
+          </label>
+          <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImageUpload(event)">
+        </div>
+        
+        <div id="audioPreviewBox" class="media-preview-box">
+          <div style="font-size: 12px; color: #92400e; font-weight: 600; margin-bottom: 5px;">ฟังเสียงที่อัดไว้ 🎵</div>
+          <audio id="audioPreview" controls style="width: 100%; height: 35px; outline: none;"></audio>
+          <button class="choice-btn bad-btn" style="padding: 4px 12px; font-size: 12px; margin-top: 8px; width: 100%;" onclick="discardAudio()">❌ ลบเสียงทิ้ง</button>
+        </div>
+
+        <div id="imagePreviewBox" class="media-preview-box">
+          <div style="font-size: 12px; color: #be185d; font-weight: 600; margin-bottom: 5px;">รูปภาพที่เลือก 📸</div>
+          <img id="imagePreview" src="">
+          <button class="choice-btn bad-btn" style="padding: 4px 12px; font-size: 12px; margin-top: 5px; width: 100%; border-color:#fda4af; color:#be185d; background:#fdf2f8;" onclick="discardImage()">❌ ลบรูปทิ้ง</button>
+        </div>
+
+        <div class="lock-toggle-box">
+          <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600;">
+            <input type="checkbox" id="lockCheckbox" onchange="toggleLockOptions()"> 🔒 ล็อกรหัสผ่านให้ข้อความนี้
+          </label>
+          <div id="lockOptions" class="lock-inputs" style="display: none;">
+            <input type="text" id="lockPin" placeholder="🔑 ตั้งรหัสผ่าน (จำเป็นต้องใส่)">
+            <input type="text" id="lockHint" placeholder="❓ คำใบ้ (ไม่ใส่ก็ได้ ให้เดาเอาเอง!)">
+          </div>
+        </div>
+
+        <button id="saveNoteBtn" class="save-note-btn" onclick="saveSharedNote()">💌 แปะกระดาษโน้ต</button>
+
+        <div id="noteStatus" style="font-size: 13px; color: #d97706; background: #fef3c7; padding: 10px; border-radius: 12px; font-weight: 600; margin-top: 15px; display: none; text-align: center; border: 2px dashed #f59e0b; animation: popUp 0.3s;">
+          💌 แปะกระดาษโน้ตสำเร็จ!<br><span style="font-size:11px; color:#b45309; font-weight:500;">กำลังกลับหน้าปฏิทิน...</span>
         </div>
       </div>
 
-      <textarea id="sharedNoteInput" class="note-input" placeholder="พิมพ์ความรู้สึกไว้ตรงนี้นะ 💌..."></textarea>
-      
-      <div class="media-buttons">
-        <button id="recordBtn" class="record-btn" onclick="toggleRecording()">
-          <span style="font-size:18px;">🎤</span> อัดเสียง
-        </button>
-        <label for="imageInput" class="image-upload-btn">
-          <span style="font-size:18px;">📸</span> ใส่รูปภาพ
-        </label>
-        <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImageUpload(event)">
-      </div>
-      
-      <div id="audioPreviewBox" class="media-preview-box">
-        <div style="font-size: 12px; color: #92400e; font-weight: 600; margin-bottom: 5px;">ฟังเสียงที่อัดไว้ 🎵</div>
-        <audio id="audioPreview" controls style="width: 100%; height: 35px; outline: none;"></audio>
-        <button class="choice-btn bad-btn" style="padding: 4px 12px; font-size: 12px; margin-top: 8px; width: 100%;" onclick="discardAudio()">❌ ลบเสียงทิ้ง</button>
-      </div>
-
-      <div id="imagePreviewBox" class="media-preview-box">
-        <div style="font-size: 12px; color: #be185d; font-weight: 600; margin-bottom: 5px;">รูปภาพที่เลือก 📸</div>
-        <img id="imagePreview" src="">
-        <button class="choice-btn bad-btn" style="padding: 4px 12px; font-size: 12px; margin-top: 5px; width: 100%; border-color:#fda4af; color:#be185d; background:#fdf2f8;" onclick="discardImage()">❌ ลบรูปทิ้ง</button>
-      </div>
-
-      <div class="lock-toggle-box">
-        <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600;">
-          <input type="checkbox" id="lockCheckbox" onchange="toggleLockOptions()"> 🔒 ล็อกรหัสผ่านให้ข้อความนี้
-        </label>
-        <div id="lockOptions" class="lock-inputs" style="display: none;">
-          <input type="text" id="lockPin" placeholder="🔑 ตั้งรหัสผ่าน (จำเป็นต้องใส่)">
-          <input type="text" id="lockHint" placeholder="❓ คำใบ้ (ไม่ใส่ก็ได้ ให้เดาเอาเอง!)">
-        </div>
-      </div>
-
-      <button id="saveNoteBtn" class="save-note-btn" onclick="saveSharedNote()">💌 แปะกระดาษโน้ต</button>
-
-      <div id="noteStatus" style="font-size: 13px; color: #d97706; background: #fef3c7; padding: 10px; border-radius: 12px; font-weight: 600; margin-top: 15px; display: none; text-align: center; border: 2px dashed #f59e0b; animation: popUp 0.3s;">
-        💌 แปะกระดาษโน้ตสำเร็จ!<br><span style="font-size:11px; color:#b45309; font-weight:500;">กำลังกลับหน้าปฏิทิน...</span>
+      <!-- ป้ายเตือนเวลาเป็นวันในอดีต -->
+      <div id="past-note-message" class="past-note-message">
+        🕰️ วันนี้กลายเป็นความทรงจำไปแล้ว...<br>
+        <span style="font-size: 13px; color: #f43f5e; font-weight: 400;">ทำได้แค่อ่านข้อความเก่าๆ นะคะ แปะเพิ่มไม่ได้แล้วน้า~ ✨</span>
       </div>
 
       <div id="notesBoard" class="notes-board"></div>
@@ -353,13 +361,13 @@
     <audio id="bgMusic" src="https://ozonemassage.com/wp-content/uploads/2026/09/Y2Mate.is-RIFF-Offical-Audio.mp3" loop></audio>
   </div>
 
-<!-- 😾 Popup เลือกเดือนต่างๆ -->
+<!-- 😾 Popup เลือกเดือนต่างๆ (ปรับให้ตรงตามรีเควส) -->
 <div id="monthChoiceModal" class="popup-modal">
   <div class="popup-content">
     <div id="popupAvatar" style="font-size: 55px; margin-bottom: 10px;">😾</div>
     <div id="popupText" style="font-size: 15px; color: #2d3748; font-weight: 500; line-height: 1.5; margin-bottom: 15px;"></div>
     <div style="display: flex; flex-direction: column; gap: 8px;">
-      <button id="monthProceedBtn" class="choice-btn good-btn" onclick="proceedToMonth()">แค่จะมาแปะโน้ตครับ 📝</button>
+      <button id="monthProceedBtn" class="choice-btn good-btn" onclick="proceedToMonth()">แค่จะเข้ามาเพิ่มโน้ตครับ 📝</button>
       <button id="monthCancelBtn" class="choice-btn bad-btn" onclick="closePopup('monthChoiceModal')">เข้าใจแล้วครับ 😅</button>
     </div>
   </div>
@@ -453,22 +461,36 @@
   function skipIntroVideo() { fullVideo.pause(); closeIntroVideo(); }
   function closeIntroVideo() { videoOverlay.style.opacity = '0'; setTimeout(() => { videoOverlay.style.display = 'none'; mainApp.style.display = 'flex'; createBackgroundHearts(); }, 1000); }
 
-  // --- 📅 เลือกเดือน ---
+  // --- 📅 เลือกเดือน (คำนวณจากเวลาจริง Real-time) ---
   function requestMonthAccess(mIndex, type) {
     pendingMonthIndex = mIndex;
-    if (type === 'past') {
-      document.getElementById('popupAvatar').innerText = '🕰️'; 
-      document.getElementById('popupText').innerHTML = 'แอบย้อนเวลาเหรอเนี่ย!<br><span style="font-size:13px; color:#64748b;">จะกลับไปดูความทรงจำเก่าๆ หรือแอบมาแปะโน้ตย้อนหลังดีล่ะ? 🤭</span>';
-      document.getElementById('monthProceedBtn').innerHTML = 'แค่จะมาแปะโน้ตครับ 📝';
+    
+    // ดึงเวลาจริงๆ จากเครื่อง
+    const today = new Date();
+    const realMonth = today.getMonth(); // เช่น กันยา = 8
+
+    if (mIndex < realMonth) {
+      // เดือนอดีต (ก่อนเดือนปัจจุบัน) -> ไม่ให้พิมพ์โน้ต ซ่อนปุ่ม Proceed ไปเลย!
+      document.getElementById('popupAvatar').innerText = '😾'; 
+      document.getElementById('popupText').innerHTML = 'จำผิดคนปะเนี่ย เรารู้จักกันเดือนกันยายนนะ!<br><span style="font-size:13px; color:#64748b;">(ย้อนเวลากลับไปเพิ่มความทรงจำไม่ได้แล้วน้า 🥺)</span>';
+      
+      document.getElementById('monthProceedBtn').style.display = 'none'; // ซ่อนปุ่มแปะโน้ต
       document.getElementById('monthCancelBtn').innerHTML = 'ขอโทษครับ / เข้าใจแล้ว 😅';
+      
       document.getElementById('monthChoiceModal').style.display = 'flex';
-    } else if (type === 'future') {
+
+    } else if (mIndex > realMonth) {
+      // เดือนอนาคต (หลังเดือนปัจจุบัน) -> ให้พิมพ์โน้ตข้ามเวลาได้
       document.getElementById('popupAvatar').innerText = '⏳'; 
       document.getElementById('popupText').innerHTML = 'เดือนนี้ยังมาไม่ถึงเลยนะคนดื้อ!<br><span style="font-size:13px; color:#64748b;">แต่ถ้าอยากส่ง "โน้ตข้ามเวลา" ไปรอไว้ก่อน<br>ก็กดเพิ่มโน้ตได้เลยนะ เค้าจะไม่แอบอ่านหรอก! 🤫</span>';
+      
+      document.getElementById('monthProceedBtn').style.display = 'block'; // โชว์ปุ่มแปะโน้ต
       document.getElementById('monthProceedBtn').innerHTML = 'แค่จะเข้ามาเพิ่มโน้ตครับ 📝';
-      document.getElementById('monthCancelBtn').innerHTML = 'เข้าใจแล้วครับ 😅';
+      document.getElementById('monthCancelBtn').innerHTML = 'กลับไปรอเวลา 😅';
+      
       document.getElementById('monthChoiceModal').style.display = 'flex';
-    } else if (type === 'september') {
+    } else {
+      // เดือนปัจจุบัน -> ผ่านเข้าไปได้เลย
       proceedToMonth();
     }
   }
@@ -526,15 +548,17 @@
     }
   }
 
-  // --- 📅 คลิกวันที่ ---
+  // --- 📅 คลิกวันที่ (อิงตามเวลาจริง) ---
   function openTodayNotes() {
-    pendingMonthIndex = 8; currentViewingMonthIndex = 8;
-    proceedToNotesBoard(4); 
+    const today = new Date();
+    pendingMonthIndex = today.getMonth();
+    currentViewingMonthIndex = today.getMonth();
+    proceedToNotesBoard(today.getDate()); // เปิดกระดานของ "วันนี้จริงๆ"
   }
 
   function clickDay(day) {
     if (currentViewingMonthIndex === 8 && day === 3) {
-      openSept3Experience(); // วันที่ 3 จะเข้าความทรงจำเสมอ!
+      openSept3Experience(); // วันที่ 3 กันยาเป็นความทรงจำเสมอ!
     } else {
       proceedToNotesBoard(day);
     }
@@ -548,6 +572,27 @@
     dailySec.style.display = 'block';
     document.getElementById('daily-note-title').innerText = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
     document.getElementById('home-btn').style.display = 'flex';
+    
+    // โลจิกเช็กวันอดีต/ปัจจุบัน/อนาคต (แบบเรียลไทม์)
+    const today = new Date();
+    const realMonth = today.getMonth();
+    const realDay = today.getDate();
+
+    const isPastDay = currentViewingMonthIndex < realMonth || (currentViewingMonthIndex === realMonth && day < realDay);
+    
+    const formArea = document.getElementById('note-creation-form');
+    const pastMessage = document.getElementById('past-note-message');
+
+    if (isPastDay) {
+      // เป็นอดีต -> ซ่อนที่พิมพ์ข้อความ โชว์แค่ข้อความว่าเขียนไม่ได้แล้ว
+      formArea.style.display = 'none';
+      pastMessage.style.display = 'block';
+    } else {
+      // ปัจจุบันและอนาคต -> โชว์ที่พิมพ์ข้อความ ซ่อนป้ายเตือน
+      formArea.style.display = 'block';
+      pastMessage.style.display = 'none';
+    }
+
     renderNotesForDay(day);
     dailySec.scrollIntoView({ behavior: 'smooth' });
   }
@@ -621,7 +666,7 @@
     const btn = document.getElementById('recordBtn'); btn.style.display = 'flex'; btn.innerHTML = '<span style="font-size:18px;">🎤</span> อัดเสียง';
   }
 
-  // --- 🚀 กิมมิคประกายดาวตอนเซฟสำเร็จ ---
+  // --- 🚀 กิมมิคประกายดาว ---
   function createSaveSparks() {
     const container = document.getElementById('main-app-container');
     for(let i=0; i<15; i++) {
@@ -652,7 +697,7 @@
   function saveSharedNote() {
     if (currentViewingDay === null) return;
     const text = document.getElementById('sharedNoteInput').value;
-    const from = document.getElementById('noteFrom').value;
+    const from = document.getElementById('noteFrom').options[document.getElementById('noteFrom').selectedIndex].text; // ดึงชื่อแบบมีไอคอน 👧👦
     const isCheckbox = document.getElementById('lockCheckbox');
     const isLocked = isCheckbox ? isCheckbox.checked : false;
     const lockPin = document.getElementById('lockPin').value;
@@ -685,22 +730,19 @@
       discardAudio(); discardImage();
       
       btn.innerText = originalText; btn.disabled = false;
-      
       createSaveSparks();
 
       const status = document.getElementById('noteStatus');
       status.style.display = 'block'; 
-      
-      setTimeout(() => { 
-        status.style.display = 'none'; 
-        backToCalendar(); 
-      }, 1500);
-      
+      setTimeout(() => { status.style.display = 'none'; backToCalendar(); }, 1500);
     }, 400); 
   }
 
+  // ฟังก์ชันเช็กโน้ตอนาคตแบบ Real-time
   function isFutureNote(m, d) {
-    const realMonth = 8; const realDay = 4; 
+    const today = new Date();
+    const realMonth = today.getMonth();
+    const realDay = today.getDate();
     if (m > realMonth) return true;
     if (m === realMonth && d > realDay) return true;
     return false;
