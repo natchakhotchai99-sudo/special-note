@@ -243,7 +243,7 @@
 <div id="mascot-container" onclick="pokeMascot()">
   <div id="mascot-bubble" class="mascot-bubble">...</div>
   <!-- เปลี่ยนเป็นรูปแมว GIF ขยับได้ -->
-  <img id="mascot-emoji" class="mascot-img" src="https://media.tenor.com/ZhbOEmA2T5MAAAAi/peach-cat-cute.gif" alt="Cat Mascot">
+  <img id="mascot-emoji" class="mascot-img" src="https://media.tenor.com/ZhbOEmA2T5MAAAAi/peach-cat-cute.gif" alt="Cat Mascot" onerror="this.src='https://i.gifer.com/ZZ5H.gif'">
 </div>
 
 <!-- 🎁 หน้าต้อนรับ (Greeting Screen) เพื่อขออนุญาตเล่นเสียงวิดีโอ -->
@@ -420,7 +420,7 @@
     <div id="popupAvatar" style="font-size: 55px; margin-bottom: 10px;">😾</div>
     <div id="popupText" style="font-size: 15px; color: #2d3748; font-weight: 500; line-height: 1.5; margin-bottom: 15px;"></div>
     <div style="display: flex; flex-direction: column; gap: 8px;">
-      <button id="monthProceedBtn" class="choice-btn good-btn" onclick="proceedToMonth()">แค่จะมาแปะโน้ตครับ 📝</button>
+      <button id="monthProceedBtn" class="choice-btn good-btn" onclick="proceedToMonth()">แค่จะเข้ามาเพิ่มโน้ตครับ 📝</button>
       <button id="monthCancelBtn" class="choice-btn bad-btn" onclick="closePopup('monthChoiceModal')">เข้าใจแล้วครับ 😅</button>
     </div>
   </div>
@@ -493,16 +493,18 @@
   function initMascot() {
     const hour = new Date().getHours();
     const emojiEl = document.getElementById('mascot-emoji');
+    if(!emojiEl) return;
+    
     // เวลา 6 โมงเช้า ถึง 4 ทุ่ม แมวจะตื่น
     if(hour >= 6 && hour < 22) {
       isMascotAwake = true;
-      emojiEl.src = 'https://media.tenor.com/ZhbOEmA2T5MAAAAi/peach-cat-cute.gif'; // ลิงก์แมวตื่นสุดน่ารัก
+      emojiEl.src = 'https://media.tenor.com/ZhbOEmA2T5MAAAAi/peach-cat-cute.gif'; 
     } else {
       isMascotAwake = false;
-      emojiEl.src = 'https://media.tenor.com/5JGEH0aH6fQAAAAi/peach-cat-sleep.gif'; // ลิงก์แมวนอนหลับ
+      emojiEl.src = 'https://media.tenor.com/5JGEH0aH6fQAAAAi/peach-cat-sleep.gif'; 
     }
   }
-  initMascot();
+  initMascot(); // ปลุก/กล่อมแมวตอนโหลดเว็บครั้งแรก
 
   function pokeMascot() {
     const bubble = document.getElementById('mascot-bubble');
@@ -519,7 +521,7 @@
     setTimeout(() => { bubble.style.display = 'none'; }, 3000);
   }
 
-  // --- 🪙 การ์ดขูด (Scratch Card) อัปเดต 10 ข้อความ ---
+  // --- 🪙 การ์ดขูด (Scratch Card) มี 10 ข้อความ ---
   const canvas = document.getElementById('scratch-canvas');
   const ctx = canvas.getContext('2d');
   let isDrawing = false;
@@ -528,16 +530,17 @@
     "ขูดหาเลขเด็ดหรอ หาน้ำกินด้วย! 😜",
     "วันนี้ห้ามดื้อนะ รู้ไหม! 💖",
     "คิดถึงคนทำเว็บล่ะสิ 👀✨",
-    "ทำงานเหนื่อยไหม สู้ๆ น้า 🫂",
+    "ทำงานเหนื่อยไหม กอดๆ น้า 🫂",
     "แอบมาส่องละสิ แบร่! 👻",
-    "ตั้งใจทำงานนะ หนูเป็นกำลังใจให้! ✌️",
-    "วันนี้ทำยอดได้เยอะป่าวว! 🥰",
+    "ตั้งใจทำงานนะ เค้าเป็นกำลังใจให้! ✌️",
+    "รักนะ ไอต้าวคนดื้อ! 🥰",
     "พักสายตาบ้างนะ จ้องจอนานเดี๋ยวปวดตา 🥺",
-    "เดี๋ยวพาไปเที่ยวจะได้หายเหนื่อยย! 🙋‍♀️",
-    "ห้ามแอบตากฝนคนเดียวอีกนะ! 🐷"
+    "วันนี้มีคนบ่นคิดถึงพี่เค 1 อัตรา! 🙋‍♀️",
+    "ห้ามแอบกินขนมเยอะนะ เดี๋ยวอ้วน! 🐷"
   ];
 
   function initScratchCard() {
+    if(!canvas) return;
     document.getElementById('scratch-text').innerText = secretMessages[Math.floor(Math.random() * secretMessages.length)];
     
     canvas.width = canvas.parentElement.offsetWidth;
@@ -572,13 +575,15 @@
     ctx.fill();
   }
 
-  canvas.addEventListener('mousedown', startScratch);
-  canvas.addEventListener('mousemove', scratch);
-  canvas.addEventListener('mouseup', stopScratch);
-  canvas.addEventListener('mouseleave', stopScratch);
-  canvas.addEventListener('touchstart', startScratch, {passive: false});
-  canvas.addEventListener('touchmove', scratch, {passive: false});
-  canvas.addEventListener('touchend', stopScratch);
+  if(canvas) {
+      canvas.addEventListener('mousedown', startScratch);
+      canvas.addEventListener('mousemove', scratch);
+      canvas.addEventListener('mouseup', stopScratch);
+      canvas.addEventListener('mouseleave', stopScratch);
+      canvas.addEventListener('touchstart', startScratch, {passive: false});
+      canvas.addEventListener('touchmove', scratch, {passive: false});
+      canvas.addEventListener('touchend', stopScratch);
+  }
 
   // --- 🔥 Firebase ---
   const firebaseConfig = { databaseURL: "https://memory-box-2026-default-rtdb.asia-southeast1.firebasedatabase.app/" };
@@ -945,7 +950,7 @@
           document.getElementById('timeCapsuleModal').style.display = 'flex';
         } else if (note.isLocked) {
           noteToUnlock = note;
-          const hintStr = (note.lockHint && note.lockHint.trim() !== '') ? note.lockHint : "ไม่มีคำใบ้ (โบ๋เบ๋ 😜)";
+          const hintStr = (note.lockHint && note.lockHint.trim() !== '') ? note.lockHint : "ไม่มีคำใบ้ (ให้เดาเอาเอง อิอิ 😜)";
           document.getElementById('displayUnlockHint').innerText = `คำใบ้: ${hintStr}`;
           document.getElementById('unlockPinInput').value = '';
           document.getElementById('unlockErrorMsg').style.display = 'none';
@@ -992,7 +997,7 @@
     document.getElementById('daily-notes-sec').style.display = 'none'; document.getElementById('sept3-experience-container').style.display = 'none'; document.getElementById('dynamic-calendar-sec').style.display = 'none';
     document.getElementById('step-1-intro').style.display = 'block'; document.getElementById('step-2-video').style.display = 'none'; document.getElementById('step-3-rain-text').style.display = 'none'; document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'none'; document.getElementById('typewriter-text').innerHTML = ''; typeIndex = 0; 
     document.getElementById('memory-box-step').style.display = 'block'; document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' });
-    initMascot(); 
+    initMascot(); // เช็กเวลาอีกรอบเผื่อตื่น/หลับ
   }
 
   // --- ✨ ความทรงจำวันที่ 3 ---
