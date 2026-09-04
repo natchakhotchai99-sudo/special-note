@@ -3,149 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Special Note for K ✨</title>
+  <title>Memory Box 2026 ✨</title>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
   <style>
     * { box-sizing: border-box; }
-
     body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #fff0f3 0%, #ffe4e8 50%, #f0f4ff 100%);
-      font-family: 'Kanit', sans-serif;
-      color: #333333;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow-x: hidden;
-      position: relative;
+      margin: 0; padding: 0; background: linear-gradient(135deg, #fff0f3 0%, #ffe4e8 50%, #f0f4ff 100%);
+      font-family: 'Kanit', sans-serif; color: #333333; min-height: 100vh; display: flex; justify-content: center; align-items: center;
+      overflow-x: hidden; position: relative;
     }
 
-    /* 💖 หัวใจลอยฉากหลัง */
-    .floating-heart-bg {
-      position: fixed;
-      font-size: 18px;
-      color: rgba(255, 117, 140, 0.35);
-      pointer-events: none;
-      z-index: 0;
-      animation: floatUp 6s linear infinite;
-    }
-    @keyframes floatUp {
-      0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0; }
-      50% { opacity: 0.8; }
-      100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
-    }
+    /* 🏠 ปุ่มต่างๆ */
+    .home-btn { position: fixed; top: 15px; left: 15px; background: rgba(255, 255, 255, 0.95); border: 2px solid #ff477e; border-radius: 50%; width: 45px; height: 45px; font-size: 20px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 71, 126, 0.3); z-index: 10000; display: none; justify-content: center; align-items: center; transition: transform 0.2s ease; }
+    .home-btn:active { transform: scale(0.9); }
+    .back-cal-btn { background: #f1f5f9; color: #475569; border: 2px solid #cbd5e1; width: 100%; margin-top: 15px; font-size: 14px; border-radius: 14px; padding: 10px; cursor: pointer; font-weight: 600; font-family: 'Kanit'; transition: background 0.2s; }
+    .back-cal-btn:hover { background: #e2e8f0; }
 
-    .cute-container {
-      width: 100%;
-      max-width: 420px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px 16px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+    .floating-heart-bg { position: fixed; font-size: 18px; color: rgba(255, 117, 140, 0.35); pointer-events: none; z-index: 0; animation: floatUp 6s linear infinite; }
+    @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } }
 
+    #video-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 1s ease; }
+    #fullVideo { width: 100%; height: 100%; object-fit: cover; }
+    .skip-btn { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(255,255,255,0.5); padding: 8px 18px; border-radius: 20px; font-family: 'Kanit', sans-serif; font-size: 14px; cursor: pointer; z-index: 10000; backdrop-filter: blur(5px); }
+
+    .cute-container { width: 100%; max-width: 440px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px 16px; text-align: center; position: relative; z-index: 1; }
     .step-box { width: 100%; }
+    .card-base { background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 20px; margin-bottom: 18px; box-shadow: 0 8px 25px rgba(255, 182, 193, 0.25); border: 2px solid #ffffff; width: 100%; }
+    .main-title { font-size: 22px; font-weight: 700; color: #ff477e; margin-bottom: 10px; }
 
-    .envelope-box { position: relative; display: inline-block; margin-bottom: 20px; }
-    .roll-in-anim { animation: rollIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-    @keyframes rollIn {
-      0% { opacity: 0; transform: translateX(-150px) rotate(-540deg) scale(0.2); }
-      100% { opacity: 1; transform: translateX(0) rotate(0deg) scale(1); }
-    }
-    .envelope-icon { font-size: 80px; filter: drop-shadow(0 10px 18px rgba(255, 182, 193, 0.6)); }
-    .sparkle-heart { position: absolute; top: -10px; right: -10px; font-size: 30px; }
+    .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease; }
+    .choice-btn:active { transform: scale(0.95); }
+    .today-btn { background: linear-gradient(135deg, #fef08a, #f59e0b); color: #78350f; border-color: #fcd34d; width: 100%; margin-bottom: 15px; font-size: 16px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
 
-    .welcome-card {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 28px;
-      padding: 28px 20px;
-      box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4);
-      border: 2px solid #ffffff;
-      animation: popUp 0.9s ease-out 0.4s forwards;
-      opacity: 0;
-    }
-    @keyframes popUp {
-      from { opacity: 0; transform: scale(0.85) translateY(20px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
+    .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 5px; }
+    .month-btn { padding: 12px 8px; border-radius: 16px; border: 2px solid #ffe4e8; background: #fff; font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; color: #4a5568; cursor: pointer; transition: all 0.2s ease; }
+    .month-btn.active-sept { background: linear-gradient(135deg, #ff477e, #ff758c); color: white; border-color: #ff477e; box-shadow: 0 4px 12px rgba(255, 71, 126, 0.3); }
 
-    .morning-title { font-size: 20px; font-weight: 700; color: #ff477e; margin-bottom: 12px; }
-    .special-today-text { font-size: 15px; line-height: 1.6; color: #4a5568; margin-bottom: 24px; }
-
-    .next-btn {
-      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
-      color: #ffffff;
-      border: none;
-      padding: 14px 28px;
-      font-size: 16px;
-      font-weight: 600;
-      font-family: 'Kanit', sans-serif;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 6px 20px rgba(255, 117, 140, 0.4);
-      width: 100%;
-      transition: all 0.3s ease;
-    }
-    .next-btn:active { transform: scale(0.96); }
-
-    .video-wrapper {
-      width: 100%;
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-      background: #000;
-      border: 3px solid #ffffff;
-      animation: popUp 0.5s ease-out forwards;
-    }
-    .video-wrapper video { width: 100%; height: auto; display: block; }
-
-    .big-rain-card {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 28px;
-      padding: 35px 20px;
-      box-shadow: 0 15px 35px rgba(147, 197, 253, 0.4);
-      border: 2px solid #ffffff;
-      animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-    .rain-icon { font-size: 60px; margin-bottom: 12px; }
-    .big-rain-title { font-size: 21px; font-weight: 700; color: #2563eb; margin: 0 0 10px 0; }
-    .sub-rain-text { font-size: 15px; color: #475569; margin: 0; }
-
-    /* ⏳ เฟดการ์ดขึ้นนุ่มๆ */
-    .fade-item {
-      opacity: 0;
-      transform: translateY(40px) scale(0.95);
-      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .fade-item.show { opacity: 1; transform: translateY(0) scale(1); }
-
-    .calendar-card, .vinyl-card, .interactive-card, .lie-detector-card, .countdown-card {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 24px;
-      padding: 18px;
-      margin-bottom: 18px;
-      box-shadow: 0 8px 25px rgba(255, 182, 193, 0.25);
-      border: 2px solid #ffffff;
-      width: 100%;
-    }
-
+    /* 🗓️ ปฏิทินแบบไดนามิก */
     .calendar-header { font-size: 18px; font-weight: 700; color: #ff477e; margin-bottom: 12px; }
     .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; font-size: 13px; }
     .day-name { font-weight: 600; color: #a0aec0; padding-bottom: 4px; }
-    .day { padding: 8px 0; border-radius: 10px; color: #4a5568; font-weight: 500; }
-    .special-day { background: linear-gradient(135deg, #ff477e, #ff758c); color: white; font-weight: bold; border-radius: 50%; box-shadow: 0 4px 10px rgba(255, 71, 126, 0.4); }
+    .day { padding: 8px 0; border-radius: 10px; color: #4a5568; font-weight: 500; cursor: pointer; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 45px; background: #f8fafc; border: 1px solid #f1f5f9; transition: background 0.2s; }
+    .day:hover { background: #fff0f3; border-color: #ffccd5; }
+    .special-day { background: linear-gradient(135deg, #ff477e, #ff758c) !important; color: white !important; font-weight: bold; border-radius: 50%; box-shadow: 0 4px 10px rgba(255, 71, 126, 0.4); animation: pulse 1.5s infinite; border: none; }
+    
+    /* 🟡 วงกลมแจ้งเตือนโน้ตบนปฏิทิน */
+    .note-badge { position: absolute; bottom: -2px; right: -2px; background: #fcd34d; color: #92400e; font-size: 10px; font-weight: bold; width: 18px; height: 18px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(245,158,11,0.4); z-index: 5; }
 
+    /* 📝 กระดานโน้ตเฉพาะวัน */
+    .shared-note-box { background: #fffdf0; border: 2px dashed #fcd34d; border-radius: 18px; padding: 15px; text-align: left; margin-bottom: 15px; position: relative; }
+    .shared-note-title { font-size: 15px; font-weight: 700; color: #d97706; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .note-meta-inputs { display: flex; gap: 10px; margin-bottom: 10px; }
+    .note-input-small { flex: 1; border: 1px solid #fef08a; border-radius: 10px; padding: 8px 10px; font-family: 'Kanit', sans-serif; font-size: 13px; outline: none; }
+    .note-input { width: 100%; height: 70px; border: 1px solid #fef08a; border-radius: 12px; padding: 10px; font-family: 'Kanit', sans-serif; font-size: 13.5px; resize: none; background: #ffffff; outline: none; transition: border 0.3s; }
+    .note-input:focus { border-color: #f59e0b; }
+    
+    .record-btn { width: 100%; background: #fef08a; border: 2px solid #fcd34d; padding: 10px; border-radius: 12px; font-family: 'Kanit'; font-weight: 600; color: #92400e; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+    .record-btn.recording { background: #fca5a5; border-color: #ef4444; color: white; animation: pulse 1s infinite; }
+    .audio-preview-box { display: none; background: #fffbeb; border: 1px dashed #f59e0b; padding: 10px; border-radius: 12px; margin-top: 10px; text-align: center; }
+
+    .lock-toggle-box { background: #fff; border: 1px solid #fef08a; border-radius: 10px; padding: 10px; margin: 10px 0; font-size: 13px; color: #b45309; }
+    .lock-inputs { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .lock-inputs input { border: 1px dashed #f59e0b; border-radius: 8px; padding: 8px; font-family: 'Kanit', sans-serif; font-size: 12px; outline: none; background: #fffbeb; }
+    
+    .save-note-btn { margin-top: 8px; background: #f59e0b; color: white; border: none; padding: 10px 16px; border-radius: 12px; font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.3s; }
+    .save-note-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+
+    /* กระดานโชว์ Mini Sticky Notes */
+    .notes-board { margin-top: 25px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; border-top: 2px dashed #fef08a; padding-top: 15px; }
+    .mini-note { background: linear-gradient(135deg, #fef08a, #fde047); width: calc(50% - 5px); aspect-ratio: 1.1; border-radius: 4px 20px 4px 20px; padding: 15px 10px; position: relative; cursor: pointer; box-shadow: 2px 4px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease; animation: stickNoteAnim 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    .mini-note:hover { transform: scale(1.05) rotate(-2deg); box-shadow: 4px 6px 12px rgba(0,0,0,0.15); }
+    @keyframes stickNoteAnim { 0% { transform: translateY(-50px) scale(1.2) rotate(10deg); opacity: 0; } 100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; } }
+    
+    .mini-note.time-capsule { background: linear-gradient(135deg, #cbd5e1, #94a3b8); border: 1px dashed #64748b; }
+    .mini-note.locked-note { background: linear-gradient(135deg, #f1f5f9, #e2e8f0); border: 1px dashed #cbd5e1; }
+    
+    .mini-pin { position: absolute; top: -12px; font-size: 24px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2)); }
+    .mini-from-text { font-size: 14px; font-weight: 700; color: #92400e; word-break: break-word; }
+    .mini-note.locked-note .mini-from-text, .mini-note.time-capsule .mini-from-text { color: #334155; }
+    .mini-hint { font-size: 11px; color: #b45309; margin-top: 5px; }
+    .mini-note.locked-note .mini-hint, .mini-note.time-capsule .mini-hint { color: #475569; font-weight: 600; }
+    .mini-time-stamp { font-size: 9.5px; color: #78350f; margin-top: 6px; opacity: 0.85; font-weight: 500; }
+    .mini-note.locked-note .mini-time-stamp, .mini-note.time-capsule .mini-time-stamp { color: #334155; }
+    
+    /* ความทรงจำ 3 ก.ย. */
+    .envelope-box { position: relative; display: inline-block; margin-bottom: 20px; }
+    .roll-in-anim { animation: rollIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    @keyframes rollIn { 0% { opacity: 0; transform: translateX(-150px) rotate(-540deg) scale(0.2); } 100% { opacity: 1; transform: translateX(0) rotate(0deg) scale(1); } }
+    .envelope-icon { font-size: 80px; filter: drop-shadow(0 10px 18px rgba(255, 182, 193, 0.6)); }
+    .sparkle-heart { position: absolute; top: -10px; right: -10px; font-size: 30px; }
+    .welcome-card { background: rgba(255, 255, 255, 0.95); border-radius: 28px; padding: 28px 20px; box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4); border: 2px solid #ffffff; animation: popUp 0.9s ease-out 0.4s forwards; opacity: 0; }
+    .morning-title { font-size: 20px; font-weight: 700; color: #ff477e; margin-bottom: 12px; }
+    .special-today-text { font-size: 15px; line-height: 1.6; color: #4a5568; margin-bottom: 24px; }
+    .next-btn { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); color: #ffffff; border: none; padding: 14px 28px; font-size: 16px; font-weight: 600; font-family: 'Kanit', sans-serif; border-radius: 30px; cursor: pointer; box-shadow: 0 6px 20px rgba(255, 117, 140, 0.4); width: 100%; transition: all 0.3s ease; }
+    .video-wrapper { width: 100%; border-radius: 28px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.2); background: #000; border: 3px solid #ffffff; animation: popUp 0.5s ease-out forwards; }
+    .video-wrapper video { width: 100%; height: auto; display: block; }
+    .big-rain-card { background: rgba(255, 255, 255, 0.95); border-radius: 28px; padding: 35px 20px; box-shadow: 0 15px 35px rgba(147, 197, 253, 0.4); border: 2px solid #ffffff; animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    .rain-icon { font-size: 60px; margin-bottom: 12px; }
+    .big-rain-title { font-size: 21px; font-weight: 700; color: #2563eb; margin: 0 0 10px 0; }
+    .sub-rain-text { font-size: 15px; color: #475569; margin: 0; }
+    .fade-item { opacity: 0; transform: translateY(40px) scale(0.95); transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); }
+    .fade-item.show { opacity: 1; transform: translateY(0) scale(1); }
     .vinyl-player { display: flex; align-items: center; gap: 14px; cursor: pointer; }
     .vinyl-disc { width: 50px; height: 50px; background: radial-gradient(circle, #333 30%, #111 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 3px solid #ffb6c1; flex-shrink: 0; }
     .vinyl-disc.spinning { animation: spin 3s linear infinite; }
@@ -153,576 +116,537 @@
     .vinyl-info { text-align: left; display: flex; flex-direction: column; }
     .song-title { font-weight: 700; font-size: 15px; color: #2d3748; }
     .play-status { font-size: 12px; color: #718096; margin-top: 2px; }
-
     .note-card { background: #fffdf0; border-radius: 22px; padding: 22px 18px; margin-bottom: 18px; position: relative; box-shadow: 0 8px 25px rgba(217, 119, 6, 0.15); border: 2px solid #fef3c7; text-align: left; width: 100%; }
     .pin-icon { position: absolute; top: -12px; left: 20px; font-size: 22px; }
     .heart-sticker { position: absolute; top: 12px; right: 15px; font-size: 20px; }
     .note-header { font-weight: 700; color: #d97706; margin-bottom: 10px; text-align: center; font-size: 15px; }
     .note-text { font-size: 14.5px; line-height: 1.6; color: #374151; margin: 0; min-height: 50px; font-weight: 500; }
-
-    .interactive-card h3, .lie-detector-card h3, .countdown-card h3 { font-size: 16px; font-weight: 700; color: #ff477e; margin-top: 0; margin-bottom: 14px; }
-    .button-group { display: flex; flex-direction: column; gap: 10px; }
-    .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-    .choice-btn {
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: 2px solid #ffe4e8;
-      font-family: 'Kanit', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      color: #2d3748;
-      cursor: pointer;
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .bad-btn { background-color: #fff5f5; border-color: #fed7d7; z-index: 10; }
-    .good-btn { background-color: #f0fdf4; border-color: #bbf7d0; }
-    .best-btn { background-color: #f0f9ff; border-color: #bae6fd; }
-
     .result-box { margin-top: 12px; font-size: 14.5px; font-weight: 600; color: #ff477e; }
-
-    .slider-box {
-      margin-top: 15px;
-      background: #f8fafc;
-      padding: 16px;
-      border-radius: 18px;
-      border: 1px dashed #cbd5e1;
-    }
+    .slider-box { margin-top: 15px; background: #f8fafc; padding: 16px; border-radius: 18px; border: 1px dashed #cbd5e1; }
     .slider-label { font-size: 14px; color: #475569; font-weight: 600; margin-bottom: 8px; }
     .time-display { font-size: 20px; font-weight: 700; color: #ff477e; margin: 6px 0 12px 0; }
-    .time-slider {
-      width: 100%;
-      -webkit-appearance: none;
-      height: 8px;
-      border-radius: 5px;
-      background: #ffccd5;
-      outline: none;
-    }
-    .time-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #ff477e;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(255, 71, 126, 0.4);
-    }
+    .time-slider { width: 100%; -webkit-appearance: none; height: 8px; border-radius: 5px; background: #ffccd5; outline: none; }
+    .time-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #ff477e; cursor: pointer; }
+    .countdown-timer-text { font-size: 24px; font-weight: 700; color: #ff477e; background: #fff0f3; padding: 10px 18px; border-radius: 16px; display: inline-block; margin-top: 8px; border: 1px dashed #ff758c; }
+    .scanner-box { position: relative; width: 130px; height: 130px; margin: 15px auto; background: linear-gradient(145deg, #ffe0e9, #ffd1dc); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; overflow: hidden; border: 3px solid #ffffff; touch-action: manipulation; user-select: none; }
+    .scanner-img { width: 100%; height: 100%; object-fit: cover; }
+    .laser-line { position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: #ff0055; box-shadow: 0 0 12px #ff0055; display: none; z-index: 5; }
+    .laser-line.scanning { display: block; animation: scanAnim 1.2s ease-in-out infinite alternate; }
+    @keyframes scanAnim { 0% { top: 10%; } 100% { top: 90%; } }
+    .final-card { background: rgba(255, 255, 255, 0.95); border-radius: 28px; padding: 35px 20px; box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4); border: 2px solid #ffffff; width: 100%; animation: popUp 0.8s forwards; }
 
-    /* ⏳ กล่องตัวนับเวลาถอยหลังก่อนเที่ยง */
-    .countdown-timer-text {
-      font-size: 24px;
-      font-weight: 700;
-      color: #ff477e;
-      background: #fff0f3;
-      padding: 10px 18px;
-      border-radius: 16px;
-      display: inline-block;
-      margin-top: 8px;
-      border: 1px dashed #ff758c;
-    }
+    /* 🌟 Modals */
+    .popup-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 10000; padding: 20px; backdrop-filter: blur(3px); }
+    .popup-content { background: white; border-radius: 24px; padding: 25px; max-width: 320px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: popUp 0.3s ease-out; position: relative; }
+    .read-note-content { background: #fffdf0; border: 2px solid #fcd34d; border-radius: 20px; padding: 30px 20px 20px 20px; text-align: left; max-width: 340px; width: 100%; box-shadow: 0 15px 35px rgba(217, 119, 6, 0.3); animation: popUp 0.3s ease-out; position: relative; }
+    .read-note-pin { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); font-size: 35px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2)); }
+    .read-note-fromto { font-weight: 700; color: #b45309; font-size: 15px; margin-bottom: 12px; border-bottom: 1px dashed #fcd34d; padding-bottom: 8px; }
+    .read-note-text { font-size: 15px; color: #374151; line-height: 1.6; margin-bottom: 15px; min-height: 40px; word-break: break-word; }
+    .read-note-time { font-size: 12px; color: #9ca3af; text-align: right; margin-bottom: 10px; font-weight: 500; }
 
-    /* 🔍 สไตล์เครื่องตรวจจับคนโกหก (ใช้รูปภาพของคุณ Mild ในปุ่มสแกน) */
-    .scanner-box {
-      position: relative;
-      width: 130px;
-      height: 130px;
-      margin: 15px auto;
-      background: linear-gradient(145deg, #ffe0e9, #ffd1dc);
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: inset 0 4px 8px rgba(0,0,0,0.06), 0 8px 20px rgba(255, 117, 140, 0.3);
-      cursor: pointer;
-      overflow: hidden;
-      touch-action: manipulation;
-      user-select: none;
-      -webkit-user-select: none;
-      border: 3px solid #ffffff;
-    }
-    
-    .scanner-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
+    /* ป๊อปอัปเกมทายรหัส */
+    .unlock-box { background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 25px; text-align: center; max-width: 320px; width: 100%; }
+    .unlock-icon { font-size: 40px; margin-bottom: 10px; }
+    .unlock-title { font-size: 18px; font-weight: 700; color: #334155; margin-bottom: 5px; }
+    .unlock-hint-text { font-size: 14px; color: #0ea5e9; font-weight: 600; margin-bottom: 15px; background: #e0f2fe; padding: 10px; border-radius: 12px; }
+    .unlock-input { width: 100%; padding: 12px; border: 1px solid #94a3b8; border-radius: 12px; font-family: 'Kanit'; font-size: 15px; text-align: center; outline: none; margin-bottom: 15px; }
+    .unlock-error { color: #e11d48; font-size: 13px; font-weight: 600; margin-bottom: 10px; display: none; }
 
-    .scanner-box:active .scanner-img {
-      transform: scale(0.92);
-      opacity: 0.9;
-    }
-    
-    /* เส้นเลเซอร์สแกน */
-    .laser-line {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: #ff0055;
-      box-shadow: 0 0 12px #ff0055, 0 0 20px #ff0055;
-      display: none;
-      z-index: 5;
-    }
-    .laser-line.scanning {
-      display: block;
-      animation: scanAnim 1.2s ease-in-out infinite alternate;
-    }
-    @keyframes scanAnim {
-      0% { top: 10%; }
-      100% { top: 90%; }
-    }
-
-    .heartbeat-line {
-      font-size: 18px;
-      color: #ff477e;
-      letter-spacing: 2px;
-      min-height: 24px;
-      margin-top: 5px;
-    }
-
-    .final-card {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 28px;
-      padding: 35px 20px;
-      box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4);
-      border: 2px solid #ffffff;
-      width: 100%;
-      animation: popUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-    .final-heart { font-size: 50px; margin-bottom: 12px; }
-    .final-title { font-size: 20px; font-weight: 700; color: #ff477e; margin: 0 0 8px 0; }
-    .final-sub { font-size: 15px; color: #4a5568; margin: 0; font-weight: 500; }
-
+    @keyframes popUp { from { opacity: 0; transform: scale(0.85) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
     .pulse-anim { animation: pulse 1.5s infinite; }
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.06); } 100% { transform: scale(1); } }
     .bounce-anim { animation: bounce 2s infinite; }
     @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } 60% { transform: translateY(-3px); } }
+    .bad-btn { background-color: #fff5f5; border-color: #fed7d7; }
+    .good-btn { background-color: #f0fdf4; border-color: #bbf7d0; }
+    .best-btn { background-color: #f0f9ff; border-color: #bae6fd; }
   </style>
 </head>
 <body>
 
-<!-- เอฟเฟกต์หัวใจลอยฉากหลัง -->
 <div id="heart-bg-container"></div>
+<button id="home-btn" class="home-btn" onclick="goHome()">🏠</button>
 
-<div id="main-app-container" class="cute-container">
+<!-- 🎬 วิดีโอเกริ่นนำ -->
+<div id="video-overlay">
+  <button class="skip-btn" onclick="skipIntroVideo()">ข้ามวิดีโอ ⏩</button>
+  <video id="fullVideo" playsinline autoplay muted>
+    <source src="https://ozonemassage.com/wp-content/uploads/2026/09/Prompt_D_Pixar_style_animati.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- 📦 Main Application -->
+<div id="main-app-container" class="cute-container" style="display: none;">
   
-  <!-- Step 1 -->
-  <div id="step-1-intro" class="step-box">
-    <div class="envelope-box roll-in-anim">
-      <div class="envelope-icon">✉️</div>
-      <div class="sparkle-heart pulse-anim">💖</div>
-    </div>
-
-    <div class="welcome-card">
-      <div class="morning-title">Morning น๊า พี่ เค ที่เป็นตัว K 💖✨</div>
-      <p class="special-today-text">
-        ✨ วันนี้พิเศษนิดนึง... เพราะว่าวันนี้หนูไม่อยู่ไปเข้าออฟฟิศน่าจะกลับค่ำๆ เลยย 🥺<br>
-        แอบทำไว้เล่นๆ เผื่อมีคนคิดถึงและคุมคนดื้อโดยเฉพาะเลย!
-      </p>
-      <button class="next-btn bounce-anim" onclick="startExperience()">✨ คลิกหน้าต่อไปสิ... 🎬</button>
+  <!-- หน้า Memory Box (เลือกเดือน) -->
+  <div id="memory-box-step" class="step-box card-base">
+    <div class="main-title">📦 Memory Box 2026 💖</div>
+    <button class="choice-btn today-btn" onclick="openTodayNotes()">💛 กดเพื่อเพิ่มกระดาษโน้ตของวันนี้เลย!</button>
+    <p style="font-size: 14px; color: #718096; margin-bottom: 10px;">หรือเลือกเดือนเพื่อดูปฏิทินย้อนหลัง/อนาคต</p>
+    <div class="month-grid">
+      <button class="month-btn" onclick="requestMonthAccess(0, 'past')">ม.ค.</button><button class="month-btn" onclick="requestMonthAccess(1, 'past')">ก.พ.</button><button class="month-btn" onclick="requestMonthAccess(2, 'past')">มี.ค.</button><button class="month-btn" onclick="requestMonthAccess(3, 'past')">เม.ย.</button><button class="month-btn" onclick="requestMonthAccess(4, 'past')">พ.ค.</button><button class="month-btn" onclick="requestMonthAccess(5, 'past')">มิ.ย.</button><button class="month-btn" onclick="requestMonthAccess(6, 'past')">ก.ค.</button><button class="month-btn" onclick="requestMonthAccess(7, 'past')">ส.ค.</button>
+      <button class="month-btn active-sept" onclick="requestMonthAccess(8, 'september')">ก.ย. ✨</button>
+      <button class="month-btn" onclick="requestMonthAccess(9, 'future')">ต.ค.</button><button class="month-btn" onclick="requestMonthAccess(10, 'future')">พ.ย.</button><button class="month-btn" onclick="requestMonthAccess(11, 'future')">ธ.ค.</button>
     </div>
   </div>
 
-  <!-- Step 2 -->
-  <div id="step-2-video" class="step-box" style="display: none;">
-    <div class="video-wrapper">
-      <video id="myVideo" playsinline muted>
-        <source src="https://ozonemassage.com/wp-content/uploads/2026/09/download-2.mp4" type="video/mp4">
-      </video>
+  <!-- 🗓️ ปฏิทินแบบไดนามิก -->
+  <div id="dynamic-calendar-sec" class="step-box card-base" style="display: none;">
+    <div class="calendar-header" id="dynamic-cal-header">Month 2026 🍁</div>
+    <p style="font-size: 12px; color: #718096; margin-top: 0;">แตะที่วันที่ 3 เพื่อดูความทรงจำ / วันอื่นเพื่อเขียนโน้ต</p>
+    <div class="calendar-grid" id="dynamic-cal-grid">
+      <!-- สร้างด้วย JS -->
     </div>
   </div>
 
-  <!-- Step 3 -->
-  <div id="step-3-rain-text" class="step-box" style="display: none;">
-    <div class="big-rain-card pulse-anim">
-      <div class="rain-icon">🌧️</div>
-      <h1 class="big-rain-title">ไม่อยากให้เปียกฝนคนเดียวแล้ว</h1>
-      <p class="sub-rain-text">เดี๋ยวไม่สบายหรอกคนดื้อ!</p>
-    </div>
-  </div>
-
-  <!-- Step 4 -->
-  <div id="step-4-main" class="step-box" style="display: none;">
-    
-    <!-- Card 1: Calendar -->
-    <div class="calendar-card fade-item" id="card-1">
-      <div class="calendar-header">September 🍁</div>
-      <div class="calendar-grid">
-        <div class="day-name">อา</div><div class="day-name">จ</div><div class="day-name">อ</div><div class="day-name">พ</div><div class="day-name">พฤ</div><div class="day-name">ศ</div><div class="day-name">ส</div>
-        <div></div><div></div>
-        <div class="day">1</div><div class="day">2</div><div class="day special-day">3</div>
-        <div class="day">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day">11</div><div class="day">12</div>
-        <div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div>
-        <div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day">23</div><div class="day">24</div><div class="day">25</div><div class="day">26</div>
-        <div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div>
+  <!-- 📝 กระดานโน้ตเฉพาะวัน -->
+  <div id="daily-notes-sec" class="step-box card-base" style="display: none;">
+    <div class="shared-note-box">
+      <div class="shared-note-title" id="daily-note-title">📌 กระดานโน้ตวันที่ X</div>
+      
+      <!-- ฟอร์มสร้างโน้ต -->
+      <div class="note-meta-inputs">
+        <input type="text" id="noteFrom" class="note-input-small" placeholder="จาก...">
+        <input type="text" id="noteTo" class="note-input-small" placeholder="ถึง...">
       </div>
-    </div>
+      <textarea id="sharedNoteInput" class="note-input" placeholder="พิมพ์ข้อความในใจที่นี่เลย..."></textarea>
+      
+      <button id="recordBtn" class="record-btn" onclick="toggleRecording()">🎤 กดเพื่อเริ่มอัดเสียง (Voice Note)</button>
+      
+      <div id="audioPreviewBox" class="audio-preview-box">
+        <div style="font-size: 13px; color: #92400e; font-weight: 600; margin-bottom: 5px;">ฟังเสียงที่อัดไว้ 🎵</div>
+        <audio id="audioPreview" controls style="width: 100%; height: 35px; outline: none;"></audio>
+        <button class="choice-btn bad-btn" style="padding: 4px 12px; font-size: 12px; margin-top: 8px;" onclick="discardAudio()">❌ ลบเสียงทิ้ง</button>
+      </div>
 
-    <!-- Card 2: Vinyl -->
-    <div class="vinyl-card fade-item" id="card-2">
-      <div class="vinyl-player" onclick="toggleAudio()">
-        <div id="vinyl-disc" class="vinyl-disc spinning">
-          <div class="vinyl-center">🎵</div>
-        </div>
-        <div class="vinyl-info">
-          <span class="song-title">Song for You ✨</span>
-          <span id="play-status" class="play-status">▶️ แตะที่แผ่นเสียงเพื่อเปิด/ปิดเพลง</span>
+      <div class="lock-toggle-box">
+        <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600;">
+          <input type="checkbox" id="lockCheckbox" onchange="toggleLockOptions()"> 🔒 ล็อกรหัสผ่านให้ข้อความนี้
+        </label>
+        <div id="lockOptions" class="lock-inputs" style="display: none;">
+          <input type="text" id="lockPin" placeholder="🔑 ตั้งรหัสผ่าน (จำเป็นต้องใส่)">
+          <input type="text" id="lockHint" placeholder="❓ คำใบ้ (ไม่ใส่ก็ได้ ให้เดาเอาเอง!)">
         </div>
       </div>
-    </div>
 
-    <!-- Card 3: Note -->
-    <div class="note-card fade-item" id="card-3">
-      <div class="pin-icon">📌</div>
-      <div class="heart-sticker pulse-anim">💖</div>
-      <div class="note-header">✨ Daily Note for K ✨</div>
-      <p id="typewriter-text" class="note-text"></p>
-    </div>
+      <button id="saveNoteBtn" class="save-note-btn" onclick="saveSharedNote()">💌 แปะกระดาษโน้ต</button>
 
-    <!-- Card 4: เลือกน้ำ -->
-    <div class="interactive-card fade-item" id="card-4">
-      <h3>☕ วันนี้คนดื้อจะกินน้ำอะไรดีคะ?</h3>
-      <div class="button-group">
-        <button id="bad-btn" class="choice-btn bad-btn" onmouseover="dodgeBadDrink()" onclick="dodgeBadDrink()" ontouchstart="dodgeBadDrink()">🥛 กาแฟใส่นม</button>
-        <button class="choice-btn good-btn" onclick="selectDrink('ชาเขียวหวานน้อย')">🍵 ชาเขียวหวานน้อย</button>
-        <button class="choice-btn best-btn" onclick="selectDrink('น้ำเปล่าเย็นๆ')">💧 น้ำเปล่าเย็นๆ</button>
-      </div>
-      <div id="drink-result" class="result-box"></div>
-    </div>
-
-    <!-- ⏳ Card แสดงเวลานับถอยหลัง (จะโชว์ถ้ายังไม่ถึง 12:00 น.) -->
-    <div class="countdown-card fade-item" id="lunch-countdown-card" style="display: none;">
-      <h3>🍱 การ์ดถัดไปปลดล็อกเวลาเที่ยงตรงน้า</h3>
-      <p style="font-size: 14px; color: #4a5568; margin: 0;">รออีกแป๊บนึงนะคนดื้อ... เหลือเวลาอีก:</p>
-      <div id="countdown-timer" class="countdown-timer-text">00:00:00</div>
-    </div>
-
-    <!-- Card 5: ข้าวเที่ยง (จะปลดล็อกเมื่อกดเลือกน้ำ + ถึงเวลา 12:00 น.) -->
-    <div class="interactive-card fade-item" id="card-5" style="display: none;">
-      <h3>🍱 ทานข้าวเที่ยงหรือยังคะ?</h3>
-      <div class="btn-grid">
-        <button class="choice-btn good-btn" onclick="answerLunch(true)">ทานแล้ว 😋</button>
-        <button class="choice-btn bad-btn" style="position: static; transform: none;" onclick="answerLunch(false)">ยังเลย 🥺</button>
-      </div>
-      <div id="lunch-result" class="result-box"></div>
-    </div>
-
-    <!-- Card 6: งานที่ 3 และตัวเลื่อนเวลา -->
-    <div class="interactive-card fade-item" id="card-6" style="display: none;">
-      <h3>💼 วันนี้ทำงานที่ 3 ไหมคะ?</h3>
-      <div class="btn-grid">
-        <button class="choice-btn good-btn" onclick="answerWork(true)">ทำครับ ✌️</button>
-        <button class="choice-btn best-btn" onclick="answerWork(false)">ไม่ได้ทำครับ 🏠</button>
+      <!-- ป้ายแจ้งเตือนสำเร็จ -->
+      <div id="noteStatus" style="font-size: 13px; color: #d97706; background: #fef3c7; padding: 10px; border-radius: 10px; font-weight: 600; margin-top: 10px; display: none; text-align: center; border: 1px dashed #f59e0b;">
+        💌 แปะสำเร็จ! กำลังกลับหน้าปฏิทิน...
       </div>
 
-      <div id="time-picker-wrapper" class="slider-box" style="display: none;">
-        <div class="slider-label">⏰ วันนี้เลิกงานกี่โมงคะ?</div>
-        <div id="time-display" class="time-display">17:00 น.</div>
-        <input type="range" min="17" max="24" value="17" class="time-slider" id="time-slider" oninput="updateTimeText(this.value)">
-        <button class="choice-btn good-btn" style="width: 100%; margin-top: 10px;" onclick="confirmTime()">ยืนยันเวลา 👍</button>
-      </div>
-
-      <div id="work-result" class="result-box"></div>
+      <!-- บอร์ดประวัติข้อความของวันนั้นๆ -->
+      <div id="notesBoard" class="notes-board"></div>
     </div>
-
-    <!-- 🕵️‍♀️ Card 7: Lie Detector Game (เครื่องตรวจจับคนโกหก) -->
-    <div class="lie-detector-card fade-item" id="card-7" style="display: none;">
-      <h3>🕵️‍♂️ เครื่องตรวจจับคนโกหกประจําวัน</h3>
-      <div id="lie-question" style="font-size: 15px; color: #4a5568; font-weight: 600; margin-bottom: 8px;">
-        โจทย์: "แอบคิดถึงคนทำเว็บนี้อยู่ใช่ไหม?"
-      </div>
-      <p style="font-size: 12px; color: #a0aec0; margin: 0;">แตะที่รูปค้างไว้ 3 วินาทีเพื่อสแกน!</p>
-
-      <div class="scanner-box" id="scanner-btn" onmousedown="startScan()" onmouseup="stopScan()" ontouchstart="startScan(event)" ontouchend="stopScan()">
-        <div class="laser-line" id="laser"></div>
-        <img src="https://ozonemassage.com/wp-content/uploads/2026/09/479.jpg" alt="scanner image" class="scanner-img">
-      </div>
-
-      <div id="heartbeat-status" class="heartbeat-line"></div>
-      <div id="lie-result" class="result-box" style="font-size: 15px; line-height: 1.5;"></div>
-    </div>
-
-    <!-- ปุ่มเปิดข้อความสุดท้าย -->
-    <div id="final-btn-wrapper" class="fade-item" style="display: none; margin-top: 10px;">
-      <button class="next-btn bounce-anim" onclick="goToNextSection()">✨ คลิกเปิดดูข้อความสุดท้าย 💌</button>
-    </div>
-
+    <button class="back-cal-btn" onclick="backToCalendar()">🔙 กลับไปหน้าปฏิทิน</button>
   </div>
 
-  <!-- Step 5 (ฉากจบ) -->
-  <div id="step-5-final" class="step-box" style="display: none;">
-    <div class="final-card">
-      <div class="final-heart pulse-anim">🥰💖✨</div>
-      <h2 class="final-title">โอเค... ไว้คุยกันตอนเย็นนะ</h2>
-      <p class="final-sub">หาเวลาพักด้วย หนูเป็นห่วง 🌸</p>
+  <!-- ✨ โซนความทรงจำวันที่ 3 กันยายน (กดวันที่ 3 จะเข้าที่นี่ที่เดียว) ✨ -->
+  <div id="sept3-experience-container" class="step-box" style="display: none;">
+    <div id="step-1-intro" class="step-box"><div class="envelope-box roll-in-anim"><div class="envelope-icon">✉️</div><div class="sparkle-heart pulse-anim">💖</div></div><div class="welcome-card"><div class="morning-title">Morning น๊า พี่ เค ที่เป็นตัว K 💖✨</div><p class="special-today-text">✨ วันนี้พิเศษนิดนึง... เพราะว่าวันนี้หนูไม่อยู่ไปเข้าออฟฟิศน่าจะกลับค่ำๆ เลยย 🥺<br>แอบทำไว้เล่นๆ เผื่อมีคนคิดถึงและคุมคนดื้อโดยเฉพาะเลย!</p><button class="next-btn bounce-anim" onclick="startExperience()">✨ คลิกหน้าต่อไปสิ... 🎬</button></div></div>
+    <div id="step-2-video" class="step-box" style="display: none;"><div class="video-wrapper"><video id="myVideo" playsinline muted><source src="https://ozonemassage.com/wp-content/uploads/2026/09/download-2.mp4" type="video/mp4"></video></div></div>
+    <div id="step-3-rain-text" class="step-box" style="display: none;"><div class="big-rain-card pulse-anim"><div class="rain-icon">🌧️</div><h1 class="big-rain-title">ไม่อยากให้เปียกฝนคนเดียวแล้ว</h1><p class="sub-rain-text">เดี๋ยวไม่สบายหรอกคนดื้อ!</p></div></div>
+    <div id="step-4-main" class="step-box" style="display: none;">
+      <div class="card-base fade-item" id="card-1"><div class="calendar-header">September 🍁</div><div class="calendar-grid"><div class="day-name">อา</div><div class="day-name">จ</div><div class="day-name">อ</div><div class="day-name">พ</div><div class="day-name">พฤ</div><div class="day-name">ศ</div><div class="day-name">ส</div><div></div><div></div><div class="day">1</div><div class="day">2</div><div class="day special-day" style="background: linear-gradient(135deg, #ff477e, #ff758c); color: white;">3</div><div class="day">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div><div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day">23</div><div class="day">24</div><div class="day">25</div><div class="day">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div></div></div>
+      <div class="card-base fade-item" id="card-2"><div class="vinyl-player" onclick="toggleAudio()"><div id="vinyl-disc" class="vinyl-disc spinning"><div class="vinyl-center">🎵</div></div><div class="vinyl-info"><span class="song-title">Song for You ✨</span><span id="play-status" class="play-status">▶️ แตะที่แผ่นเสียงเพื่อเปิด/ปิดเพลง</span></div></div></div>
+      <div class="note-card fade-item" id="card-3"><div class="pin-icon">📌</div><div class="heart-sticker pulse-anim">💖</div><div class="note-header">✨ Daily Note for K ✨</div><p id="typewriter-text" class="note-text"></p></div>
+      <div class="card-base fade-item" id="card-4"><h3 style="font-size: 16px; color: #ff477e; margin-top: 0;">☕ วันนี้คนดื้อจะกินน้ำอะไรดีคะ?</h3><div style="display: flex; flex-direction: column; gap: 10px;"><button id="bad-btn" class="choice-btn bad-btn" onmouseover="dodgeBadDrink()" onclick="dodgeBadDrink()" ontouchstart="dodgeBadDrink()">🥛 กาแฟใส่นม</button><button class="choice-btn good-btn" onclick="selectDrink('ชาเขียวหวานน้อย')">🍵 ชาเขียวหวานน้อย</button><button class="choice-btn best-btn" onclick="selectDrink('น้ำเปล่าเย็นๆ')">💧 น้ำเปล่าเย็นๆ</button></div><div id="drink-result" class="result-box"></div></div>
+      <div class="card-base fade-item" id="lunch-countdown-card" style="display: none;"><h3 style="font-size: 16px; color: #ff477e; margin-top: 0;">🍱 การ์ดถัดไปปลดล็อกเวลาเที่ยงตรงน้า</h3><p style="font-size: 14px; color: #4a5568; margin: 0;">รออีกแป๊บนึงนะคนดื้อ... เหลือเวลาอีก:</p><div id="countdown-timer" class="countdown-timer-text">00:00:00</div></div>
+      <div class="card-base fade-item" id="card-5" style="display: none;"><h3 style="font-size: 16px; color: #ff477e; margin-top: 0;">🍱 ทานข้าวเที่ยงหรือยังคะ?</h3><div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"><button class="choice-btn good-btn" onclick="answerLunch(true)">ทานแล้ว 😋</button><button class="choice-btn bad-btn" style="position: static; transform: none;" onclick="answerLunch(false)">ยังเลย 🥺</button></div><div id="lunch-result" class="result-box"></div></div>
+      <div class="card-base fade-item" id="card-6" style="display: none;"><h3 style="font-size: 16px; color: #ff477e; margin-top: 0;">💼 วันนี้ทำงานที่ 3 ไหมคะ?</h3><div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"><button class="choice-btn good-btn" onclick="answerWork(true)">ทำครับ ✌️</button><button class="choice-btn best-btn" onclick="answerWork(false)">ไม่ได้ทำครับ 🏠</button></div><div id="time-picker-wrapper" class="slider-box" style="display: none;"><div class="slider-label">⏰ วันนี้เลิกงานกี่โมงคะ?</div><div id="time-display" class="time-display">17:00 น.</div><input type="range" min="17" max="24" value="17" class="time-slider" id="time-slider" oninput="updateTimeText(this.value)"><button class="choice-btn good-btn" style="width: 100%; margin-top: 10px;" onclick="confirmTime()">ยืนยันเวลา 👍</button></div><div id="work-result" class="result-box"></div></div>
+      <div class="card-base fade-item" id="card-7" style="display: none;"><h3 style="font-size: 16px; color: #ff477e; margin-top: 0;">🕵️‍♂️ เครื่องตรวจจับคนโกหกประจําวัน</h3><div style="font-size: 15px; color: #4a5568; font-weight: 600; margin-bottom: 8px;">โจทย์: "แอบคิดถึงคนทำเว็บนี้อยู่ใช่ไหม?"</div><p style="font-size: 12px; color: #a0aec0; margin: 0;">แตะที่รูปค้างไว้ 3 วินาทีเพื่อสแกน!</p><div class="scanner-box" id="scanner-btn" onmousedown="startScan()" onmouseup="stopScan()" ontouchstart="startScan(event)" ontouchend="stopScan()"><div class="laser-line" id="laser"></div><img src="https://ozonemassage.com/wp-content/uploads/2026/09/479.jpg" alt="scanner image" class="scanner-img"></div><div id="heartbeat-status" style="font-size: 18px; color: #ff477e; margin-top: 5px;"></div><div id="lie-result" class="result-box" style="font-size: 15px; line-height: 1.5;"></div></div>
+      <div id="final-btn-wrapper" class="fade-item" style="display: none; margin-top: 10px;"><button class="next-btn bounce-anim" onclick="goToNextSection()">✨ คลิกเปิดดูข้อความสุดท้าย 💌</button></div>
     </div>
+    <div id="step-5-final" class="step-box" style="display: none;">
+      <div class="final-card">
+        <div style="font-size: 50px; margin-bottom: 12px;" class="pulse-anim">🥰💖✨</div><h2 style="font-size: 20px; font-weight: 700; color: #ff477e; margin: 0 0 8px 0;">โอเค... ไว้คุยกันตอนเย็นนะ</h2><p style="font-size: 15px; color: #4a5568; margin: 0 0 20px 0; font-weight: 500;">หาเวลาพักด้วย หนูเป็นห่วง 🌸</p><button class="choice-btn best-btn" style="width: 100%; border-radius: 20px;" onclick="goHome()">🏠 กลับไปหน้าปฏิทิน</button>
+      </div>
+    </div>
+    <audio id="bgMusic" src="https://ozonemassage.com/wp-content/uploads/2026/09/Y2Mate.is-RIFF-Offical-Audio.mp3" loop></audio>
   </div>
 
-  <audio id="bgMusic" src="https://ozonemassage.com/wp-content/uploads/2026/09/Y2Mate.is-RIFF-Offical-Audio.mp3" loop></audio>
+<!-- 😾 Popup เลือกเดือน (เพิ่มโน้ตต่างเดือน) -->
+<div id="monthChoiceModal" class="popup-modal">
+  <div class="popup-content">
+    <div id="popupAvatar" style="font-size: 55px; margin-bottom: 10px;">😾</div>
+    <div id="popupText" style="font-size: 15px; color: #2d3748; font-weight: 500; line-height: 1.5; margin-bottom: 15px;"></div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <button class="choice-btn bad-btn" onclick="closePopup('monthChoiceModal')">เข้าใจแล้วครับ 😅</button>
+      <button class="choice-btn good-btn" onclick="proceedToMonth()">แค่จะเพิ่มโน้ตครับ 📝</button>
+    </div>
+  </div>
+</div>
+
+<!-- ⏳ ป๊อปอัปแจ้งเตือนโน้ตอนาคต -->
+<div id="timeCapsuleModal" class="popup-modal">
+  <div class="popup-content">
+    <div style="font-size: 55px; margin-bottom: 10px;">🔒</div>
+    <div style="font-size: 18px; font-weight: 700; color: #334155; margin-bottom: 5px;">โน้ตแห่งอนาคต!</div>
+    <p style="font-size: 14px; color: #64748b; line-height: 1.5; margin-bottom: 15px;" id="capsuleUnlockText"></p>
+    <button class="choice-btn good-btn" style="width: 100%;" onclick="closePopup('timeCapsuleModal')">อดใจรอหน่อยนะ! 😉</button>
+  </div>
+</div>
+
+<!-- 🔒 ป๊อปอัปเกมทายรหัส -->
+<div id="unlockModal" class="popup-modal">
+  <div class="unlock-box">
+    <div class="unlock-icon">🔒</div>
+    <div class="unlock-title">ข้อความนี้ถูกล็อกไว้!</div>
+    <p style="font-size: 13px; color: #64748b; margin: 5px 0 15px 0;">ตอบคำถามให้ถูกถึงจะเปิดอ่านได้นะ 😜</p>
+    <div class="unlock-hint-text" id="displayUnlockHint">คำใบ้: ...</div>
+    <input type="text" id="unlockPinInput" class="unlock-input" placeholder="พิมพ์รหัส/คำตอบที่นี่...">
+    <div id="unlockErrorMsg" class="unlock-error">❌ รหัสผิดนะ ลองใหม่สิคนดื้อ!</div>
+    <div style="display: flex; gap: 10px;">
+      <button class="choice-btn bad-btn" style="flex: 1;" onclick="closePopup('unlockModal')">ยกเลิก</button>
+      <button class="choice-btn best-btn" style="flex: 1; background: #38bdf8; color: white; border-color: #0284c7;" onclick="verifyUnlock()">ปลดล็อก 🔓</button>
+    </div>
+  </div>
+</div>
+
+<!-- 💌 Popup สำหรับเปิดอ่านโน้ต -->
+<div id="noteDetailModal" class="popup-modal">
+  <div class="read-note-content">
+    <div class="read-note-pin">📌</div>
+    <div class="read-note-fromto" id="detailFromTo"></div>
+    <div class="read-note-text" id="detailText"></div>
+    <div id="detailAudioContainer" style="display: none; margin-bottom: 15px;">
+      <div style="font-size: 12px; color: #b45309; font-weight: 600; margin-bottom: 5px;">🎵 มีข้อความเสียงด้วยนะ:</div>
+      <audio id="detailAudio" controls style="width: 100%; height: 35px; outline: none;"></audio>
+    </div>
+    <div class="read-note-time" id="detailTime"></div>
+    <button class="choice-btn bad-btn" style="width: 100%; margin-top: 5px;" onclick="closePopup('noteDetailModal')">ปิดกระดาษโน้ต ❌</button>
+  </div>
 </div>
 
 <script>
-  // สร้างหัวใจลอยเบื้องหลัง
-  function createBackgroundHearts() {
-    const container = document.getElementById('heart-bg-container');
-    const hearts = ['💖', '🌸', '✨', '💕'];
-    for(let i=0; i<12; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('floating-heart-bg');
-      heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
-      heart.style.animationDelay = (Math.random() * 5) + 's';
-      container.appendChild(heart);
-    }
-  }
-  createBackgroundHearts();
+  const monthNames = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+  const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  let pendingMonthIndex = null; let currentViewingMonthIndex = 8; let currentViewingDay = null;
 
-  let btnScale = 1;
-  let drinkSelected = false;
-  let timerInterval = null;
+  // --- 🔥 Firebase ---
+  const firebaseConfig = { databaseURL: "https://memory-box-2026-default-rtdb.asia-southeast1.firebasedatabase.app/" };
+  if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+  const database = firebase.database();
+  const notesRef = database.ref('memory_box_notes_v6'); 
+  
+  let allNotes = []; let noteToUnlock = null;
 
-  function startExperience() {
-    const bgMusic = document.getElementById('bgMusic');
-    const video = document.getElementById('myVideo');
-    const step1 = document.getElementById('step-1-intro');
-    const step2 = document.getElementById('step-2-video');
+  notesRef.on('value', (snapshot) => {
+    const data = snapshot.val();
+    allNotes = [];
+    if (data) { for (let key in data) { allNotes.push({ id: key, ...data[key] }); } }
+    updateCalendarDots();
+    if (currentViewingDay !== null) { renderNotesForDay(currentViewingDay); }
+  });
 
-    bgMusic.currentTime = 15;
-    bgMusic.play().catch(err => console.log("Audio play error:", err));
-
-    step1.style.display = 'none';
-    step2.style.display = 'block';
-
-    video.play().catch(err => console.log("Video play error:", err));
-
-    video.onended = function() {
-      step2.style.display = 'none';
-      const step3 = document.getElementById('step-3-rain-text');
-      step3.style.display = 'block';
-
-      setTimeout(function() {
-        step3.style.display = 'none';
-        const step4 = document.getElementById('step-4-main');
-        step4.style.display = 'block';
-        
-        revealCardsSequentially();
-      }, 3500);
-    };
-  }
-
-  function revealCardsSequentially() {
-    setTimeout(() => { document.getElementById('card-1').classList.add('show'); }, 600);
-    setTimeout(() => { document.getElementById('card-2').classList.add('show'); }, 1800);
-    setTimeout(() => { 
-      document.getElementById('card-3').classList.add('show');
-      startTypewriter();
-    }, 3000);
-    setTimeout(() => { document.getElementById('card-4').classList.add('show'); }, 4200);
-  }
-
-  function toggleAudio() {
-    const bgMusic = document.getElementById('bgMusic');
-    const disc = document.getElementById('vinyl-disc');
-    const status = document.getElementById('play-status');
-
-    if (bgMusic.paused) {
-      bgMusic.play();
-      disc.classList.add('spinning');
-      status.textContent = '⏸️ กำลังเล่นเพลงอยู่...';
-    } else {
-      bgMusic.pause();
-      disc.classList.remove('spinning');
-      status.textContent = '▶️ แตะเพื่อเปิดเพลง';
+  // --- 📅 เลือกเดือน ---
+  function requestMonthAccess(mIndex, type) {
+    pendingMonthIndex = mIndex;
+    if (type === 'past') {
+      document.getElementById('popupAvatar').innerText = '😾'; document.getElementById('popupText').innerHTML = 'เรารู้จักกันเดือนกันยานะ!<br>จำคนผิดป่ะเนี่ย จะมากดเดือนนี้ได้ยังไง!';
+      document.getElementById('monthChoiceModal').style.display = 'flex';
+    } else if (type === 'future') {
+      document.getElementById('popupAvatar').innerText = '⏳'; document.getElementById('popupText').innerHTML = 'อนาคตยังมาไม่ถึงนะคนดื้อ...<br>ไว้ถึงเดือนนี้แล้วค่อยมาเปิดดูสิ!';
+      document.getElementById('monthChoiceModal').style.display = 'flex';
+    } else if (type === 'september') {
+      proceedToMonth();
     }
   }
 
-  const noteText = "ถึงคนดื้อ... วันนี้ตั้งใจทำงานน๊า อย่าลืมหาอะไรอร่อยๆ กินด้วยล่ะ ดื่มน้ำเยอะๆ พักผ่อนมากๆ! 💖";
-  let typeIndex = 0;
-
-  function startTypewriter() {
-    const el = document.getElementById('typewriter-text');
-    if (typeIndex < noteText.length) {
-      el.innerHTML += noteText.charAt(typeIndex);
-      typeIndex++;
-      setTimeout(startTypewriter, 50);
-    }
-  }
-
-  function dodgeBadDrink() {
-    const badBtn = document.getElementById('bad-btn');
-    const card = document.getElementById('card-4');
+  function proceedToMonth() {
+    closePopup('monthChoiceModal');
+    if (pendingMonthIndex !== null) { currentViewingMonthIndex = pendingMonthIndex; }
     
-    const cardRect = card.getBoundingClientRect();
-    const x = Math.floor(Math.random() * (cardRect.width - 120)) - (cardRect.width / 2 - 60);
-    const y = Math.floor(Math.random() * 80) - 40;
-
-    if (btnScale > 0.35) { btnScale -= 0.15; }
-
-    badBtn.style.position = 'relative';
-    badBtn.style.transform = `translate(${x}px, ${y}px) scale(${btnScale})`;
-    document.getElementById('drink-result').innerText = '😜 ปุ่มนี้กดไม่ได้หรอก! เลือกอันอื่นสิคะ';
+    document.getElementById('memory-box-step').style.display = 'none';
+    document.getElementById('dynamic-calendar-sec').style.display = 'block';
+    document.getElementById('home-btn').style.display = 'flex';
+    buildCalendar(currentViewingMonthIndex);
   }
 
-  function selectDrink(drinkName) {
-    drinkSelected = true;
-    const resultEl = document.getElementById('drink-result');
-    resultEl.innerText = (drinkName === 'น้ำเปล่าเย็นๆ') ? 'เก่งมาก! ❤️' : 'ดีมาก! ✨';
-
-    // ตรวจสอบระบบเวลาเที่ยง
-    checkLunchTimeAccess();
+  function buildCalendar(mIndex) {
+    document.getElementById('dynamic-cal-header').innerText = `${monthNames[mIndex]} 2026 🍁`;
+    const grid = document.getElementById('dynamic-cal-grid');
+    grid.innerHTML = '<div class="day-name">อา</div><div class="day-name">จ</div><div class="day-name">อ</div><div class="day-name">พ</div><div class="day-name">พฤ</div><div class="day-name">ศ</div><div class="day-name">ส</div>';
+    
+    const padding = new Date(2026, mIndex, 1).getDay();
+    for(let i=0; i<padding; i++) { grid.innerHTML += '<div></div>'; }
+    
+    const days = monthDays[mIndex];
+    for(let i=1; i<=days; i++) {
+      let extraClass = (mIndex === 8 && i === 3) ? 'special-day' : '';
+      grid.innerHTML += `<div class="day ${extraClass}" id="cal-day-${i}" onclick="clickDay(${i})">${i}</div>`;
+    }
+    updateCalendarDots();
   }
 
-  // ⏰ ฟังก์ชันตรวจสอบเวลาเที่ยง
-  function checkLunchTimeAccess() {
-    if (!drinkSelected) return;
-
-    const now = new Date();
-    const currentHour = now.getHours();
-
-    // ถ้าเวลา 12:00 น. ขึ้นไป ให้แสดง Card ข้าวเที่ยงเลย
-    if (currentHour >= 12) {
-      const countdownCard = document.getElementById('lunch-countdown-card');
-      countdownCard.style.display = 'none';
-      if (timerInterval) clearInterval(timerInterval);
-
-      const card5 = document.getElementById('card-5');
-      card5.style.display = 'block';
-      setTimeout(() => { card5.classList.add('show'); }, 400);
-    } else {
-      // ถ้าย้อนก่อน 12:00 น. ให้โชว์กล่องนับถอยหลัง
-      const countdownCard = document.getElementById('lunch-countdown-card');
-      countdownCard.style.display = 'block';
-      setTimeout(() => { countdownCard.classList.add('show'); }, 400);
-
-      updateCountdown();
-      if (!timerInterval) {
-        timerInterval = setInterval(updateCountdown, 1000);
+  // 🟡 ฟังก์ชันวาดจุดเหลือง!
+  function updateCalendarDots() {
+    for (let i = 1; i <= 31; i++) {
+      const dayEl = document.getElementById(`cal-day-${i}`);
+      if (dayEl) { const b = dayEl.querySelector('.note-dot'); if (b) b.remove(); }
+    }
+    const notesInMonth = allNotes.filter(n => n.targetMonth === currentViewingMonthIndex);
+    const daysWithNotes = new Set(notesInMonth.map(n => n.targetDay));
+    daysWithNotes.forEach(day => {
+      const dayEl = document.getElementById(`cal-day-${day}`);
+      if (dayEl) {
+        const dot = document.createElement('div');
+        dot.className = 'note-dot'; // 🟡 เรียกใช้ CSS วงกลมสีเหลือง
+        dayEl.appendChild(dot);
       }
-    }
+    });
   }
 
-  function updateCountdown() {
-    const now = new Date();
-    const target = new Date();
-    target.setHours(12, 0, 0, 0); // ตั้งเป้าหมายที่ 12:00:00 น.
-
-    const diff = target - now;
-
-    if (diff <= 0) {
-      checkLunchTimeAccess();
-      return;
-    }
-
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-
-    const hStr = hours.toString().padStart(2, '0');
-    const mStr = minutes.toString().padStart(2, '0');
-    const sStr = seconds.toString().padStart(2, '0');
-
-    document.getElementById('countdown-timer').innerText = `${hStr}:${mStr}:${sStr}`;
+  // --- 📅 คลิกวันที่ ---
+  function openTodayNotes() {
+    pendingMonthIndex = 8; currentViewingMonthIndex = 8;
+    proceedToNotesBoard(4); 
   }
 
-  function answerLunch(eaten) {
-    const resultEl = document.getElementById('lunch-result');
-    resultEl.innerText = eaten ? 'ดีแล้วค่ะ อิ่มแล้วก็มีแรงทำงานต่อเนอะ ✨' : 'อย่าลืมรีบไปหาอะไรทานด้วยน้า เดี๋ยวปวดท้องนะ! 🥺';
-
-    const card6 = document.getElementById('card-6');
-    card6.style.display = 'block';
-    setTimeout(() => { card6.classList.add('show'); }, 600);
-  }
-
-  function answerWork(working) {
-    const timePicker = document.getElementById('time-picker-wrapper');
-    const resultEl = document.getElementById('work-result');
-
-    if (working) {
-      timePicker.style.display = 'block';
-      resultEl.innerText = '';
+  function clickDay(day) {
+    if (currentViewingMonthIndex === 8 && day === 3) {
+      openSept3Experience(); // วันที่ 3 กันยาเท่านั้นที่จะเข้าความทรงจำ
     } else {
-      timePicker.style.display = 'none';
-      resultEl.innerText = 'รีบกลับบ้านพักผ่อนหาอะไรกินด้วยนะ 🌸';
-      showLieDetectorSection();
+      proceedToNotesBoard(day);
     }
   }
 
-  function updateTimeText(val) {
-    document.getElementById('time-display').innerText = val + ':00 น.';
+  function proceedToNotesBoard(day) {
+    currentViewingDay = day;
+    document.getElementById('dynamic-calendar-sec').style.display = 'none';
+    document.getElementById('memory-box-step').style.display = 'none';
+    const dailySec = document.getElementById('daily-notes-sec');
+    dailySec.style.display = 'block';
+    document.getElementById('daily-note-title').innerText = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
+    document.getElementById('home-btn').style.display = 'flex';
+    renderNotesForDay(day);
+    dailySec.scrollIntoView({ behavior: 'smooth' });
   }
 
-  function confirmTime() {
-    document.getElementById('work-result').innerText = 'โอเค ดูแลตัวเองดีๆ นะ 💖';
-    showLieDetectorSection();
+  function backToCalendar() {
+    document.getElementById('daily-notes-sec').style.display = 'none';
+    proceedToMonth(); 
   }
 
-  function showLieDetectorSection() {
-    const card7 = document.getElementById('card-7');
-    card7.style.display = 'block';
-    setTimeout(() => { card7.classList.add('show'); }, 600);
+  // --- 🎤 อัดเสียง ---
+  let mediaRecorder; let audioChunks = []; let audioBase64 = null; let isRecording = false;
+  async function toggleRecording() {
+    const btn = document.getElementById('recordBtn');
+    if (!isRecording) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream); audioChunks = [];
+        mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+          const reader = new FileReader(); reader.readAsDataURL(audioBlob);
+          reader.onloadend = () => {
+            audioBase64 = reader.result; document.getElementById('audioPreview').src = audioBase64;
+            document.getElementById('audioPreviewBox').style.display = 'block'; btn.style.display = 'none';
+          };
+          stream.getTracks().forEach(track => track.stop());
+        };
+        mediaRecorder.start(); isRecording = true;
+        btn.innerText = '⏹️ กำลังอัดเสียง... (กดอีกครั้งเพื่อหยุด)'; btn.classList.add('recording');
+      } catch (err) { alert('เข้าถึงไมค์ไม่ได้ค่ะ รบกวนกดอนุญาตไมโครโฟนก่อนนะคะ 🥺'); }
+    } else {
+      mediaRecorder.stop(); isRecording = false; btn.classList.remove('recording'); btn.innerText = '🎤 กดเพื่อเริ่มอัดเสียง (Voice Note)';
+    }
+  }
+  function discardAudio() {
+    audioBase64 = null; audioChunks = []; document.getElementById('audioPreviewBox').style.display = 'none';
+    const btn = document.getElementById('recordBtn'); btn.style.display = 'block'; btn.innerText = '🎤 กดเพื่อเริ่มอัดเสียง (Voice Note)';
   }
 
-  // 🕵️‍♂️ ระบบเครื่องตรวจจับคนโกหก (Lie Detector Logic)
-  let scanTimer = null;
-  let heartbeatInterval = null;
-  let hasCompletedScan = false;
-
-  function startScan(e) {
-    if (e) e.preventDefault();
-    if (hasCompletedScan) return;
-
-    document.getElementById('laser').classList.add('scanning');
-    document.getElementById('lie-result').innerText = '';
-
-    const statusEl = document.getElementById('heartbeat-status');
-    const beats = ['💓 75 BPM', '💓 88 BPM', '💓 102 BPM', '💓 120 BPM 🔥'];
-    let beatIdx = 0;
-    heartbeatInterval = setInterval(() => {
-      statusEl.innerText = beats[beatIdx % beats.length];
-      beatIdx++;
-    }, 400);
-
-    scanTimer = setTimeout(() => {
-      finishScan();
-    }, 2500);
+  // --- 📝 เซฟโน้ต (การันตี ไม่ค้าง ไม่รอ 100%!) ---
+  function toggleLockOptions() {
+    const isCheckbox = document.getElementById('lockCheckbox');
+    if(isCheckbox) {
+      document.getElementById('lockOptions').style.display = isCheckbox.checked ? 'flex' : 'none';
+    }
   }
 
-  function stopScan() {
-    if (hasCompletedScan) return;
+  function saveSharedNote() {
+    if (currentViewingDay === null) return;
+    const text = document.getElementById('sharedNoteInput').value;
+    const from = document.getElementById('noteFrom').value || 'ใครบางคน';
+    const to = document.getElementById('noteTo').value || 'ใครบางคน';
+    const isCheckbox = document.getElementById('lockCheckbox');
+    const isLocked = isCheckbox ? isCheckbox.checked : false;
+    const lockPin = document.getElementById('lockPin').value;
+    const lockHint = document.getElementById('lockHint').value;
     
-    document.getElementById('laser').classList.remove('scanning');
-    clearTimeout(scanTimer);
-    clearInterval(heartbeatInterval);
+    if (text.trim() === '' && !audioBase64) { alert("พิมพ์ข้อความ หรืออัดเสียงสักนิดนึงก่อนส่งน้า! 🥺"); return; }
+    if (isLocked && lockPin.trim() === '') { alert("ถ้าเลือกล็อกรหัสผ่าน ต้องใส่รหัสด้วยน้า! 🔑"); return; }
 
-    document.getElementById('heartbeat-status').innerText = '';
-    document.getElementById('lie-result').innerHTML = '<span style="color: #e53e3e;">⚠️ สแกนยังไม่เสร็จ! แตะค้างไว้จนกว่าจะเสร็จน้า</span>';
+    const btn = document.getElementById('saveNoteBtn');
+    const originalText = btn.innerText;
+    btn.innerText = '⏳ กำลังแปะกระดาษโน้ต...';
+    btn.disabled = true;
+
+    const now = new Date();
+    const timeStr = now.toLocaleDateString('th-TH') + ' เวลา ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.';
+
+    const noteData = {
+      targetMonth: currentViewingMonthIndex, targetDay: currentViewingDay,
+      text: text, from: from, to: to, timestamp: timeStr,
+      isLocked: isLocked, lockPin: lockPin, lockHint: lockHint,
+      audioData: audioBase64 || null 
+    };
+
+    // ส่งออกไปที่คลาวด์แบบลืมไปเลย (Fire and forget!)
+    try { notesRef.push(noteData); } catch (e) { console.log(e); }
+
+    // เปลี่ยน UI ทันที! ไม่สนใจว่าเน็ตจะส่งเสร็จหรือยัง!
+    setTimeout(() => {
+      document.getElementById('sharedNoteInput').value = ''; 
+      document.getElementById('lockHint').value = ''; document.getElementById('lockPin').value = ''; 
+      if (isCheckbox) { isCheckbox.checked = false; } toggleLockOptions(); discardAudio(); 
+      
+      btn.innerText = originalText;
+      btn.disabled = false;
+
+      const status = document.getElementById('noteStatus');
+      status.style.display = 'block'; 
+      
+      // ให้ดูคำว่า 'แปะสำเร็จ' 1.5 วินาที แล้วหน้าจอจะพับกลับไปที่ปฏิทินเอง!
+      setTimeout(() => { 
+        status.style.display = 'none'; 
+        backToCalendar(); 
+      }, 1500);
+
+    }, 300); // หลอกตาให้ระบบทำงาน 0.3 วิ
   }
 
-  function finishScan() {
-    hasCompletedScan = true;
-    document.getElementById('laser').classList.remove('scanning');
-    clearInterval(heartbeatInterval);
-
-    document.getElementById('heartbeat-status').innerHTML = '💓 135 BPM (หัวใจเต้นแรงมาก!)';
-    document.getElementById('lie-result').innerHTML = `
-      🚨 <strong>RESULT: DETECTED!</strong><br>
-      <span style="color: #ff477e;">"ตรวจพบความคิดถึง 100% (ห้ามปฏิเสธเด็ดขาด!)" 🥰✨</span>
-    `;
-
-    const finalBtn = document.getElementById('final-btn-wrapper');
-    finalBtn.style.display = 'block';
-    setTimeout(() => { finalBtn.classList.add('show'); }, 600);
+  function isFutureNote(m, d) {
+    const realMonth = 8; const realDay = 4; // สมมติอิงวันที่ 4 กันยา
+    if (m > realMonth) return true;
+    if (m === realMonth && d > realDay) return true;
+    return false;
   }
 
-  function goToNextSection() {
-    document.getElementById('step-4-main').style.display = 'none';
-    document.getElementById('step-5-final').style.display = 'block';
+  function renderNotesForDay(day) {
+    const board = document.getElementById('notesBoard'); board.innerHTML = ''; 
+    const dayNotes = allNotes.filter(n => n.targetDay === day && n.targetMonth === currentViewingMonthIndex).reverse();
+    
+    if (dayNotes.length === 0) {
+      board.innerHTML = '<div style="width: 100%; text-align: center; color: #9ca3af; font-size: 14px; padding: 20px;">ยังไม่มีโน้ตเลย... ลองแปะแผ่นแรกดูสิคะ! 💌</div>'; return;
+    }
+    
+    dayNotes.forEach(note => {
+      const noteEl = document.createElement('div');
+      const timeCapsule = isFutureNote(note.targetMonth, note.targetDay);
+      
+      if (timeCapsule) { noteEl.className = 'mini-note time-capsule'; } 
+      else if (note.isLocked) { noteEl.className = 'mini-note locked-note'; } 
+      else { noteEl.className = 'mini-note'; }
+
+      const pinIcon = timeCapsule ? '🔒' : (note.isLocked ? '🔒' : '📍');
+      const audioIcon = note.audioData ? ' 🎵' : ''; 
+      const hintText = timeCapsule ? '(ความลับแห่งอนาคต 🔒)' : (note.isLocked ? '(ข้อความติดล็อก 🔑)' : '(แตะเพื่อเปิดอ่าน 💌)');
+
+      noteEl.innerHTML = `
+        <div class="mini-pin">${pinIcon}</div>
+        <div class="mini-from-text">จาก:<br>${note.from}${audioIcon}</div>
+        <div class="mini-hint">${hintText}</div>
+        <div class="mini-time-stamp">${note.timestamp}</div>
+      `;
+      
+      noteEl.onclick = () => {
+        if (timeCapsule) {
+          document.getElementById('capsuleUnlockText').innerText = `ข้อความนี้จะเปิดให้ดูได้ในวันที่ ${note.targetDay} ${monthNames[note.targetMonth]} เท่านั้นนะ อดใจรอหน่อยคนดื้อ!`;
+          document.getElementById('timeCapsuleModal').style.display = 'flex';
+        } else if (note.isLocked) {
+          noteToUnlock = note;
+          const hintStr = (note.lockHint && note.lockHint.trim() !== '') ? note.lockHint : "ไม่มีคำใบ้ (ให้เดาเอาเอง อิอิ 😜)";
+          document.getElementById('displayUnlockHint').innerText = `คำใบ้: ${hintStr}`;
+          document.getElementById('unlockPinInput').value = '';
+          document.getElementById('unlockErrorMsg').style.display = 'none';
+          document.getElementById('unlockModal').style.display = 'flex';
+        } else {
+          openNoteDetail(note);
+        }
+      };
+      board.appendChild(noteEl);
+    });
   }
+
+  function verifyUnlock() {
+    const inputPin = document.getElementById('unlockPinInput').value;
+    if (inputPin.trim().toLowerCase() === noteToUnlock.lockPin.trim().toLowerCase()) {
+      closePopup('unlockModal'); openNoteDetail(noteToUnlock);
+    } else {
+      const errorMsg = document.getElementById('unlockErrorMsg');
+      errorMsg.style.display = 'block'; errorMsg.classList.remove('bounce-anim'); void errorMsg.offsetWidth; errorMsg.classList.add('bounce-anim');
+    }
+  }
+
+  function openNoteDetail(note) {
+    document.getElementById('detailFromTo').innerHTML = `จาก: ${note.from} <br> ถึง: ${note.to}`;
+    const textEl = document.getElementById('detailText');
+    if (note.text.trim() !== '') { textEl.innerText = note.text; textEl.style.display = 'block'; } else { textEl.style.display = 'none'; }
+    const audioContainer = document.getElementById('detailAudioContainer'); const audioEl = document.getElementById('detailAudio');
+    if (note.audioData) { audioEl.src = note.audioData; audioContainer.style.display = 'block'; } else { audioEl.src = ''; audioContainer.style.display = 'none'; }
+    document.getElementById('detailTime').innerText = `📅 เขียนเมื่อ: ${note.timestamp}`; document.getElementById('noteDetailModal').style.display = 'flex';
+  }
+  
+  function closePopup(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+    if(modalId === 'noteDetailModal') { document.getElementById('detailAudio').pause(); }
+  }
+
+  function goHome() {
+    document.getElementById('home-btn').style.display = 'none'; currentViewingDay = null; noteToUnlock = null; discardAudio(); 
+    const bgMusic = document.getElementById('bgMusic'); const video = document.getElementById('myVideo');
+    if (bgMusic) bgMusic.pause(); if (video) video.pause();
+    document.getElementById('daily-notes-sec').style.display = 'none'; document.getElementById('sept3-experience-container').style.display = 'none'; document.getElementById('dynamic-calendar-sec').style.display = 'none';
+    document.getElementById('step-1-intro').style.display = 'block'; document.getElementById('step-2-video').style.display = 'none'; document.getElementById('step-3-rain-text').style.display = 'none'; document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'none'; document.getElementById('typewriter-text').innerHTML = ''; typeIndex = 0; 
+    document.getElementById('memory-box-step').style.display = 'block'; document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // --- ✨ ความทรงจำวันที่ 3 ล้วนๆ ✨ ---
+  function openSept3Experience() {
+    document.getElementById('dynamic-calendar-sec').style.display = 'none';
+    document.getElementById('sept3-experience-container').style.display = 'block';
+    document.getElementById('sept3-experience-container').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  let btnScale = 1; let drinkSelected = false; let timerInterval = null;
+  function startExperience() {
+    const bgMusic = document.getElementById('bgMusic'); const video = document.getElementById('myVideo'); const step1 = document.getElementById('step-1-intro'); const step2 = document.getElementById('step-2-video');
+    bgMusic.currentTime = 15; bgMusic.play().catch(err => console.log(err)); step1.style.display = 'none'; step2.style.display = 'block'; video.play().catch(err => console.log(err));
+    video.onended = function() { step2.style.display = 'none'; const step3 = document.getElementById('step-3-rain-text'); step3.style.display = 'block'; setTimeout(function() { step3.style.display = 'none'; const step4 = document.getElementById('step-4-main'); step4.style.display = 'block'; revealCardsSequentially(); }, 3500); };
+  }
+  function revealCardsSequentially() { setTimeout(() => { document.getElementById('card-1').classList.add('show'); }, 600); setTimeout(() => { document.getElementById('card-2').classList.add('show'); }, 1800); setTimeout(() => { document.getElementById('card-3').classList.add('show'); startTypewriter(); }, 3000); setTimeout(() => { document.getElementById('card-4').classList.add('show'); }, 4200); }
+  function toggleAudio() { const bgMusic = document.getElementById('bgMusic'); const disc = document.getElementById('vinyl-disc'); const status = document.getElementById('play-status'); if (bgMusic.paused) { bgMusic.play(); disc.classList.add('spinning'); status.textContent = '⏸️ กำลังเล่นเพลงอยู่...'; } else { bgMusic.pause(); disc.classList.remove('spinning'); status.textContent = '▶️ แตะเพื่อเปิดเพลง'; } }
+  const noteText = "ถึงคนดื้อ... วันนี้ตั้งใจทำงานน๊า อย่าลืมหาอะไรอร่อยๆ กินด้วยล่ะ ดื่มน้ำเยอะๆ พักผ่อนมากๆ! 💖"; let typeIndex = 0;
+  function startTypewriter() { const el = document.getElementById('typewriter-text'); if (typeIndex < noteText.length) { el.innerHTML += noteText.charAt(typeIndex); typeIndex++; setTimeout(startTypewriter, 50); } }
+  function dodgeBadDrink() { const badBtn = document.getElementById('bad-btn'); const card = document.getElementById('card-4'); const cardRect = card.getBoundingClientRect(); const x = Math.floor(Math.random() * (cardRect.width - 120)) - (cardRect.width / 2 - 60); const y = Math.floor(Math.random() * 80) - 40; if (btnScale > 0.35) { btnScale -= 0.15; } badBtn.style.position = 'relative'; badBtn.style.transform = `translate(${x}px, ${y}px) scale(${btnScale})`; document.getElementById('drink-result').innerText = '😜 ปุ่มนี้กดไม่ได้หรอก! เลือกอันอื่นสิคะ'; }
+  function selectDrink(drinkName) { drinkSelected = true; document.getElementById('drink-result').innerText = (drinkName === 'น้ำเปล่าเย็นๆ') ? 'เก่งมาก! ❤️' : 'ดีมาก! ✨'; checkLunchTimeAccess(); }
+  function checkLunchTimeAccess() {
+    if (!drinkSelected) return; const now = new Date(); const currentDay = now.getDate(); const currentMonth = now.getMonth(); const currentHour = now.getHours(); const countdownCard = document.getElementById('lunch-countdown-card'); const card5 = document.getElementById('card-5');
+    if (currentMonth > 8 || currentDay > 3 || (currentDay === 3 && currentHour >= 12)) { countdownCard.style.display = 'none'; if (timerInterval) clearInterval(timerInterval); card5.style.display = 'block'; setTimeout(() => { card5.classList.add('show'); }, 400);
+    } else { countdownCard.style.display = 'block'; setTimeout(() => { countdownCard.classList.add('show'); }, 400); updateCountdown(); if (!timerInterval) { timerInterval = setInterval(updateCountdown, 1000); } }
+  }
+  function updateCountdown() { const now = new Date(); const target = new Date(); target.setDate(3); target.setHours(12, 0, 0, 0); const diff = target - now; if (diff <= 0) { checkLunchTimeAccess(); return; } const hours = Math.floor((diff / (1000 * 60 * 60)) % 24); const minutes = Math.floor((diff / (1000 * 60)) % 60); const seconds = Math.floor((diff / 1000) % 60); document.getElementById('countdown-timer').innerText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`; }
+  function answerLunch(eaten) { document.getElementById('lunch-result').innerText = eaten ? 'ดีแล้วค่ะ อิ่มแล้วก็มีแรงทำงานต่อเนอะ ✨' : 'อย่าลืมรีบไปหาอะไรทานด้วยน้า เดี๋ยวปวดท้องนะ! 🥺'; const card6 = document.getElementById('card-6'); card6.style.display = 'block'; setTimeout(() => { card6.classList.add('show'); }, 600); }
+  function answerWork(working) { const timePicker = document.getElementById('time-picker-wrapper'); const resultEl = document.getElementById('work-result'); if (working) { timePicker.style.display = 'block'; resultEl.innerText = ''; } else { timePicker.style.display = 'none'; resultEl.innerText = 'รีบกลับบ้านพักผ่อนหาอะไรกินด้วยนะ 🌸'; showLieDetectorSection(); } }
+  function updateTimeText(val) { document.getElementById('time-display').innerText = val + ':00 น.'; }
+  function confirmTime() { document.getElementById('work-result').innerText = 'โอเค ดูแลตัวเองดีๆนะ 💖'; showLieDetectorSection(); }
+  function showLieDetectorSection() { const card7 = document.getElementById('card-7'); card7.style.display = 'block'; setTimeout(() => { card7.classList.add('show'); }, 600); }
+  let scanTimer = null; let heartbeatInterval = null; let hasCompletedScan = false;
+  function startScan(e) { if (e) e.preventDefault(); if (hasCompletedScan) return; document.getElementById('laser').classList.add('scanning'); document.getElementById('lie-result').innerText = ''; const statusEl = document.getElementById('heartbeat-status'); const beats = ['💓 75 BPM', '💓 88 BPM', '💓 102 BPM', '💓 120 BPM 🔥']; let beatIdx = 0; heartbeatInterval = setInterval(() => { statusEl.innerText = beats[beatIdx % beats.length]; beatIdx++; }, 400); scanTimer = setTimeout(() => { finishScan(); }, 2500); }
+  function stopScan() { if (hasCompletedScan) return; document.getElementById('laser').classList.remove('scanning'); clearTimeout(scanTimer); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerText = ''; document.getElementById('lie-result').innerHTML = '<span style="color: #e53e3e;">⚠️ สแกนยังไม่เสร็จ! แตะค้างไว้จนกว่าจะเสร็จน้า</span>'; }
+  function finishScan() { hasCompletedScan = true; document.getElementById('laser').classList.remove('scanning'); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerHTML = '💓 135 BPM (หัวใจเต้นแรงมาก!)'; document.getElementById('lie-result').innerHTML = `🚨 <strong>RESULT: DETECTED!</strong><br><span style="color: #ff477e;">"ตรวจพบความคิดถึง 100% (ห้ามปฏิเสธเด็ดขาด!)" 🥰✨</span>`; const finalBtn = document.getElementById('final-btn-wrapper'); finalBtn.style.display = 'block'; setTimeout(() => { finalBtn.classList.add('show'); }, 600); }
+  function goToNextSection() { document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'block'; }
+
+  // 🎬 วิดีโอเกริ่นนำ
+  const videoOverlay = document.getElementById('video-overlay'); const fullVideo = document.getElementById('fullVideo'); const mainApp = document.getElementById('main-app-container');
+  document.body.addEventListener('click', function() { if (fullVideo.muted) { fullVideo.muted = false; } }, { once: true });
+  fullVideo.onended = function() { closeIntroVideo(); }; function skipIntroVideo() { fullVideo.pause(); closeIntroVideo(); }
+  function closeIntroVideo() { videoOverlay.style.opacity = '0'; setTimeout(() => { videoOverlay.style.display = 'none'; mainApp.style.display = 'flex'; createBackgroundHearts(); }, 1000); }
+  function createBackgroundHearts() { const container = document.getElementById('heart-bg-container'); const hearts = ['💖', '🌸', '✨', '💕']; for(let i=0; i<12; i++) { const heart = document.createElement('div'); heart.classList.add('floating-heart-bg'); heart.innerText = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 4 + 4) + 's'; container.appendChild(heart); } }
 </script>
 
 </body>
