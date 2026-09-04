@@ -52,14 +52,20 @@
     .day:hover { background: #fff0f3; border-color: #ffccd5; }
     .special-day { background: linear-gradient(135deg, #ff477e, #ff758c) !important; color: white !important; font-weight: bold; border-radius: 50%; box-shadow: 0 4px 10px rgba(255, 71, 126, 0.4); animation: pulse 1.5s infinite; border: none; }
     
-    /* 🟡 วงกลมแจ้งเตือนโน้ตบนปฏิทิน */
-    .note-badge { position: absolute; bottom: -2px; right: -2px; background: #fcd34d; color: #92400e; font-size: 10px; font-weight: bold; width: 18px; height: 18px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(245,158,11,0.4); z-index: 5; }
+    /* 🟡 วงกลมสีเหลืองบนปฏิทิน */
+    .note-dot { position: absolute; bottom: 3px; right: 3px; background: #fcd34d; border-radius: 50%; box-shadow: 0 2px 4px rgba(245,158,11,0.5); z-index: 5; width: 10px; height: 10px; animation: pulse 2s infinite; pointer-events: none; }
+    .note-dot.has-number { width: 16px; height: 16px; font-size: 10px; font-weight: bold; color: #92400e; display: flex; justify-content: center; align-items: center; border: 1.5px solid white; bottom: -2px; right: -2px; animation: bounce 1.5s infinite; }
 
     /* 📝 กระดานโน้ตเฉพาะวัน */
     .shared-note-box { background: #fffdf0; border: 2px dashed #fcd34d; border-radius: 18px; padding: 15px; text-align: left; margin-bottom: 15px; position: relative; }
     .shared-note-title { font-size: 15px; font-weight: 700; color: #d97706; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
-    .note-meta-inputs { display: flex; gap: 10px; margin-bottom: 10px; }
-    .note-input-small { flex: 1; border: 1px solid #fef08a; border-radius: 10px; padding: 8px 10px; font-family: 'Kanit', sans-serif; font-size: 13px; outline: none; }
+    
+    /* โครงสร้าง Dropdown (แก้ปัญหาช่องทะลุจอ) */
+    .note-meta-inputs { display: flex; gap: 10px; margin-bottom: 10px; width: 100%; }
+    .input-col { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .input-label { font-size: 11px; color: #b45309; font-weight: 700; margin-bottom: 4px; padding-left: 2px; }
+    .note-input-small { width: 100%; border: 1px solid #fcd34d; border-radius: 10px; padding: 8px 10px; font-family: 'Kanit', sans-serif; font-size: 14px; outline: none; background: #ffffff; color: #4a5568; cursor: pointer; font-weight: 500; }
+    
     .note-input { width: 100%; height: 70px; border: 1px solid #fef08a; border-radius: 12px; padding: 10px; font-family: 'Kanit', sans-serif; font-size: 13.5px; resize: none; background: #ffffff; outline: none; transition: border 0.3s; }
     .note-input:focus { border-color: #f59e0b; }
     
@@ -178,7 +184,7 @@
 <!-- 📦 Main Application -->
 <div id="main-app-container" class="cute-container" style="display: none;">
   
-  <!-- หน้า Memory Box (เลือกเดือน) -->
+  <!-- หน้า Memory Box -->
   <div id="memory-box-step" class="step-box card-base">
     <div class="main-title">📦 Memory Box 2026 💖</div>
     <button class="choice-btn today-btn" onclick="openTodayNotes()">💛 กดเพื่อเพิ่มกระดาษโน้ตของวันนี้เลย!</button>
@@ -204,11 +210,24 @@
     <div class="shared-note-box">
       <div class="shared-note-title" id="daily-note-title">📌 กระดานโน้ตวันที่ X</div>
       
-      <!-- ฟอร์มสร้างโน้ต -->
+      <!-- ฟอร์มสร้างโน้ต (Dropdown แก้ช่องทะลุจอ) -->
       <div class="note-meta-inputs">
-        <input type="text" id="noteFrom" class="note-input-small" placeholder="จาก...">
-        <input type="text" id="noteTo" class="note-input-small" placeholder="ถึง...">
+        <div class="input-col">
+          <div class="input-label">จากใคร:</div>
+          <select id="noteFrom" class="note-input-small">
+            <option value="มาย">มาย</option>
+            <option value="พี่เค">พี่เค</option>
+          </select>
+        </div>
+        <div class="input-col">
+          <div class="input-label">ส่งถึงใคร:</div>
+          <select id="noteTo" class="note-input-small">
+            <option value="พี่เค">พี่เค</option>
+            <option value="มาย">มาย</option>
+          </select>
+        </div>
       </div>
+
       <textarea id="sharedNoteInput" class="note-input" placeholder="พิมพ์ข้อความในใจที่นี่เลย..."></textarea>
       
       <button id="recordBtn" class="record-btn" onclick="toggleRecording()">🎤 กดเพื่อเริ่มอัดเสียง (Voice Note)</button>
@@ -242,7 +261,7 @@
     <button class="back-cal-btn" onclick="backToCalendar()">🔙 กลับไปหน้าปฏิทิน</button>
   </div>
 
-  <!-- ✨ โซนความทรงจำวันที่ 3 กันยายน (กดวันที่ 3 จะเข้าที่นี่ที่เดียว) ✨ -->
+  <!-- ✨ โซนความทรงจำวันที่ 3 กันยายน ✨ -->
   <div id="sept3-experience-container" class="step-box" style="display: none;">
     <div id="step-1-intro" class="step-box"><div class="envelope-box roll-in-anim"><div class="envelope-icon">✉️</div><div class="sparkle-heart pulse-anim">💖</div></div><div class="welcome-card"><div class="morning-title">Morning น๊า พี่ เค ที่เป็นตัว K 💖✨</div><p class="special-today-text">✨ วันนี้พิเศษนิดนึง... เพราะว่าวันนี้หนูไม่อยู่ไปเข้าออฟฟิศน่าจะกลับค่ำๆ เลยย 🥺<br>แอบทำไว้เล่นๆ เผื่อมีคนคิดถึงและคุมคนดื้อโดยเฉพาะเลย!</p><button class="next-btn bounce-anim" onclick="startExperience()">✨ คลิกหน้าต่อไปสิ... 🎬</button></div></div>
     <div id="step-2-video" class="step-box" style="display: none;"><div class="video-wrapper"><video id="myVideo" playsinline muted><source src="https://ozonemassage.com/wp-content/uploads/2026/09/download-2.mp4" type="video/mp4"></video></div></div>
@@ -266,7 +285,7 @@
     <audio id="bgMusic" src="https://ozonemassage.com/wp-content/uploads/2026/09/Y2Mate.is-RIFF-Offical-Audio.mp3" loop></audio>
   </div>
 
-<!-- 😾 Popup เลือกเดือน (เพิ่มโน้ตต่างเดือน) -->
+<!-- 😾 Popup เลือกเดือน -->
 <div id="monthChoiceModal" class="popup-modal">
   <div class="popup-content">
     <div id="popupAvatar" style="font-size: 55px; margin-bottom: 10px;">😾</div>
@@ -377,25 +396,41 @@
       let extraClass = (mIndex === 8 && i === 3) ? 'special-day' : '';
       grid.innerHTML += `<div class="day ${extraClass}" id="cal-day-${i}" onclick="clickDay(${i})">${i}</div>`;
     }
+    // วาดจุดสีเหลืองหลังสร้างปฏิทินเสร็จ
     updateCalendarDots();
   }
 
-  // 🟡 ฟังก์ชันวาดจุดเหลือง!
+  // 🟡 ฟังก์ชันวาดจุดเหลือง และ ตัวเลข!
   function updateCalendarDots() {
+    // ล้างจุดเก่าทิ้งให้หมดก่อน
     for (let i = 1; i <= 31; i++) {
       const dayEl = document.getElementById(`cal-day-${i}`);
       if (dayEl) { const b = dayEl.querySelector('.note-dot'); if (b) b.remove(); }
     }
-    const notesInMonth = allNotes.filter(n => n.targetMonth === currentViewingMonthIndex);
-    const daysWithNotes = new Set(notesInMonth.map(n => n.targetDay));
-    daysWithNotes.forEach(day => {
-      const dayEl = document.getElementById(`cal-day-${day}`);
-      if (dayEl) {
-        const dot = document.createElement('div');
-        dot.className = 'note-dot'; // 🟡 เรียกใช้ CSS วงกลมสีเหลือง
-        dayEl.appendChild(dot);
-      }
+    
+    // นับจำนวนโน้ตในแต่ละวันของเดือนนั้นๆ
+    const notesInMonth = allNotes.filter(n => Number(n.targetMonth) === currentViewingMonthIndex);
+    const dayCounts = {};
+    notesInMonth.forEach(n => { 
+        let d = Number(n.targetDay);
+        dayCounts[d] = (dayCounts[d] || 0) + 1; 
     });
+
+    for(let day in dayCounts) {
+      const dayEl = document.getElementById(`cal-day-${day}`);
+      if (dayEl && dayCounts[day] > 0) {
+        const badge = document.createElement('div');
+        badge.className = 'note-dot'; 
+        
+        // ถ้ามีหลายโน้ต ให้ใส่ตัวเลขลงไปในจุดสีเหลืองด้วย
+        if(dayCounts[day] > 1) {
+            badge.innerText = dayCounts[day];
+            badge.classList.add('has-number');
+        }
+        
+        dayEl.appendChild(badge);
+      }
+    }
   }
 
   // --- 📅 คลิกวันที่ ---
@@ -406,7 +441,7 @@
 
   function clickDay(day) {
     if (currentViewingMonthIndex === 8 && day === 3) {
-      openSept3Experience(); // วันที่ 3 กันยาเท่านั้นที่จะเข้าความทรงจำ
+      openSept3Experience(); // วันที่ 3 จะเข้าความทรงจำเสมอ!
     } else {
       proceedToNotesBoard(day);
     }
@@ -459,7 +494,7 @@
     const btn = document.getElementById('recordBtn'); btn.style.display = 'block'; btn.innerText = '🎤 กดเพื่อเริ่มอัดเสียง (Voice Note)';
   }
 
-  // --- 📝 เซฟโน้ต (การันตี ไม่ค้าง ไม่รอ 100%!) ---
+  // --- 📝 เซฟโน้ต (วิธีแก้ปัญหาค้าง!) ---
   function toggleLockOptions() {
     const isCheckbox = document.getElementById('lockCheckbox');
     if(isCheckbox) {
@@ -489,16 +524,16 @@
     const timeStr = now.toLocaleDateString('th-TH') + ' เวลา ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.';
 
     const noteData = {
-      targetMonth: currentViewingMonthIndex, targetDay: currentViewingDay,
+      targetMonth: Number(currentViewingMonthIndex), targetDay: Number(currentViewingDay),
       text: text, from: from, to: to, timestamp: timeStr,
       isLocked: isLocked, lockPin: lockPin, lockHint: lockHint,
       audioData: audioBase64 || null 
     };
 
-    // ส่งออกไปที่คลาวด์แบบลืมไปเลย (Fire and forget!)
+    // ส่งเข้า Firebase ไม่ต้องรอ!
     try { notesRef.push(noteData); } catch (e) { console.log(e); }
 
-    // เปลี่ยน UI ทันที! ไม่สนใจว่าเน็ตจะส่งเสร็จหรือยัง!
+    // เปลี่ยนหน้าและสำเร็จทันที! ไม่ค้าง 100%
     setTimeout(() => {
       document.getElementById('sharedNoteInput').value = ''; 
       document.getElementById('lockHint').value = ''; document.getElementById('lockPin').value = ''; 
@@ -510,13 +545,13 @@
       const status = document.getElementById('noteStatus');
       status.style.display = 'block'; 
       
-      // ให้ดูคำว่า 'แปะสำเร็จ' 1.5 วินาที แล้วหน้าจอจะพับกลับไปที่ปฏิทินเอง!
+      // ให้ดูคำว่า 'แปะสำเร็จ' 1.5 วิ แล้วเด้งกลับปฏิทินเอง!
       setTimeout(() => { 
         status.style.display = 'none'; 
         backToCalendar(); 
       }, 1500);
-
-    }, 300); // หลอกตาให้ระบบทำงาน 0.3 วิ
+      
+    }, 500); 
   }
 
   function isFutureNote(m, d) {
@@ -528,7 +563,7 @@
 
   function renderNotesForDay(day) {
     const board = document.getElementById('notesBoard'); board.innerHTML = ''; 
-    const dayNotes = allNotes.filter(n => n.targetDay === day && n.targetMonth === currentViewingMonthIndex).reverse();
+    const dayNotes = allNotes.filter(n => Number(n.targetDay) === day && Number(n.targetMonth) === currentViewingMonthIndex).reverse();
     
     if (dayNotes.length === 0) {
       board.innerHTML = '<div style="width: 100%; text-align: center; color: #9ca3af; font-size: 14px; padding: 20px;">ยังไม่มีโน้ตเลย... ลองแปะแผ่นแรกดูสิคะ! 💌</div>'; return;
@@ -536,7 +571,7 @@
     
     dayNotes.forEach(note => {
       const noteEl = document.createElement('div');
-      const timeCapsule = isFutureNote(note.targetMonth, note.targetDay);
+      const timeCapsule = isFutureNote(Number(note.targetMonth), Number(note.targetDay));
       
       if (timeCapsule) { noteEl.className = 'mini-note time-capsule'; } 
       else if (note.isLocked) { noteEl.className = 'mini-note locked-note'; } 
