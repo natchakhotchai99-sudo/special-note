@@ -242,8 +242,8 @@
 <!-- 🐱 น้องแมวเฝ้าเว็บ (Mascot) รูปภาพ GIF -->
 <div id="mascot-container" onclick="pokeMascot()">
   <div id="mascot-bubble" class="mascot-bubble">...</div>
-  <!-- เปลี่ยนเป็นรูปแมว GIF ขยับได้ -->
-  <img id="mascot-emoji" class="mascot-img" src="https://media.tenor.com/ZhbOEmA2T5MAAAAi/peach-cat-cute.gif" alt="Cat Mascot" onerror="this.src='https://i.gifer.com/ZZ5H.gif'">
+  <!-- รูปแมวตั้งค่าเริ่มต้นไว้ก่อน เดี๋ยว JavaScript จะสลับเวลาให้เองค่ะ -->
+  <img id="mascot-emoji" class="mascot-img" src="https://ozonemassage.com/wp-content/uploads/2026/09/ดีไซน์ที่ยังไม่ได้ตั้งชื่อ.gif" alt="Cat Mascot">
 </div>
 
 <!-- 🎁 หน้าต้อนรับ (Greeting Screen) เพื่อขออนุญาตเล่นเสียงวิดีโอ -->
@@ -488,7 +488,7 @@
   }
   updateTimeGreeting();
 
-  // --- 🐱 น้องแมว Mascot ภาพ GIF น่ารักๆ ---
+  // --- 🐱 น้องแมว Mascot ภาพ GIF น่ารักๆ โดยใช้ลิงก์จาก WordPress ---
   let isMascotAwake = false;
   function initMascot() {
     const hour = new Date().getHours();
@@ -498,10 +498,10 @@
     // เวลา 6 โมงเช้า ถึง 4 ทุ่ม แมวจะตื่น
     if(hour >= 6 && hour < 22) {
       isMascotAwake = true;
-      emojiEl.src = 'https://media.tenor.com/ZhbOEmA2T5MAAAAi/peach-cat-cute.gif'; 
+      emojiEl.src = 'https://ozonemassage.com/wp-content/uploads/2026/09/ดีไซน์ที่ยังไม่ได้ตั้งชื่อ.gif'; 
     } else {
       isMascotAwake = false;
-      emojiEl.src = 'https://media.tenor.com/5JGEH0aH6fQAAAAi/peach-cat-sleep.gif'; 
+      emojiEl.src = 'https://ozonemassage.com/wp-content/uploads/2026/09/download.gif'; 
     }
   }
   initMascot(); // ปลุก/กล่อมแมวตอนโหลดเว็บครั้งแรก
