@@ -25,7 +25,10 @@
       z-index: 10005; display: flex; flex-direction: column; justify-content: center; align-items: center;
       transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
     }
-    .greeting-box-icon { font-size: 90px; margin-bottom: 15px; filter: drop-shadow(0 10px 15px rgba(255, 71, 126, 0.3)); animation: bounce 2s infinite; }
+    /* กิมมิค 1: กล่องพัสดุดุ๊กดิ๊ก */
+    .greeting-box-icon { font-size: 90px; margin-bottom: 15px; filter: drop-shadow(0 10px 15px rgba(255, 71, 126, 0.3)); animation: wiggleBox 1.5s infinite; }
+    @keyframes wiggleBox { 0%, 10% { transform: rotate(-10deg) scale(1); } 20% { transform: rotate(10deg) scale(1.1); } 30% { transform: rotate(-10deg) scale(1); } 40% { transform: rotate(10deg) scale(1.1); } 50%, 100% { transform: rotate(0deg) scale(1); } }
+    
     .greeting-text { font-size: 24px; font-weight: 700; color: #ff477e; margin-bottom: 35px; text-shadow: 0 2px 4px rgba(255,71,126,0.1); text-align: center; padding: 0 20px; }
     .open-box-btn { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); color: #ffffff; border: none; padding: 16px 35px; font-size: 18px; font-weight: 700; font-family: 'Kanit', sans-serif; border-radius: 30px; cursor: pointer; box-shadow: 0 8px 25px rgba(255, 117, 140, 0.5); transition: transform 0.2s; animation: pulseGlowPink 2s infinite; }
     .open-box-btn:active { transform: scale(0.95); }
@@ -49,7 +52,9 @@
     .step-box { width: 100%; }
     .card-base { background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 25px 20px; margin-bottom: 18px; box-shadow: 0 8px 30px rgba(255, 182, 193, 0.3); border: 2px solid #ffffff; width: 100%; position: relative; }
     
-    .main-title { font-size: 24px; font-weight: 700; color: #ff477e; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(255,71,126,0.1); }
+    /* กิมมิค 2: ข้อความหัวเรื่องลอยได้ */
+    .main-title { font-size: 24px; font-weight: 700; color: #ff477e; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(255,71,126,0.1); animation: floatTitle 3s ease-in-out infinite; display: inline-block; }
+    @keyframes floatTitle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
     .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .choice-btn:active { transform: scale(0.95); }
@@ -64,6 +69,7 @@
     .month-btn.active-sept:hover { color: white; }
     .month-icon { font-size: 16px; margin-bottom: 3px; }
 
+    /* 🗓️ ปฏิทินแบบไดนามิก */
     .calendar-header { font-size: 18px; font-weight: 700; color: #ff477e; margin-bottom: 12px; }
     .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; font-size: 13px; }
     .day-name { font-weight: 600; color: #a0aec0; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0; margin-bottom: 5px; }
@@ -74,13 +80,14 @@
     .note-dot { position: absolute; bottom: 3px; right: 3px; background: #fcd34d; border-radius: 50%; box-shadow: 0 2px 4px rgba(245,158,11,0.5); z-index: 5; width: 10px; height: 10px; animation: pulse 2s infinite; pointer-events: none; }
     .note-dot.has-number { width: 16px; height: 16px; font-size: 10px; font-weight: bold; color: #92400e; display: flex; justify-content: center; align-items: center; border: 1.5px solid white; bottom: -2px; right: -2px; animation: bounce 1.5s infinite; }
 
+    /* 📝 กระดานโน้ตเฉพาะวัน */
     .shared-note-box { background: #fffdf0; border: 2px dashed #fcd34d; border-radius: 18px; padding: 15px; text-align: left; margin-bottom: 15px; position: relative; box-shadow: inset 0 0 10px rgba(245,158,11,0.05); }
     .shared-note-title { font-size: 16px; font-weight: 700; color: #d97706; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 6px; border-bottom: 1px dashed #fcd34d; padding-bottom: 10px; }
     
-    .note-meta-inputs { display: flex; gap: 10px; margin-bottom: 12px; width: 100%; }
-    .input-col { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-    .input-label { font-size: 12px; color: #b45309; font-weight: 700; margin-bottom: 4px; padding-left: 2px; }
-    .note-input-small { width: 100%; border: 1px solid #fcd34d; border-radius: 10px; padding: 8px 10px; font-family: 'Kanit', sans-serif; font-size: 14px; outline: none; background: #ffffff; color: #4a5568; cursor: pointer; font-weight: 500; transition: border 0.3s, box-shadow 0.3s; }
+    .note-meta-inputs { display: flex; justify-content: center; margin-bottom: 12px; width: 100%; }
+    .input-col { flex: 1; max-width: 220px; display: flex; flex-direction: column; text-align: center; }
+    .input-label { font-size: 13px; color: #b45309; font-weight: 700; margin-bottom: 6px; }
+    .note-input-small { width: 100%; border: 1px solid #fcd34d; border-radius: 10px; padding: 10px; font-family: 'Kanit', sans-serif; font-size: 15px; outline: none; background: #ffffff; color: #4a5568; cursor: pointer; font-weight: 600; text-align: center; transition: border 0.3s, box-shadow 0.3s; }
     .note-input-small:focus { border-color: #f59e0b; box-shadow: 0 0 0 2px rgba(245,158,11,0.2); }
     
     .note-input { width: 100%; height: 80px; border: 1px solid #fef08a; border-radius: 12px; padding: 12px; font-family: 'Kanit', sans-serif; font-size: 14px; resize: none; background: #ffffff; outline: none; transition: border 0.3s, box-shadow 0.3s; }
@@ -107,14 +114,17 @@
     .save-note-btn:disabled { background: #cbd5e1; box-shadow: none; cursor: not-allowed; transform: none; }
 
     .notes-board { margin-top: 25px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; border-top: 2px dashed #fef08a; padding-top: 20px; }
+    
+    /* กิมมิค 3: รอยสก็อตเทปแปะกระดาษโน้ต */
     .mini-note { background: linear-gradient(135deg, #fef08a, #fde047); width: calc(50% - 5px); aspect-ratio: 1.05; border-radius: 4px 20px 4px 20px; padding: 15px 10px; position: relative; cursor: pointer; box-shadow: 2px 4px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease; animation: stickNoteAnim 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    .mini-note::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 35px; height: 14px; background: rgba(255,255,255,0.45); box-shadow: 0 1px 3px rgba(0,0,0,0.05); z-index: 3; border-radius: 2px; }
     .mini-note:hover { transform: scale(1.05) rotate(-2deg); box-shadow: 4px 8px 15px rgba(0,0,0,0.15); z-index: 10; }
     @keyframes stickNoteAnim { 0% { transform: translateY(-50px) scale(1.2) rotate(10deg); opacity: 0; } 100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; } }
     
     .mini-note.time-capsule { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); border: 1px dashed #94a3b8; }
     .mini-note.locked-note { background: linear-gradient(135deg, #f8fafc, #f1f5f9); border: 1px dashed #cbd5e1; }
     
-    .mini-pin { position: absolute; top: -14px; font-size: 26px; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3)); z-index: 2; }
+    .mini-pin { position: absolute; top: -14px; font-size: 26px; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3)); z-index: 4; }
     .mini-from-text { font-size: 15px; font-weight: 700; color: #92400e; word-break: break-word; line-height: 1.3; }
     .mini-note.locked-note .mini-from-text, .mini-note.time-capsule .mini-from-text { color: #334155; }
     .mini-icons { font-size: 12px; margin-top: 4px; }
@@ -123,10 +133,7 @@
     .mini-time-stamp { font-size: 9.5px; color: #78350f; margin-top: 8px; opacity: 0.8; font-weight: 500; }
     .mini-note.locked-note .mini-time-stamp, .mini-note.time-capsule .mini-time-stamp { color: #334155; }
     
-    @keyframes flyOut {
-      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-      100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.5) rotate(180deg); opacity: 0; }
-    }
+    @keyframes flyOut { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.5) rotate(180deg); opacity: 0; } }
 
     /* ความทรงจำ 3 ก.ย. */
     .envelope-box { position: relative; display: inline-block; margin-bottom: 20px; }
@@ -178,7 +185,7 @@
     
     .read-note-content { background: #fffdf0; border: 2px solid #fcd34d; border-radius: 20px; padding: 35px 20px 20px 20px; text-align: left; max-width: 360px; width: 100%; box-shadow: 0 15px 35px rgba(217, 119, 6, 0.3); animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; max-height: 90vh; overflow-y: auto; }
     .read-note-pin { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 40px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.3)); z-index: 5; }
-    .read-note-fromto { font-weight: 700; color: #b45309; font-size: 16px; margin-bottom: 12px; border-bottom: 1px dashed #fcd34d; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .read-note-fromto { font-weight: 700; color: #b45309; font-size: 16px; margin-bottom: 12px; border-bottom: 1px dashed #fcd34d; padding-bottom: 10px; text-align: center; }
     .read-note-text { font-size: 15px; color: #374151; line-height: 1.6; margin-bottom: 15px; min-height: 40px; word-break: break-word; font-weight: 500; }
     .read-note-time { font-size: 12px; color: #9ca3af; text-align: right; margin-top: 15px; font-weight: 500; border-top: 1px solid #fef08a; padding-top: 10px; }
     
@@ -266,25 +273,18 @@
     <div class="shared-note-box">
       <div class="shared-note-title" id="daily-note-title">📌 กระดานโน้ตวันที่ X</div>
       
-      <!-- ฟอร์มสร้างโน้ต -->
-      <div class="note-meta-inputs">
-        <div class="input-col">
-          <div class="input-label">จากใคร:</div>
-          <select id="noteFrom" class="note-input-small">
-            <option value="มาย">มาย</option>
-            <option value="พี่เค">พี่เค</option>
-          </select>
-        </div>
-        <div class="input-col">
-          <div class="input-label">ส่งถึงใคร:</div>
-          <select id="noteTo" class="note-input-small">
-            <option value="พี่เค">พี่เค</option>
-            <option value="มาย">มาย</option>
+      <!-- ฟอร์มสร้างโน้ต (เอาช่อง "ส่งถึงใคร" ออกไปแล้ว) -->
+      <div class="note-meta-inputs" style="justify-content: center;">
+        <div class="input-col" style="max-width: 220px;">
+          <div class="input-label" style="text-align: center;">📝 โน้ตแผ่นนี้จาก:</div>
+          <select id="noteFrom" class="note-input-small" style="text-align: center;">
+            <option value="มาย">👧 มาย</option>
+            <option value="พี่เค">👦 พี่เค</option>
           </select>
         </div>
       </div>
 
-      <textarea id="sharedNoteInput" class="note-input" placeholder="พิมพ์ข้อความในใจที่นี่เลย..."></textarea>
+      <textarea id="sharedNoteInput" class="note-input" placeholder="พิมพ์ความรู้สึกไว้ตรงนี้นะ 💌..."></textarea>
       
       <div class="media-buttons">
         <button id="recordBtn" class="record-btn" onclick="toggleRecording()">
@@ -437,14 +437,11 @@
     const videoOverlay = document.getElementById('video-overlay');
     const video = document.getElementById('fullVideo');
 
-    // Fade out กล่องของขวัญ
     greeting.style.opacity = '0';
     greeting.style.transform = 'scale(1.2)';
     setTimeout(() => {
       greeting.style.display = 'none';
       videoOverlay.style.display = 'flex';
-      
-      // ตอนนี้ระบบอนุญาตให้เปิดเสียงได้แล้ว 100% เพราะถูกปลดล็อกด้วยการคลิกปุ่ม!
       video.muted = false; 
       video.play().catch(err => console.log("Video play error:", err));
     }, 800);
@@ -460,14 +457,14 @@
   function requestMonthAccess(mIndex, type) {
     pendingMonthIndex = mIndex;
     if (type === 'past') {
-      document.getElementById('popupAvatar').innerText = '😾'; 
-      document.getElementById('popupText').innerHTML = 'จำผิดคนปะเนี่ย รู้จักกันเดือนกันยายนนะ!';
+      document.getElementById('popupAvatar').innerText = '🕰️'; 
+      document.getElementById('popupText').innerHTML = 'แอบย้อนเวลาเหรอเนี่ย!<br><span style="font-size:13px; color:#64748b;">จะกลับไปดูความทรงจำเก่าๆ หรือแอบมาแปะโน้ตย้อนหลังดีล่ะ? 🤭</span>';
       document.getElementById('monthProceedBtn').innerHTML = 'แค่จะมาแปะโน้ตครับ 📝';
       document.getElementById('monthCancelBtn').innerHTML = 'ขอโทษครับ / เข้าใจแล้ว 😅';
       document.getElementById('monthChoiceModal').style.display = 'flex';
     } else if (type === 'future') {
       document.getElementById('popupAvatar').innerText = '⏳'; 
-      document.getElementById('popupText').innerHTML = 'อนาคตยังมาไม่ถึงเลย จะเข้ามาทำอะไรเนี่ย!';
+      document.getElementById('popupText').innerHTML = 'เดือนนี้ยังมาไม่ถึงเลยนะคนดื้อ!<br><span style="font-size:13px; color:#64748b;">แต่ถ้าอยากส่ง "โน้ตข้ามเวลา" ไปรอไว้ก่อน<br>ก็กดเพิ่มโน้ตได้เลยนะ เค้าจะไม่แอบอ่านหรอก! 🤫</span>';
       document.getElementById('monthProceedBtn').innerHTML = 'แค่จะเข้ามาเพิ่มโน้ตครับ 📝';
       document.getElementById('monthCancelBtn').innerHTML = 'เข้าใจแล้วครับ 😅';
       document.getElementById('monthChoiceModal').style.display = 'flex';
@@ -655,8 +652,7 @@
   function saveSharedNote() {
     if (currentViewingDay === null) return;
     const text = document.getElementById('sharedNoteInput').value;
-    const from = document.getElementById('noteFrom').value || 'ใครบางคน';
-    const to = document.getElementById('noteTo').value || 'ใครบางคน';
+    const from = document.getElementById('noteFrom').value;
     const isCheckbox = document.getElementById('lockCheckbox');
     const isLocked = isCheckbox ? isCheckbox.checked : false;
     const lockPin = document.getElementById('lockPin').value;
@@ -675,7 +671,7 @@
 
     const noteData = {
       targetMonth: Number(currentViewingMonthIndex), targetDay: Number(currentViewingDay),
-      text: text, from: from, to: to, timestamp: timeStr,
+      text: text, from: from, timestamp: timeStr,
       isLocked: isLocked, lockPin: lockPin, lockHint: lockHint,
       audioData: audioBase64 || null, imageData: imageBase64 || null 
     };
@@ -704,7 +700,7 @@
   }
 
   function isFutureNote(m, d) {
-    const realMonth = 8; const realDay = 4; // สมมติอิงวันที่ 4 กันยา
+    const realMonth = 8; const realDay = 4; 
     if (m > realMonth) return true;
     if (m === realMonth && d > realDay) return true;
     return false;
@@ -772,7 +768,7 @@
   }
 
   function openNoteDetail(note) {
-    document.getElementById('detailFromTo').innerHTML = `จาก: ${note.from} <span style="color:#cbd5e1;">|</span> ถึง: ${note.to}`;
+    document.getElementById('detailFromTo').innerHTML = `ส่งความรู้สึกจาก: <span style="color:#ff477e;">${note.from}</span> 💌`;
     const textEl = document.getElementById('detailText');
     if (note.text && note.text.trim() !== '') { textEl.innerText = note.text; textEl.style.display = 'block'; } else { textEl.style.display = 'none'; }
     const imgEl = document.getElementById('detailImage');
@@ -832,8 +828,6 @@
   function stopScan() { if (hasCompletedScan) return; document.getElementById('laser').classList.remove('scanning'); clearTimeout(scanTimer); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerText = ''; document.getElementById('lie-result').innerHTML = '<span style="color: #e53e3e;">⚠️ สแกนยังไม่เสร็จ! แตะค้างไว้จนกว่าจะเสร็จน้า</span>'; }
   function finishScan() { hasCompletedScan = true; document.getElementById('laser').classList.remove('scanning'); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerHTML = '💓 135 BPM (หัวใจเต้นแรงมาก!)'; document.getElementById('lie-result').innerHTML = `🚨 <strong>RESULT: DETECTED!</strong><br><span style="color: #ff477e;">"ตรวจพบความคิดถึง 100% (ห้ามปฏิเสธเด็ดขาด!)" 🥰✨</span>`; const finalBtn = document.getElementById('final-btn-wrapper'); finalBtn.style.display = 'block'; setTimeout(() => { finalBtn.classList.add('show'); }, 600); }
   function goToNextSection() { document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'block'; }
-
-  function createBackgroundHearts() { const container = document.getElementById('heart-bg-container'); const hearts = ['💖', '🌸', '✨', '💕']; for(let i=0; i<12; i++) { const heart = document.createElement('div'); heart.classList.add('floating-heart-bg'); heart.innerText = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 4 + 4) + 's'; container.appendChild(heart); } }
 </script>
 
 </body>
