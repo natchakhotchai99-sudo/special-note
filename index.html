@@ -20,9 +20,10 @@
 
     /* 🏠 ปุ่มต่างๆ */
     .home-btn { position: fixed; top: 15px; left: 15px; background: rgba(255, 255, 255, 0.95); border: 2px solid #ff477e; border-radius: 50%; width: 45px; height: 45px; font-size: 20px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 71, 126, 0.3); z-index: 10000; display: none; justify-content: center; align-items: center; transition: transform 0.2s ease; }
-    .home-btn:active { transform: scale(0.9); }
-    .back-cal-btn { background: #f1f5f9; color: #475569; border: 2px solid #cbd5e1; width: 100%; margin-top: 15px; font-size: 14px; border-radius: 14px; padding: 10px; cursor: pointer; font-weight: 600; font-family: 'Kanit'; transition: background 0.2s; }
-    .back-cal-btn:hover { background: #e2e8f0; }
+    .home-btn:hover, .home-btn:active { transform: scale(0.9) rotate(-10deg); }
+    
+    .back-cal-btn { background: #f1f5f9; color: #475569; border: 2px solid #cbd5e1; width: 100%; margin-top: 15px; font-size: 14px; border-radius: 14px; padding: 10px; cursor: pointer; font-weight: 600; font-family: 'Kanit'; transition: background 0.2s, transform 0.2s; }
+    .back-cal-btn:hover { background: #e2e8f0; transform: translateY(-2px); }
 
     .floating-heart-bg { position: fixed; font-size: 18px; color: rgba(255, 117, 140, 0.35); pointer-events: none; z-index: 0; animation: floatUp 6s linear infinite; }
     @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } }
@@ -33,68 +34,88 @@
 
     .cute-container { width: 100%; max-width: 440px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px 16px; text-align: center; position: relative; z-index: 1; }
     .step-box { width: 100%; }
-    .card-base { background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 20px; margin-bottom: 18px; box-shadow: 0 8px 25px rgba(255, 182, 193, 0.25); border: 2px solid #ffffff; width: 100%; }
-    .main-title { font-size: 22px; font-weight: 700; color: #ff477e; margin-bottom: 10px; }
+    .card-base { background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 25px 20px; margin-bottom: 18px; box-shadow: 0 8px 30px rgba(255, 182, 193, 0.3); border: 2px solid #ffffff; width: 100%; position: relative; }
+    
+    .main-title { font-size: 24px; font-weight: 700; color: #ff477e; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(255,71,126,0.1); }
 
-    .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease; }
+    .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .choice-btn:active { transform: scale(0.95); }
-    .today-btn { background: linear-gradient(135deg, #fef08a, #f59e0b); color: #78350f; border-color: #fcd34d; width: 100%; margin-bottom: 15px; font-size: 16px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
+    
+    /* ปุ่มเพิ่มโน้ตวันนี้ เรืองแสงดุ๊กดิ๊ก */
+    .today-btn { background: linear-gradient(135deg, #fef08a, #f59e0b); color: #78350f; border-color: #fcd34d; width: 100%; margin-bottom: 20px; font-size: 16px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); animation: pulseGlow 2s infinite; }
+    @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
 
-    .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 5px; }
-    .month-btn { padding: 12px 8px; border-radius: 16px; border: 2px solid #ffe4e8; background: #fff; font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; color: #4a5568; cursor: pointer; transition: all 0.2s ease; }
-    .month-btn.active-sept { background: linear-gradient(135deg, #ff477e, #ff758c); color: white; border-color: #ff477e; box-shadow: 0 4px 12px rgba(255, 71, 126, 0.3); }
+    /* ตารางเลือกเดือนน่ารักขึ้น */
+    .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 5px; }
+    .month-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 5px; border-radius: 16px; border: 2px solid #ffe4e8; background: #fff; font-family: 'Kanit', sans-serif; font-size: 13.5px; font-weight: 600; color: #4a5568; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+    .month-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(255, 182, 193, 0.2); border-color: #ffb6c1; color: #ff477e; }
+    .month-btn.active-sept { background: linear-gradient(135deg, #ff477e, #ff758c); color: white; border-color: #ff477e; box-shadow: 0 4px 15px rgba(255, 71, 126, 0.4); }
+    .month-btn.active-sept:hover { color: white; }
+    .month-icon { font-size: 16px; margin-bottom: 3px; }
 
     /* 🗓️ ปฏิทินแบบไดนามิก */
     .calendar-header { font-size: 18px; font-weight: 700; color: #ff477e; margin-bottom: 12px; }
     .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; font-size: 13px; }
-    .day-name { font-weight: 600; color: #a0aec0; padding-bottom: 4px; }
-    .day { padding: 8px 0; border-radius: 10px; color: #4a5568; font-weight: 500; cursor: pointer; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 45px; background: #f8fafc; border: 1px solid #f1f5f9; transition: background 0.2s; }
-    .day:hover { background: #fff0f3; border-color: #ffccd5; }
+    .day-name { font-weight: 600; color: #a0aec0; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0; margin-bottom: 5px; }
+    .day { padding: 8px 0; border-radius: 10px; color: #4a5568; font-weight: 500; cursor: pointer; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 45px; background: #f8fafc; border: 1px solid #f1f5f9; transition: all 0.2s; }
+    .day:hover { background: #fff0f3; border-color: #ffccd5; transform: scale(1.05); z-index: 10; box-shadow: 0 4px 8px rgba(255, 182, 193, 0.3); }
     .special-day { background: linear-gradient(135deg, #ff477e, #ff758c) !important; color: white !important; font-weight: bold; border-radius: 50%; box-shadow: 0 4px 10px rgba(255, 71, 126, 0.4); animation: pulse 1.5s infinite; border: none; }
     
-    /* 🟡 วงกลมสีเหลืองบนปฏิทิน */
+    /* 🟡 วงกลมแจ้งเตือนโน้ตบนปฏิทิน */
     .note-dot { position: absolute; bottom: 3px; right: 3px; background: #fcd34d; border-radius: 50%; box-shadow: 0 2px 4px rgba(245,158,11,0.5); z-index: 5; width: 10px; height: 10px; animation: pulse 2s infinite; pointer-events: none; }
     .note-dot.has-number { width: 16px; height: 16px; font-size: 10px; font-weight: bold; color: #92400e; display: flex; justify-content: center; align-items: center; border: 1.5px solid white; bottom: -2px; right: -2px; animation: bounce 1.5s infinite; }
 
     /* 📝 กระดานโน้ตเฉพาะวัน */
-    .shared-note-box { background: #fffdf0; border: 2px dashed #fcd34d; border-radius: 18px; padding: 15px; text-align: left; margin-bottom: 15px; position: relative; }
-    .shared-note-title { font-size: 15px; font-weight: 700; color: #d97706; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .shared-note-box { background: #fffdf0; border: 2px dashed #fcd34d; border-radius: 18px; padding: 15px; text-align: left; margin-bottom: 15px; position: relative; box-shadow: inset 0 0 10px rgba(245,158,11,0.05); }
+    .shared-note-title { font-size: 16px; font-weight: 700; color: #d97706; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 6px; border-bottom: 1px dashed #fcd34d; padding-bottom: 10px; }
     
-    /* โครงสร้าง Dropdown (แก้ปัญหาช่องทะลุจอ) */
-    .note-meta-inputs { display: flex; gap: 10px; margin-bottom: 10px; width: 100%; }
+    /* โครงสร้าง Dropdown */
+    .note-meta-inputs { display: flex; gap: 10px; margin-bottom: 12px; width: 100%; }
     .input-col { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-    .input-label { font-size: 11px; color: #b45309; font-weight: 700; margin-bottom: 4px; padding-left: 2px; }
-    .note-input-small { width: 100%; border: 1px solid #fcd34d; border-radius: 10px; padding: 8px 10px; font-family: 'Kanit', sans-serif; font-size: 14px; outline: none; background: #ffffff; color: #4a5568; cursor: pointer; font-weight: 500; }
+    .input-label { font-size: 12px; color: #b45309; font-weight: 700; margin-bottom: 4px; padding-left: 2px; }
+    .note-input-small { width: 100%; border: 1px solid #fcd34d; border-radius: 10px; padding: 8px 10px; font-family: 'Kanit', sans-serif; font-size: 14px; outline: none; background: #ffffff; color: #4a5568; cursor: pointer; font-weight: 500; transition: border 0.3s, box-shadow 0.3s; }
+    .note-input-small:focus { border-color: #f59e0b; box-shadow: 0 0 0 2px rgba(245,158,11,0.2); }
     
-    .note-input { width: 100%; height: 70px; border: 1px solid #fef08a; border-radius: 12px; padding: 10px; font-family: 'Kanit', sans-serif; font-size: 13.5px; resize: none; background: #ffffff; outline: none; transition: border 0.3s; }
-    .note-input:focus { border-color: #f59e0b; }
+    .note-input { width: 100%; height: 80px; border: 1px solid #fef08a; border-radius: 12px; padding: 12px; font-family: 'Kanit', sans-serif; font-size: 14px; resize: none; background: #ffffff; outline: none; transition: border 0.3s, box-shadow 0.3s; }
+    .note-input:focus { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.1); }
     
-    .record-btn { width: 100%; background: #fef08a; border: 2px solid #fcd34d; padding: 10px; border-radius: 12px; font-family: 'Kanit'; font-weight: 600; color: #92400e; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+    /* ปุ่มอัปโหลดรูปและเสียง */
+    .media-buttons { display: flex; gap: 8px; margin-top: 10px; }
+    .record-btn, .image-upload-btn { flex: 1; border: 2px solid; padding: 10px; border-radius: 12px; font-family: 'Kanit'; font-weight: 600; cursor: pointer; transition: 0.3s; text-align: center; font-size: 13px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .record-btn { background: #fef08a; border-color: #fcd34d; color: #92400e; }
+    .record-btn:hover { background: #fde047; }
     .record-btn.recording { background: #fca5a5; border-color: #ef4444; color: white; animation: pulse 1s infinite; }
-    .audio-preview-box { display: none; background: #fffbeb; border: 1px dashed #f59e0b; padding: 10px; border-radius: 12px; margin-top: 10px; text-align: center; }
-
-    .lock-toggle-box { background: #fff; border: 1px solid #fef08a; border-radius: 10px; padding: 10px; margin: 10px 0; font-size: 13px; color: #b45309; }
-    .lock-inputs { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-    .lock-inputs input { border: 1px dashed #f59e0b; border-radius: 8px; padding: 8px; font-family: 'Kanit', sans-serif; font-size: 12px; outline: none; background: #fffbeb; }
+    .image-upload-btn { background: #fce7f3; border-color: #fbcfe8; color: #be185d; }
+    .image-upload-btn:hover { background: #fbcfe8; }
     
-    .save-note-btn { margin-top: 8px; background: #f59e0b; color: white; border: none; padding: 10px 16px; border-radius: 12px; font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.3s; }
-    .save-note-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+    .media-preview-box { display: none; background: #fffbeb; border: 1px dashed #f59e0b; padding: 10px; border-radius: 12px; margin-top: 10px; text-align: center; }
+    .media-preview-box img { max-width: 100%; max-height: 150px; border-radius: 8px; object-fit: contain; margin-bottom: 5px; border: 1px solid #fcd34d; }
+
+    .lock-toggle-box { background: #ffffff; border: 1px dashed #fcd34d; border-radius: 12px; padding: 12px; margin: 12px 0; font-size: 13px; color: #b45309; }
+    .lock-inputs { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .lock-inputs input { border: 1px dashed #f59e0b; border-radius: 8px; padding: 10px; font-family: 'Kanit', sans-serif; font-size: 13px; outline: none; background: #fffbeb; transition: background 0.3s; }
+    .lock-inputs input:focus { background: #ffffff; }
+    
+    .save-note-btn { margin-top: 10px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 12px 16px; border-radius: 14px; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; width: 100%; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3); }
+    .save-note-btn:active { transform: translateY(2px); box-shadow: 0 2px 5px rgba(217, 119, 6, 0.3); }
+    .save-note-btn:disabled { background: #cbd5e1; box-shadow: none; cursor: not-allowed; transform: none; }
 
     /* กระดานโชว์ Mini Sticky Notes */
-    .notes-board { margin-top: 25px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; border-top: 2px dashed #fef08a; padding-top: 15px; }
-    .mini-note { background: linear-gradient(135deg, #fef08a, #fde047); width: calc(50% - 5px); aspect-ratio: 1.1; border-radius: 4px 20px 4px 20px; padding: 15px 10px; position: relative; cursor: pointer; box-shadow: 2px 4px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease; animation: stickNoteAnim 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-    .mini-note:hover { transform: scale(1.05) rotate(-2deg); box-shadow: 4px 6px 12px rgba(0,0,0,0.15); }
+    .notes-board { margin-top: 25px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; border-top: 2px dashed #fef08a; padding-top: 20px; }
+    .mini-note { background: linear-gradient(135deg, #fef08a, #fde047); width: calc(50% - 5px); aspect-ratio: 1.05; border-radius: 4px 20px 4px 20px; padding: 15px 10px; position: relative; cursor: pointer; box-shadow: 2px 4px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease; animation: stickNoteAnim 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    .mini-note:hover { transform: scale(1.05) rotate(-2deg); box-shadow: 4px 8px 15px rgba(0,0,0,0.15); z-index: 10; }
     @keyframes stickNoteAnim { 0% { transform: translateY(-50px) scale(1.2) rotate(10deg); opacity: 0; } 100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; } }
     
-    .mini-note.time-capsule { background: linear-gradient(135deg, #cbd5e1, #94a3b8); border: 1px dashed #64748b; }
-    .mini-note.locked-note { background: linear-gradient(135deg, #f1f5f9, #e2e8f0); border: 1px dashed #cbd5e1; }
+    .mini-note.time-capsule { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); border: 1px dashed #94a3b8; }
+    .mini-note.locked-note { background: linear-gradient(135deg, #f8fafc, #f1f5f9); border: 1px dashed #cbd5e1; }
     
-    .mini-pin { position: absolute; top: -12px; font-size: 24px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2)); }
-    .mini-from-text { font-size: 14px; font-weight: 700; color: #92400e; word-break: break-word; }
+    .mini-pin { position: absolute; top: -14px; font-size: 26px; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3)); z-index: 2; }
+    .mini-from-text { font-size: 15px; font-weight: 700; color: #92400e; word-break: break-word; line-height: 1.3; }
     .mini-note.locked-note .mini-from-text, .mini-note.time-capsule .mini-from-text { color: #334155; }
-    .mini-hint { font-size: 11px; color: #b45309; margin-top: 5px; }
-    .mini-note.locked-note .mini-hint, .mini-note.time-capsule .mini-hint { color: #475569; font-weight: 600; }
-    .mini-time-stamp { font-size: 9.5px; color: #78350f; margin-top: 6px; opacity: 0.85; font-weight: 500; }
+    .mini-icons { font-size: 12px; margin-top: 4px; }
+    .mini-hint { font-size: 11px; color: #b45309; margin-top: 6px; background: rgba(255,255,255,0.4); padding: 2px 8px; border-radius: 10px; }
+    .mini-note.locked-note .mini-hint, .mini-note.time-capsule .mini-hint { color: #475569; font-weight: 600; background: rgba(0,0,0,0.05); }
+    .mini-time-stamp { font-size: 9.5px; color: #78350f; margin-top: 8px; opacity: 0.8; font-weight: 500; }
     .mini-note.locked-note .mini-time-stamp, .mini-note.time-capsule .mini-time-stamp { color: #334155; }
     
     /* ความทรงจำ 3 ก.ย. */
@@ -142,30 +163,34 @@
     .final-card { background: rgba(255, 255, 255, 0.95); border-radius: 28px; padding: 35px 20px; box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4); border: 2px solid #ffffff; width: 100%; animation: popUp 0.8s forwards; }
 
     /* 🌟 Modals */
-    .popup-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 10000; padding: 20px; backdrop-filter: blur(3px); }
-    .popup-content { background: white; border-radius: 24px; padding: 25px; max-width: 320px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: popUp 0.3s ease-out; position: relative; }
-    .read-note-content { background: #fffdf0; border: 2px solid #fcd34d; border-radius: 20px; padding: 30px 20px 20px 20px; text-align: left; max-width: 340px; width: 100%; box-shadow: 0 15px 35px rgba(217, 119, 6, 0.3); animation: popUp 0.3s ease-out; position: relative; }
-    .read-note-pin { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); font-size: 35px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2)); }
-    .read-note-fromto { font-weight: 700; color: #b45309; font-size: 15px; margin-bottom: 12px; border-bottom: 1px dashed #fcd34d; padding-bottom: 8px; }
-    .read-note-text { font-size: 15px; color: #374151; line-height: 1.6; margin-bottom: 15px; min-height: 40px; word-break: break-word; }
-    .read-note-time { font-size: 12px; color: #9ca3af; text-align: right; margin-bottom: 10px; font-weight: 500; }
+    .popup-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 10000; padding: 20px; backdrop-filter: blur(4px); }
+    .popup-content { background: white; border-radius: 24px; padding: 25px; max-width: 320px; width: 100%; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.25); animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
+    
+    .read-note-content { background: #fffdf0; border: 2px solid #fcd34d; border-radius: 20px; padding: 35px 20px 20px 20px; text-align: left; max-width: 360px; width: 100%; box-shadow: 0 15px 35px rgba(217, 119, 6, 0.3); animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; max-height: 90vh; overflow-y: auto; }
+    .read-note-pin { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 40px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.3)); z-index: 5; }
+    .read-note-fromto { font-weight: 700; color: #b45309; font-size: 16px; margin-bottom: 12px; border-bottom: 1px dashed #fcd34d; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .read-note-text { font-size: 15px; color: #374151; line-height: 1.6; margin-bottom: 15px; min-height: 40px; word-break: break-word; font-weight: 500; }
+    .read-note-time { font-size: 12px; color: #9ca3af; text-align: right; margin-top: 15px; font-weight: 500; border-top: 1px solid #fef08a; padding-top: 10px; }
+    
+    .detail-image { width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; border: 2px solid #fff; }
 
     /* ป๊อปอัปเกมทายรหัส */
-    .unlock-box { background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 25px; text-align: center; max-width: 320px; width: 100%; }
-    .unlock-icon { font-size: 40px; margin-bottom: 10px; }
+    .unlock-box { background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 25px; text-align: center; max-width: 320px; width: 100%; animation: popUp 0.3s ease-out; }
+    .unlock-icon { font-size: 45px; margin-bottom: 10px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); }
     .unlock-title { font-size: 18px; font-weight: 700; color: #334155; margin-bottom: 5px; }
-    .unlock-hint-text { font-size: 14px; color: #0ea5e9; font-weight: 600; margin-bottom: 15px; background: #e0f2fe; padding: 10px; border-radius: 12px; }
-    .unlock-input { width: 100%; padding: 12px; border: 1px solid #94a3b8; border-radius: 12px; font-family: 'Kanit'; font-size: 15px; text-align: center; outline: none; margin-bottom: 15px; }
-    .unlock-error { color: #e11d48; font-size: 13px; font-weight: 600; margin-bottom: 10px; display: none; }
+    .unlock-hint-text { font-size: 14px; color: #0ea5e9; font-weight: 600; margin-bottom: 15px; background: #e0f2fe; padding: 12px; border-radius: 12px; border: 1px dashed #bae6fd; }
+    .unlock-input { width: 100%; padding: 14px; border: 2px solid #cbd5e1; border-radius: 12px; font-family: 'Kanit'; font-size: 15px; text-align: center; outline: none; margin-bottom: 15px; transition: border 0.3s; }
+    .unlock-input:focus { border-color: #38bdf8; }
+    .unlock-error { color: #e11d48; font-size: 13px; font-weight: 600; margin-bottom: 12px; display: none; background: #ffe4e6; padding: 8px; border-radius: 8px; }
 
-    @keyframes popUp { from { opacity: 0; transform: scale(0.85) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    @keyframes popUp { from { opacity: 0; transform: scale(0.8) translateY(30px); } to { opacity: 1; transform: scale(1) translateY(0); } }
     .pulse-anim { animation: pulse 1.5s infinite; }
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.06); } 100% { transform: scale(1); } }
     .bounce-anim { animation: bounce 2s infinite; }
     @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } 60% { transform: translateY(-3px); } }
-    .bad-btn { background-color: #fff5f5; border-color: #fed7d7; }
-    .good-btn { background-color: #f0fdf4; border-color: #bbf7d0; }
-    .best-btn { background-color: #f0f9ff; border-color: #bae6fd; }
+    .bad-btn { background-color: #fff5f5; border-color: #fed7d7; color: #e53e3e; }
+    .good-btn { background-color: #f0fdf4; border-color: #bbf7d0; color: #16a34a; }
+    .best-btn { background-color: #f0f9ff; border-color: #bae6fd; color: #0284c7; }
   </style>
 </head>
 <body>
@@ -187,12 +212,27 @@
   <!-- หน้า Memory Box -->
   <div id="memory-box-step" class="step-box card-base">
     <div class="main-title">📦 Memory Box 2026 💖</div>
-    <button class="choice-btn today-btn" onclick="openTodayNotes()">💛 กดเพื่อเพิ่มกระดาษโน้ตของวันนี้เลย!</button>
-    <p style="font-size: 14px; color: #718096; margin-bottom: 10px;">หรือเลือกเดือนเพื่อดูปฏิทินย้อนหลัง/อนาคต</p>
+    
+    <!-- ปุ่มเพิ่มกระดาษโน้ต เรืองแสงเด่นๆ -->
+    <button class="choice-btn today-btn" onclick="openTodayNotes()">
+      <span style="font-size: 18px;">💛</span> กดเพื่อเพิ่มกระดาษโน้ตของวันนี้เลย!
+    </button>
+    
+    <p style="font-size: 13px; color: #94a3b8; margin-bottom: 12px; font-weight: 500;">หรือเลือกเดือนเพื่อดูปฏิทินย้อนหลัง/อนาคต</p>
+    
     <div class="month-grid">
-      <button class="month-btn" onclick="requestMonthAccess(0, 'past')">ม.ค.</button><button class="month-btn" onclick="requestMonthAccess(1, 'past')">ก.พ.</button><button class="month-btn" onclick="requestMonthAccess(2, 'past')">มี.ค.</button><button class="month-btn" onclick="requestMonthAccess(3, 'past')">เม.ย.</button><button class="month-btn" onclick="requestMonthAccess(4, 'past')">พ.ค.</button><button class="month-btn" onclick="requestMonthAccess(5, 'past')">มิ.ย.</button><button class="month-btn" onclick="requestMonthAccess(6, 'past')">ก.ค.</button><button class="month-btn" onclick="requestMonthAccess(7, 'past')">ส.ค.</button>
-      <button class="month-btn active-sept" onclick="requestMonthAccess(8, 'september')">ก.ย. ✨</button>
-      <button class="month-btn" onclick="requestMonthAccess(9, 'future')">ต.ค.</button><button class="month-btn" onclick="requestMonthAccess(10, 'future')">พ.ย.</button><button class="month-btn" onclick="requestMonthAccess(11, 'future')">ธ.ค.</button>
+      <button class="month-btn" onclick="requestMonthAccess(0, 'past')"><span class="month-icon">❄️</span>ม.ค.</button>
+      <button class="month-btn" onclick="requestMonthAccess(1, 'past')"><span class="month-icon">💝</span>ก.พ.</button>
+      <button class="month-btn" onclick="requestMonthAccess(2, 'past')"><span class="month-icon">🌱</span>มี.ค.</button>
+      <button class="month-btn" onclick="requestMonthAccess(3, 'past')"><span class="month-icon">💦</span>เม.ย.</button>
+      <button class="month-btn" onclick="requestMonthAccess(4, 'past')"><span class="month-icon">🌈</span>พ.ค.</button>
+      <button class="month-btn" onclick="requestMonthAccess(5, 'past')"><span class="month-icon">🌻</span>มิ.ย.</button>
+      <button class="month-btn" onclick="requestMonthAccess(6, 'past')"><span class="month-icon">☀️</span>ก.ค.</button>
+      <button class="month-btn" onclick="requestMonthAccess(7, 'past')"><span class="month-icon">☔</span>ส.ค.</button>
+      <button class="month-btn active-sept" onclick="requestMonthAccess(8, 'september')"><span class="month-icon">🍁</span>ก.ย. ✨</button>
+      <button class="month-btn" onclick="requestMonthAccess(9, 'future')"><span class="month-icon">🎃</span>ต.ค.</button>
+      <button class="month-btn" onclick="requestMonthAccess(10, 'future')"><span class="month-icon">🪁</span>พ.ย.</button>
+      <button class="month-btn" onclick="requestMonthAccess(11, 'future')"><span class="month-icon">🎄</span>ธ.ค.</button>
     </div>
   </div>
 
@@ -230,12 +270,30 @@
 
       <textarea id="sharedNoteInput" class="note-input" placeholder="พิมพ์ข้อความในใจที่นี่เลย..."></textarea>
       
-      <button id="recordBtn" class="record-btn" onclick="toggleRecording()">🎤 กดเพื่อเริ่มอัดเสียง (Voice Note)</button>
+      <!-- กลุ่มปุ่ม มีอัดเสียง และ เพิ่มรูปภาพ -->
+      <div class="media-buttons">
+        <button id="recordBtn" class="record-btn" onclick="toggleRecording()">
+          <span style="font-size:18px;">🎤</span> อัดเสียง
+        </button>
+        <!-- ปุ่มเลือกรูปภาพ -->
+        <label for="imageInput" class="image-upload-btn">
+          <span style="font-size:18px;">📸</span> ใส่รูปภาพ
+        </label>
+        <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImageUpload(event)">
+      </div>
       
-      <div id="audioPreviewBox" class="audio-preview-box">
-        <div style="font-size: 13px; color: #92400e; font-weight: 600; margin-bottom: 5px;">ฟังเสียงที่อัดไว้ 🎵</div>
+      <!-- พรีวิวเสียง -->
+      <div id="audioPreviewBox" class="media-preview-box">
+        <div style="font-size: 12px; color: #92400e; font-weight: 600; margin-bottom: 5px;">ฟังเสียงที่อัดไว้ 🎵</div>
         <audio id="audioPreview" controls style="width: 100%; height: 35px; outline: none;"></audio>
-        <button class="choice-btn bad-btn" style="padding: 4px 12px; font-size: 12px; margin-top: 8px;" onclick="discardAudio()">❌ ลบเสียงทิ้ง</button>
+        <button class="choice-btn bad-btn" style="padding: 4px 12px; font-size: 12px; margin-top: 8px; width: 100%;" onclick="discardAudio()">❌ ลบเสียงทิ้ง</button>
+      </div>
+
+      <!-- พรีวิวรูปภาพ -->
+      <div id="imagePreviewBox" class="media-preview-box">
+        <div style="font-size: 12px; color: #be185d; font-weight: 600; margin-bottom: 5px;">รูปภาพที่เลือก 📸</div>
+        <img id="imagePreview" src="">
+        <button class="choice-btn bad-btn" style="padding: 4px 12px; font-size: 12px; margin-top: 5px; width: 100%; border-color:#fda4af; color:#be185d; background:#fdf2f8;" onclick="discardImage()">❌ ลบรูปทิ้ง</button>
       </div>
 
       <div class="lock-toggle-box">
@@ -251,8 +309,8 @@
       <button id="saveNoteBtn" class="save-note-btn" onclick="saveSharedNote()">💌 แปะกระดาษโน้ต</button>
 
       <!-- ป้ายแจ้งเตือนสำเร็จ -->
-      <div id="noteStatus" style="font-size: 13px; color: #d97706; background: #fef3c7; padding: 10px; border-radius: 10px; font-weight: 600; margin-top: 10px; display: none; text-align: center; border: 1px dashed #f59e0b;">
-        💌 แปะสำเร็จ! กำลังกลับหน้าปฏิทิน...
+      <div id="noteStatus" style="font-size: 13px; color: #d97706; background: #fef3c7; padding: 10px; border-radius: 12px; font-weight: 600; margin-top: 15px; display: none; text-align: center; border: 2px dashed #f59e0b; animation: popUp 0.3s;">
+        💌 แปะกระดาษโน้ตสำเร็จ!<br><span style="font-size:11px; color:#b45309; font-weight:500;">กำลังกลับหน้าปฏิทิน...</span>
       </div>
 
       <!-- บอร์ดประวัติข้อความของวันนั้นๆ -->
@@ -300,9 +358,9 @@
 <!-- ⏳ ป๊อปอัปแจ้งเตือนโน้ตอนาคต -->
 <div id="timeCapsuleModal" class="popup-modal">
   <div class="popup-content">
-    <div style="font-size: 55px; margin-bottom: 10px;">🔒</div>
+    <div style="font-size: 55px; margin-bottom: 10px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));">⏳</div>
     <div style="font-size: 18px; font-weight: 700; color: #334155; margin-bottom: 5px;">โน้ตแห่งอนาคต!</div>
-    <p style="font-size: 14px; color: #64748b; line-height: 1.5; margin-bottom: 15px;" id="capsuleUnlockText"></p>
+    <p style="font-size: 14px; color: #64748b; line-height: 1.5; margin-bottom: 15px; font-weight: 500;" id="capsuleUnlockText"></p>
     <button class="choice-btn good-btn" style="width: 100%;" onclick="closePopup('timeCapsuleModal')">อดใจรอหน่อยนะ! 😉</button>
   </div>
 </div>
@@ -318,7 +376,7 @@
     <div id="unlockErrorMsg" class="unlock-error">❌ รหัสผิดนะ ลองใหม่สิคนดื้อ!</div>
     <div style="display: flex; gap: 10px;">
       <button class="choice-btn bad-btn" style="flex: 1;" onclick="closePopup('unlockModal')">ยกเลิก</button>
-      <button class="choice-btn best-btn" style="flex: 1; background: #38bdf8; color: white; border-color: #0284c7;" onclick="verifyUnlock()">ปลดล็อก 🔓</button>
+      <button class="choice-btn best-btn" style="flex: 1; background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: white; border: none; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);" onclick="verifyUnlock()">ปลดล็อก 🔓</button>
     </div>
   </div>
 </div>
@@ -328,13 +386,19 @@
   <div class="read-note-content">
     <div class="read-note-pin">📌</div>
     <div class="read-note-fromto" id="detailFromTo"></div>
+    
+    <!-- โชว์รูปภาพในโน้ต -->
+    <img id="detailImage" class="detail-image" src="" style="display: none;">
+    
     <div class="read-note-text" id="detailText"></div>
-    <div id="detailAudioContainer" style="display: none; margin-bottom: 15px;">
-      <div style="font-size: 12px; color: #b45309; font-weight: 600; margin-bottom: 5px;">🎵 มีข้อความเสียงด้วยนะ:</div>
+    
+    <div id="detailAudioContainer" style="display: none; margin-bottom: 15px; background: #fffbeb; padding: 10px; border-radius: 12px; border: 1px dashed #fcd34d;">
+      <div style="font-size: 12px; color: #b45309; font-weight: 700; margin-bottom: 5px; text-align: center;">🎵 กดเพื่อฟังเสียงจากเค้าสิ:</div>
       <audio id="detailAudio" controls style="width: 100%; height: 35px; outline: none;"></audio>
     </div>
+    
     <div class="read-note-time" id="detailTime"></div>
-    <button class="choice-btn bad-btn" style="width: 100%; margin-top: 5px;" onclick="closePopup('noteDetailModal')">ปิดกระดาษโน้ต ❌</button>
+    <button class="choice-btn bad-btn" style="width: 100%; margin-top: 5px;" onclick="closePopup('noteDetailModal')">พับเก็บกระดาษโน้ต 💌</button>
   </div>
 </div>
 
@@ -347,7 +411,8 @@
   const firebaseConfig = { databaseURL: "https://memory-box-2026-default-rtdb.asia-southeast1.firebasedatabase.app/" };
   if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
   const database = firebase.database();
-  const notesRef = database.ref('memory_box_notes_v6'); 
+  // เปลี่ยนเวอร์ชันเล็กน้อยเพื่อให้รองรับรูปภาพแบบสมบูรณ์
+  const notesRef = database.ref('memory_box_notes_v7'); 
   
   let allNotes = []; let noteToUnlock = null;
 
@@ -396,19 +461,15 @@
       let extraClass = (mIndex === 8 && i === 3) ? 'special-day' : '';
       grid.innerHTML += `<div class="day ${extraClass}" id="cal-day-${i}" onclick="clickDay(${i})">${i}</div>`;
     }
-    // วาดจุดสีเหลืองหลังสร้างปฏิทินเสร็จ
     updateCalendarDots();
   }
 
-  // 🟡 ฟังก์ชันวาดจุดเหลือง และ ตัวเลข!
   function updateCalendarDots() {
-    // ล้างจุดเก่าทิ้งให้หมดก่อน
+    if(document.getElementById('dynamic-calendar-sec').style.display === 'none') return;
     for (let i = 1; i <= 31; i++) {
       const dayEl = document.getElementById(`cal-day-${i}`);
       if (dayEl) { const b = dayEl.querySelector('.note-dot'); if (b) b.remove(); }
     }
-    
-    // นับจำนวนโน้ตในแต่ละวันของเดือนนั้นๆ
     const notesInMonth = allNotes.filter(n => Number(n.targetMonth) === currentViewingMonthIndex);
     const dayCounts = {};
     notesInMonth.forEach(n => { 
@@ -421,13 +482,10 @@
       if (dayEl && dayCounts[day] > 0) {
         const badge = document.createElement('div');
         badge.className = 'note-dot'; 
-        
-        // ถ้ามีหลายโน้ต ให้ใส่ตัวเลขลงไปในจุดสีเหลืองด้วย
         if(dayCounts[day] > 1) {
             badge.innerText = dayCounts[day];
             badge.classList.add('has-number');
         }
-        
         dayEl.appendChild(badge);
       }
     }
@@ -453,7 +511,7 @@
     document.getElementById('memory-box-step').style.display = 'none';
     const dailySec = document.getElementById('daily-notes-sec');
     dailySec.style.display = 'block';
-    document.getElementById('daily-note-title').innerText = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
+    document.getElementById('daily-note-title').innerHTML = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
     document.getElementById('home-btn').style.display = 'flex';
     renderNotesForDay(day);
     dailySec.scrollIntoView({ behavior: 'smooth' });
@@ -462,6 +520,52 @@
   function backToCalendar() {
     document.getElementById('daily-notes-sec').style.display = 'none';
     proceedToMonth(); 
+  }
+
+  // --- 📸 อัปโหลดรูปภาพแบบบีบอัด ---
+  let imageBase64 = null;
+  function handleImageUpload(event) {
+    const file = event.target.files[0];
+    if(!file) return;
+    
+    // โชว์ว่ากำลังประมวลผลรูป (เผื่อรูปใหญ่มาก)
+    const previewBox = document.getElementById('imagePreviewBox');
+    previewBox.style.display = 'block';
+    document.getElementById('imagePreview').src = 'https://i.gifer.com/ZZ5H.gif'; // loading gif
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        // ใช้ Canvas ย่อขนาดรูปลงมา เพื่อไม่ให้ Firebase ระเบิด
+        const canvas = document.createElement('canvas');
+        const MAX_WIDTH = 800; // ความกว้างสูงสุด 800px
+        let width = img.width;
+        let height = img.height;
+
+        if (width > MAX_WIDTH) {
+          height *= MAX_WIDTH / width;
+          width = MAX_WIDTH;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // แปลงกลับเป็น Base64 (คุณภาพ 70%)
+        imageBase64 = canvas.toDataURL('image/jpeg', 0.7);
+        document.getElementById('imagePreview').src = imageBase64;
+      }
+      img.src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+  }
+
+  function discardImage() {
+    imageBase64 = null;
+    document.getElementById('imageInput').value = '';
+    document.getElementById('imagePreviewBox').style.display = 'none';
   }
 
   // --- 🎤 อัดเสียง ---
@@ -483,18 +587,18 @@
           stream.getTracks().forEach(track => track.stop());
         };
         mediaRecorder.start(); isRecording = true;
-        btn.innerText = '⏹️ กำลังอัดเสียง... (กดอีกครั้งเพื่อหยุด)'; btn.classList.add('recording');
+        btn.innerHTML = '<span style="font-size:18px;">⏹️</span> กำลังอัดเสียง... (กดเพื่อหยุด)'; btn.classList.add('recording');
       } catch (err) { alert('เข้าถึงไมค์ไม่ได้ค่ะ รบกวนกดอนุญาตไมโครโฟนก่อนนะคะ 🥺'); }
     } else {
-      mediaRecorder.stop(); isRecording = false; btn.classList.remove('recording'); btn.innerText = '🎤 กดเพื่อเริ่มอัดเสียง (Voice Note)';
+      mediaRecorder.stop(); isRecording = false; btn.classList.remove('recording'); btn.innerHTML = '<span style="font-size:18px;">🎤</span> อัดเสียง';
     }
   }
   function discardAudio() {
     audioBase64 = null; audioChunks = []; document.getElementById('audioPreviewBox').style.display = 'none';
-    const btn = document.getElementById('recordBtn'); btn.style.display = 'block'; btn.innerText = '🎤 กดเพื่อเริ่มอัดเสียง (Voice Note)';
+    const btn = document.getElementById('recordBtn'); btn.style.display = 'flex'; btn.innerHTML = '<span style="font-size:18px;">🎤</span> อัดเสียง';
   }
 
-  // --- 📝 เซฟโน้ต (วิธีแก้ปัญหาค้าง!) ---
+  // --- 📝 เซฟโน้ต ---
   function toggleLockOptions() {
     const isCheckbox = document.getElementById('lockCheckbox');
     if(isCheckbox) {
@@ -512,12 +616,13 @@
     const lockPin = document.getElementById('lockPin').value;
     const lockHint = document.getElementById('lockHint').value;
     
-    if (text.trim() === '' && !audioBase64) { alert("พิมพ์ข้อความ หรืออัดเสียงสักนิดนึงก่อนส่งน้า! 🥺"); return; }
+    // ตรวจสอบว่าต้องมีตัวหนังสือ, เสียง หรือ รูป อย่างใดอย่างหนึ่ง
+    if (text.trim() === '' && !audioBase64 && !imageBase64) { alert("ต้องพิมพ์ข้อความ อัดเสียง หรือใส่รูปก่อนส่งน้า! 🥺"); return; }
     if (isLocked && lockPin.trim() === '') { alert("ถ้าเลือกล็อกรหัสผ่าน ต้องใส่รหัสด้วยน้า! 🔑"); return; }
 
     const btn = document.getElementById('saveNoteBtn');
     const originalText = btn.innerText;
-    btn.innerText = '⏳ กำลังแปะกระดาษโน้ต...';
+    btn.innerHTML = '⏳ กำลังแพ็กกระดาษโน้ต...';
     btn.disabled = true;
 
     const now = new Date();
@@ -527,17 +632,20 @@
       targetMonth: Number(currentViewingMonthIndex), targetDay: Number(currentViewingDay),
       text: text, from: from, to: to, timestamp: timeStr,
       isLocked: isLocked, lockPin: lockPin, lockHint: lockHint,
-      audioData: audioBase64 || null 
+      audioData: audioBase64 || null,
+      imageData: imageBase64 || null // เพิ่มเก็บรูปภาพ
     };
 
-    // ส่งเข้า Firebase ไม่ต้องรอ!
+    // ส่งเข้า Firebase
     try { notesRef.push(noteData); } catch (e) { console.log(e); }
 
-    // เปลี่ยนหน้าและสำเร็จทันที! ไม่ค้าง 100%
+    // ดีเลย์นิดนึง ให้ความรู้สึกว่ากำลังโหลด
     setTimeout(() => {
       document.getElementById('sharedNoteInput').value = ''; 
       document.getElementById('lockHint').value = ''; document.getElementById('lockPin').value = ''; 
-      if (isCheckbox) { isCheckbox.checked = false; } toggleLockOptions(); discardAudio(); 
+      if (isCheckbox) { isCheckbox.checked = false; } toggleLockOptions(); 
+      discardAudio(); 
+      discardImage();
       
       btn.innerText = originalText;
       btn.disabled = false;
@@ -545,7 +653,7 @@
       const status = document.getElementById('noteStatus');
       status.style.display = 'block'; 
       
-      // ให้ดูคำว่า 'แปะสำเร็จ' 1.5 วิ แล้วเด้งกลับปฏิทินเอง!
+      // ให้ดูคำว่าสำเร็จ แล้วเด้งกลับปฏิทินเอง!
       setTimeout(() => { 
         status.style.display = 'none'; 
         backToCalendar(); 
@@ -566,7 +674,7 @@
     const dayNotes = allNotes.filter(n => Number(n.targetDay) === day && Number(n.targetMonth) === currentViewingMonthIndex).reverse();
     
     if (dayNotes.length === 0) {
-      board.innerHTML = '<div style="width: 100%; text-align: center; color: #9ca3af; font-size: 14px; padding: 20px;">ยังไม่มีโน้ตเลย... ลองแปะแผ่นแรกดูสิคะ! 💌</div>'; return;
+      board.innerHTML = '<div style="width: 100%; text-align: center; color: #9ca3af; font-size: 14px; padding: 20px; font-weight: 500;">ยังไม่มีโน้ตเลย... ลองแปะแผ่นแรกดูสิคะ! 💌</div>'; return;
     }
     
     dayNotes.forEach(note => {
@@ -577,13 +685,19 @@
       else if (note.isLocked) { noteEl.className = 'mini-note locked-note'; } 
       else { noteEl.className = 'mini-note'; }
 
-      const pinIcon = timeCapsule ? '🔒' : (note.isLocked ? '🔒' : '📍');
-      const audioIcon = note.audioData ? ' 🎵' : ''; 
-      const hintText = timeCapsule ? '(ความลับแห่งอนาคต 🔒)' : (note.isLocked ? '(ข้อความติดล็อก 🔑)' : '(แตะเพื่อเปิดอ่าน 💌)');
+      const pinIcon = timeCapsule ? '⏳' : (note.isLocked ? '🔒' : '📍');
+      
+      // เช็กไอคอนสื่อต่างๆ
+      let mediaIcons = '';
+      if (note.audioData) mediaIcons += '🎵 ';
+      if (note.imageData) mediaIcons += '📸 ';
+
+      const hintText = timeCapsule ? '(รอเปิดในอนาคต 🔒)' : (note.isLocked ? '(ข้อความติดล็อก 🔑)' : '(แตะเพื่อเปิดอ่าน 💌)');
 
       noteEl.innerHTML = `
         <div class="mini-pin">${pinIcon}</div>
-        <div class="mini-from-text">จาก:<br>${note.from}${audioIcon}</div>
+        <div class="mini-from-text">จาก:<br>${note.from}</div>
+        <div class="mini-icons">${mediaIcons}</div>
         <div class="mini-hint">${hintText}</div>
         <div class="mini-time-stamp">${note.timestamp}</div>
       `;
@@ -618,12 +732,22 @@
   }
 
   function openNoteDetail(note) {
-    document.getElementById('detailFromTo').innerHTML = `จาก: ${note.from} <br> ถึง: ${note.to}`;
+    document.getElementById('detailFromTo').innerHTML = `จาก: ${note.from} <span style="color:#cbd5e1;">|</span> ถึง: ${note.to}`;
+    
+    // โชว์ตัวหนังสือ
     const textEl = document.getElementById('detailText');
-    if (note.text.trim() !== '') { textEl.innerText = note.text; textEl.style.display = 'block'; } else { textEl.style.display = 'none'; }
+    if (note.text && note.text.trim() !== '') { textEl.innerText = note.text; textEl.style.display = 'block'; } else { textEl.style.display = 'none'; }
+    
+    // โชว์รูปภาพ
+    const imgEl = document.getElementById('detailImage');
+    if (note.imageData) { imgEl.src = note.imageData; imgEl.style.display = 'block'; } else { imgEl.src = ''; imgEl.style.display = 'none'; }
+    
+    // โชว์เสียง
     const audioContainer = document.getElementById('detailAudioContainer'); const audioEl = document.getElementById('detailAudio');
     if (note.audioData) { audioEl.src = note.audioData; audioContainer.style.display = 'block'; } else { audioEl.src = ''; audioContainer.style.display = 'none'; }
-    document.getElementById('detailTime').innerText = `📅 เขียนเมื่อ: ${note.timestamp}`; document.getElementById('noteDetailModal').style.display = 'flex';
+    
+    document.getElementById('detailTime').innerHTML = `📅 เขียนเมื่อ: <span style="color:#b45309;">${note.timestamp}</span>`; 
+    document.getElementById('noteDetailModal').style.display = 'flex';
   }
   
   function closePopup(modalId) {
@@ -632,7 +756,7 @@
   }
 
   function goHome() {
-    document.getElementById('home-btn').style.display = 'none'; currentViewingDay = null; noteToUnlock = null; discardAudio(); 
+    document.getElementById('home-btn').style.display = 'none'; currentViewingDay = null; noteToUnlock = null; discardAudio(); discardImage();
     const bgMusic = document.getElementById('bgMusic'); const video = document.getElementById('myVideo');
     if (bgMusic) bgMusic.pause(); if (video) video.pause();
     document.getElementById('daily-notes-sec').style.display = 'none'; document.getElementById('sept3-experience-container').style.display = 'none'; document.getElementById('dynamic-calendar-sec').style.display = 'none';
@@ -640,7 +764,7 @@
     document.getElementById('memory-box-step').style.display = 'block'; document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' });
   }
 
-  // --- ✨ ความทรงจำวันที่ 3 ล้วนๆ ✨ ---
+  // --- ✨ ความทรงจำวันที่ 3 ---
   function openSept3Experience() {
     document.getElementById('dynamic-calendar-sec').style.display = 'none';
     document.getElementById('sept3-experience-container').style.display = 'block';
