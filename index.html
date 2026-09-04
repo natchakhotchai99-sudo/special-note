@@ -69,7 +69,7 @@
     .shared-note-box { background: #fffdf0; border: 2px dashed #fcd34d; border-radius: 18px; padding: 15px; text-align: left; margin-bottom: 15px; position: relative; box-shadow: inset 0 0 10px rgba(245,158,11,0.05); }
     .shared-note-title { font-size: 16px; font-weight: 700; color: #d97706; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 6px; border-bottom: 1px dashed #fcd34d; padding-bottom: 10px; }
     
-    /* โครงสร้าง Dropdown */
+    /* โครงสร้าง Dropdown (แก้ปัญหาช่องทะลุจอ) */
     .note-meta-inputs { display: flex; gap: 10px; margin-bottom: 12px; width: 100%; }
     .input-col { flex: 1; min-width: 0; display: flex; flex-direction: column; }
     .input-label { font-size: 12px; color: #b45309; font-weight: 700; margin-bottom: 4px; padding-left: 2px; }
@@ -106,6 +106,7 @@
     .mini-note:hover { transform: scale(1.05) rotate(-2deg); box-shadow: 4px 8px 15px rgba(0,0,0,0.15); z-index: 10; }
     @keyframes stickNoteAnim { 0% { transform: translateY(-50px) scale(1.2) rotate(10deg); opacity: 0; } 100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; } }
     
+    /* สไตล์สำหรับโน้ตข้ามเวลาและโน้ตล็อกรหัส */
     .mini-note.time-capsule { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); border: 1px dashed #94a3b8; }
     .mini-note.locked-note { background: linear-gradient(135deg, #f8fafc, #f1f5f9); border: 1px dashed #cbd5e1; }
     
@@ -118,6 +119,12 @@
     .mini-time-stamp { font-size: 9.5px; color: #78350f; margin-top: 8px; opacity: 0.8; font-weight: 500; }
     .mini-note.locked-note .mini-time-stamp, .mini-note.time-capsule .mini-time-stamp { color: #334155; }
     
+    /* กิมมิคดาวกระจายตอนแปะโน้ต */
+    @keyframes flyOut {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+      100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.5) rotate(180deg); opacity: 0; }
+    }
+
     /* ความทรงจำ 3 ก.ย. */
     .envelope-box { position: relative; display: inline-block; margin-bottom: 20px; }
     .roll-in-anim { animation: rollIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
@@ -213,7 +220,6 @@
   <div id="memory-box-step" class="step-box card-base">
     <div class="main-title">📦 Memory Box 2026 💖</div>
     
-    <!-- ปุ่มเพิ่มกระดาษโน้ต เรืองแสงเด่นๆ -->
     <button class="choice-btn today-btn" onclick="openTodayNotes()">
       <span style="font-size: 18px;">💛</span> กดเพื่อเพิ่มกระดาษโน้ตของวันนี้เลย!
     </button>
@@ -239,7 +245,8 @@
   <!-- 🗓️ ปฏิทินแบบไดนามิก -->
   <div id="dynamic-calendar-sec" class="step-box card-base" style="display: none;">
     <div class="calendar-header" id="dynamic-cal-header">Month 2026 🍁</div>
-    <p style="font-size: 12px; color: #718096; margin-top: 0;">แตะที่วันที่ 3 เพื่อดูความทรงจำ / วันอื่นเพื่อเขียนโน้ต</p>
+    <!-- ลบข้อความ "แตะวันที่ 3" ออกไป เปลี่ยนเป็นคำอธิบายรวมๆ น่ารักๆ แทน -->
+    <p style="font-size: 13px; color: #718096; margin-top: 0; font-weight: 500;">แตะที่ตัวเลขวันที่ เพื่อเปิดดูความทรงจำ หรือแปะกระดาษโน้ต 💌</p>
     <div class="calendar-grid" id="dynamic-cal-grid">
       <!-- สร้างด้วย JS -->
     </div>
@@ -250,7 +257,7 @@
     <div class="shared-note-box">
       <div class="shared-note-title" id="daily-note-title">📌 กระดานโน้ตวันที่ X</div>
       
-      <!-- ฟอร์มสร้างโน้ต (Dropdown แก้ช่องทะลุจอ) -->
+      <!-- ฟอร์มสร้างโน้ต -->
       <div class="note-meta-inputs">
         <div class="input-col">
           <div class="input-label">จากใคร:</div>
@@ -270,26 +277,22 @@
 
       <textarea id="sharedNoteInput" class="note-input" placeholder="พิมพ์ข้อความในใจที่นี่เลย..."></textarea>
       
-      <!-- กลุ่มปุ่ม มีอัดเสียง และ เพิ่มรูปภาพ -->
       <div class="media-buttons">
         <button id="recordBtn" class="record-btn" onclick="toggleRecording()">
           <span style="font-size:18px;">🎤</span> อัดเสียง
         </button>
-        <!-- ปุ่มเลือกรูปภาพ -->
         <label for="imageInput" class="image-upload-btn">
           <span style="font-size:18px;">📸</span> ใส่รูปภาพ
         </label>
         <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImageUpload(event)">
       </div>
       
-      <!-- พรีวิวเสียง -->
       <div id="audioPreviewBox" class="media-preview-box">
         <div style="font-size: 12px; color: #92400e; font-weight: 600; margin-bottom: 5px;">ฟังเสียงที่อัดไว้ 🎵</div>
         <audio id="audioPreview" controls style="width: 100%; height: 35px; outline: none;"></audio>
         <button class="choice-btn bad-btn" style="padding: 4px 12px; font-size: 12px; margin-top: 8px; width: 100%;" onclick="discardAudio()">❌ ลบเสียงทิ้ง</button>
       </div>
 
-      <!-- พรีวิวรูปภาพ -->
       <div id="imagePreviewBox" class="media-preview-box">
         <div style="font-size: 12px; color: #be185d; font-weight: 600; margin-bottom: 5px;">รูปภาพที่เลือก 📸</div>
         <img id="imagePreview" src="">
@@ -308,12 +311,10 @@
 
       <button id="saveNoteBtn" class="save-note-btn" onclick="saveSharedNote()">💌 แปะกระดาษโน้ต</button>
 
-      <!-- ป้ายแจ้งเตือนสำเร็จ -->
       <div id="noteStatus" style="font-size: 13px; color: #d97706; background: #fef3c7; padding: 10px; border-radius: 12px; font-weight: 600; margin-top: 15px; display: none; text-align: center; border: 2px dashed #f59e0b; animation: popUp 0.3s;">
         💌 แปะกระดาษโน้ตสำเร็จ!<br><span style="font-size:11px; color:#b45309; font-weight:500;">กำลังกลับหน้าปฏิทิน...</span>
       </div>
 
-      <!-- บอร์ดประวัติข้อความของวันนั้นๆ -->
       <div id="notesBoard" class="notes-board"></div>
     </div>
     <button class="back-cal-btn" onclick="backToCalendar()">🔙 กลับไปหน้าปฏิทิน</button>
@@ -343,14 +344,14 @@
     <audio id="bgMusic" src="https://ozonemassage.com/wp-content/uploads/2026/09/Y2Mate.is-RIFF-Offical-Audio.mp3" loop></audio>
   </div>
 
-<!-- 😾 Popup เลือกเดือน -->
+<!-- 😾 Popup เลือกเดือนต่างๆ (ปรับให้ตรงตามรีเควสเป๊ะๆ) -->
 <div id="monthChoiceModal" class="popup-modal">
   <div class="popup-content">
     <div id="popupAvatar" style="font-size: 55px; margin-bottom: 10px;">😾</div>
     <div id="popupText" style="font-size: 15px; color: #2d3748; font-weight: 500; line-height: 1.5; margin-bottom: 15px;"></div>
     <div style="display: flex; flex-direction: column; gap: 8px;">
-      <button class="choice-btn bad-btn" onclick="closePopup('monthChoiceModal')">เข้าใจแล้วครับ 😅</button>
-      <button class="choice-btn good-btn" onclick="proceedToMonth()">แค่จะเพิ่มโน้ตครับ 📝</button>
+      <button id="monthProceedBtn" class="choice-btn good-btn" onclick="proceedToMonth()">แค่จะมาแปะโน้ตครับ 📝</button>
+      <button id="monthCancelBtn" class="choice-btn bad-btn" onclick="closePopup('monthChoiceModal')">เข้าใจแล้วครับ 😅</button>
     </div>
   </div>
 </div>
@@ -387,9 +388,7 @@
     <div class="read-note-pin">📌</div>
     <div class="read-note-fromto" id="detailFromTo"></div>
     
-    <!-- โชว์รูปภาพในโน้ต -->
     <img id="detailImage" class="detail-image" src="" style="display: none;">
-    
     <div class="read-note-text" id="detailText"></div>
     
     <div id="detailAudioContainer" style="display: none; margin-bottom: 15px; background: #fffbeb; padding: 10px; border-radius: 12px; border: 1px dashed #fcd34d;">
@@ -411,7 +410,6 @@
   const firebaseConfig = { databaseURL: "https://memory-box-2026-default-rtdb.asia-southeast1.firebasedatabase.app/" };
   if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
   const database = firebase.database();
-  // เปลี่ยนเวอร์ชันเล็กน้อยเพื่อให้รองรับรูปภาพแบบสมบูรณ์
   const notesRef = database.ref('memory_box_notes_v7'); 
   
   let allNotes = []; let noteToUnlock = null;
@@ -428,10 +426,16 @@
   function requestMonthAccess(mIndex, type) {
     pendingMonthIndex = mIndex;
     if (type === 'past') {
-      document.getElementById('popupAvatar').innerText = '😾'; document.getElementById('popupText').innerHTML = 'เรารู้จักกันเดือนกันยานะ!<br>จำคนผิดป่ะเนี่ย จะมากดเดือนนี้ได้ยังไง!';
+      document.getElementById('popupAvatar').innerText = '😾'; 
+      document.getElementById('popupText').innerHTML = 'จำผิดคนปะเนี่ย รู้จักกันเดือนกันยายนนะ!';
+      document.getElementById('monthProceedBtn').innerHTML = 'แค่จะมาแปะโน้ตครับ 📝';
+      document.getElementById('monthCancelBtn').innerHTML = 'ขอโทษครับ / เข้าใจแล้ว 😅';
       document.getElementById('monthChoiceModal').style.display = 'flex';
     } else if (type === 'future') {
-      document.getElementById('popupAvatar').innerText = '⏳'; document.getElementById('popupText').innerHTML = 'อนาคตยังมาไม่ถึงนะคนดื้อ...<br>ไว้ถึงเดือนนี้แล้วค่อยมาเปิดดูสิ!';
+      document.getElementById('popupAvatar').innerText = '⏳'; 
+      document.getElementById('popupText').innerHTML = 'อนาคตยังมาไม่ถึงเลย จะเข้ามาทำอะไรเนี่ย!';
+      document.getElementById('monthProceedBtn').innerHTML = 'แค่จะเข้ามาเพิ่มโน้ตครับ 📝';
+      document.getElementById('monthCancelBtn').innerHTML = 'เข้าใจแล้วครับ 😅';
       document.getElementById('monthChoiceModal').style.display = 'flex';
     } else if (type === 'september') {
       proceedToMonth();
@@ -494,7 +498,7 @@
   // --- 📅 คลิกวันที่ ---
   function openTodayNotes() {
     pendingMonthIndex = 8; currentViewingMonthIndex = 8;
-    proceedToNotesBoard(4); 
+    proceedToNotesBoard(4); // สมมติอิงวันที่ 4
   }
 
   function clickDay(day) {
@@ -511,7 +515,7 @@
     document.getElementById('memory-box-step').style.display = 'none';
     const dailySec = document.getElementById('daily-notes-sec');
     dailySec.style.display = 'block';
-    document.getElementById('daily-note-title').innerHTML = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
+    document.getElementById('daily-note-title').innerText = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
     document.getElementById('home-btn').style.display = 'flex';
     renderNotesForDay(day);
     dailySec.scrollIntoView({ behavior: 'smooth' });
@@ -528,32 +532,22 @@
     const file = event.target.files[0];
     if(!file) return;
     
-    // โชว์ว่ากำลังประมวลผลรูป (เผื่อรูปใหญ่มาก)
     const previewBox = document.getElementById('imagePreviewBox');
     previewBox.style.display = 'block';
-    document.getElementById('imagePreview').src = 'https://i.gifer.com/ZZ5H.gif'; // loading gif
+    document.getElementById('imagePreview').src = 'https://i.gifer.com/ZZ5H.gif'; 
     
     const reader = new FileReader();
     reader.onload = function(e) {
       const img = new Image();
       img.onload = function() {
-        // ใช้ Canvas ย่อขนาดรูปลงมา เพื่อไม่ให้ Firebase ระเบิด
         const canvas = document.createElement('canvas');
-        const MAX_WIDTH = 800; // ความกว้างสูงสุด 800px
+        const MAX_WIDTH = 800; 
         let width = img.width;
         let height = img.height;
-
-        if (width > MAX_WIDTH) {
-          height *= MAX_WIDTH / width;
-          width = MAX_WIDTH;
-        }
-
-        canvas.width = width;
-        canvas.height = height;
+        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+        canvas.width = width; canvas.height = height;
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, width, height);
-
-        // แปลงกลับเป็น Base64 (คุณภาพ 70%)
         imageBase64 = canvas.toDataURL('image/jpeg', 0.7);
         document.getElementById('imagePreview').src = imageBase64;
       }
@@ -561,10 +555,8 @@
     }
     reader.readAsDataURL(file);
   }
-
   function discardImage() {
-    imageBase64 = null;
-    document.getElementById('imageInput').value = '';
+    imageBase64 = null; document.getElementById('imageInput').value = '';
     document.getElementById('imagePreviewBox').style.display = 'none';
   }
 
@@ -598,12 +590,32 @@
     const btn = document.getElementById('recordBtn'); btn.style.display = 'flex'; btn.innerHTML = '<span style="font-size:18px;">🎤</span> อัดเสียง';
   }
 
+  // --- 🚀 กิมมิคประกายดาวตอนเซฟสำเร็จ ---
+  function createSaveSparks() {
+    const container = document.getElementById('main-app-container');
+    for(let i=0; i<15; i++) {
+      const spark = document.createElement('div');
+      spark.innerHTML = ['✨','💖','🌟','💫'][Math.floor(Math.random() * 4)];
+      spark.style.position = 'fixed'; spark.style.left = '50%'; spark.style.top = '50%';
+      spark.style.transform = 'translate(-50%, -50%)';
+      spark.style.fontSize = (Math.random() * 20 + 15) + 'px';
+      spark.style.pointerEvents = 'none'; spark.style.zIndex = '99999';
+      spark.style.animation = `flyOut ${Math.random() * 0.6 + 0.5}s cubic-bezier(0.25, 1, 0.5, 1) forwards`;
+      
+      const angle = Math.random() * Math.PI * 2;
+      const velocity = Math.random() * 150 + 80;
+      spark.style.setProperty('--tx', `${Math.cos(angle) * velocity}px`);
+      spark.style.setProperty('--ty', `${Math.sin(angle) * velocity}px`);
+      
+      container.appendChild(spark);
+      setTimeout(() => spark.remove(), 1200);
+    }
+  }
+
   // --- 📝 เซฟโน้ต ---
   function toggleLockOptions() {
     const isCheckbox = document.getElementById('lockCheckbox');
-    if(isCheckbox) {
-      document.getElementById('lockOptions').style.display = isCheckbox.checked ? 'flex' : 'none';
-    }
+    if(isCheckbox) { document.getElementById('lockOptions').style.display = isCheckbox.checked ? 'flex' : 'none'; }
   }
 
   function saveSharedNote() {
@@ -616,7 +628,6 @@
     const lockPin = document.getElementById('lockPin').value;
     const lockHint = document.getElementById('lockHint').value;
     
-    // ตรวจสอบว่าต้องมีตัวหนังสือ, เสียง หรือ รูป อย่างใดอย่างหนึ่ง
     if (text.trim() === '' && !audioBase64 && !imageBase64) { alert("ต้องพิมพ์ข้อความ อัดเสียง หรือใส่รูปก่อนส่งน้า! 🥺"); return; }
     if (isLocked && lockPin.trim() === '') { alert("ถ้าเลือกล็อกรหัสผ่าน ต้องใส่รหัสด้วยน้า! 🔑"); return; }
 
@@ -632,38 +643,34 @@
       targetMonth: Number(currentViewingMonthIndex), targetDay: Number(currentViewingDay),
       text: text, from: from, to: to, timestamp: timeStr,
       isLocked: isLocked, lockPin: lockPin, lockHint: lockHint,
-      audioData: audioBase64 || null,
-      imageData: imageBase64 || null // เพิ่มเก็บรูปภาพ
+      audioData: audioBase64 || null, imageData: imageBase64 || null 
     };
 
-    // ส่งเข้า Firebase
     try { notesRef.push(noteData); } catch (e) { console.log(e); }
 
-    // ดีเลย์นิดนึง ให้ความรู้สึกว่ากำลังโหลด
     setTimeout(() => {
       document.getElementById('sharedNoteInput').value = ''; 
       document.getElementById('lockHint').value = ''; document.getElementById('lockPin').value = ''; 
       if (isCheckbox) { isCheckbox.checked = false; } toggleLockOptions(); 
-      discardAudio(); 
-      discardImage();
+      discardAudio(); discardImage();
       
-      btn.innerText = originalText;
-      btn.disabled = false;
+      btn.innerText = originalText; btn.disabled = false;
+      
+      createSaveSparks();
 
       const status = document.getElementById('noteStatus');
       status.style.display = 'block'; 
       
-      // ให้ดูคำว่าสำเร็จ แล้วเด้งกลับปฏิทินเอง!
       setTimeout(() => { 
         status.style.display = 'none'; 
         backToCalendar(); 
       }, 1500);
       
-    }, 500); 
+    }, 400); 
   }
 
   function isFutureNote(m, d) {
-    const realMonth = 8; const realDay = 4; // สมมติอิงวันที่ 4 กันยา
+    const realMonth = 8; const realDay = 4; // อิงจากวันที่ 4 กันยายน (index=8)
     if (m > realMonth) return true;
     if (m === realMonth && d > realDay) return true;
     return false;
@@ -687,7 +694,6 @@
 
       const pinIcon = timeCapsule ? '⏳' : (note.isLocked ? '🔒' : '📍');
       
-      // เช็กไอคอนสื่อต่างๆ
       let mediaIcons = '';
       if (note.audioData) mediaIcons += '🎵 ';
       if (note.imageData) mediaIcons += '📸 ';
@@ -733,19 +739,12 @@
 
   function openNoteDetail(note) {
     document.getElementById('detailFromTo').innerHTML = `จาก: ${note.from} <span style="color:#cbd5e1;">|</span> ถึง: ${note.to}`;
-    
-    // โชว์ตัวหนังสือ
     const textEl = document.getElementById('detailText');
     if (note.text && note.text.trim() !== '') { textEl.innerText = note.text; textEl.style.display = 'block'; } else { textEl.style.display = 'none'; }
-    
-    // โชว์รูปภาพ
     const imgEl = document.getElementById('detailImage');
     if (note.imageData) { imgEl.src = note.imageData; imgEl.style.display = 'block'; } else { imgEl.src = ''; imgEl.style.display = 'none'; }
-    
-    // โชว์เสียง
     const audioContainer = document.getElementById('detailAudioContainer'); const audioEl = document.getElementById('detailAudio');
     if (note.audioData) { audioEl.src = note.audioData; audioContainer.style.display = 'block'; } else { audioEl.src = ''; audioContainer.style.display = 'none'; }
-    
     document.getElementById('detailTime').innerHTML = `📅 เขียนเมื่อ: <span style="color:#b45309;">${note.timestamp}</span>`; 
     document.getElementById('noteDetailModal').style.display = 'flex';
   }
