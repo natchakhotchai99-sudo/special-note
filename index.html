@@ -51,17 +51,32 @@
     .step-box { width: 100%; }
     .card-base { background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 25px 20px; margin-bottom: 18px; box-shadow: 0 8px 30px rgba(255, 182, 193, 0.3); border: 2px solid #ffffff; width: 100%; position: relative; }
     
-    /* กิมมิค 4: คำทักทายตามเวลา */
     .time-greeting { font-size: 13px; font-weight: 700; color: #d97706; background: #fef3c7; padding: 6px 16px; border-radius: 20px; display: inline-block; margin-bottom: 12px; border: 1px dashed #f59e0b; animation: bounce 2s infinite; }
 
     .main-title { font-size: 24px; font-weight: 700; color: #ff477e; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(255,71,126,0.1); animation: floatTitle 3s ease-in-out infinite; display: inline-block; }
     @keyframes floatTitle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
-    /* กิมมิค 5: หลอดความทรงจำ */
-    .memory-counter-box { width: 100%; background: #fff0f3; border-radius: 16px; padding: 12px; margin-bottom: 20px; border: 1px dashed #ffb6c1; }
-    .counter-text { font-size: 13px; color: #4a5568; font-weight: 600; margin-bottom: 8px; }
-    .progress-bar-bg { width: 100%; height: 10px; background: #ffe4e8; border-radius: 10px; overflow: hidden; }
-    .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #ff758c, #ff477e); transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); border-radius: 10px; }
+    /* 🧪 หลอดแก้วเรืองแสงสะสมโน้ต */
+    .memory-counter-box { width: 100%; margin-bottom: 25px; padding: 0 10px; }
+    .counter-text { font-size: 14px; color: #4a5568; font-weight: 700; margin-bottom: 12px; }
+    .glass-tube { width: 100%; height: 26px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 255, 255, 0.9); border-radius: 20px; box-shadow: inset 0 3px 6px rgba(0,0,0,0.1), 0 4px 15px rgba(255,182,193,0.3); position: relative; overflow: hidden; backdrop-filter: blur(2px); }
+    .glass-liquid { height: 100%; width: 0%; background: linear-gradient(90deg, #ff758c, #ff0055); box-shadow: 0 0 15px #ff477e, inset 0 2px 5px rgba(255,255,255,0.6); border-radius: 18px; transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); position: relative; }
+    .glass-liquid::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.6) 15%, transparent 20%), radial-gradient(circle, rgba(255,255,255,0.4) 15%, transparent 20%); background-size: 15px 15px, 20px 20px; background-position: 0 0, 10px 10px; animation: bubbles 2s linear infinite; border-radius: 18px; }
+    @keyframes bubbles { 0% { background-position: 0 20px, 10px 30px; } 100% { background-position: 0 0, 10px 10px; } }
+
+    /* 🪙 การ์ดขูดลุ้นข้อความ */
+    .scratch-wrapper { margin-bottom: 25px; position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .scratch-header { font-size: 13px; font-weight: 700; color: #b45309; margin-bottom: 8px; }
+    .scratch-container { position: relative; width: 100%; max-width: 320px; height: 75px; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 2px solid #ffffff; }
+    .scratch-text-secret { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #fffbeb; display: flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 14px; font-weight: 700; color: #e11d48; text-align: center; border: 2px dashed #fcd34d; border-radius: 14px; }
+    #scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; cursor: pointer; }
+    .scratch-reset-btn { margin-top: 8px; font-size: 11px; background: #e2e8f0; color: #475569; border: none; padding: 4px 12px; border-radius: 10px; cursor: pointer; font-family: 'Kanit'; font-weight: 600; }
+
+    /* 🐱 น้องแมวเฝ้าเว็บ (Mascot) */
+    #mascot-container { position: fixed; bottom: 20px; right: 15px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; cursor: pointer; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
+    .mascot-bubble { background: white; border: 2px solid #cbd5e1; padding: 8px 12px; border-radius: 16px 16px 4px 16px; font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 8px; display: none; max-width: 150px; text-align: right; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-family: 'Kanit'; }
+    .mascot-emoji { font-size: 55px; transition: transform 0.2s; }
+    .mascot-emoji:active { transform: scale(0.8) rotate(10deg); }
 
     .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .choice-btn:active { transform: scale(0.95); }
@@ -76,7 +91,6 @@
     .month-btn.active-sept:hover { color: white; }
     .month-icon { font-size: 16px; margin-bottom: 3px; }
 
-    /* 🗓️ ปฏิทินแบบไดนามิก */
     .calendar-header { font-size: 18px; font-weight: 700; color: #ff477e; margin-bottom: 12px; text-transform: uppercase;}
     .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; font-size: 13px; }
     .day-name { font-weight: 600; color: #a0aec0; padding-bottom: 4px; border-bottom: 1px dashed #e2e8f0; margin-bottom: 5px; }
@@ -87,7 +101,6 @@
     .note-dot { position: absolute; bottom: 3px; right: 3px; background: #fcd34d; border-radius: 50%; box-shadow: 0 2px 4px rgba(245,158,11,0.5); z-index: 5; width: 10px; height: 10px; animation: pulse 2s infinite; pointer-events: none; }
     .note-dot.has-number { width: 16px; height: 16px; font-size: 10px; font-weight: bold; color: #92400e; display: flex; justify-content: center; align-items: center; border: 1.5px solid white; bottom: -2px; right: -2px; animation: bounce 1.5s infinite; }
 
-    /* 📝 กระดานโน้ตเฉพาะวัน */
     .shared-note-box { background: #fffdf0; border: 2px dashed #fcd34d; border-radius: 18px; padding: 15px; text-align: left; margin-bottom: 15px; position: relative; box-shadow: inset 0 0 10px rgba(245,158,11,0.05); }
     .shared-note-title { font-size: 16px; font-weight: 700; color: #d97706; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 6px; border-bottom: 1px dashed #fcd34d; padding-bottom: 10px; }
     
@@ -223,6 +236,12 @@
 <div id="heart-bg-container"></div>
 <button id="home-btn" class="home-btn" onclick="goHome()">🏠</button>
 
+<!-- 🐱 น้องแมวเฝ้าเว็บ (Mascot) -->
+<div id="mascot-container" onclick="pokeMascot()">
+  <div id="mascot-bubble" class="mascot-bubble">...</div>
+  <div id="mascot-emoji" class="mascot-emoji">🐱</div>
+</div>
+
 <!-- 🎁 หน้าต้อนรับ (Greeting Screen) เพื่อขออนุญาตเล่นเสียงวิดีโอ -->
 <div id="greeting-overlay">
   <div class="greeting-box-icon">📦</div>
@@ -249,12 +268,22 @@
 
     <div class="main-title">📦 Memory Box 2026 💖</div>
     
-    <!-- 🌸 กิมมิค 5: หลอดความทรงจำ -->
+    <!-- 🧪 หลอดแก้วเรืองแสง -->
     <div class="memory-counter-box">
-      <div class="counter-text">เก็บสะสมความทรงจำไปแล้ว <span id="totalNotesCount" style="font-size: 18px; color: #ff477e;">0</span>/365 แผ่น 💌</div>
-      <div class="progress-bar-bg">
-        <div id="progressBarFill" class="progress-bar-fill"></div>
+      <div class="counter-text">หลอดแก้วเก็บกระดาษโน๊ต 📝<br>สะสมโน้ตไปแล้ว <span id="totalNotesCount" style="font-size: 18px; color: #ff477e;">0</span> แผ่น ✨</div>
+      <div class="glass-tube">
+        <div id="progressBarFill" class="glass-liquid"></div>
       </div>
+    </div>
+
+    <!-- 🪙 การ์ดขูดลุ้นคำแซว -->
+    <div class="scratch-wrapper">
+      <div class="scratch-header">🪙 การ์ดขูดเสี่ยงทายประจำวัน (ถูๆ ดูสิ!)</div>
+      <div class="scratch-container">
+        <div id="scratch-text" class="scratch-text-secret">ขูดหาเลขเด็ดหรอ หาน้ำกินด้วย! 😜</div>
+        <canvas id="scratch-canvas"></canvas>
+      </div>
+      <button class="scratch-reset-btn" onclick="resetScratchCard()">🔄 ขอขูดใบใหม่</button>
     </div>
 
     <button class="choice-btn today-btn" onclick="openTodayNotes()">
@@ -381,7 +410,7 @@
     <audio id="bgMusic" src="https://ozonemassage.com/wp-content/uploads/2026/09/Y2Mate.is-RIFF-Offical-Audio.mp3" loop></audio>
   </div>
 
-<!-- 😾 Popup เลือกเดือนต่างๆ -->
+<!-- 😾 Popup เลือกเดือนต่างๆ (ปรับให้ตรงตามรีเควส) -->
 <div id="monthChoiceModal" class="popup-modal">
   <div class="popup-content">
     <div id="popupAvatar" style="font-size: 55px; margin-bottom: 10px;">😾</div>
@@ -453,7 +482,99 @@
     else text = "ดึกแล้วน้า ดื้อไม่ยอมนอนหรอ? 🌙";
     document.getElementById('timeGreeting').innerText = text;
   }
-  updateTimeGreeting(); // เรียกใช้ตอนโหลดเว็บ
+  updateTimeGreeting();
+
+  // --- 🐱 น้องแมว Mascot ตามเวลา ---
+  let isMascotAwake = false;
+  function initMascot() {
+    const hour = new Date().getHours();
+    const emojiEl = document.getElementById('mascot-emoji');
+    // ถ้าเวลา 6 โมงเช้า ถึง 4 ทุ่ม แมวจะตื่น
+    if(hour >= 6 && hour < 22) {
+      isMascotAwake = true;
+      emojiEl.innerText = '🐱';
+    } else {
+      isMascotAwake = false;
+      emojiEl.innerText = '🐱💤'; // หลับ
+    }
+  }
+  initMascot();
+
+  function pokeMascot() {
+    const bubble = document.getElementById('mascot-bubble');
+    let phrases = [];
+    if(isMascotAwake) {
+      phrases = ["วันนี้ดื้อหรือเปล่าเนี่ย? 🐱", "ทำงานสู้ๆ น้าา 💖", "แอบดูอยู่นะ! 👀", "หาน้ำกินด้วยยย 🥤"];
+    } else {
+      phrases = ["มาจิ้มทำไม คนจะนอน! 😾", "ง่วงงงง 💤", "ดึกแล้วไปนอนได้แล้ว! 🌙"];
+    }
+    bubble.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+    bubble.style.display = 'block';
+    
+    // ซ่อนข้อความหลังจาก 3 วินาที
+    setTimeout(() => { bubble.style.display = 'none'; }, 3000);
+  }
+
+  // --- 🪙 การ์ดขูด (Scratch Card) ---
+  const canvas = document.getElementById('scratch-canvas');
+  const ctx = canvas.getContext('2d');
+  let isDrawing = false;
+  
+  const secretMessages = [
+    "ขูดหาเลขเด็ดหรอ หาน้ำกินด้วย! 😜",
+    "วันนี้ห้ามดื้อนะ รู้ไหม! 💖",
+    "คิดถึงคนทำเว็บล่ะสิ 👀✨",
+    "ทำงานเหนื่อยไหม กอดๆ น้า 🫂",
+    "แอบมาส่องละสิ แบร่! 👻"
+  ];
+
+  function initScratchCard() {
+    // สุ่มข้อความลับ
+    document.getElementById('scratch-text').innerText = secretMessages[Math.floor(Math.random() * secretMessages.length)];
+    
+    // วาดการ์ดปิดทับสีเงิน
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = '#cbd5e1'; // สีเทาเงินๆ
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // วาดลายเส้นบนการ์ดนิดนึง
+    ctx.font = '16px Kanit';
+    ctx.fillStyle = '#64748b';
+    ctx.textAlign = 'center';
+    ctx.fillText('✨ ขูดตรงนี้สิ! ✨', canvas.width/2, canvas.height/2 + 5);
+  }
+  
+  // โหลดการ์ดครั้งแรก
+  window.onload = () => { initScratchCard(); };
+  function resetScratchCard() { initScratchCard(); }
+
+  // ระบบการขูดด้วยเมาส์และนิ้ว
+  function startScratch(e) { isDrawing = true; scratch(e); }
+  function stopScratch() { isDrawing = false; }
+  function scratch(e) {
+    if (!isDrawing) return;
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath();
+    ctx.arc(x, y, 15, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  canvas.addEventListener('mousedown', startScratch);
+  canvas.addEventListener('mousemove', scratch);
+  canvas.addEventListener('mouseup', stopScratch);
+  canvas.addEventListener('mouseleave', stopScratch);
+  canvas.addEventListener('touchstart', startScratch, {passive: false});
+  canvas.addEventListener('touchmove', scratch, {passive: false});
+  canvas.addEventListener('touchend', stopScratch);
 
   // --- 🔥 Firebase ---
   const firebaseConfig = { databaseURL: "https://memory-box-2026-default-rtdb.asia-southeast1.firebasedatabase.app/" };
@@ -468,7 +589,7 @@
     allNotes = [];
     if (data) { for (let key in data) { allNotes.push({ id: key, ...data[key] }); } }
     
-    // อัปเดตหลอดความทรงจำ!
+    // อัปเดตหลอดแก้วความทรงจำ
     const count = allNotes.length;
     const counterEl = document.getElementById('totalNotesCount');
     if(counterEl) counterEl.innerText = count;
@@ -497,6 +618,9 @@
       videoOverlay.style.display = 'flex';
       video.muted = false; 
       video.play().catch(err => console.log("Video play error:", err));
+      
+      // Init scratch canvas properly after display is block
+      setTimeout(() => initScratchCard(), 100); 
     }, 800);
   }
 
@@ -504,7 +628,7 @@
   const videoOverlay = document.getElementById('video-overlay'); const fullVideo = document.getElementById('fullVideo'); const mainApp = document.getElementById('main-app-container');
   fullVideo.onended = function() { closeIntroVideo(); }; 
   function skipIntroVideo() { fullVideo.pause(); closeIntroVideo(); }
-  function closeIntroVideo() { videoOverlay.style.opacity = '0'; setTimeout(() => { videoOverlay.style.display = 'none'; mainApp.style.display = 'flex'; createBackgroundHearts(); }, 1000); }
+  function closeIntroVideo() { videoOverlay.style.opacity = '0'; setTimeout(() => { videoOverlay.style.display = 'none'; mainApp.style.display = 'flex'; createBackgroundHearts(); initScratchCard(); }, 1000); }
 
   // --- 📅 เลือกเดือน (คำนวณจากเวลาจริง Real-time) ---
   function requestMonthAccess(mIndex, type) {
@@ -598,7 +722,7 @@
     const today = new Date();
     pendingMonthIndex = today.getMonth();
     currentViewingMonthIndex = today.getMonth();
-    proceedToNotesBoard(today.getDate()); // เปิดกระดานของ "วันนี้จริงๆ"
+    proceedToNotesBoard(today.getDate()); 
   }
 
   function clickDay(day) {
@@ -618,7 +742,7 @@
     document.getElementById('daily-note-title').innerText = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
     document.getElementById('home-btn').style.display = 'flex';
     
-    // โลจิกเช็กวันอดีต/ปัจจุบัน/อนาคต (แบบเรียลไทม์)
+    // โลจิกเช็กวันอดีต/ปัจจุบัน/อนาคต
     const today = new Date();
     const realMonth = today.getMonth();
     const realDay = today.getDate();
@@ -629,11 +753,9 @@
     const pastMessage = document.getElementById('past-note-message');
 
     if (isPastDay) {
-      // เป็นอดีต -> ซ่อนที่พิมพ์ข้อความ โชว์แค่ข้อความว่าเขียนไม่ได้แล้ว
       formArea.style.display = 'none';
       pastMessage.style.display = 'block';
     } else {
-      // ปัจจุบันและอนาคต -> โชว์ที่พิมพ์ข้อความ ซ่อนป้ายเตือน
       formArea.style.display = 'block';
       pastMessage.style.display = 'none';
     }
@@ -742,7 +864,7 @@
   function saveSharedNote() {
     if (currentViewingDay === null) return;
     const text = document.getElementById('sharedNoteInput').value;
-    const from = document.getElementById('noteFrom').options[document.getElementById('noteFrom').selectedIndex].text; // ดึงชื่อแบบมีไอคอน
+    const from = document.getElementById('noteFrom').options[document.getElementById('noteFrom').selectedIndex].text; 
     const isCheckbox = document.getElementById('lockCheckbox');
     const isLocked = isCheckbox ? isCheckbox.checked : false;
     const lockPin = document.getElementById('lockPin').value;
@@ -783,7 +905,6 @@
     }, 400); 
   }
 
-  // ฟังก์ชันเช็กโน้ตอนาคตแบบ Real-time
   function isFutureNote(m, d) {
     const today = new Date();
     const realMonth = today.getMonth();
@@ -878,6 +999,7 @@
     document.getElementById('daily-notes-sec').style.display = 'none'; document.getElementById('sept3-experience-container').style.display = 'none'; document.getElementById('dynamic-calendar-sec').style.display = 'none';
     document.getElementById('step-1-intro').style.display = 'block'; document.getElementById('step-2-video').style.display = 'none'; document.getElementById('step-3-rain-text').style.display = 'none'; document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'none'; document.getElementById('typewriter-text').innerHTML = ''; typeIndex = 0; 
     document.getElementById('memory-box-step').style.display = 'block'; document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' });
+    initMascot(); // อัปเดตแมวอีกรอบเผื่อเวลาเปลี่ยน
   }
 
   // --- ✨ ความทรงจำวันที่ 3 ---
