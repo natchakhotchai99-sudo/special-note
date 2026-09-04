@@ -51,8 +51,17 @@
     .step-box { width: 100%; }
     .card-base { background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 25px 20px; margin-bottom: 18px; box-shadow: 0 8px 30px rgba(255, 182, 193, 0.3); border: 2px solid #ffffff; width: 100%; position: relative; }
     
+    /* กิมมิค 4: คำทักทายตามเวลา */
+    .time-greeting { font-size: 13px; font-weight: 700; color: #d97706; background: #fef3c7; padding: 6px 16px; border-radius: 20px; display: inline-block; margin-bottom: 12px; border: 1px dashed #f59e0b; animation: bounce 2s infinite; }
+
     .main-title { font-size: 24px; font-weight: 700; color: #ff477e; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(255,71,126,0.1); animation: floatTitle 3s ease-in-out infinite; display: inline-block; }
     @keyframes floatTitle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+    /* กิมมิค 5: หลอดความทรงจำ */
+    .memory-counter-box { width: 100%; background: #fff0f3; border-radius: 16px; padding: 12px; margin-bottom: 20px; border: 1px dashed #ffb6c1; }
+    .counter-text { font-size: 13px; color: #4a5568; font-weight: 600; margin-bottom: 8px; }
+    .progress-bar-bg { width: 100%; height: 10px; background: #ffe4e8; border-radius: 10px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #ff758c, #ff477e); transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); border-radius: 10px; }
 
     .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .choice-btn:active { transform: scale(0.95); }
@@ -82,7 +91,6 @@
     .shared-note-box { background: #fffdf0; border: 2px dashed #fcd34d; border-radius: 18px; padding: 15px; text-align: left; margin-bottom: 15px; position: relative; box-shadow: inset 0 0 10px rgba(245,158,11,0.05); }
     .shared-note-title { font-size: 16px; font-weight: 700; color: #d97706; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 6px; border-bottom: 1px dashed #fcd34d; padding-bottom: 10px; }
     
-    /* กล่องข้อความเมื่อเวลาผ่านไปแล้ว (อดีต) */
     .past-note-message { display: none; text-align: center; padding: 20px; background: #fff0f3; border-radius: 16px; margin-bottom: 15px; border: 2px dashed #ffb6c1; color: #e11d48; font-weight: 600; box-shadow: inset 0 0 10px rgba(255,182,193,0.3); }
     
     .note-meta-inputs { display: flex; justify-content: center; margin-bottom: 12px; width: 100%; }
@@ -235,8 +243,20 @@
   
   <!-- หน้า Memory Box -->
   <div id="memory-box-step" class="step-box card-base">
+    
+    <!-- 🌸 กิมมิค 4: คำทักทายตามเวลาจริง -->
+    <div id="timeGreeting" class="time-greeting"></div>
+
     <div class="main-title">📦 Memory Box 2026 💖</div>
     
+    <!-- 🌸 กิมมิค 5: หลอดความทรงจำ -->
+    <div class="memory-counter-box">
+      <div class="counter-text">เก็บสะสมความทรงจำไปแล้ว <span id="totalNotesCount" style="font-size: 18px; color: #ff477e;">0</span>/365 แผ่น 💌</div>
+      <div class="progress-bar-bg">
+        <div id="progressBarFill" class="progress-bar-fill"></div>
+      </div>
+    </div>
+
     <button class="choice-btn today-btn" onclick="openTodayNotes()">
       <span style="font-size: 18px;">💛</span> กดเพื่อเพิ่มกระดาษโน้ตของวันนี้เลย!
     </button>
@@ -361,7 +381,7 @@
     <audio id="bgMusic" src="https://ozonemassage.com/wp-content/uploads/2026/09/Y2Mate.is-RIFF-Offical-Audio.mp3" loop></audio>
   </div>
 
-<!-- 😾 Popup เลือกเดือนต่างๆ (ปรับให้ตรงตามรีเควส) -->
+<!-- 😾 Popup เลือกเดือนต่างๆ -->
 <div id="monthChoiceModal" class="popup-modal">
   <div class="popup-content">
     <div id="popupAvatar" style="font-size: 55px; margin-bottom: 10px;">😾</div>
@@ -423,6 +443,18 @@
   const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   let pendingMonthIndex = null; let currentViewingMonthIndex = 8; let currentViewingDay = null;
 
+  // --- ทักทายตามเวลาจริง ---
+  function updateTimeGreeting() {
+    const hour = new Date().getHours();
+    let text = "";
+    if(hour >= 5 && hour < 12) text = "Morning น้า~ เริ่มต้นวันใหม่ให้สดใสนะคะ ☀️";
+    else if(hour >= 12 && hour < 17) text = "บ่ายแล้ว ลุยงานต่อสู้ๆ น้า (อย่าลืมกินข้าวด้วย!) 🍱";
+    else if(hour >= 17 && hour < 22) text = "เย็นแล้ว~ หมดไปอีกวัน เก่งมากเลย พักผ่อนน้า 🌆";
+    else text = "ดึกแล้วน้า ดื้อไม่ยอมนอนหรอ? 🌙";
+    document.getElementById('timeGreeting').innerText = text;
+  }
+  updateTimeGreeting(); // เรียกใช้ตอนโหลดเว็บ
+
   // --- 🔥 Firebase ---
   const firebaseConfig = { databaseURL: "https://memory-box-2026-default-rtdb.asia-southeast1.firebasedatabase.app/" };
   if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
@@ -435,6 +467,19 @@
     const data = snapshot.val();
     allNotes = [];
     if (data) { for (let key in data) { allNotes.push({ id: key, ...data[key] }); } }
+    
+    // อัปเดตหลอดความทรงจำ!
+    const count = allNotes.length;
+    const counterEl = document.getElementById('totalNotesCount');
+    if(counterEl) counterEl.innerText = count;
+    
+    const fillEl = document.getElementById('progressBarFill');
+    if(fillEl) {
+       let percent = (count / 365) * 100;
+       if(percent > 100) percent = 100;
+       fillEl.style.width = percent + '%';
+    }
+
     updateCalendarDots();
     if (currentViewingDay !== null) { renderNotesForDay(currentViewingDay); }
   });
@@ -470,21 +515,21 @@
     const realMonth = today.getMonth(); // เช่น กันยา = 8
 
     if (mIndex < realMonth) {
-      // เดือนอดีต (ก่อนเดือนปัจจุบัน) -> ไม่ให้พิมพ์โน้ต ซ่อนปุ่ม Proceed ไปเลย!
+      // เดือนอดีต -> ไม่ให้พิมพ์โน้ต ซ่อนปุ่ม Proceed ไปเลย!
       document.getElementById('popupAvatar').innerText = '😾'; 
       document.getElementById('popupText').innerHTML = 'จำผิดคนปะเนี่ย เรารู้จักกันเดือนกันยายนนะ!<br><span style="font-size:13px; color:#64748b;">(ย้อนเวลากลับไปเพิ่มความทรงจำไม่ได้แล้วน้า 🥺)</span>';
       
-      document.getElementById('monthProceedBtn').style.display = 'none'; // ซ่อนปุ่มแปะโน้ต
+      document.getElementById('monthProceedBtn').style.display = 'none'; // ซ่อนปุ่ม
       document.getElementById('monthCancelBtn').innerHTML = 'ขอโทษครับ / เข้าใจแล้ว 😅';
       
       document.getElementById('monthChoiceModal').style.display = 'flex';
 
     } else if (mIndex > realMonth) {
-      // เดือนอนาคต (หลังเดือนปัจจุบัน) -> ให้พิมพ์โน้ตข้ามเวลาได้
+      // เดือนอนาคต -> ให้พิมพ์โน้ตข้ามเวลาได้
       document.getElementById('popupAvatar').innerText = '⏳'; 
       document.getElementById('popupText').innerHTML = 'เดือนนี้ยังมาไม่ถึงเลยนะคนดื้อ!<br><span style="font-size:13px; color:#64748b;">แต่ถ้าอยากส่ง "โน้ตข้ามเวลา" ไปรอไว้ก่อน<br>ก็กดเพิ่มโน้ตได้เลยนะ เค้าจะไม่แอบอ่านหรอก! 🤫</span>';
       
-      document.getElementById('monthProceedBtn').style.display = 'block'; // โชว์ปุ่มแปะโน้ต
+      document.getElementById('monthProceedBtn').style.display = 'block'; // โชว์ปุ่ม
       document.getElementById('monthProceedBtn').innerHTML = 'แค่จะเข้ามาเพิ่มโน้ตครับ 📝';
       document.getElementById('monthCancelBtn').innerHTML = 'กลับไปรอเวลา 😅';
       
@@ -697,7 +742,7 @@
   function saveSharedNote() {
     if (currentViewingDay === null) return;
     const text = document.getElementById('sharedNoteInput').value;
-    const from = document.getElementById('noteFrom').options[document.getElementById('noteFrom').selectedIndex].text; // ดึงชื่อแบบมีไอคอน 👧👦
+    const from = document.getElementById('noteFrom').options[document.getElementById('noteFrom').selectedIndex].text; // ดึงชื่อแบบมีไอคอน
     const isCheckbox = document.getElementById('lockCheckbox');
     const isLocked = isCheckbox ? isCheckbox.checked : false;
     const lockPin = document.getElementById('lockPin').value;
@@ -870,6 +915,8 @@
   function stopScan() { if (hasCompletedScan) return; document.getElementById('laser').classList.remove('scanning'); clearTimeout(scanTimer); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerText = ''; document.getElementById('lie-result').innerHTML = '<span style="color: #e53e3e;">⚠️ สแกนยังไม่เสร็จ! แตะค้างไว้จนกว่าจะเสร็จน้า</span>'; }
   function finishScan() { hasCompletedScan = true; document.getElementById('laser').classList.remove('scanning'); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerHTML = '💓 135 BPM (หัวใจเต้นแรงมาก!)'; document.getElementById('lie-result').innerHTML = `🚨 <strong>RESULT: DETECTED!</strong><br><span style="color: #ff477e;">"ตรวจพบความคิดถึง 100% (ห้ามปฏิเสธเด็ดขาด!)" 🥰✨</span>`; const finalBtn = document.getElementById('final-btn-wrapper'); finalBtn.style.display = 'block'; setTimeout(() => { finalBtn.classList.add('show'); }, 600); }
   function goToNextSection() { document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'block'; }
+
+  function createBackgroundHearts() { const container = document.getElementById('heart-bg-container'); const hearts = ['💖', '🌸', '✨', '💕']; for(let i=0; i<12; i++) { const heart = document.createElement('div'); heart.classList.add('floating-heart-bg'); heart.innerText = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 4 + 4) + 's'; container.appendChild(heart); } }
 </script>
 
 </body>
