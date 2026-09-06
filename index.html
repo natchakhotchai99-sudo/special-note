@@ -64,14 +64,13 @@
     .glass-liquid::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.6) 15%, transparent 20%), radial-gradient(circle, rgba(255,255,255,0.4) 15%, transparent 20%); background-size: 15px 15px, 20px 20px; background-position: 0 0, 10px 10px; animation: bubbles 2s linear infinite; border-radius: 18px; }
     @keyframes bubbles { 0% { background-position: 0 20px, 10px 30px; } 100% { background-position: 0 0, 10px 10px; } }
 
-    /* 🪙 การ์ดขูดลุ้นข้อความ */
+    /* 🪙 การ์ดขูดลุ้นข้อความ (ปรับดีไซน์ใหม่) */
     .scratch-wrapper { margin-bottom: 25px; position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; }
-    .scratch-header { font-size: 13px; font-weight: 700; color: #b45309; margin-bottom: 8px; }
-    .scratch-container { position: relative; width: 100%; max-width: 320px; height: 75px; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 2px solid #ffffff; }
-    .scratch-text-secret { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #fffbeb; display: flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 14px; font-weight: 700; color: #e11d48; text-align: center; border: 2px dashed #fcd34d; border-radius: 14px; }
-    #scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; cursor: pointer; }
-    .scratch-reset-btn { margin-top: 8px; font-size: 11px; background: #e2e8f0; color: #475569; border: none; padding: 4px 12px; border-radius: 10px; cursor: pointer; font-family: 'Kanit'; font-weight: 600; transition: background 0.2s; }
-    .scratch-reset-btn:hover { background: #cbd5e1; }
+    .scratch-header { font-size: 13px; font-weight: 700; color: #b45309; margin-bottom: 8px; transition: color 0.3s; }
+    .scratch-container { position: relative; width: 100%; max-width: 320px; height: 80px; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2); border: 2px solid #ffffff; }
+    .scratch-text-secret { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #fff0f3; display: flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 15px; font-weight: 700; color: #e11d48; text-align: center; border: 2px dashed #ffb6c1; border-radius: 14px; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .scratch-text-secret.revealed { transform: scale(1.05); }
+    #scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; cursor: pointer; transition: opacity 0.5s ease; }
 
     /* 🐱 น้องแมวเฝ้าเว็บ (Mascot) รูปภาพ GIF */
     #mascot-container { position: fixed; bottom: 20px; right: 15px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; cursor: pointer; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
@@ -243,7 +242,7 @@
 <div id="mascot-container" onclick="pokeMascot()">
   <div id="mascot-bubble" class="mascot-bubble">...</div>
   <!-- รูปแมวตั้งค่าเริ่มต้นไว้ก่อน เดี๋ยว JavaScript จะสลับเวลาให้เองค่ะ -->
-  <img id="mascot-emoji" class="mascot-img" src="https://ozonemassage.com/wp-content/uploads/2026/09/ดีไซน์ที่ยังไม่ได้ตั้งชื่อ.gif" alt="Cat Mascot">
+  <img id="mascot-emoji" class="mascot-img" src="https://ozonemassage.com/wp-content/uploads/2026/09/ดีไซน์ที่ยังไม่ได้ตั้งชื่อ-1.gif" alt="Cat Mascot">
 </div>
 
 <!-- 🎁 หน้าต้อนรับ (Greeting Screen) เพื่อขออนุญาตเล่นเสียงวิดีโอ -->
@@ -280,14 +279,14 @@
       </div>
     </div>
 
-    <!-- 🪙 การ์ดขูดลุ้นคำแซว (มี 10 ข้อความ) -->
+    <!-- 🪙 การ์ดขูดลุ้นคำแซว (แบบออนไลน์ วันละ 1 ครั้งแชร์กัน!) -->
     <div class="scratch-wrapper">
-      <div class="scratch-header">🪙 การ์ดขูดเสี่ยงทายประจำวัน (ถูๆ ดูสิ!)</div>
-      <div class="scratch-container">
-        <div id="scratch-text" class="scratch-text-secret">ขูดหาเลขเด็ดหรอ หาน้ำกินด้วย! 😜</div>
+      <div id="scratch-status" class="scratch-header">🪙 การ์ดขูดเสี่ยงทายประจำวัน (ขูดได้ 1 ครั้ง/วัน)</div>
+      <div class="scratch-container" id="scratch-container">
+        <div id="scratch-text" class="scratch-text-secret">...กำลังโหลดการ์ดเสี่ยงทาย...</div>
+        <!-- สีของ Canvas จะถูกวาดเป็นสีชมพูพาสเทลใน JS ค่ะ -->
         <canvas id="scratch-canvas"></canvas>
       </div>
-      <button class="scratch-reset-btn" onclick="resetScratchCard()">🔄 ขอขูดใบใหม่</button>
     </div>
 
     <button class="choice-btn today-btn" onclick="openTodayNotes()">
@@ -498,10 +497,10 @@
     // เวลา 6 โมงเช้า ถึง 4 ทุ่ม แมวจะตื่น
     if(hour >= 6 && hour < 22) {
       isMascotAwake = true;
-      emojiEl.src = 'https://ozonemassage.com/wp-content/uploads/2026/09/ดีไซน์ที่ยังไม่ได้ตั้งชื่อ.gif'; 
+      emojiEl.src = 'https://ozonemassage.com/wp-content/uploads/2026/09/ดีไซน์ที่ยังไม่ได้ตั้งชื่อ-1.gif'; 
     } else {
       isMascotAwake = false;
-      emojiEl.src = 'https://ozonemassage.com/wp-content/uploads/2026/09/download.gif'; 
+      emojiEl.src = 'https://ozonemassage.com/wp-content/uploads/2026/09/download-2.gif'; 
     }
   }
   initMascot(); // ปลุก/กล่อมแมวตอนโหลดเว็บครั้งแรก
@@ -521,48 +520,128 @@
     setTimeout(() => { bubble.style.display = 'none'; }, 3000);
   }
 
-  // --- 🪙 การ์ดขูด (Scratch Card) มี 10 ข้อความ ---
+  // --- 🪙 การ์ดขูด (Scratch Card) มี 31 ข้อความ (ไม่ซ้ำกันใน 1 เดือน!) ---
   const canvas = document.getElementById('scratch-canvas');
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas ? canvas.getContext('2d') : null;
   let isDrawing = false;
+  let hasScratchedTodayLocally = false;
+  let currentScratchData = null;
   
   const secretMessages = [
     "ขูดหาเลขเด็ดหรอ หาน้ำกินด้วย! 😜",
     "วันนี้ห้ามดื้อนะ รู้ไหม! 💖",
     "คิดถึงคนทำเว็บล่ะสิ 👀✨",
-    "ทำงานเหนื่อยไหม สู้ๆ น้า 🫂",
+    "ทำงานเหนื่อยไหม กอดๆ น้า 🫂",
     "แอบมาส่องละสิ แบร่! 👻",
-    "ตั้งใจทำงานนะ หนูเป็นกำลังใจให้! ✌️",
-    "วันนี้เหนื่อยมั้ย ยอดตามเป้าหมายป่าว! 🥰",
+    "ตั้งใจทำงานนะ เค้าเป็นกำลังใจให้! ✌️",
+    "รักนะ ไอต้าวคนดื้อ! 🥰",
     "พักสายตาบ้างนะ จ้องจอนานเดี๋ยวปวดตา 🥺",
-    "อย่าแอบไปตากฝนคนเดียวล่ะ! 🙋‍♀️",
-    "ไปเที่ยวกัน! 🐷"
+    "วันนี้มีคนบ่นคิดถึงพี่เค 1 อัตรา! 🙋‍♀️",
+    "ห้ามแอบกินขนมเยอะนะ เดี๋ยวอ้วน! 🐷",
+    "ขูดเจอความรัก! รับไปเลยเต็มๆ 💕",
+    "วันนี้ยิ้มเยอะๆ น้า โลกสดใสเพราะรอยยิ้มพี่เค! 😊",
+    "แอบอู้เล่นเน็ตหรอเนี่ย จับได้แล้ว! 🕵️‍♀️",
+    "เหนื่อยก็พักนะ เค้าอยู่ตรงนี้เสมอ 🌸",
+    "ขูดเจอคนเก่งประจำวัน! สู้ๆ นะคะ 🥇",
+    "อย่าลืมกินข้าวให้ตรงเวลานะ เป็นห่วง! 🍱",
+    "ถ้าเครียดก็ถอนหายใจยาวๆ แล้วลุยต่อ! 💨",
+    "ขูดเจอ... คำว่า 'รัก' เอาไปเลย! 💘",
+    "ดื่มน้ำเปล่าเยอะๆ น้า ผิวจะได้ใสๆ 💧",
+    "แวะมาเติมกำลังใจให้ 100% เต็ม! 🔋",
+    "วันนี้ดื้อไปกี่เปอร์เซ็นต์แล้วสารภาพมา! 🧐",
+    "ขูดเจอความสุข ขอให้วันนี้ราบรื่นน้า 🍀",
+    "เลิกงานแล้วรีบกลับไปพักผ่อนนะ 🏠",
+    "เก่งมากแล้วนะที่ผ่านวันนี้มาได้ ลูบหัวๆ 🖐️",
+    "แฟนใครเนี่ยน่ารักจัง อ้อ แฟนเค้าเอง! 🤭",
+    "ยืดเส้นยืดสายบ้างนะ เดี๋ยวปวดหลัง! 🧘‍♂️",
+    "ขูดเจอคนหล่อ 1 EA! 😎",
+    "อย่าโหมงานหนักเกินไปนะ เค้าหวง! 😠",
+    "วันนี้เจอเรื่องปวดหัวมั้ย โอ๋ๆ น้า 🥺",
+    "แอบส่งจุ๊บให้ 1 ที จุ๊บ! 😘",
+    "ขูดจนเมื่อยนิ้วยัง? อะ หยอกๆ รักน้า! 🤣"
   ];
 
-  function initScratchCard() {
+  // คอยฟังข้อมูลการ์ดขูดจาก Firebase (ซิงค์ตรงกันทุกคน)
+  const scratchRef = database.ref('memory_box_scratch_v7');
+  scratchRef.on('value', (snapshot) => {
+    currentScratchData = snapshot.val();
+    checkAndRenderScratchCard();
+  });
+
+  function checkAndRenderScratchCard() {
     if(!canvas) return;
-    document.getElementById('scratch-text').innerText = secretMessages[Math.floor(Math.random() * secretMessages.length)];
-    
+    const todayStr = new Date().toLocaleDateString('th-TH'); // วันที่ปัจจุบัน
+    const textEl = document.getElementById('scratch-text');
+    const statusEl = document.getElementById('scratch-status');
+
+    if (!currentScratchData || currentScratchData.date !== todayStr) {
+      // ดึงข้อความตามวันที่ของเดือน (วันที่ 1 ถึง 31) รับรองไม่ซ้ำกันใน 1 เดือนแน่นอนค่ะ
+      const dayIndex = new Date().getDate() - 1; // 0-30
+      const newMsg = secretMessages[dayIndex % secretMessages.length];
+      
+      scratchRef.set({ date: todayStr, message: newMsg, isScratched: false });
+      return; // รอ Firebase ส่งกลับมาแล้วค่อยวาด
+    }
+
+    // มีข้อมูลของวันนี้แล้ว
+    textEl.innerText = currentScratchData.message;
+
+    if (currentScratchData.isScratched) {
+      // มีคนขูดไปแล้ววันนี้! ซ่อน Canvas ให้เห็นข้อความเลย
+      canvas.style.display = 'none';
+      textEl.classList.add('revealed');
+      statusEl.innerText = '🌟 มีคนแอบขูดไปแล้ววันนี้!';
+      statusEl.style.color = '#e11d48'; // สีแดง
+    } else {
+      // ยังไม่มีใครขูด -> วาดการ์ดสีชมพูรอไว้
+      canvas.style.display = 'block';
+      textEl.classList.remove('revealed');
+      statusEl.innerText = '🪙 การ์ดขูดเสี่ยงทายประจำวัน (ขูดได้วันละ 1 ครั้ง)';
+      statusEl.style.color = '#b45309'; // สีส้มทอง
+      initScratchCardCanvas();
+    }
+  }
+
+  function initScratchCardCanvas() {
     canvas.width = canvas.parentElement.offsetWidth;
     canvas.height = canvas.parentElement.offsetHeight;
     ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = '#cbd5e1';
+    
+    // วาดสีชมพูโฮโลแกรม (Gradient) แบบน่ารักๆ
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, '#ff9a9e'); 
+    gradient.addColorStop(0.5, '#fecfef'); 
+    gradient.addColorStop(1, '#fbc2eb'); 
+    ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    ctx.font = '16px Kanit';
-    ctx.fillStyle = '#64748b';
+    // ข้อความบนหน้าการ์ด
+    ctx.font = 'bold 18px Kanit';
+    ctx.fillStyle = '#ffffff';
     ctx.textAlign = 'center';
-    ctx.fillText('✨ ขูดตรงนี้สิ! ✨', canvas.width/2, canvas.height/2 + 5);
+    ctx.shadowColor = 'rgba(255, 71, 126, 0.5)';
+    ctx.shadowBlur = 4;
+    ctx.fillText('✨ ขูดดูสิคนดื้อ! ✨', canvas.width/2, canvas.height/2 + 6);
+  }
+
+  function startScratch(e) { 
+    if(!currentScratchData || currentScratchData.isScratched) return; 
+    isDrawing = true; scratch(e); 
   }
   
-  window.onload = () => { initScratchCard(); };
-  function resetScratchCard() { initScratchCard(); }
-
-  function startScratch(e) { isDrawing = true; scratch(e); }
-  function stopScratch() { isDrawing = false; }
+  function stopScratch() { 
+    isDrawing = false; 
+    // ถ้ามีการเอานิ้วถูไปแล้ว และปล่อยนิ้ว -> แจ้ง Firebase ว่าการ์ดนี้ถูกขูดแล้ว!
+    if (hasScratchedTodayLocally && currentScratchData && !currentScratchData.isScratched) {
+      scratchRef.update({ isScratched: true });
+    }
+  }
+  
   function scratch(e) {
-    if (!isDrawing) return;
+    if (!isDrawing || !currentScratchData || currentScratchData.isScratched) return;
     e.preventDefault();
+    hasScratchedTodayLocally = true; // ยืนยันว่าคนนี้กำลังขูด
+
     const rect = canvas.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -571,7 +650,7 @@
 
     ctx.globalCompositeOperation = 'destination-out';
     ctx.beginPath();
-    ctx.arc(x, y, 15, 0, Math.PI * 2);
+    ctx.arc(x, y, 18, 0, Math.PI * 2);
     ctx.fill();
   }
 
@@ -586,13 +665,6 @@
   }
 
   // --- 🔥 Firebase ---
-  const firebaseConfig = { databaseURL: "https://memory-box-2026-default-rtdb.asia-southeast1.firebasedatabase.app/" };
-  if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-  const database = firebase.database();
-  const notesRef = database.ref('memory_box_notes_v7'); 
-  
-  let allNotes = []; let noteToUnlock = null;
-
   notesRef.on('value', (snapshot) => {
     const data = snapshot.val();
     allNotes = [];
@@ -627,8 +699,6 @@
       videoOverlay.style.display = 'flex';
       video.muted = false; 
       video.play().catch(err => console.log("Video play error:", err));
-      
-      setTimeout(() => initScratchCard(), 100); 
     }, 800);
   }
 
@@ -636,7 +706,7 @@
   const videoOverlay = document.getElementById('video-overlay'); const fullVideo = document.getElementById('fullVideo'); const mainApp = document.getElementById('main-app-container');
   fullVideo.onended = function() { closeIntroVideo(); }; 
   function skipIntroVideo() { fullVideo.pause(); closeIntroVideo(); }
-  function closeIntroVideo() { videoOverlay.style.opacity = '0'; setTimeout(() => { videoOverlay.style.display = 'none'; mainApp.style.display = 'flex'; createBackgroundHearts(); initScratchCard(); }, 1000); }
+  function closeIntroVideo() { videoOverlay.style.opacity = '0'; setTimeout(() => { videoOverlay.style.display = 'none'; mainApp.style.display = 'flex'; createBackgroundHearts(); checkAndRenderScratchCard(); }, 1000); }
 
   // --- 📅 เลือกเดือน (คำนวณจากเวลาจริง Real-time) ---
   function requestMonthAccess(mIndex, type) {
@@ -997,7 +1067,7 @@
     document.getElementById('daily-notes-sec').style.display = 'none'; document.getElementById('sept3-experience-container').style.display = 'none'; document.getElementById('dynamic-calendar-sec').style.display = 'none';
     document.getElementById('step-1-intro').style.display = 'block'; document.getElementById('step-2-video').style.display = 'none'; document.getElementById('step-3-rain-text').style.display = 'none'; document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'none'; document.getElementById('typewriter-text').innerHTML = ''; typeIndex = 0; 
     document.getElementById('memory-box-step').style.display = 'block'; document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' });
-    initMascot(); // เช็กเวลาอีกรอบเผื่อตื่น/หลับ
+    initMascot(); 
   }
 
   // --- ✨ ความทรงจำวันที่ 3 ---
