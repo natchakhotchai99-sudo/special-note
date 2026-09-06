@@ -475,6 +475,13 @@
   const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   let pendingMonthIndex = null; let currentViewingMonthIndex = 8; let currentViewingDay = null;
 
+  // --- 🔥 Firebase (ห้ามลบเด็ดขาดดด!) ---
+  const firebaseConfig = { databaseURL: "https://memory-box-2026-default-rtdb.asia-southeast1.firebasedatabase.app/" };
+  if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+  const database = firebase.database();
+  const notesRef = database.ref('memory_box_notes_v7'); 
+  const scratchRef = database.ref('memory_box_scratch_v7'); 
+
   // --- ทักทายตามเวลาจริง ---
   function updateTimeGreeting() {
     const hour = new Date().getHours();
@@ -530,13 +537,13 @@
   const secretMessages = [
     "ขูดหาเลขเด็ดหรอ หาน้ำกินด้วย! 😜",
     "วันนี้ห้ามดื้อนะ รู้ไหม! ✨",
-    "แอบส่องเว็บล่ะสิ 👀✨",
+    "แอบคิดถึงหนูล่ะสิ 👀✨",
     "ทำงานเหนื่อยไหม ส่งกำลังใจให้น้า 🫂",
     "แอบมาส่องละสิ แบร่! 👻",
     "ตั้งใจทำงานนะ หนูเป็นกำลังใจให้! ✌️",
     "สู้ๆ นะ คนดื้อ! 😆",
     "พักสายตาบ้างนะ จ้องจอนานเดี๋ยวปวดตา 🥺",
-    "วันนี้มีคนแอบส่งกำลังใจให้ 1 อัตรา! 🙋‍♀️",
+    "ไม่ให้ตากฝนคนเดียวแล้วน๊า! 🙋‍♀️",
     "ไปทำงานได้แล้ว! 🏃‍♂️",
     "ขูดเจอความห่วงใย! รับไปเลยเต็มๆ 💕",
     "วันนี้ยิ้มเยอะๆ น้า โลกสดใสเพราะรอยยิ้มของพี่เลยย! 😊",
@@ -551,9 +558,9 @@
     "วันนี้ดื้อไปกี่เปอร์เซ็นต์แล้วสารภาพมา! 🧐",
     "ขอให้วันนี้เป็นวันที่ดีและราบรื่นน้า 🍀",
     "เลิกงานแล้วรีบกลับไปพักผ่อนนะ 🏠",
-    "เก่งมากแล้วนะที่ผ่านวันนี้มาได้🖐️",
+    "เก่งมากแล้วนะที่ผ่านวันนี้มาได้ ลูบหัวๆ 🖐️",
     "ใครกันเนี่ยน่ารักจัง! 🤭",
-    "ยืดเส้นยืดสายบ้างนะ เดี๋ยวออฟฟิศซินโดรมถามหา! 🧘‍♂️",
+    "คิดถึงหนูป่าวน๊า! 🧘‍♂️",
     "ขูดเจอคนเก่ง! 😎",
     "อย่าโหมงานหนักเกินไปนะ เป็นห่วงสุขภาพด้วย! 😠",
     "วันนี้เจอเรื่องปวดหัวมั้ย สู้ๆ น้า 🥺",
@@ -561,8 +568,6 @@
     "ขูดจนเมื่อยนิ้วยัง? อะ หยอกๆ ตั้งใจทำงานน้า! 🤣"
   ];
 
-  // คอยฟังข้อมูลการ์ดขูดจาก Firebase (ซิงค์ตรงกันทุกคน)
-  const scratchRef = database.ref('memory_box_scratch_v7');
   scratchRef.on('value', (snapshot) => {
     currentScratchData = snapshot.val();
     checkAndRenderScratchCard();
@@ -580,24 +585,21 @@
       const newMsg = secretMessages[dayIndex % secretMessages.length];
       
       scratchRef.set({ date: todayStr, message: newMsg, isScratched: false });
-      return; // รอ Firebase ส่งกลับมาแล้วค่อยวาด
+      return; 
     }
 
-    // มีข้อมูลของวันนี้แล้ว
     textEl.innerText = currentScratchData.message;
 
     if (currentScratchData.isScratched) {
-      // มีคนขูดไปแล้ววันนี้! ซ่อน Canvas ให้เห็นข้อความเลย
       canvas.style.display = 'none';
       textEl.classList.add('revealed');
       statusEl.innerText = '🌟 มีคนแอบขูดไปแล้ววันนี้!';
-      statusEl.style.color = '#e11d48'; // สีแดง
+      statusEl.style.color = '#e11d48'; 
     } else {
-      // ยังไม่มีใครขูด -> วาดการ์ดสีชมพูรอไว้
       canvas.style.display = 'block';
       textEl.classList.remove('revealed');
       statusEl.innerText = '🪙 การ์ดขูดเสี่ยงทายประจำวัน (ขูดได้วันละ 1 ครั้ง)';
-      statusEl.style.color = '#b45309'; // สีส้มทอง
+      statusEl.style.color = '#b45309'; 
       initScratchCardCanvas();
     }
   }
@@ -607,7 +609,6 @@
     canvas.height = canvas.parentElement.offsetHeight;
     ctx.globalCompositeOperation = 'source-over';
     
-    // วาดสีชมพูโฮโลแกรม (Gradient) แบบน่ารักๆ
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
     gradient.addColorStop(0, '#ff9a9e'); 
     gradient.addColorStop(0.5, '#fecfef'); 
@@ -615,7 +616,6 @@
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // ข้อความบนหน้าการ์ด
     ctx.font = 'bold 18px Kanit';
     ctx.fillStyle = '#ffffff';
     ctx.textAlign = 'center';
@@ -631,7 +631,6 @@
   
   function stopScratch() { 
     isDrawing = false; 
-    // ถ้ามีการเอานิ้วถูไปแล้ว และปล่อยนิ้ว -> แจ้ง Firebase ว่าการ์ดนี้ถูกขูดแล้ว!
     if (hasScratchedTodayLocally && currentScratchData && !currentScratchData.isScratched) {
       scratchRef.update({ isScratched: true });
     }
@@ -640,7 +639,7 @@
   function scratch(e) {
     if (!isDrawing || !currentScratchData || currentScratchData.isScratched) return;
     e.preventDefault();
-    hasScratchedTodayLocally = true; // ยืนยันว่าคนนี้กำลังขูด
+    hasScratchedTodayLocally = true; 
 
     const rect = canvas.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -664,7 +663,8 @@
       canvas.addEventListener('touchend', stopScratch);
   }
 
-  // --- 🔥 Firebase ---
+  // --- 🔥 Firebase Listener ---
+  let allNotes = []; let noteToUnlock = null;
   notesRef.on('value', (snapshot) => {
     const data = snapshot.val();
     allNotes = [];
