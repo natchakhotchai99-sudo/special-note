@@ -128,11 +128,22 @@
     .media-preview-box { display: none; background: #fffbeb; border: 1px dashed #f59e0b; padding: 10px; border-radius: 12px; margin-top: 10px; text-align: center; }
     .media-preview-box img { max-width: 100%; max-height: 150px; border-radius: 8px; object-fit: contain; margin-bottom: 5px; border: 1px solid #fcd34d; }
 
-    .lock-toggle-box { background: #ffffff; border: 1px dashed #fcd34d; border-radius: 12px; padding: 12px; margin: 12px 0; font-size: 13px; color: #b45309; }
-    .lock-inputs { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-    .lock-inputs input { border: 1px dashed #f59e0b; border-radius: 8px; padding: 10px; font-family: 'Kanit', sans-serif; font-size: 13px; outline: none; background: #fffbeb; transition: background 0.3s; }
-    .lock-inputs input:focus { background: #ffffff; }
+    /* 🔑 แป้นตัวเลข (Numpad) */
+    .lock-toggle-box { background: #ffffff; border: 1px dashed #fcd34d; border-radius: 12px; padding: 15px; margin: 12px 0; font-size: 14px; color: #b45309; }
+    .lock-inputs { display: flex; flex-direction: column; align-items: center; margin-top: 15px; }
     
+    .pin-display { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; }
+    .pin-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #ff477e; background: transparent; transition: background 0.2s, transform 0.2s; }
+    .pin-dot.filled { background: #ff477e; transform: scale(1.1); }
+    
+    .pin-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; max-width: 220px; margin: 0 auto 15px auto; }
+    .pin-keypad button { background: #fff0f3; color: #ff477e; border: 2px solid #ffccd5; border-radius: 50%; width: 55px; height: 55px; font-size: 22px; font-family: 'Kanit'; font-weight: 700; cursor: pointer; transition: all 0.1s; display: flex; justify-content: center; align-items: center; margin: 0 auto; box-shadow: 0 4px 6px rgba(255,182,193,0.2); }
+    .pin-keypad button:active { transform: scale(0.9); background: #ffccd5; box-shadow: none; }
+    
+    .hint-input-wrapper { width: 100%; margin-top: 10px; }
+    .hint-input-wrapper input { width: 100%; border: 1px dashed #f59e0b; border-radius: 10px; padding: 12px; font-family: 'Kanit', sans-serif; font-size: 14px; outline: none; background: #fffbeb; transition: background 0.3s; text-align: center; }
+    .hint-input-wrapper input:focus { background: #ffffff; border-color: #d97706; }
+
     .save-note-btn { margin-top: 10px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 12px 16px; border-radius: 14px; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; width: 100%; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3); }
     .save-note-btn:active { transform: translateY(2px); box-shadow: 0 2px 5px rgba(217, 119, 6, 0.3); }
     .save-note-btn:disabled { background: #cbd5e1; box-shadow: none; cursor: not-allowed; transform: none; }
@@ -215,12 +226,10 @@
     .detail-image { width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; border: 2px solid #fff; }
 
     /* ป๊อปอัปเกมทายรหัส */
-    .unlock-box { background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 25px; text-align: center; max-width: 320px; width: 100%; animation: popUp 0.3s ease-out; }
-    .unlock-icon { font-size: 45px; margin-bottom: 10px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); }
+    .unlock-box { background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 25px 20px; text-align: center; max-width: 320px; width: 100%; animation: popUp 0.3s ease-out; }
+    .unlock-icon { font-size: 45px; margin-bottom: 5px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); }
     .unlock-title { font-size: 18px; font-weight: 700; color: #334155; margin-bottom: 5px; }
-    .unlock-hint-text { font-size: 14px; color: #0ea5e9; font-weight: 600; margin-bottom: 15px; background: #e0f2fe; padding: 12px; border-radius: 12px; border: 1px dashed #bae6fd; }
-    .unlock-input { width: 100%; padding: 14px; border: 2px solid #cbd5e1; border-radius: 12px; font-family: 'Kanit'; font-size: 15px; text-align: center; outline: none; margin-bottom: 15px; transition: border 0.3s; }
-    .unlock-input:focus { border-color: #38bdf8; }
+    .unlock-hint-text { font-size: 14px; color: #0ea5e9; font-weight: 600; margin-bottom: 15px; background: #e0f2fe; padding: 10px; border-radius: 12px; border: 1px dashed #bae6fd; }
     .unlock-error { color: #e11d48; font-size: 13px; font-weight: 600; margin-bottom: 12px; display: none; background: #ffe4e6; padding: 8px; border-radius: 8px; }
 
     @keyframes popUp { from { opacity: 0; transform: scale(0.8) translateY(30px); } to { opacity: 1; transform: scale(1) translateY(0); } }
@@ -284,7 +293,6 @@
       <div id="scratch-status" class="scratch-header">🪙 การ์ดขูดเสี่ยงทายประจำวัน (ขูดได้ 1 ครั้ง/วัน)</div>
       <div class="scratch-container" id="scratch-container">
         <div id="scratch-text" class="scratch-text-secret">...กำลังโหลดการ์ดเสี่ยงทาย...</div>
-        <!-- สีของ Canvas จะถูกวาดเป็นสีชมพูพาสเทลใน JS ค่ะ -->
         <canvas id="scratch-canvas"></canvas>
       </div>
     </div>
@@ -365,9 +373,34 @@
           <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600;">
             <input type="checkbox" id="lockCheckbox" onchange="toggleLockOptions()"> 🔒 ล็อกรหัสผ่านให้ข้อความนี้
           </label>
+          
+          <!-- แป้นตัวเลขสำหรับตั้งรหัส 6 หลัก (Setup Numpad) -->
           <div id="lockOptions" class="lock-inputs" style="display: none;">
-            <input type="text" id="lockPin" placeholder="🔑 ตั้งรหัสผ่าน (จำเป็นต้องใส่)">
-            <input type="text" id="lockHint" placeholder="❓ คำใบ้ (ไม่ใส่ก็ได้ ให้เดาเอาเอง!)">
+            <div style="text-align: center; margin-bottom: 5px; font-weight: 600; color: #e11d48; font-size: 15px;">ตั้งรหัสผ่าน 6 หลัก 🔑</div>
+            
+            <div class="pin-display" id="setup-pin-display">
+              <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+              <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+            </div>
+            
+            <div class="pin-keypad">
+              <button type="button" onclick="addSetupPin('1')">1</button>
+              <button type="button" onclick="addSetupPin('2')">2</button>
+              <button type="button" onclick="addSetupPin('3')">3</button>
+              <button type="button" onclick="addSetupPin('4')">4</button>
+              <button type="button" onclick="addSetupPin('5')">5</button>
+              <button type="button" onclick="addSetupPin('6')">6</button>
+              <button type="button" onclick="addSetupPin('7')">7</button>
+              <button type="button" onclick="addSetupPin('8')">8</button>
+              <button type="button" onclick="addSetupPin('9')">9</button>
+              <button type="button" onclick="clearSetupPin()" style="font-size: 20px; color: #f43f5e;">C</button>
+              <button type="button" onclick="addSetupPin('0')">0</button>
+              <button type="button" onclick="delSetupPin()" style="font-size: 20px; color: #64748b;">⌫</button>
+            </div>
+            
+            <div class="hint-input-wrapper">
+              <input type="text" id="lockHint" placeholder="❓ คำใบ้ (ไม่ใส่ก็ได้ ให้เดาเอาเอง!)">
+            </div>
           </div>
         </div>
 
@@ -435,16 +468,37 @@
   </div>
 </div>
 
-<!-- 🔒 ป๊อปอัปเกมทายรหัส -->
+<!-- 🔒 ป๊อปอัปเกมทายรหัส (แก้เป็น Numpad แล้ว) -->
 <div id="unlockModal" class="popup-modal">
   <div class="unlock-box">
     <div class="unlock-icon">🔒</div>
     <div class="unlock-title">ข้อความนี้ถูกล็อกไว้!</div>
-    <p style="font-size: 13px; color: #64748b; margin: 5px 0 15px 0;">ตอบคำถามให้ถูกถึงจะเปิดอ่านได้นะ 😜</p>
+    <p style="font-size: 13px; color: #64748b; margin: 5px 0 15px 0;">ใส่รหัสผ่าน 6 หลักเพื่อปลดล็อกนะ 😜</p>
     <div class="unlock-hint-text" id="displayUnlockHint">คำใบ้: ...</div>
-    <input type="text" id="unlockPinInput" class="unlock-input" placeholder="พิมพ์รหัส/คำตอบที่นี่...">
+    
+    <div class="pin-display" id="unlock-pin-display">
+      <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+      <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+    </div>
+    
+    <div class="pin-keypad" style="margin-bottom: 5px;">
+      <button type="button" onclick="addUnlockPin('1')">1</button>
+      <button type="button" onclick="addUnlockPin('2')">2</button>
+      <button type="button" onclick="addUnlockPin('3')">3</button>
+      <button type="button" onclick="addUnlockPin('4')">4</button>
+      <button type="button" onclick="addUnlockPin('5')">5</button>
+      <button type="button" onclick="addUnlockPin('6')">6</button>
+      <button type="button" onclick="addUnlockPin('7')">7</button>
+      <button type="button" onclick="addUnlockPin('8')">8</button>
+      <button type="button" onclick="addUnlockPin('9')">9</button>
+      <button type="button" onclick="clearUnlockPin()" style="font-size: 20px; color: #f43f5e;">C</button>
+      <button type="button" onclick="addUnlockPin('0')">0</button>
+      <button type="button" onclick="delUnlockPin()" style="font-size: 20px; color: #64748b;">⌫</button>
+    </div>
+
     <div id="unlockErrorMsg" class="unlock-error">❌ รหัสผิดนะ ลองใหม่สิคนดื้อ!</div>
-    <div style="display: flex; gap: 10px;">
+    
+    <div style="display: flex; gap: 10px; margin-top: 15px;">
       <button class="choice-btn bad-btn" style="flex: 1;" onclick="closePopup('unlockModal')">ยกเลิก</button>
       <button class="choice-btn best-btn" style="flex: 1; background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: white; border: none; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);" onclick="verifyUnlock()">ปลดล็อก 🔓</button>
     </div>
@@ -474,6 +528,54 @@
   const monthNames = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
   const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   let pendingMonthIndex = null; let currentViewingMonthIndex = 8; let currentViewingDay = null;
+
+  // --- 🔑 ระบบปุ่มกดตัวเลข (Numpad) ---
+  let setupPin = "";
+  let unlockPin = "";
+
+  function addSetupPin(num) {
+    if(setupPin.length < 6) {
+      setupPin += num;
+      updateSetupPinDisplay();
+    }
+  }
+  function delSetupPin() {
+    setupPin = setupPin.slice(0, -1);
+    updateSetupPinDisplay();
+  }
+  function clearSetupPin() {
+    setupPin = "";
+    updateSetupPinDisplay();
+  }
+  function updateSetupPinDisplay() {
+    const dots = document.querySelectorAll('#setup-pin-display .pin-dot');
+    dots.forEach((dot, index) => {
+      if(index < setupPin.length) dot.classList.add('filled');
+      else dot.classList.remove('filled');
+    });
+  }
+
+  function addUnlockPin(num) {
+    if(unlockPin.length < 6) {
+      unlockPin += num;
+      updateUnlockPinDisplay();
+    }
+  }
+  function delUnlockPin() {
+    unlockPin = unlockPin.slice(0, -1);
+    updateUnlockPinDisplay();
+  }
+  function clearUnlockPin() {
+    unlockPin = "";
+    updateUnlockPinDisplay();
+  }
+  function updateUnlockPinDisplay() {
+    const dots = document.querySelectorAll('#unlock-pin-display .pin-dot');
+    dots.forEach((dot, index) => {
+      if(index < unlockPin.length) dot.classList.add('filled');
+      else dot.classList.remove('filled');
+    });
+  }
 
   // --- 🔥 Firebase (ห้ามลบเด็ดขาดดด!) ---
   const firebaseConfig = { databaseURL: "https://memory-box-2026-default-rtdb.asia-southeast1.firebasedatabase.app/" };
@@ -663,7 +765,6 @@
       canvas.addEventListener('touchend', stopScratch);
   }
 
-  // --- 🔥 Firebase Listener ---
   let allNotes = []; let noteToUnlock = null;
   notesRef.on('value', (snapshot) => {
     const data = snapshot.val();
@@ -709,7 +810,7 @@
   function closeIntroVideo() { videoOverlay.style.opacity = '0'; setTimeout(() => { 
     videoOverlay.style.display = 'none'; 
     mainApp.style.display = 'flex'; 
-    document.getElementById('mascot-container').style.display = 'flex'; // แสดงแมวตอนอยู่หน้าหลัก
+    document.getElementById('mascot-container').style.display = 'flex'; 
     createBackgroundHearts(); 
     checkAndRenderScratchCard(); 
   }, 1000); }
@@ -746,7 +847,7 @@
     document.getElementById('memory-box-step').style.display = 'none';
     document.getElementById('dynamic-calendar-sec').style.display = 'block';
     document.getElementById('home-btn').style.display = 'flex';
-    document.getElementById('mascot-container').style.display = 'flex'; // แสดงแมวตอนอยู่หน้าปฏิทิน
+    document.getElementById('mascot-container').style.display = 'flex'; 
     buildCalendar(currentViewingMonthIndex);
   }
 
@@ -813,7 +914,7 @@
     currentViewingDay = day;
     document.getElementById('dynamic-calendar-sec').style.display = 'none';
     document.getElementById('memory-box-step').style.display = 'none';
-    document.getElementById('mascot-container').style.display = 'none'; // ซ่อนแมวตอนเข้าไปพิมพ์โน้ต
+    document.getElementById('mascot-container').style.display = 'none'; 
     const dailySec = document.getElementById('daily-notes-sec');
     dailySec.style.display = 'block';
     document.getElementById('daily-note-title').innerText = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
@@ -909,32 +1010,12 @@
     const btn = document.getElementById('recordBtn'); btn.style.display = 'flex'; btn.innerHTML = '<span style="font-size:18px;">🎤</span> อัดเสียง';
   }
 
-  // --- 🚀 กิมมิคประกายดาว ---
-  function createSaveSparks() {
-    const container = document.getElementById('main-app-container');
-    for(let i=0; i<15; i++) {
-      const spark = document.createElement('div');
-      spark.innerHTML = ['✨','💖','🌟','💫'][Math.floor(Math.random() * 4)];
-      spark.style.position = 'fixed'; spark.style.left = '50%'; spark.style.top = '50%';
-      spark.style.transform = 'translate(-50%, -50%)';
-      spark.style.fontSize = (Math.random() * 20 + 15) + 'px';
-      spark.style.pointerEvents = 'none'; spark.style.zIndex = '99999';
-      spark.style.animation = `flyOut ${Math.random() * 0.6 + 0.5}s cubic-bezier(0.25, 1, 0.5, 1) forwards`;
-      
-      const angle = Math.random() * Math.PI * 2;
-      const velocity = Math.random() * 150 + 80;
-      spark.style.setProperty('--tx', `${Math.cos(angle) * velocity}px`);
-      spark.style.setProperty('--ty', `${Math.sin(angle) * velocity}px`);
-      
-      container.appendChild(spark);
-      setTimeout(() => spark.remove(), 1200);
-    }
-  }
-
-  // --- 📝 เซฟโน้ต ---
   function toggleLockOptions() {
     const isCheckbox = document.getElementById('lockCheckbox');
-    if(isCheckbox) { document.getElementById('lockOptions').style.display = isCheckbox.checked ? 'flex' : 'none'; }
+    if(isCheckbox) { 
+      document.getElementById('lockOptions').style.display = isCheckbox.checked ? 'flex' : 'none'; 
+      if(!isCheckbox.checked) { clearSetupPin(); document.getElementById('lockHint').value = ''; }
+    }
   }
 
   function saveSharedNote() {
@@ -943,11 +1024,11 @@
     const from = document.getElementById('noteFrom').options[document.getElementById('noteFrom').selectedIndex].text; 
     const isCheckbox = document.getElementById('lockCheckbox');
     const isLocked = isCheckbox ? isCheckbox.checked : false;
-    const lockPin = document.getElementById('lockPin').value;
+    const lockPin = setupPin; // ใช้รหัสจากแป้นกด 6 หลัก
     const lockHint = document.getElementById('lockHint').value;
     
     if (text.trim() === '' && !audioBase64 && !imageBase64) { alert("ต้องพิมพ์ข้อความ อัดเสียง หรือใส่รูปก่อนส่งน้า! 🥺"); return; }
-    if (isLocked && lockPin.trim() === '') { alert("ถ้าเลือกล็อกรหัสผ่าน ต้องใส่รหัสด้วยน้า! 🔑"); return; }
+    if (isLocked && lockPin.length !== 6) { alert("ต้องใส่รหัส 6 หลักให้ครบก่อนนะคะ! 🔑"); return; }
 
     const btn = document.getElementById('saveNoteBtn');
     const originalText = btn.innerText;
@@ -968,7 +1049,8 @@
 
     setTimeout(() => {
       document.getElementById('sharedNoteInput').value = ''; 
-      document.getElementById('lockHint').value = ''; document.getElementById('lockPin').value = ''; 
+      document.getElementById('lockHint').value = ''; 
+      clearSetupPin();
       if (isCheckbox) { isCheckbox.checked = false; } toggleLockOptions(); 
       discardAudio(); discardImage();
       
@@ -1030,7 +1112,9 @@
           noteToUnlock = note;
           const hintStr = (note.lockHint && note.lockHint.trim() !== '') ? note.lockHint : "ไม่มีคำใบ้ (ให้เดาเอาเอง อิอิ 😜)";
           document.getElementById('displayUnlockHint').innerText = `คำใบ้: ${hintStr}`;
-          document.getElementById('unlockPinInput').value = '';
+          
+          // รีเซ็ตการแสดงผลแป้นตัวเลขปลดล็อก
+          clearUnlockPin();
           document.getElementById('unlockErrorMsg').style.display = 'none';
           document.getElementById('unlockModal').style.display = 'flex';
         } else {
@@ -1042,12 +1126,20 @@
   }
 
   function verifyUnlock() {
-    const inputPin = document.getElementById('unlockPinInput').value;
-    if (inputPin.trim().toLowerCase() === noteToUnlock.lockPin.trim().toLowerCase()) {
+    if(unlockPin.length !== 6) {
+      const errorMsg = document.getElementById('unlockErrorMsg');
+      errorMsg.innerText = '❌ ใส่รหัสให้ครบ 6 หลักสิคนดื้อ!';
+      errorMsg.style.display = 'block'; errorMsg.classList.remove('bounce-anim'); void errorMsg.offsetWidth; errorMsg.classList.add('bounce-anim');
+      return;
+    }
+
+    if (unlockPin === noteToUnlock.lockPin) {
       closePopup('unlockModal'); openNoteDetail(noteToUnlock);
     } else {
       const errorMsg = document.getElementById('unlockErrorMsg');
+      errorMsg.innerText = '❌ รหัสผิดนะ ลองใหม่สิ!';
       errorMsg.style.display = 'block'; errorMsg.classList.remove('bounce-anim'); void errorMsg.offsetWidth; errorMsg.classList.add('bounce-anim');
+      clearUnlockPin(); // เคลียร์รหัสที่กดผิดให้กดใหม่
     }
   }
 
@@ -1083,7 +1175,7 @@
   // --- ✨ ความทรงจำวันที่ 3 ---
   function openSept3Experience() {
     document.getElementById('dynamic-calendar-sec').style.display = 'none';
-    document.getElementById('mascot-container').style.display = 'none'; // ซ่อนแมวตอนเข้าไปดูความทรงจำ 3 ก.ย.
+    document.getElementById('mascot-container').style.display = 'none'; 
     document.getElementById('sept3-experience-container').style.display = 'block';
     document.getElementById('sept3-experience-container').scrollIntoView({ behavior: 'smooth' });
   }
