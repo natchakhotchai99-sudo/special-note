@@ -64,7 +64,7 @@
     .glass-liquid::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.6) 15%, transparent 20%), radial-gradient(circle, rgba(255,255,255,0.4) 15%, transparent 20%); background-size: 15px 15px, 20px 20px; background-position: 0 0, 10px 10px; animation: bubbles 2s linear infinite; border-radius: 18px; }
     @keyframes bubbles { 0% { background-position: 0 20px, 10px 30px; } 100% { background-position: 0 0, 10px 10px; } }
 
-    /* 🪙 การ์ดขูดลุ้นข้อความ (ปรับดีไซน์ใหม่) */
+    /* 🪙 การ์ดขูดลุ้นข้อความ */
     .scratch-wrapper { margin-bottom: 25px; position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; }
     .scratch-header { font-size: 13px; font-weight: 700; color: #b45309; margin-bottom: 8px; transition: color 0.3s; }
     .scratch-container { position: relative; width: 100%; max-width: 320px; height: 80px; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2); border: 2px solid #ffffff; }
@@ -72,8 +72,8 @@
     .scratch-text-secret.revealed { transform: scale(1.05); }
     #scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; cursor: pointer; transition: opacity 0.5s ease; }
 
-    /* 🐱 น้องแมวเฝ้าเว็บ (Mascot) รูปภาพ GIF */
-    #mascot-container { position: fixed; bottom: 20px; right: 15px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; cursor: pointer; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
+    /* 🐱 น้องแมวเฝ้าเว็บ (Mascot) */
+    #mascot-container { position: fixed; bottom: 20px; right: 15px; z-index: 10000; display: none; flex-direction: column; align-items: flex-end; cursor: pointer; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
     .mascot-bubble { background: white; border: 2px solid #cbd5e1; padding: 8px 12px; border-radius: 16px 16px 4px 16px; font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 8px; display: none; max-width: 160px; text-align: right; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-family: 'Kanit'; }
     .mascot-img { width: 70px; height: 70px; object-fit: contain; transition: transform 0.2s; }
     .mascot-img:active { transform: scale(0.85); }
@@ -256,7 +256,7 @@
 <div id="video-overlay">
   <button class="skip-btn" onclick="skipIntroVideo()">ข้ามวิดีโอ ⏩</button>
   <video id="fullVideo" playsinline>
-    <source src="https://ozonemassage.com/wp-content/uploads/2026/09/Prompt_D_Pixar_style_animati.mp4" type="video/mp4">
+    <source src="https://ozonemassage.com/wp-content/uploads/2026/09/download-3.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -520,7 +520,7 @@
     setTimeout(() => { bubble.style.display = 'none'; }, 3000);
   }
 
-  // --- 🪙 การ์ดขูด (Scratch Card) มี 31 ข้อความ (ไม่ซ้ำกันใน 1 เดือน!) ---
+  // --- 🪙 การ์ดขูด (Scratch Card) มี 31 ข้อความ (คลีนข้อความใหม่แล้ว!) ---
   const canvas = document.getElementById('scratch-canvas');
   const ctx = canvas ? canvas.getContext('2d') : null;
   let isDrawing = false;
@@ -529,36 +529,36 @@
   
   const secretMessages = [
     "ขูดหาเลขเด็ดหรอ หาน้ำกินด้วย! 😜",
-    "วันนี้ห้ามดื้อนะ รู้ไหม! 💖",
-    "คิดถึงคนทำเว็บล่ะสิ 👀✨",
-    "ทำงานเหนื่อยไหม กอดๆ น้า 🫂",
+    "วันนี้ห้ามดื้อนะ รู้ไหม! ✨",
+    "แอบส่องเว็บล่ะสิ 👀✨",
+    "ทำงานเหนื่อยไหม ส่งกำลังใจให้น้า 🫂",
     "แอบมาส่องละสิ แบร่! 👻",
-    "ตั้งใจทำงานนะ เค้าเป็นกำลังใจให้! ✌️",
-    "รักนะ ไอต้าวคนดื้อ! 🥰",
+    "ตั้งใจทำงานนะ หนูเป็นกำลังใจให้! ✌️",
+    "สู้ๆ นะ คนดื้อ! 😆",
     "พักสายตาบ้างนะ จ้องจอนานเดี๋ยวปวดตา 🥺",
-    "วันนี้มีคนบ่นคิดถึงพี่เค 1 อัตรา! 🙋‍♀️",
-    "ห้ามแอบกินขนมเยอะนะ เดี๋ยวอ้วน! 🐷",
-    "ขูดเจอความรัก! รับไปเลยเต็มๆ 💕",
-    "วันนี้ยิ้มเยอะๆ น้า โลกสดใสเพราะรอยยิ้มพี่เค! 😊",
-    "แอบอู้เล่นเน็ตหรอเนี่ย จับได้แล้ว! 🕵️‍♀️",
-    "เหนื่อยก็พักนะ เค้าอยู่ตรงนี้เสมอ 🌸",
+    "วันนี้มีคนแอบส่งกำลังใจให้ 1 อัตรา! 🙋‍♀️",
+    "ไปทำงานได้แล้ว! 🏃‍♂️",
+    "ขูดเจอความห่วงใย! รับไปเลยเต็มๆ 💕",
+    "วันนี้ยิ้มเยอะๆ น้า โลกสดใสเพราะรอยยิ้มของพี่เลยย! 😊",
+    "แอบเล่นเน็ตหรอเนี่ย จับได้แล้ว! 🕵️‍♀️",
+    "เหนื่อยก็พักนะ อยู่ตรงนี้เสมอ 🌸",
     "ขูดเจอคนเก่งประจำวัน! สู้ๆ นะคะ 🥇",
     "อย่าลืมกินข้าวให้ตรงเวลานะ เป็นห่วง! 🍱",
-    "ถ้าเครียดก็ถอนหายใจยาวๆ แล้วลุยต่อ! 💨",
-    "ขูดเจอ... คำว่า 'รัก' เอาไปเลย! 💘",
-    "ดื่มน้ำเปล่าเยอะๆ น้า ผิวจะได้ใสๆ 💧",
-    "แวะมาเติมกำลังใจให้ 100% เต็ม! 🔋",
+    "ถ้าเครียดก็ถอนหายใจยาวๆ! 💨",
+    "ขูดเจอ... รอยยิ้ม! เอาไปเลย 1 ที 😊",
+    "ดื่มน้ำเปล่าเยอะๆ น้า 💧",
+    "แวะมาเติมพลังให้ 100% เต็ม! 🔋",
     "วันนี้ดื้อไปกี่เปอร์เซ็นต์แล้วสารภาพมา! 🧐",
-    "ขูดเจอความสุข ขอให้วันนี้ราบรื่นน้า 🍀",
+    "ขอให้วันนี้เป็นวันที่ดีและราบรื่นน้า 🍀",
     "เลิกงานแล้วรีบกลับไปพักผ่อนนะ 🏠",
-    "เก่งมากแล้วนะที่ผ่านวันนี้มาได้ ลูบหัวๆ 🖐️",
-    "แฟนใครเนี่ยน่ารักจัง อ้อ แฟนเค้าเอง! 🤭",
-    "ยืดเส้นยืดสายบ้างนะ เดี๋ยวปวดหลัง! 🧘‍♂️",
-    "ขูดเจอคนหล่อ 1 EA! 😎",
-    "อย่าโหมงานหนักเกินไปนะ เค้าหวง! 😠",
-    "วันนี้เจอเรื่องปวดหัวมั้ย โอ๋ๆ น้า 🥺",
-    "แอบส่งจุ๊บให้ 1 ที จุ๊บ! 😘",
-    "ขูดจนเมื่อยนิ้วยัง? อะ หยอกๆ รักน้า! 🤣"
+    "เก่งมากแล้วนะที่ผ่านวันนี้มาได้🖐️",
+    "ใครกันเนี่ยน่ารักจัง! 🤭",
+    "ยืดเส้นยืดสายบ้างนะ เดี๋ยวออฟฟิศซินโดรมถามหา! 🧘‍♂️",
+    "ขูดเจอคนเก่ง! 😎",
+    "อย่าโหมงานหนักเกินไปนะ เป็นห่วงสุขภาพด้วย! 😠",
+    "วันนี้เจอเรื่องปวดหัวมั้ย สู้ๆ น้า 🥺",
+    "ส่งพลังบวกให้ปิ้วๆ! ✨",
+    "ขูดจนเมื่อยนิ้วยัง? อะ หยอกๆ ตั้งใจทำงานน้า! 🤣"
   ];
 
   // คอยฟังข้อมูลการ์ดขูดจาก Firebase (ซิงค์ตรงกันทุกคน)
@@ -706,7 +706,13 @@
   const videoOverlay = document.getElementById('video-overlay'); const fullVideo = document.getElementById('fullVideo'); const mainApp = document.getElementById('main-app-container');
   fullVideo.onended = function() { closeIntroVideo(); }; 
   function skipIntroVideo() { fullVideo.pause(); closeIntroVideo(); }
-  function closeIntroVideo() { videoOverlay.style.opacity = '0'; setTimeout(() => { videoOverlay.style.display = 'none'; mainApp.style.display = 'flex'; createBackgroundHearts(); checkAndRenderScratchCard(); }, 1000); }
+  function closeIntroVideo() { videoOverlay.style.opacity = '0'; setTimeout(() => { 
+    videoOverlay.style.display = 'none'; 
+    mainApp.style.display = 'flex'; 
+    document.getElementById('mascot-container').style.display = 'flex'; // แสดงแมวตอนอยู่หน้าหลัก
+    createBackgroundHearts(); 
+    checkAndRenderScratchCard(); 
+  }, 1000); }
 
   // --- 📅 เลือกเดือน (คำนวณจากเวลาจริง Real-time) ---
   function requestMonthAccess(mIndex, type) {
@@ -740,6 +746,7 @@
     document.getElementById('memory-box-step').style.display = 'none';
     document.getElementById('dynamic-calendar-sec').style.display = 'block';
     document.getElementById('home-btn').style.display = 'flex';
+    document.getElementById('mascot-container').style.display = 'flex'; // แสดงแมวตอนอยู่หน้าปฏิทิน
     buildCalendar(currentViewingMonthIndex);
   }
 
@@ -806,6 +813,7 @@
     currentViewingDay = day;
     document.getElementById('dynamic-calendar-sec').style.display = 'none';
     document.getElementById('memory-box-step').style.display = 'none';
+    document.getElementById('mascot-container').style.display = 'none'; // ซ่อนแมวตอนเข้าไปพิมพ์โน้ต
     const dailySec = document.getElementById('daily-notes-sec');
     dailySec.style.display = 'block';
     document.getElementById('daily-note-title').innerText = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
@@ -1066,13 +1074,16 @@
     if (bgMusic) bgMusic.pause(); if (video) video.pause();
     document.getElementById('daily-notes-sec').style.display = 'none'; document.getElementById('sept3-experience-container').style.display = 'none'; document.getElementById('dynamic-calendar-sec').style.display = 'none';
     document.getElementById('step-1-intro').style.display = 'block'; document.getElementById('step-2-video').style.display = 'none'; document.getElementById('step-3-rain-text').style.display = 'none'; document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'none'; document.getElementById('typewriter-text').innerHTML = ''; typeIndex = 0; 
-    document.getElementById('memory-box-step').style.display = 'block'; document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('memory-box-step').style.display = 'block'; 
+    document.getElementById('mascot-container').style.display = 'flex'; 
+    document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' });
     initMascot(); 
   }
 
   // --- ✨ ความทรงจำวันที่ 3 ---
   function openSept3Experience() {
     document.getElementById('dynamic-calendar-sec').style.display = 'none';
+    document.getElementById('mascot-container').style.display = 'none'; // ซ่อนแมวตอนเข้าไปดูความทรงจำ 3 ก.ย.
     document.getElementById('sept3-experience-container').style.display = 'block';
     document.getElementById('sept3-experience-container').scrollIntoView({ behavior: 'smooth' });
   }
