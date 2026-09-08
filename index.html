@@ -148,7 +148,11 @@
     .save-note-btn:active { transform: translateY(2px); box-shadow: 0 2px 5px rgba(217, 119, 6, 0.3); }
     .save-note-btn:disabled { background: #cbd5e1; box-shadow: none; cursor: not-allowed; transform: none; }
 
-    .notes-board { margin-top: 25px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; border-top: 2px dashed #fef08a; padding-top: 20px; }
+    /* ปุ่มเล่นเกมเซเว่นวันที่ 8 */
+    .play-game-btn { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: #e11d48; border: 2px dashed #ff477e; padding: 15px; font-size: 16px; font-weight: 700; font-family: 'Kanit', sans-serif; border-radius: 16px; cursor: pointer; width: 100%; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(255, 117, 140, 0.3); animation: pulseGlowPink 2s infinite; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .history-game-btn { background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); color: #0284c7; border: 2px dashed #38bdf8; padding: 15px; font-size: 16px; font-weight: 700; font-family: 'Kanit', sans-serif; border-radius: 16px; cursor: pointer; width: 100%; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); display: flex; justify-content: center; align-items: center; gap: 8px; }
+
+    .notes-board { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; border-top: 2px dashed #fef08a; padding-top: 20px; }
     
     /* สไตล์หลักของกระดาษโน้ต */
     .mini-note { width: calc(50% - 5px); aspect-ratio: 1.05; border-radius: 4px 20px 4px 20px; padding: 15px 10px; position: relative; cursor: pointer; box-shadow: 2px 4px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease; animation: stickNoteAnim 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
@@ -168,7 +172,7 @@
     .mini-note.note-k .mini-hint { color: #b45309; background: rgba(255,255,255,0.4); }
     .mini-note.note-k .mini-time-stamp { color: #78350f; }
     
-    /* สีเทาสำหรับโน้ตที่ล็อกหรือแคปซูลเวลา (จะทับสีหลักเสมอ) */
+    /* สีเทาสำหรับโน้ตที่ล็อกหรือแคปซูลเวลา */
     .mini-note.time-capsule { background: linear-gradient(135deg, #e2e8f0, #cbd5e1) !important; border: 1px dashed #94a3b8; }
     .mini-note.locked-note { background: linear-gradient(135deg, #f8fafc, #f1f5f9) !important; border: 1px dashed #cbd5e1; }
     
@@ -254,6 +258,31 @@
     .bad-btn { background-color: #fff5f5; border-color: #fed7d7; color: #e53e3e; }
     .good-btn { background-color: #f0fdf4; border-color: #bbf7d0; color: #16a34a; }
     .best-btn { background-color: #f0f9ff; border-color: #bae6fd; color: #0284c7; }
+
+    /* 🎮 มินิเกม 8 กันยา (เซเว่นออนไลน์) */
+    .game-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 10005; padding: 15px; backdrop-filter: blur(5px); }
+    .game-content { background: white; border-radius: 24px; padding: 25px 15px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 10px 40px rgba(255, 71, 126, 0.4); border: 3px solid #ffccd5; position: relative; animation: popUp 0.4s ease-out; }
+    .game-title { font-size: 20px; font-weight: 700; color: #ff477e; margin-bottom: 5px; }
+    .game-subtitle { font-size: 13px; color: #64748b; margin-bottom: 15px; }
+    .cart-status { font-size: 14px; font-weight: 600; color: #0ea5e9; background: #e0f2fe; padding: 8px; border-radius: 12px; margin-bottom: 15px; border: 1px dashed #7dd3fc; }
+    
+    /* ปรับเป็น 3 คอลัมน์ให้รูปเล็กลงและน่ารักขึ้น */
+    .food-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; position: relative; max-height: 400px; overflow-y: auto; padding: 5px; }
+    .food-item { background: #fff0f3; border: 2px solid #ffe4e8; border-radius: 16px; padding: 6px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; position: relative; display: flex; justify-content: center; align-items: center; height: 95px; }
+    .food-item:hover { transform: scale(1.05); box-shadow: 0 4px 10px rgba(255, 182, 193, 0.4); border-color: #ffb6c1; }
+    .food-item.selected { border-color: #10b981; background: #ecfdf5; transform: scale(0.95); opacity: 0.6; pointer-events: none; }
+    .food-item.selected::after { content: '✔️'; position: absolute; font-size: 30px; z-index: 5; }
+    .food-img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+    
+    /* ตัวจองพื้นที่บอสมาย ให้เลย์เอาต์ไม่พังเวลามันบินออกไป */
+    .boss-placeholder { width: 100%; height: 95px; position: relative; }
+    
+    /* รูปบอส (มาย) */
+    .boss-item { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: all 0.2s ease-out; z-index: 10; border-color: #ff477e; background: #fff; }
+    .boss-item.fixed-fly { position: fixed; z-index: 10100; box-shadow: 0 10px 25px rgba(255, 71, 126, 0.5); }
+    
+    .checkout-btn { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 14px 20px; border-radius: 20px; font-size: 16px; font-weight: 700; width: 100%; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); display: none; animation: pulse 1.5s infinite; font-family: 'Kanit'; margin-top: 15px; }
+    .close-game-btn { position: absolute; top: -15px; right: -15px; background: #fff; color: #e11d48; width: 35px; height: 35px; border-radius: 50%; font-size: 20px; font-weight: bold; border: 2px solid #e11d48; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; z-index: 20; }
   </style>
 </head>
 <body>
@@ -346,6 +375,11 @@
   <div id="daily-notes-sec" class="step-box card-base" style="display: none;">
     <div class="shared-note-box">
       <div class="shared-note-title" id="daily-note-title">📌 กระดานโน้ตวันที่ X</div>
+      
+      <!-- 🛒 ปุ่มเล่นเกมเซเว่นวันที่ 8 (จะโชว์เฉพาะถ้าเปิดมาตรงวันที่ 8 ก.ย.) -->
+      <button id="playGame8Btn" class="play-game-btn" style="display: none;" onclick="openSevenGame()">
+        <span style="font-size: 22px;">🥺</span> หิวไหมคะ... แวะสั่งเซเว่นออนไลน์ให้หน่อยน้าา!
+      </button>
       
       <!-- ส่วนฟอร์มสร้างโน้ต -->
       <div id="note-creation-form">
@@ -482,7 +516,7 @@
   </div>
 </div>
 
-<!-- 🔒 ป๊อปอัปเกมทายรหัส (แก้เป็น Numpad แล้ว) -->
+<!-- 🔒 ป๊อปอัปเกมทายรหัส (Numpad) -->
 <div id="unlockModal" class="popup-modal">
   <div class="unlock-box">
     <div class="unlock-icon">🔒</div>
@@ -535,6 +569,51 @@
     
     <div class="read-note-time" id="detailTime"></div>
     <button class="choice-btn bad-btn" style="width: 100%; margin-top: 5px;" onclick="closePopup('noteDetailModal')">พับเก็บกระดาษโน้ต 💌</button>
+  </div>
+</div>
+
+<!-- 🎮 ป๊อปอัปมินิเกมเซเว่น 8 ก.ย. -->
+<div id="sevenGameModal" class="game-modal">
+  <div class="game-content">
+    <button class="close-game-btn" onclick="closePopup('sevenGameModal')">✕</button>
+    <div class="game-title">🛒 7-Eleven เดลิเวอรี่</div>
+    <div class="game-subtitle">"อยากกินอะไรจิ้มใส่ตะกร้าเลย!<br>แต่ต้องเลือกอย่างน้อย 4 อย่างน้า ถึงจะสั่งได้"</div>
+    
+    <div class="cart-status" id="cartStatusText">🛒 ตะกร้าว่างเปล่า (เลือกอีกอย่างน้อย 4 อย่าง)</div>
+    
+    <div class="food-grid" id="foodGrid">
+      <!-- รูป 12 รูปจะถูกสร้างและเรียงในนี้ -->
+    </div>
+    
+    <button id="checkoutBtn" class="checkout-btn" onclick="finishSevenGame()">กดสั่งซื้อเลย! 🛵💨</button>
+  </div>
+</div>
+
+<!-- 📜 ป๊อปอัปดูประวัติการสั่งซื้อ (สำหรับคนที่เคยสั่งไปแล้ว) -->
+<div id="orderHistoryModal" class="game-modal">
+  <div class="game-content">
+    <button class="close-game-btn" onclick="closePopup('orderHistoryModal')">✕</button>
+    <div class="game-title">🛒 ออเดอร์ที่สั่งไว้</div>
+    <div class="game-subtitle">สั่งของพวกนี้ไว้แล้วน้า แถมออเดอร์พิเศษด้วย! 🥰</div>
+    
+    <div class="food-grid" id="historyGrid" style="min-height: auto; max-height: 350px;">
+      <!-- จะแสดงของที่สั่งไปแล้วที่นี่ -->
+    </div>
+    
+    <!-- ✨ ปุ่มรีเซ็ตออเดอร์ ✨ -->
+    <button class="choice-btn bad-btn" style="width: 100%; margin-top: 15px;" onclick="resetSevenOrder()">
+      🔄 ล้างตะกร้าแล้วเริ่มสั่งใหม่
+    </button>
+  </div>
+</div>
+
+<!-- 🎉 ป๊อปอัปสรุปการสั่งซื้อ -->
+<div id="orderSuccessModal" class="popup-modal" style="z-index: 10010;">
+  <div class="popup-content" style="border: 3px solid #10b981;">
+    <div style="font-size: 55px; margin-bottom: 10px; animation: bounce 1s infinite;">🛵💨</div>
+    <div style="font-size: 20px; font-weight: 700; color: #10b981; margin-bottom: 10px;">รับออเดอร์เรียบร้อย! 🎉</div>
+    <p style="font-size: 15px; color: #475569; line-height: 1.5; margin-bottom: 15px; font-weight: 500;">โอเค กดสั่งออเดอร์พิเศษได้แล้ว...<br><span style="color:#ff477e; font-weight:700;">ออเดอร์พิเศษก็คือหนูเอง 🥰</span></p>
+    <button class="choice-btn good-btn" style="width: 100%;" onclick="closeOrderSuccess()">รับทราบค่ะ! 💖</button>
   </div>
 </div>
 
@@ -591,12 +670,13 @@
     });
   }
 
-  // --- 🔥 Firebase (ห้ามลบเด็ดขาดดด!) ---
+  // --- 🔥 Firebase ---
   const firebaseConfig = { databaseURL: "https://memory-box-2026-default-rtdb.asia-southeast1.firebasedatabase.app/" };
   if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
   const database = firebase.database();
   const notesRef = database.ref('memory_box_notes_v7'); 
   const scratchRef = database.ref('memory_box_scratch_v7'); 
+  const sevenOrderRef = database.ref('memory_box_seven_order_v7'); 
 
   // --- ทักทายตามเวลาจริง ---
   function updateTimeGreeting() {
@@ -610,14 +690,13 @@
   }
   updateTimeGreeting();
 
-  // --- 🐱 น้องแมว Mascot ภาพ GIF น่ารักๆ โดยใช้ลิงก์จาก WordPress ---
+  // --- 🐱 น้องแมว Mascot ภาพ GIF น่ารักๆ ---
   let isMascotAwake = false;
   function initMascot() {
     const hour = new Date().getHours();
     const emojiEl = document.getElementById('mascot-emoji');
     if(!emojiEl) return;
     
-    // เวลา 6 โมงเช้า ถึง 4 ทุ่ม แมวจะตื่น
     if(hour >= 6 && hour < 22) {
       isMascotAwake = true;
       emojiEl.src = 'https://ozonemassage.com/wp-content/uploads/2026/09/ดีไซน์ที่ยังไม่ได้ตั้งชื่อ-1.gif'; 
@@ -626,7 +705,7 @@
       emojiEl.src = 'https://ozonemassage.com/wp-content/uploads/2026/09/download-2.gif'; 
     }
   }
-  initMascot(); // ปลุก/กล่อมแมวตอนโหลดเว็บครั้งแรก
+  initMascot(); 
 
   function pokeMascot() {
     const bubble = document.getElementById('mascot-bubble');
@@ -638,12 +717,10 @@
     }
     bubble.innerText = phrases[Math.floor(Math.random() * phrases.length)];
     bubble.style.display = 'block';
-    
-    // ซ่อนข้อความหลังจาก 3 วินาที
     setTimeout(() => { bubble.style.display = 'none'; }, 3000);
   }
 
-  // --- 🪙 การ์ดขูด (Scratch Card) มี 31 ข้อความ (คลีนข้อความใหม่แล้ว!) ---
+  // --- 🪙 การ์ดขูด (Scratch Card) ---
   const canvas = document.getElementById('scratch-canvas');
   const ctx = canvas ? canvas.getContext('2d') : null;
   let isDrawing = false;
@@ -651,37 +728,14 @@
   let currentScratchData = null;
   
   const secretMessages = [
-    "ขูดหาเลขเด็ดหรอ หาน้ำกินด้วย! 😜",
-    "วันนี้ห้ามดื้อนะ รู้ไหม! ✨",
-    "แอบคิดถึงหนูล่ะสิ 👀✨",
-    "ทำงานเหนื่อยไหม ส่งกำลังใจให้น้า 🫂",
-    "แอบมาส่องละสิ แบร่! 👻",
-    "ตั้งใจทำงานนะ หนูเป็นกำลังใจให้! ✌️",
-    "สู้ๆ นะ คนดื้อ! 😆",
-    "พักสายตาบ้างนะ จ้องจอนานเดี๋ยวปวดตา 🥺",
-    "ไม่ให้ตากฝนคนเดียวแล้วน๊า! 🙋‍♀️",
-    "ไปทำงานได้แล้ว! 🏃‍♂️",
-    "ขูดเจอความห่วงใย! รับไปเลยเต็มๆ 💕",
-    "วันนี้ยิ้มเยอะๆ น้า โลกสดใสเพราะรอยยิ้มของพี่เลยย! 😊",
-    "แอบเล่นเน็ตหรอเนี่ย จับได้แล้ว! 🕵️‍♀️",
-    "เหนื่อยก็พักนะ อยู่ตรงนี้เสมอ 🌸",
-    "ขูดเจอคนเก่งประจำวัน! สู้ๆ นะคะ 🥇",
-    "อย่าลืมกินข้าวให้ตรงเวลานะ เป็นห่วง! 🍱",
-    "ถ้าเครียดก็ถอนหายใจยาวๆ! 💨",
-    "ขูดเจอ... รอยยิ้ม! เอาไปเลย 1 ที 😊",
-    "ดื่มน้ำเปล่าเยอะๆ น้า 💧",
-    "แวะมาเติมพลังให้ 100% เต็ม! 🔋",
-    "วันนี้ดื้อไปกี่เปอร์เซ็นต์แล้วสารภาพมา! 🧐",
-    "ขอให้วันนี้เป็นวันที่ดีและราบรื่นน้า 🍀",
-    "เลิกงานแล้วรีบกลับไปพักผ่อนนะ 🏠",
-    "เก่งมากแล้วนะที่ผ่านวันนี้มาได้ ลูบหัวๆ 🖐️",
-    "ใครกันเนี่ยน่ารักจัง! 🤭",
-    "คิดถึงหนูป่าวน๊า! 🧘‍♂️",
-    "ขูดเจอคนเก่ง! 😎",
-    "อย่าโหมงานหนักเกินไปนะ เป็นห่วงสุขภาพด้วย! 😠",
-    "วันนี้เจอเรื่องปวดหัวมั้ย สู้ๆ น้า 🥺",
-    "ส่งพลังบวกให้ปิ้วๆ! ✨",
-    "ขูดจนเมื่อยนิ้วยัง? อะ หยอกๆ ตั้งใจทำงานน้า! 🤣"
+    "ขูดหาเลขเด็ดหรอ หาน้ำกินด้วย! 😜", "วันนี้ห้ามดื้อนะ รู้ไหม! ✨", "แอบคิดถึงหนูล่ะสิ 👀✨", "ทำงานเหนื่อยไหม ส่งกำลังใจให้น้า 🫂",
+    "แอบมาส่องละสิ แบร่! 👻", "ตั้งใจทำงานนะ หนูเป็นกำลังใจให้! ✌️", "สู้ๆ นะ คนดื้อ! 😆", "พักสายตาบ้างนะ จ้องจอนานเดี๋ยวปวดตา 🥺",
+    "ไม่ให้ตากฝนคนเดียวแล้วน๊า! 🙋‍♀️", "ไปทำงานได้แล้ว! 🏃‍♂️", "ขูดเจอความห่วงใย! รับไปเลยเต็มๆ 💕", "วันนี้ยิ้มเยอะๆ น้า โลกสดใสเพราะรอยยิ้มของพี่เลยย! 😊",
+    "แอบเล่นเน็ตหรอเนี่ย จับได้แล้ว! 🕵️‍♀️", "เหนื่อยก็พักนะ อยู่ตรงนี้เสมอ 🌸", "ขูดเจอคนเก่งประจำวัน! สู้ๆ นะคะ 🥇", "อย่าลืมกินข้าวให้ตรงเวลานะ เป็นห่วง! 🍱",
+    "ถ้าเครียดก็ถอนหายใจยาวๆ! 💨", "ขูดเจอ... รอยยิ้ม! เอาไปเลย 1 ที 😊", "ดื่มน้ำเปล่าเยอะๆ น้า 💧", "แวะมาเติมพลังให้ 100% เต็ม! 🔋",
+    "วันนี้ดื้อไปกี่เปอร์เซ็นต์แล้วสารภาพมา! 🧐", "ขอให้วันนี้เป็นวันที่ดีและราบรื่นน้า 🍀", "เลิกงานแล้วรีบกลับไปพักผ่อนนะ 🏠", "เก่งมากแล้วนะที่ผ่านวันนี้มาได้ ลูบหัวๆ 🖐️",
+    "ใครกันเนี่ยน่ารักจัง! 🤭", "คิดถึงหนูป่าวน๊า! 🧘‍♂️", "ขูดเจอคนเก่ง! 😎", "อย่าโหมงานหนักเกินไปนะ เป็นห่วงสุขภาพด้วย! 😠",
+    "วันนี้เจอเรื่องปวดหัวมั้ย สู้ๆ น้า 🥺", "ส่งพลังบวกให้ปิ้วๆ! ✨", "ขูดจนเมื่อยนิ้วยัง? อะ หยอกๆ ตั้งใจทำงานน้า! 🤣"
   ];
 
   scratchRef.on('value', (snapshot) => {
@@ -691,15 +745,13 @@
 
   function checkAndRenderScratchCard() {
     if(!canvas) return;
-    const todayStr = new Date().toLocaleDateString('th-TH'); // วันที่ปัจจุบัน
+    const todayStr = new Date().toLocaleDateString('th-TH');
     const textEl = document.getElementById('scratch-text');
     const statusEl = document.getElementById('scratch-status');
 
     if (!currentScratchData || currentScratchData.date !== todayStr) {
-      // ดึงข้อความตามวันที่ของเดือน (วันที่ 1 ถึง 31) รับรองไม่ซ้ำกันใน 1 เดือนแน่นอนค่ะ
-      const dayIndex = new Date().getDate() - 1; // 0-30
+      const dayIndex = new Date().getDate() - 1; 
       const newMsg = secretMessages[dayIndex % secretMessages.length];
-      
       scratchRef.set({ date: todayStr, message: newMsg, isScratched: false });
       return; 
     }
@@ -726,66 +778,47 @@
     ctx.globalCompositeOperation = 'source-over';
     
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    gradient.addColorStop(0, '#ff9a9e'); 
-    gradient.addColorStop(0.5, '#fecfef'); 
-    gradient.addColorStop(1, '#fbc2eb'); 
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, '#ff9a9e'); gradient.addColorStop(0.5, '#fecfef'); gradient.addColorStop(1, '#fbc2eb'); 
+    ctx.fillStyle = gradient; ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    ctx.font = 'bold 18px Kanit';
-    ctx.fillStyle = '#ffffff';
-    ctx.textAlign = 'center';
-    ctx.shadowColor = 'rgba(255, 71, 126, 0.5)';
-    ctx.shadowBlur = 4;
+    ctx.font = 'bold 18px Kanit'; ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center';
+    ctx.shadowColor = 'rgba(255, 71, 126, 0.5)'; ctx.shadowBlur = 4;
     ctx.fillText('✨ ขูดดูสิคนดื้อ! ✨', canvas.width/2, canvas.height/2 + 6);
   }
 
-  function startScratch(e) { 
-    if(!currentScratchData || currentScratchData.isScratched) return; 
-    isDrawing = true; scratch(e); 
-  }
-  
+  function startScratch(e) { if(!currentScratchData || currentScratchData.isScratched) return; isDrawing = true; scratch(e); }
   function stopScratch() { 
     isDrawing = false; 
-    if (hasScratchedTodayLocally && currentScratchData && !currentScratchData.isScratched) {
-      scratchRef.update({ isScratched: true });
-    }
+    if (hasScratchedTodayLocally && currentScratchData && !currentScratchData.isScratched) { scratchRef.update({ isScratched: true }); }
   }
-  
   function scratch(e) {
     if (!isDrawing || !currentScratchData || currentScratchData.isScratched) return;
-    e.preventDefault();
-    hasScratchedTodayLocally = true; 
+    e.preventDefault(); hasScratchedTodayLocally = true; 
 
     const rect = canvas.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
+    const x = clientX - rect.left; const y = clientY - rect.top;
 
     ctx.globalCompositeOperation = 'destination-out';
-    ctx.beginPath();
-    ctx.arc(x, y, 18, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.beginPath(); ctx.arc(x, y, 18, 0, Math.PI * 2); ctx.fill();
   }
 
   if(canvas) {
-      canvas.addEventListener('mousedown', startScratch);
-      canvas.addEventListener('mousemove', scratch);
-      canvas.addEventListener('mouseup', stopScratch);
-      canvas.addEventListener('mouseleave', stopScratch);
-      canvas.addEventListener('touchstart', startScratch, {passive: false});
-      canvas.addEventListener('touchmove', scratch, {passive: false});
+      canvas.addEventListener('mousedown', startScratch); canvas.addEventListener('mousemove', scratch);
+      canvas.addEventListener('mouseup', stopScratch); canvas.addEventListener('mouseleave', stopScratch);
+      canvas.addEventListener('touchstart', startScratch, {passive: false}); canvas.addEventListener('touchmove', scratch, {passive: false});
       canvas.addEventListener('touchend', stopScratch);
   }
 
-  let allNotes = []; let noteToUnlock = null;
+  // --- 🔥 Firebase Listener ---
+  let allNotes = []; let noteToUnlock = null; let savedSevenOrder = null;
+  
   notesRef.on('value', (snapshot) => {
     const data = snapshot.val();
     allNotes = [];
     if (data) { for (let key in data) { allNotes.push({ id: key, ...data[key] }); } }
     
-    // อัปเดตหลอดแก้วความทรงจำ
     const count = allNotes.length;
     const counterEl = document.getElementById('totalNotesCount');
     if(counterEl) counterEl.innerText = count;
@@ -801,7 +834,11 @@
     if (currentViewingDay !== null) { renderNotesForDay(currentViewingDay); }
   });
 
-  // --- 🎁 ฟังก์ชันเปิดกล่องพัสดุ (Greeting Screen) ---
+  sevenOrderRef.on('value', (snapshot) => {
+    savedSevenOrder = snapshot.val();
+  });
+
+  // --- 🎁 ฟังก์ชันเปิดกล่องพัสดุ ---
   function openPackage() {
     const greeting = document.getElementById('greeting-overlay');
     const videoOverlay = document.getElementById('video-overlay');
@@ -824,17 +861,15 @@
   function closeIntroVideo() { videoOverlay.style.opacity = '0'; setTimeout(() => { 
     videoOverlay.style.display = 'none'; 
     mainApp.style.display = 'flex'; 
-    document.getElementById('mascot-container').style.display = 'flex'; // แสดงแมวตอนอยู่หน้าหลัก
+    document.getElementById('mascot-container').style.display = 'flex'; 
     createBackgroundHearts(); 
     checkAndRenderScratchCard(); 
   }, 1000); }
 
-  // --- 📅 เลือกเดือน (คำนวณจากเวลาจริง Real-time) ---
+  // --- 📅 เลือกเดือน ---
   function requestMonthAccess(mIndex, type) {
     pendingMonthIndex = mIndex;
-    
-    const today = new Date();
-    const realMonth = today.getMonth();
+    const today = new Date(); const realMonth = today.getMonth();
 
     if (mIndex < realMonth) {
       document.getElementById('popupAvatar').innerText = '😾'; 
@@ -849,19 +884,14 @@
       document.getElementById('monthProceedBtn').innerHTML = 'แค่จะเข้ามาเพิ่มโน้ตครับ 📝';
       document.getElementById('monthCancelBtn').innerHTML = 'กลับไปรอเวลา 😅';
       document.getElementById('monthChoiceModal').style.display = 'flex';
-    } else {
-      proceedToMonth();
-    }
+    } else { proceedToMonth(); }
   }
 
   function proceedToMonth() {
     closePopup('monthChoiceModal');
     if (pendingMonthIndex !== null) { currentViewingMonthIndex = pendingMonthIndex; }
-    
-    document.getElementById('memory-box-step').style.display = 'none';
-    document.getElementById('dynamic-calendar-sec').style.display = 'block';
-    document.getElementById('home-btn').style.display = 'flex';
-    document.getElementById('mascot-container').style.display = 'flex'; // แสดงแมวตอนอยู่หน้าปฏิทิน
+    document.getElementById('memory-box-step').style.display = 'none'; document.getElementById('dynamic-calendar-sec').style.display = 'block';
+    document.getElementById('home-btn').style.display = 'flex'; document.getElementById('mascot-container').style.display = 'flex'; 
     buildCalendar(currentViewingMonthIndex);
   }
 
@@ -872,10 +902,10 @@
     
     const padding = new Date(2026, mIndex, 1).getDay();
     for(let i=0; i<padding; i++) { grid.innerHTML += '<div></div>'; }
-    
     const days = monthDays[mIndex];
     for(let i=1; i<=days; i++) {
-      let extraClass = (mIndex === 8 && i === 3) ? 'special-day' : '';
+      // 🌟 ไฮไลต์วันที่ 3 และ 8 เป็นสีชมพู
+      let extraClass = (mIndex === 8 && (i === 3 || i === 8)) ? 'special-day' : '';
       grid.innerHTML += `<div class="day ${extraClass}" id="cal-day-${i}" onclick="clickDay(${i})">${i}</div>`;
     }
     updateCalendarDots();
@@ -883,26 +913,16 @@
 
   function updateCalendarDots() {
     if(document.getElementById('dynamic-calendar-sec').style.display === 'none') return;
-    for (let i = 1; i <= 31; i++) {
-      const dayEl = document.getElementById(`cal-day-${i}`);
-      if (dayEl) { const b = dayEl.querySelector('.note-dot'); if (b) b.remove(); }
-    }
+    for (let i = 1; i <= 31; i++) { const dayEl = document.getElementById(`cal-day-${i}`); if (dayEl) { const b = dayEl.querySelector('.note-dot'); if (b) b.remove(); } }
     const notesInMonth = allNotes.filter(n => Number(n.targetMonth) === currentViewingMonthIndex);
     const dayCounts = {};
-    notesInMonth.forEach(n => { 
-        let d = Number(n.targetDay);
-        dayCounts[d] = (dayCounts[d] || 0) + 1; 
-    });
+    notesInMonth.forEach(n => { let d = Number(n.targetDay); dayCounts[d] = (dayCounts[d] || 0) + 1; });
 
     for(let day in dayCounts) {
       const dayEl = document.getElementById(`cal-day-${day}`);
       if (dayEl && dayCounts[day] > 0) {
-        const badge = document.createElement('div');
-        badge.className = 'note-dot'; 
-        if(dayCounts[day] > 1) {
-            badge.innerText = dayCounts[day];
-            badge.classList.add('has-number');
-        }
+        const badge = document.createElement('div'); badge.className = 'note-dot'; 
+        if(dayCounts[day] > 1) { badge.innerText = dayCounts[day]; badge.classList.add('has-number'); }
         dayEl.appendChild(badge);
       }
     }
@@ -910,89 +930,66 @@
 
   // --- 📅 คลิกวันที่ ---
   function openTodayNotes() {
-    const today = new Date();
-    pendingMonthIndex = today.getMonth();
-    currentViewingMonthIndex = today.getMonth();
-    proceedToNotesBoard(today.getDate()); 
+    const today = new Date(); pendingMonthIndex = today.getMonth(); currentViewingMonthIndex = today.getMonth(); proceedToNotesBoard(today.getDate()); 
   }
 
   function clickDay(day) {
-    if (currentViewingMonthIndex === 8 && day === 3) {
-      openSept3Experience();
-    } else {
-      proceedToNotesBoard(day);
-    }
+    if (currentViewingMonthIndex === 8 && day === 3) { openSept3Experience(); } 
+    else { proceedToNotesBoard(day); }
   }
 
   function proceedToNotesBoard(day) {
     currentViewingDay = day;
-    document.getElementById('dynamic-calendar-sec').style.display = 'none';
-    document.getElementById('memory-box-step').style.display = 'none';
-    document.getElementById('mascot-container').style.display = 'none'; // ซ่อนแมวตอนเข้าไปพิมพ์โน้ต
+    document.getElementById('dynamic-calendar-sec').style.display = 'none'; document.getElementById('memory-box-step').style.display = 'none'; document.getElementById('mascot-container').style.display = 'none'; 
     const dailySec = document.getElementById('daily-notes-sec');
-    dailySec.style.display = 'block';
-    document.getElementById('daily-note-title').innerText = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
+    dailySec.style.display = 'block'; document.getElementById('daily-note-title').innerText = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
     document.getElementById('home-btn').style.display = 'flex';
     
-    const today = new Date();
-    const realMonth = today.getMonth();
-    const realDay = today.getDate();
-
-    const isPastDay = currentViewingMonthIndex < realMonth || (currentViewingMonthIndex === realMonth && day < realDay);
-    
-    const formArea = document.getElementById('note-creation-form');
-    const pastMessage = document.getElementById('past-note-message');
-
-    if (isPastDay) {
-      formArea.style.display = 'none';
-      pastMessage.style.display = 'block';
+    // 🌟 โชว์ปุ่มเกมเซเว่นออนไลน์ในวันที่ 8 ก.ย. เท่านั้น
+    const playGameBtn = document.getElementById('playGame8Btn');
+    if (currentViewingMonthIndex === 8 && day === 8) {
+      playGameBtn.style.display = 'flex';
+      // ถ้ายืนยันออเดอร์ไปแล้ว เปลี่ยนสไตล์และคำบนปุ่ม
+      if (savedSevenOrder) {
+        playGameBtn.innerHTML = '<span style="font-size: 22px;">📜</span> เปิดดูออเดอร์ที่สั่งไว้แล้ว 🥰';
+        playGameBtn.className = 'history-game-btn'; 
+      } else {
+        playGameBtn.innerHTML = '<span style="font-size: 22px;">🥺</span> หิวไหมคะ... แวะสั่งเซเว่นออนไลน์ให้หน่อยน้าา!';
+        playGameBtn.className = 'play-game-btn'; 
+      }
     } else {
-      formArea.style.display = 'block';
-      pastMessage.style.display = 'none';
+      playGameBtn.style.display = 'none';
     }
 
-    renderNotesForDay(day);
-    dailySec.scrollIntoView({ behavior: 'smooth' });
+    const today = new Date(); const realMonth = today.getMonth(); const realDay = today.getDate();
+    const isPastDay = currentViewingMonthIndex < realMonth || (currentViewingMonthIndex === realMonth && day < realDay);
+    
+    const formArea = document.getElementById('note-creation-form'); const pastMessage = document.getElementById('past-note-message');
+    if (isPastDay) { formArea.style.display = 'none'; pastMessage.style.display = 'block'; } 
+    else { formArea.style.display = 'block'; pastMessage.style.display = 'none'; }
+
+    renderNotesForDay(day); dailySec.scrollIntoView({ behavior: 'smooth' });
   }
 
-  function backToCalendar() {
-    document.getElementById('daily-notes-sec').style.display = 'none';
-    proceedToMonth(); 
-  }
+  function backToCalendar() { document.getElementById('daily-notes-sec').style.display = 'none'; proceedToMonth(); }
 
   // --- 📸 อัปโหลดรูปภาพ ---
   let imageBase64 = null;
   function handleImageUpload(event) {
-    const file = event.target.files[0];
-    if(!file) return;
-    
-    const previewBox = document.getElementById('imagePreviewBox');
-    previewBox.style.display = 'block';
-    document.getElementById('imagePreview').src = 'https://i.gifer.com/ZZ5H.gif'; 
-    
+    const file = event.target.files[0]; if(!file) return;
+    const previewBox = document.getElementById('imagePreviewBox'); previewBox.style.display = 'block'; document.getElementById('imagePreview').src = 'https://i.gifer.com/ZZ5H.gif'; 
     const reader = new FileReader();
     reader.onload = function(e) {
       const img = new Image();
       img.onload = function() {
-        const canvas = document.createElement('canvas');
-        const MAX_WIDTH = 800; 
-        let width = img.width;
-        let height = img.height;
+        const canvas = document.createElement('canvas'); const MAX_WIDTH = 800; let width = img.width; let height = img.height;
         if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-        canvas.width = width; canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, width, height);
-        imageBase64 = canvas.toDataURL('image/jpeg', 0.7);
-        document.getElementById('imagePreview').src = imageBase64;
-      }
-      img.src = e.target.result;
-    }
-    reader.readAsDataURL(file);
+        canvas.width = width; canvas.height = height; const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, width, height);
+        imageBase64 = canvas.toDataURL('image/jpeg', 0.7); document.getElementById('imagePreview').src = imageBase64;
+      }; img.src = e.target.result;
+    }; reader.readAsDataURL(file);
   }
-  function discardImage() {
-    imageBase64 = null; document.getElementById('imageInput').value = '';
-    document.getElementById('imagePreviewBox').style.display = 'none';
-  }
+  function discardImage() { imageBase64 = null; document.getElementById('imageInput').value = ''; document.getElementById('imagePreviewBox').style.display = 'none'; }
 
   // --- 🎤 อัดเสียง ---
   let mediaRecorder; let audioChunks = []; let audioBase64 = null; let isRecording = false;
@@ -1004,141 +1001,73 @@
         mediaRecorder = new MediaRecorder(stream); audioChunks = [];
         mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
         mediaRecorder.onstop = () => {
-          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-          const reader = new FileReader(); reader.readAsDataURL(audioBlob);
-          reader.onloadend = () => {
-            audioBase64 = reader.result; document.getElementById('audioPreview').src = audioBase64;
-            document.getElementById('audioPreviewBox').style.display = 'block'; btn.style.display = 'none';
-          };
+          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' }); const reader = new FileReader(); reader.readAsDataURL(audioBlob);
+          reader.onloadend = () => { audioBase64 = reader.result; document.getElementById('audioPreview').src = audioBase64; document.getElementById('audioPreviewBox').style.display = 'block'; btn.style.display = 'none'; };
           stream.getTracks().forEach(track => track.stop());
         };
-        mediaRecorder.start(); isRecording = true;
-        btn.innerHTML = '<span style="font-size:18px;">⏹️</span> กำลังอัดเสียง... (กดเพื่อหยุด)'; btn.classList.add('recording');
+        mediaRecorder.start(); isRecording = true; btn.innerHTML = '<span style="font-size:18px;">⏹️</span> กำลังอัดเสียง... (กดเพื่อหยุด)'; btn.classList.add('recording');
       } catch (err) { alert('เข้าถึงไมค์ไม่ได้ค่ะ รบกวนกดอนุญาตไมโครโฟนก่อนนะคะ 🥺'); }
     } else {
       mediaRecorder.stop(); isRecording = false; btn.classList.remove('recording'); btn.innerHTML = '<span style="font-size:18px;">🎤</span> อัดเสียง';
     }
   }
-  function discardAudio() {
-    audioBase64 = null; audioChunks = []; document.getElementById('audioPreviewBox').style.display = 'none';
-    const btn = document.getElementById('recordBtn'); btn.style.display = 'flex'; btn.innerHTML = '<span style="font-size:18px;">🎤</span> อัดเสียง';
-  }
+  function discardAudio() { audioBase64 = null; audioChunks = []; document.getElementById('audioPreviewBox').style.display = 'none'; const btn = document.getElementById('recordBtn'); btn.style.display = 'flex'; btn.innerHTML = '<span style="font-size:18px;">🎤</span> อัดเสียง'; }
 
   function toggleLockOptions() {
     const isCheckbox = document.getElementById('lockCheckbox');
-    if(isCheckbox) { 
-      document.getElementById('lockOptions').style.display = isCheckbox.checked ? 'flex' : 'none'; 
-      if(!isCheckbox.checked) { clearSetupPin(); document.getElementById('lockHint').value = ''; }
-    }
+    if(isCheckbox) { document.getElementById('lockOptions').style.display = isCheckbox.checked ? 'flex' : 'none'; if(!isCheckbox.checked) { clearSetupPin(); document.getElementById('lockHint').value = ''; } }
   }
 
   function saveSharedNote() {
     if (currentViewingDay === null) return;
     const text = document.getElementById('sharedNoteInput').value;
     const from = document.getElementById('noteFrom').options[document.getElementById('noteFrom').selectedIndex].text; 
-    const isCheckbox = document.getElementById('lockCheckbox');
-    const isLocked = isCheckbox ? isCheckbox.checked : false;
-    const lockPin = setupPin; // ใช้รหัสจากแป้นกด 6 หลัก
-    const lockHint = document.getElementById('lockHint').value;
-    
+    const isCheckbox = document.getElementById('lockCheckbox'); const isLocked = isCheckbox ? isCheckbox.checked : false; const lockPin = setupPin; const lockHint = document.getElementById('lockHint').value;
     if (text.trim() === '' && !audioBase64 && !imageBase64) { alert("ต้องพิมพ์ข้อความ อัดเสียง หรือใส่รูปก่อนส่งน้า! 🥺"); return; }
     if (isLocked && lockPin.length !== 6) { alert("ต้องใส่รหัส 6 หลักให้ครบก่อนนะคะ! 🔑"); return; }
 
-    const btn = document.getElementById('saveNoteBtn');
-    const originalText = btn.innerText;
-    btn.innerHTML = '⏳ กำลังแพ็กกระดาษโน้ต...';
-    btn.disabled = true;
+    const btn = document.getElementById('saveNoteBtn'); const originalText = btn.innerText; btn.innerHTML = '⏳ กำลังแพ็กกระดาษโน้ต...'; btn.disabled = true;
+    const now = new Date(); const timeStr = now.toLocaleDateString('th-TH') + ' เวลา ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.';
 
-    const now = new Date();
-    const timeStr = now.toLocaleDateString('th-TH') + ' เวลา ' + now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.';
-
-    const noteData = {
-      targetMonth: Number(currentViewingMonthIndex), targetDay: Number(currentViewingDay),
-      text: text, from: from, timestamp: timeStr,
-      isLocked: isLocked, lockPin: lockPin, lockHint: lockHint,
-      audioData: audioBase64 || null, imageData: imageBase64 || null 
-    };
-
+    const noteData = { targetMonth: Number(currentViewingMonthIndex), targetDay: Number(currentViewingDay), text: text, from: from, timestamp: timeStr, isLocked: isLocked, lockPin: lockPin, lockHint: lockHint, audioData: audioBase64 || null, imageData: imageBase64 || null };
     try { notesRef.push(noteData); } catch (e) { console.log(e); }
 
     setTimeout(() => {
-      document.getElementById('sharedNoteInput').value = ''; 
-      document.getElementById('lockHint').value = ''; 
-      clearSetupPin();
-      if (isCheckbox) { isCheckbox.checked = false; } toggleLockOptions(); 
-      discardAudio(); discardImage();
-      
-      btn.innerText = originalText; btn.disabled = false;
-      createSaveSparks();
-
-      const status = document.getElementById('noteStatus');
-      status.style.display = 'block'; 
-      setTimeout(() => { status.style.display = 'none'; backToCalendar(); }, 1500);
+      document.getElementById('sharedNoteInput').value = ''; document.getElementById('lockHint').value = ''; clearSetupPin();
+      if (isCheckbox) { isCheckbox.checked = false; } toggleLockOptions(); discardAudio(); discardImage();
+      btn.innerText = originalText; btn.disabled = false; createSaveSparks();
+      const status = document.getElementById('noteStatus'); status.style.display = 'block'; setTimeout(() => { status.style.display = 'none'; backToCalendar(); }, 1500);
     }, 400); 
   }
 
-  function isFutureNote(m, d) {
-    const today = new Date();
-    const realMonth = today.getMonth();
-    const realDay = today.getDate();
-    if (m > realMonth) return true;
-    if (m === realMonth && d > realDay) return true;
-    return false;
-  }
+  function isFutureNote(m, d) { const today = new Date(); const realMonth = today.getMonth(); const realDay = today.getDate(); if (m > realMonth) return true; if (m === realMonth && d > realDay) return true; return false; }
 
   function renderNotesForDay(day) {
     const board = document.getElementById('notesBoard'); board.innerHTML = ''; 
     const dayNotes = allNotes.filter(n => Number(n.targetDay) === day && Number(n.targetMonth) === currentViewingMonthIndex).reverse();
-    
-    if (dayNotes.length === 0) {
-      board.innerHTML = '<div style="width: 100%; text-align: center; color: #9ca3af; font-size: 14px; padding: 20px; font-weight: 500;">ยังไม่มีโน้ตเลย... ลองแปะแผ่นแรกดูสิคะ! 💌</div>'; return;
-    }
+    if (dayNotes.length === 0) { board.innerHTML = '<div style="width: 100%; text-align: center; color: #9ca3af; font-size: 14px; padding: 20px; font-weight: 500;">ยังไม่มีโน้ตเลย... ลองแปะแผ่นแรกดูสิคะ! 💌</div>'; return; }
     
     dayNotes.forEach(note => {
-      const noteEl = document.createElement('div');
-      const timeCapsule = isFutureNote(Number(note.targetMonth), Number(note.targetDay));
-      
-      // ✨ เช็กชื่อคนส่งเพื่อกำหนดสีพื้นหลังของโน้ต
+      const noteEl = document.createElement('div'); const timeCapsule = isFutureNote(Number(note.targetMonth), Number(note.targetDay));
       let senderClass = '';
-      if (note.from && note.from.includes('มาย')) { senderClass = ' note-may'; }
-      else if (note.from && note.from.includes('เค')) { senderClass = ' note-k'; }
+      if (note.from && note.from.includes('มาย')) { senderClass = ' note-may'; } else if (note.from && note.from.includes('เค')) { senderClass = ' note-k'; }
 
-      if (timeCapsule) { noteEl.className = 'mini-note time-capsule' + senderClass; } 
-      else if (note.isLocked) { noteEl.className = 'mini-note locked-note' + senderClass; } 
-      else { noteEl.className = 'mini-note' + senderClass; }
+      if (timeCapsule) { noteEl.className = 'mini-note time-capsule' + senderClass; } else if (note.isLocked) { noteEl.className = 'mini-note locked-note' + senderClass; } else { noteEl.className = 'mini-note' + senderClass; }
 
       const pinIcon = timeCapsule ? '⏳' : (note.isLocked ? '🔒' : '📍');
-      
-      let mediaIcons = '';
-      if (note.audioData) mediaIcons += '🎵 ';
-      if (note.imageData) mediaIcons += '📸 ';
-
+      let mediaIcons = ''; if (note.audioData) mediaIcons += '🎵 '; if (note.imageData) mediaIcons += '📸 ';
       const hintText = timeCapsule ? '(รอเปิดในอนาคต 🔒)' : (note.isLocked ? '(ข้อความติดล็อก 🔑)' : '(แตะเพื่อเปิดอ่าน 💌)');
 
-      noteEl.innerHTML = `
-        <div class="mini-pin">${pinIcon}</div>
-        <div class="mini-from-text">จาก:<br>${note.from}</div>
-        <div class="mini-icons">${mediaIcons}</div>
-        <div class="mini-hint">${hintText}</div>
-        <div class="mini-time-stamp">${note.timestamp}</div>
-      `;
+      noteEl.innerHTML = `<div class="mini-pin">${pinIcon}</div><div class="mini-from-text">จาก:<br>${note.from}</div><div class="mini-icons">${mediaIcons}</div><div class="mini-hint">${hintText}</div><div class="mini-time-stamp">${note.timestamp}</div>`;
       
       noteEl.onclick = () => {
         if (timeCapsule) {
           document.getElementById('capsuleUnlockText').innerText = `ข้อความนี้จะเปิดให้ดูได้ในวันที่ ${note.targetDay} ${monthNames[note.targetMonth]} เท่านั้นนะ อดใจรอหน่อยคนดื้อ!`;
           document.getElementById('timeCapsuleModal').style.display = 'flex';
         } else if (note.isLocked) {
-          noteToUnlock = note;
-          const hintStr = (note.lockHint && note.lockHint.trim() !== '') ? note.lockHint : "ไม่มีคำใบ้ (ให้เดาเอาเอง อิอิ 😜)";
-          document.getElementById('displayUnlockHint').innerText = `คำใบ้: ${hintStr}`;
-          
-          // รีเซ็ตการแสดงผลแป้นตัวเลขปลดล็อก
-          clearUnlockPin();
-          document.getElementById('unlockErrorMsg').style.display = 'none';
-          document.getElementById('unlockModal').style.display = 'flex';
-        } else {
-          openNoteDetail(note);
-        }
+          noteToUnlock = note; const hintStr = (note.lockHint && note.lockHint.trim() !== '') ? note.lockHint : "ไม่มีคำใบ้ (ให้เดาเอาเอง อิอิ 😜)"; document.getElementById('displayUnlockHint').innerText = `คำใบ้: ${hintStr}`;
+          clearUnlockPin(); document.getElementById('unlockErrorMsg').style.display = 'none'; document.getElementById('unlockModal').style.display = 'flex';
+        } else { openNoteDetail(note); }
       };
       board.appendChild(noteEl);
     });
@@ -1146,38 +1075,24 @@
 
   function verifyUnlock() {
     if(unlockPin.length !== 6) {
-      const errorMsg = document.getElementById('unlockErrorMsg');
-      errorMsg.innerText = '❌ ใส่รหัสให้ครบ 6 หลักสิคนดื้อ!';
-      errorMsg.style.display = 'block'; errorMsg.classList.remove('bounce-anim'); void errorMsg.offsetWidth; errorMsg.classList.add('bounce-anim');
-      return;
+      const errorMsg = document.getElementById('unlockErrorMsg'); errorMsg.innerText = '❌ ใส่รหัสให้ครบ 6 หลักสิคนดื้อ!'; errorMsg.style.display = 'block'; errorMsg.classList.remove('bounce-anim'); void errorMsg.offsetWidth; errorMsg.classList.add('bounce-anim'); return;
     }
-
-    if (unlockPin === noteToUnlock.lockPin) {
-      closePopup('unlockModal'); openNoteDetail(noteToUnlock);
+    if (unlockPin === noteToUnlock.lockPin) { closePopup('unlockModal'); openNoteDetail(noteToUnlock);
     } else {
-      const errorMsg = document.getElementById('unlockErrorMsg');
-      errorMsg.innerText = '❌ รหัสผิดนะ ลองใหม่สิ!';
-      errorMsg.style.display = 'block'; errorMsg.classList.remove('bounce-anim'); void errorMsg.offsetWidth; errorMsg.classList.add('bounce-anim');
-      clearUnlockPin(); // เคลียร์รหัสที่กดผิดให้กดใหม่
+      const errorMsg = document.getElementById('unlockErrorMsg'); errorMsg.innerText = '❌ รหัสผิดนะ ลองใหม่สิ!'; errorMsg.style.display = 'block'; errorMsg.classList.remove('bounce-anim'); void errorMsg.offsetWidth; errorMsg.classList.add('bounce-anim'); clearUnlockPin(); 
     }
   }
 
   function openNoteDetail(note) {
     document.getElementById('detailFromTo').innerHTML = `ส่งความรู้สึกจาก: <span style="color:#ff477e;">${note.from}</span> 💌`;
-    const textEl = document.getElementById('detailText');
-    if (note.text && note.text.trim() !== '') { textEl.innerText = note.text; textEl.style.display = 'block'; } else { textEl.style.display = 'none'; }
-    const imgEl = document.getElementById('detailImage');
-    if (note.imageData) { imgEl.src = note.imageData; imgEl.style.display = 'block'; } else { imgEl.src = ''; imgEl.style.display = 'none'; }
+    const textEl = document.getElementById('detailText'); if (note.text && note.text.trim() !== '') { textEl.innerText = note.text; textEl.style.display = 'block'; } else { textEl.style.display = 'none'; }
+    const imgEl = document.getElementById('detailImage'); if (note.imageData) { imgEl.src = note.imageData; imgEl.style.display = 'block'; } else { imgEl.src = ''; imgEl.style.display = 'none'; }
     const audioContainer = document.getElementById('detailAudioContainer'); const audioEl = document.getElementById('detailAudio');
     if (note.audioData) { audioEl.src = note.audioData; audioContainer.style.display = 'block'; } else { audioEl.src = ''; audioContainer.style.display = 'none'; }
-    document.getElementById('detailTime').innerHTML = `📅 เขียนเมื่อ: <span style="color:#b45309;">${note.timestamp}</span>`; 
-    document.getElementById('noteDetailModal').style.display = 'flex';
+    document.getElementById('detailTime').innerHTML = `📅 เขียนเมื่อ: <span style="color:#b45309;">${note.timestamp}</span>`; document.getElementById('noteDetailModal').style.display = 'flex';
   }
   
-  function closePopup(modalId) {
-    document.getElementById(modalId).style.display = 'none';
-    if(modalId === 'noteDetailModal') { document.getElementById('detailAudio').pause(); }
-  }
+  function closePopup(modalId) { document.getElementById(modalId).style.display = 'none'; if(modalId === 'noteDetailModal') { document.getElementById('detailAudio').pause(); } }
 
   function goHome() {
     document.getElementById('home-btn').style.display = 'none'; currentViewingDay = null; noteToUnlock = null; discardAudio(); discardImage();
@@ -1185,18 +1100,12 @@
     if (bgMusic) bgMusic.pause(); if (video) video.pause();
     document.getElementById('daily-notes-sec').style.display = 'none'; document.getElementById('sept3-experience-container').style.display = 'none'; document.getElementById('dynamic-calendar-sec').style.display = 'none';
     document.getElementById('step-1-intro').style.display = 'block'; document.getElementById('step-2-video').style.display = 'none'; document.getElementById('step-3-rain-text').style.display = 'none'; document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'none'; document.getElementById('typewriter-text').innerHTML = ''; typeIndex = 0; 
-    document.getElementById('memory-box-step').style.display = 'block'; 
-    document.getElementById('mascot-container').style.display = 'flex'; 
-    document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' });
-    initMascot(); 
+    document.getElementById('memory-box-step').style.display = 'block'; document.getElementById('mascot-container').style.display = 'flex'; document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' }); initMascot(); 
   }
 
   // --- ✨ ความทรงจำวันที่ 3 ---
   function openSept3Experience() {
-    document.getElementById('dynamic-calendar-sec').style.display = 'none';
-    document.getElementById('mascot-container').style.display = 'none'; 
-    document.getElementById('sept3-experience-container').style.display = 'block';
-    document.getElementById('sept3-experience-container').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('dynamic-calendar-sec').style.display = 'none'; document.getElementById('mascot-container').style.display = 'none'; document.getElementById('sept3-experience-container').style.display = 'block'; document.getElementById('sept3-experience-container').scrollIntoView({ behavior: 'smooth' });
   }
 
   let btnScale = 1; let drinkSelected = false; let timerInterval = null;
@@ -1227,6 +1136,212 @@
   function stopScan() { if (hasCompletedScan) return; document.getElementById('laser').classList.remove('scanning'); clearTimeout(scanTimer); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerText = ''; document.getElementById('lie-result').innerHTML = '<span style="color: #e53e3e;">⚠️ สแกนยังไม่เสร็จ! แตะค้างไว้จนกว่าจะเสร็จน้า</span>'; }
   function finishScan() { hasCompletedScan = true; document.getElementById('laser').classList.remove('scanning'); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerHTML = '💓 135 BPM (หัวใจเต้นแรงมาก!)'; document.getElementById('lie-result').innerHTML = `🚨 <strong>RESULT: DETECTED!</strong><br><span style="color: #ff477e;">"ตรวจพบความคิดถึง 100% (ห้ามปฏิเสธเด็ดขาด!)" 🥰✨</span>`; const finalBtn = document.getElementById('final-btn-wrapper'); finalBtn.style.display = 'block'; setTimeout(() => { finalBtn.classList.add('show'); }, 600); }
   function goToNextSection() { document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'block'; }
+
+
+  // --- 🛒 🎮 มินิเกม 8 กันยายน (เซเว่นออนไลน์) 🎮 🛒 ---
+  const foodImages = [
+    "https://ozonemassage.com/wp-content/uploads/2026/09/571.jpg", 
+    "https://ozonemassage.com/wp-content/uploads/2026/09/570.jpg",
+    "https://ozonemassage.com/wp-content/uploads/2026/09/569_0.jpg",
+    "https://ozonemassage.com/wp-content/uploads/2026/09/568_0.jpg",
+    "https://ozonemassage.com/wp-content/uploads/2026/09/567_0.jpg",
+    "https://ozonemassage.com/wp-content/uploads/2026/09/572.jpg", 
+    "https://ozonemassage.com/wp-content/uploads/2026/09/565_0.jpg",
+    "https://ozonemassage.com/wp-content/uploads/2026/09/564_0.jpg",
+    "https://ozonemassage.com/wp-content/uploads/2026/09/563_0.jpg",
+    "https://ozonemassage.com/wp-content/uploads/2026/09/562_0.jpg",
+    "https://ozonemassage.com/wp-content/uploads/2026/09/561_0.jpg",
+    "https://ozonemassage.com/wp-content/uploads/2026/09/560_0.jpg"
+  ];
+
+  let selectedFoods = 0;
+  let bossScale = 1;
+  let bossMoved = false; 
+
+  function openSevenGame() {
+    if (savedSevenOrder) {
+      const historyGrid = document.getElementById('historyGrid');
+      historyGrid.innerHTML = '';
+      savedSevenOrder.items.forEach(src => {
+        const div = document.createElement('div');
+        div.className = 'food-item';
+        div.style.borderColor = '#10b981'; 
+        div.innerHTML = `<img src="${src}" class="food-img" alt="Ordered Item">`;
+        historyGrid.appendChild(div);
+      });
+      document.getElementById('orderHistoryModal').style.display = 'flex';
+      return;
+    }
+
+    selectedFoods = 0;
+    bossScale = 1;
+    bossMoved = false;
+    document.getElementById('cartStatusText').innerText = "🛒 ตะกร้าว่างเปล่า (เลือกอีกอย่างน้อย 4 อย่าง)";
+    document.getElementById('cartStatusText').style.color = '#0ea5e9';
+    document.getElementById('cartStatusText').style.background = '#e0f2fe';
+    document.getElementById('cartStatusText').style.borderColor = '#7dd3fc';
+    document.getElementById('checkoutBtn').style.display = "none";
+    document.getElementById('sevenGameModal').style.display = 'flex';
+    
+    const grid = document.getElementById('foodGrid');
+    grid.innerHTML = '';
+    
+    foodImages.forEach((src, index) => {
+      if (index === 0) {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'boss-placeholder';
+        placeholder.id = 'bossPlaceholder';
+        
+        const bossDiv = document.createElement('div');
+        bossDiv.className = 'food-item boss-item';
+        bossDiv.id = 'bossMay';
+        bossDiv.innerHTML = `<img src="${src}" class="food-img" alt="May">`;
+        
+        bossDiv.onmouseover = function() { dodgeBoss(); };
+        bossDiv.ontouchstart = function() { dodgeBoss(); };
+        bossDiv.onclick = function() { clickBoss(this); };
+        
+        placeholder.appendChild(bossDiv);
+        grid.appendChild(placeholder);
+      } else {
+        const div = document.createElement('div');
+        div.className = 'food-item';
+        div.innerHTML = `<img src="${src}" class="food-img" alt="Food ${index}">`;
+        div.onclick = function() { selectFoodItem(this); };
+        grid.appendChild(div);
+      }
+    });
+  }
+
+  function selectFoodItem(element) {
+    if (element.classList.contains('selected')) return; 
+    
+    element.classList.add('selected');
+    selectedFoods++;
+    
+    const statusText = document.getElementById('cartStatusText');
+    
+    if (selectedFoods < 4) {
+      const remaining = 4 - selectedFoods;
+      statusText.innerText = `🛒 เลือกไป ${selectedFoods} อย่างแล้ว (เลือกอีกอย่างน้อย ${remaining} อย่าง)`;
+      statusText.style.color = '#0ea5e9';
+    } else {
+      statusText.innerText = `🛒 เลือกครบแล้ว! กดสั่งออเดอร์พิเศษได้เลยย ✨`;
+      statusText.style.color = '#10b981';
+      statusText.style.background = '#d1fae5';
+      statusText.style.borderColor = '#34d399';
+      
+      document.getElementById('checkoutBtn').style.display = "block"; 
+
+      const boss = document.getElementById('bossMay');
+      if (boss) {
+        boss.classList.remove('fixed-fly');
+        boss.style.position = 'absolute';
+        boss.style.left = '0';
+        boss.style.top = '0';
+        boss.style.width = '100%';
+        boss.style.height = '100%';
+        boss.style.transform = 'scale(1)';
+        boss.style.animation = 'pulse 1s infinite';
+        boss.style.borderColor = '#10b981';
+        bossMoved = false; 
+      }
+    }
+  }
+
+  function dodgeBoss() {
+    if (selectedFoods >= 4) return; 
+    
+    const boss = document.getElementById('bossMay');
+    
+    if (!bossMoved) {
+      const rect = boss.getBoundingClientRect();
+      boss.classList.add('fixed-fly');
+      boss.style.width = rect.width + 'px';
+      boss.style.height = rect.height + 'px';
+      bossMoved = true;
+    }
+    
+    const maxX = window.innerWidth - boss.offsetWidth;
+    const maxY = window.innerHeight - boss.offsetHeight;
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+    
+    if (bossScale > 0.4) {
+      bossScale -= 0.1; 
+    }
+    
+    boss.style.left = randomX + 'px';
+    boss.style.top = randomY + 'px';
+    boss.style.transform = `scale(${bossScale})`;
+  }
+
+  function clickBoss(element) {
+    if (selectedFoods < 4) {
+      dodgeBoss();
+      const statusText = document.getElementById('cartStatusText');
+      statusText.innerText = "🚨 เห้ย! เลือกให้ครบอย่างน้อย 4 อย่างก่อนสิคนดื้อ!";
+      statusText.style.color = '#e11d48';
+      statusText.style.background = '#ffe4e6';
+      statusText.style.borderColor = '#fda4af';
+      
+      setTimeout(() => {
+        const remaining = 4 - selectedFoods;
+        if (remaining > 0) {
+          statusText.innerText = `🛒 เลือกไป ${selectedFoods} อย่างแล้ว (เลือกอีกอย่างน้อย ${remaining} อย่าง)`;
+          statusText.style.color = '#0ea5e9';
+          statusText.style.background = '#e0f2fe';
+          statusText.style.borderColor = '#7dd3fc';
+        }
+      }, 1500);
+    } else {
+      if (!element.classList.contains('selected')) {
+        element.classList.add('selected');
+        element.style.transform = 'scale(1)'; 
+        element.style.animation = 'none'; 
+      }
+    }
+  }
+
+  function finishSevenGame() {
+    let selectedImages = [];
+    document.querySelectorAll('.food-item.selected img').forEach(img => {
+        selectedImages.push(img.src);
+    });
+
+    sevenOrderRef.set({
+        orderedAt: new Date().toISOString(),
+        items: selectedImages
+    });
+
+    closePopup('sevenGameModal');
+    
+    const playGameBtn = document.getElementById('playGame8Btn');
+    playGameBtn.innerHTML = '<span style="font-size: 22px;">📜</span> เปิดดูออเดอร์ที่สั่งไว้แล้ว 🥰';
+    playGameBtn.className = 'history-game-btn';
+
+    document.getElementById('orderSuccessModal').style.display = 'flex';
+  }
+
+  function closeOrderSuccess() {
+    closePopup('orderSuccessModal');
+  }
+
+  // ✨ ฟังก์ชันสำหรับล้างตะกร้าเซเว่น เพื่อเล่นใหม่ ✨
+  function resetSevenOrder() {
+    if(confirm("แน่ใจนะว่าจะทิ้งออเดอร์นี้แล้วสั่งใหม่? 🥺")) {
+      sevenOrderRef.remove().then(() => {
+        savedSevenOrder = null;
+        closePopup('orderHistoryModal');
+        
+        const playGameBtn = document.getElementById('playGame8Btn');
+        playGameBtn.innerHTML = '<span style="font-size: 22px;">🥺</span> หิวไหมคะ... แวะสั่งเซเว่นออนไลน์ให้หน่อยน้าา!';
+        playGameBtn.className = 'play-game-btn';
+        
+        openSevenGame();
+      });
+    }
+  }
 
   function createBackgroundHearts() { const container = document.getElementById('heart-bg-container'); const hearts = ['💖', '🌸', '✨', '💕']; for(let i=0; i<12; i++) { const heart = document.createElement('div'); heart.classList.add('floating-heart-bg'); heart.innerText = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 4 + 4) + 's'; container.appendChild(heart); } }
 </script>
