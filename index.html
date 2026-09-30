@@ -50,7 +50,7 @@
     .floating-heart-bg { position: fixed; font-size: 22px; color: rgba(255, 117, 140, 0.35); pointer-events: none; z-index: 0; animation: floatUp 6s linear infinite; }
     @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } }
 
-    /* 🎬 Memory Cinema (เปลี่ยนสีให้คิวท์ขึ้น) */
+    /* 🎬 Memory Cinema */
     .cinema-btn { background: linear-gradient(135deg, #fdf4ff, #fae8ff); color: #d946ef; border: 2px dashed #f0abfc; padding: 15px; font-size: 16px; font-weight: 700; font-family: 'Kanit'; border-radius: 16px; width: 100%; cursor: pointer; margin-bottom: 25px; box-shadow: 0 6px 20px rgba(240, 171, 252, 0.4); display: flex; justify-content: center; align-items: center; gap: 10px; animation: pulseGlowCinema 2s infinite; }
     @keyframes pulseGlowCinema { 0% { box-shadow: 0 0 0 0 rgba(240, 171, 252, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(240, 171, 252, 0); } 100% { box-shadow: 0 0 0 0 rgba(240, 171, 252, 0); } }
     #cinema-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 10010; display: none; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(8px); animation: fadeIn 1s; }
@@ -77,15 +77,30 @@
     .glass-tube { width: 100%; height: 28px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 255, 255, 0.9); border-radius: 20px; box-shadow: inset 0 3px 6px rgba(0,0,0,0.1), 0 4px 15px rgba(255,182,193,0.3); position: relative; overflow: hidden; backdrop-filter: blur(2px); }
     .glass-liquid { height: 100%; width: 0%; background: linear-gradient(90deg, #ff758c, #ff0055); box-shadow: 0 0 20px #ff477e, inset 0 2px 5px rgba(255,255,255,0.6); border-radius: 18px; transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); position: relative; }
     .glass-liquid::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.6) 15%, transparent 20%), radial-gradient(circle, rgba(255,255,255,0.4) 15%, transparent 20%); background-size: 15px 15px, 20px 20px; background-position: 0 0, 10px 10px; animation: bubbles 2s linear infinite; border-radius: 18px; }
-    @keyframes bubbles { 0% { background-position: 0 20px, 10px 30px; } 100% { background-position: 0 0, 10px 10px; } }
 
-    /* 🪙 การ์ดขูดลุ้นข้อความ */
-    .scratch-wrapper { margin-bottom: 25px; position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; }
-    .scratch-header { font-size: 13px; font-weight: 700; color: #b45309; margin-bottom: 8px; transition: color 0.3s; }
-    .scratch-container { position: relative; width: 100%; max-width: 320px; height: 85px; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 20px rgba(255, 182, 193, 0.3); border: 3px solid #ffffff; }
-    .scratch-text-secret { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #fff0f3; display: flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 15px; font-weight: 700; color: #e11d48; text-align: center; border: 2px dashed #ffb6c1; border-radius: 14px; transition: transform 0.4s; }
-    .scratch-text-secret.revealed { transform: scale(1.05); }
-    #scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; cursor: pointer; transition: opacity 0.5s ease; }
+    /* 🎰 กิมมิคใหม่: เซียมซีเขย่ารัก (Fortune Shake) */
+    .shake-wrapper { margin-bottom: 25px; position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; background: #fffdf0; padding: 20px; border-radius: 20px; border: 2px dashed #fcd34d; box-shadow: inset 0 0 15px rgba(245, 158, 11, 0.1); }
+    .shake-header { font-size: 15px; font-weight: 700; color: #d97706; margin-bottom: 15px; }
+    .shake-instruction { font-size: 12px; color: #b45309; margin-bottom: 15px; background: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 12px; }
+    .cylinder-container { position: relative; width: 100px; height: 130px; cursor: pointer; display: flex; justify-content: center; align-items: flex-end; margin-bottom: 10px; }
+    .cylinder-img { width: 80px; height: auto; z-index: 2; transition: transform 0.1s; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15)); }
+    .stick-img { position: absolute; top: 20px; width: 15px; height: auto; z-index: 1; transition: top 0.3s ease-out; opacity: 0; }
+    
+    /* อนิเมชันตอนเขย่า */
+    .shaking .cylinder-img { animation: shakeHard 0.3s infinite; }
+    .popping .stick-img { top: -30px; opacity: 1; animation: popUpStick 0.5s ease-out forwards; }
+    
+    @keyframes shakeHard { 0% { transform: translate(2px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-5deg); } 20% { transform: translate(-3px, 0px) rotate(5deg); } 30% { transform: translate(0px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(5deg); } 50% { transform: translate(-1px, 2px) rotate(-5deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(2px, 1px) rotate(-5deg); } 80% { transform: translate(-1px, -1px) rotate(5deg); } 90% { transform: translate(2px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-5deg); } }
+    @keyframes popUpStick { 0% { top: 20px; opacity: 1; } 50% { top: -50px; transform: rotate(15deg); } 100% { top: -20px; transform: rotate(10deg); opacity: 1; } }
+
+    .shake-status { font-size: 13px; font-weight: 600; color: #059669; margin-top: 10px; display: none; background: #d1fae5; padding: 5px 12px; border-radius: 12px; border: 1px dashed #34d399; }
+
+    /* ป๊อปอัปผลลัพธ์เซียมซี (คูปอง) */
+    .fortune-modal { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 4px solid #f59e0b; padding: 35px 25px; }
+    .fortune-icon { font-size: 50px; margin-bottom: 10px; animation: bounce 2s infinite; }
+    .fortune-title { font-size: 22px; font-weight: 700; color: #d97706; margin-bottom: 15px; }
+    .fortune-message { font-size: 16px; color: #4a5568; font-weight: 600; line-height: 1.5; background: white; padding: 20px; border-radius: 16px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); margin-bottom: 20px; border: 2px dashed #fcd34d; }
+    .fortune-coupon { color: #e11d48; font-size: 18px; font-weight: 700; animation: pulse 1.5s infinite; }
 
     .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .choice-btn:active { transform: scale(0.95); }
@@ -97,7 +112,6 @@
     .month-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 5px; border-radius: 16px; border: 2px solid #ffe4e8; background: #fff; font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; color: #4a5568; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative;}
     .month-btn:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3); border-color: #ffb6c1; color: #ff477e; }
     
-    /* สไตล์ปุ่มเดือนปัจจุบัน และเดือนอดีต */
     .active-month { background: linear-gradient(135deg, #ff477e, #ff758c); color: white; border-color: #ff477e; box-shadow: 0 6px 20px rgba(255, 71, 126, 0.5); }
     .active-month:hover { color: white; }
     .past-month { background: #fffdf0; border-color: #fcd34d; color: #b45309; box-shadow: inset 0 0 10px rgba(245,158,11,0.1); }
@@ -111,13 +125,14 @@
     .day:hover { background: #fff0f3; border-color: #ffccd5; transform: scale(1.08); z-index: 10; box-shadow: 0 6px 15px rgba(255, 182, 193, 0.4); }
     .special-day { background: linear-gradient(135deg, #ff477e, #ff758c) !important; color: white !important; font-weight: bold; border-radius: 50%; box-shadow: 0 6px 15px rgba(255, 71, 126, 0.5); animation: pulse 1.5s infinite; border: none; }
     
-    /* ไฮไลต์วันที่มีโน้ตถูกล็อก */
     .has-locked-note-day { background: linear-gradient(135deg, #fef3c7, #fde68a) !important; border: 2px solid #f59e0b !important; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important; color: #92400e !important; }
 
     .note-dot { position: absolute; bottom: 3px; right: 3px; background: #fcd34d; border-radius: 50%; box-shadow: 0 2px 5px rgba(245,158,11,0.6); z-index: 5; width: 12px; height: 12px; animation: pulse 2s infinite; pointer-events: none; }
     .note-dot.has-number { width: 18px; height: 18px; font-size: 11px; font-weight: bold; color: #92400e; display: flex; justify-content: center; align-items: center; border: 2px solid white; bottom: -3px; right: -3px; animation: bounce 1.5s infinite; }
+    
+    /* ไอคอนมงกุฎสำหรับวันพิเศษ (3 ก.ย.) */
+    .crown-icon { position: absolute; top: -10px; font-size: 16px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); z-index: 6; animation: floatBox 2s infinite; }
 
-    /* ป้ายบอกสถานะวันที่มีโน้ตลับ (ใต้ปฏิทิน) */
     .locked-legend-box { display: none; margin-top: 20px; padding: 15px; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 16px; font-size: 14px; color: #b45309; font-weight: 600; text-align: center; box-shadow: 0 4px 10px rgba(245,158,11,0.1); animation: popUp 0.5s; }
 
     /* 📝 กระดานโน้ตเฉพาะวัน */
@@ -143,45 +158,33 @@
     .image-upload-btn { background: #fce7f3; border-color: #fbcfe8; color: #be185d; }
     .image-upload-btn:hover { background: #fbcfe8; transform: translateY(-2px); }
 
-    /* 🔑 แป้นตัวเลข (Numpad) */
     .lock-toggle-box { background: #ffffff; border: 2px dashed #fcd34d; border-radius: 14px; padding: 18px; margin: 15px 0; font-size: 15px; color: #b45309; transition: all 0.3s; }
     .lock-inputs { display: flex; flex-direction: column; align-items: center; margin-top: 15px; }
-    
     .pin-display { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
     .pin-dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #ff477e; background: transparent; transition: background 0.2s, transform 0.2s; }
     .pin-dot.filled { background: #ff477e; transform: scale(1.1); box-shadow: 0 2px 6px rgba(255,71,126,0.4); }
-    
     .pin-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; max-width: 240px; margin: 0 auto 15px auto; }
     .pin-keypad button { background: #fff0f3; color: #ff477e; border: 2px solid #ffccd5; border-radius: 50%; width: 60px; height: 60px; font-size: 24px; font-family: 'Kanit'; font-weight: 700; cursor: pointer; transition: all 0.1s; display: flex; justify-content: center; align-items: center; margin: 0 auto; box-shadow: 0 4px 10px rgba(255,182,193,0.3); }
     .pin-keypad button:active { transform: scale(0.9); background: #ffccd5; box-shadow: none; }
-    
     .hint-input-wrapper { width: 100%; margin-top: 10px; }
     .hint-input-wrapper input { width: 100%; border: 2px dashed #f59e0b; border-radius: 12px; padding: 14px; font-family: 'Kanit', sans-serif; font-size: 15px; outline: none; background: #fffbeb; transition: background 0.3s; text-align: center; }
-    .hint-input-wrapper input:focus { background: #ffffff; border-color: #d97706; }
 
     .save-note-btn { margin-top: 15px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 15px 20px; border-radius: 16px; font-family: 'Kanit', sans-serif; font-size: 17px; font-weight: 700; cursor: pointer; width: 100%; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 15px rgba(217, 119, 6, 0.4); }
     .save-note-btn:active { transform: translateY(2px); box-shadow: 0 2px 8px rgba(217, 119, 6, 0.4); }
 
     .notes-board { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-start; border-top: 2px dashed #fef08a; padding-top: 22px; margin-top: 10px;}
-    
-    /* สไตล์หลักของกระดาษโน้ต */
     .mini-note { width: calc(50% - 6px); aspect-ratio: 1; border-radius: 6px 24px 6px 24px; padding: 18px 12px; position: relative; cursor: pointer; box-shadow: 3px 6px 12px rgba(0,0,0,0.12); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease; animation: stickNoteAnim 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
     .mini-note::before { content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%) rotate(-3deg); width: 45px; height: 16px; background: rgba(255,255,255,0.5); box-shadow: 0 2px 5px rgba(0,0,0,0.08); z-index: 3; border-radius: 3px; }
     .mini-note:hover { transform: scale(1.08) rotate(-3deg); box-shadow: 6px 12px 20px rgba(0,0,0,0.18); z-index: 10; }
     @keyframes stickNoteAnim { 0% { transform: translateY(-50px) scale(1.2) rotate(10deg); opacity: 0; } 100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; } }
     
-    /* 💙 💛 สีโน้ตปกติ */
     .mini-note.note-may { background: linear-gradient(135deg, #e0f2fe, #bae6fd); }
     .mini-note.note-may .mini-from-text { color: #075985; }
     .mini-note.note-k { background: linear-gradient(135deg, #fef08a, #fde047); }
     .mini-note.note-k .mini-from-text { color: #92400e; }
-    
-    /* 🌟 โน้ตปลดล็อกออร่า (อดีต) */
     .mini-note.unlocked-past-note { background: linear-gradient(135deg, #fffbeb, #fef3c7) !important; border: 2px solid #fcd34d; box-shadow: 0 0 15px rgba(245,158,11,0.4), inset 0 0 10px rgba(255,255,255,0.8) !important; animation: glowNote 2s infinite alternate !important; }
     @keyframes glowNote { from { box-shadow: 0 0 10px rgba(245,158,11,0.3); } to { box-shadow: 0 0 25px rgba(245,158,11,0.7); } }
     .mini-note.unlocked-past-note .mini-from-text { color: #b45309 !important; font-size: 16px;}
-    
-    /* โน้ตที่ล็อกปัจจุบัน */
     .mini-note.locked-note { background: linear-gradient(135deg, #f8fafc, #f1f5f9) !important; border: 2px dashed #cbd5e1; }
     .mini-note.time-capsule { background: linear-gradient(135deg, #e2e8f0, #cbd5e1) !important; border: 2px dashed #94a3b8; }
     
@@ -195,6 +198,9 @@
     /* 🌟 Modals (ป๊อปอัปต่างๆ) */
     .popup-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 10000; padding: 20px; backdrop-filter: blur(6px); }
     .popup-content { background: white; border-radius: 28px; padding: 30px; max-width: 340px; width: 100%; text-align: center; box-shadow: 0 15px 50px rgba(0,0,0,0.3); animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
+    
+    /* ป๊อปอัปเลือก 3 ก.ย. */
+    .choice-3sep-modal { background: linear-gradient(135deg, #fff0f3, #ffe4e8); border: 4px solid #ffb6c1; }
     
     /* 🎉 ป๊อปอัปสรุปเดือนเก่า */
     .summary-modal { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 4px solid #fcd34d; overflow: hidden; }
@@ -224,10 +230,23 @@
     .good-btn { background-color: #f0fdf4; border-color: #bbf7d0; color: #16a34a; }
     .best-btn { background-color: #f0f9ff; border-color: #bae6fd; color: #0284c7; }
     
-    /* ป๊อปอัปเกมทายรหัส */
     .unlock-box { background: #f8fafc; border: 3px solid #cbd5e1; border-radius: 24px; padding: 30px 20px; text-align: center; max-width: 340px; width: 100%; animation: popUp 0.3s ease-out; }
     .unlock-icon { font-size: 55px; margin-bottom: 10px; filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15)); }
     .unlock-title { font-size: 20px; font-weight: 700; color: #334155; margin-bottom: 8px; }
+
+    /* ✨ ซ่อนโซนประสบการณ์ 3 ก.ย. และทำดีไซน์ให้เหมือนเดิม ✨ */
+    #sept3-experience-container { position: relative; z-index: 50; }
+    .envelope-box { position: relative; display: inline-block; margin-bottom: 20px; }
+    .roll-in-anim { animation: rollIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    @keyframes rollIn { 0% { opacity: 0; transform: translateX(-150px) rotate(-540deg) scale(0.2); } 100% { opacity: 1; transform: translateX(0) rotate(0deg) scale(1); } }
+    .envelope-icon { font-size: 80px; filter: drop-shadow(0 10px 18px rgba(255, 182, 193, 0.6)); }
+    .sparkle-heart { position: absolute; top: -10px; right: -10px; font-size: 30px; }
+    .welcome-card { background: rgba(255, 255, 255, 0.95); border-radius: 28px; padding: 28px 20px; box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4); border: 2px solid #ffffff; animation: popUp 0.9s ease-out 0.4s forwards; opacity: 0; }
+    .morning-title { font-size: 20px; font-weight: 700; color: #ff477e; margin-bottom: 12px; }
+    .special-today-text { font-size: 15px; line-height: 1.6; color: #4a5568; margin-bottom: 24px; }
+    .next-btn { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); color: #ffffff; border: none; padding: 14px 28px; font-size: 16px; font-weight: 600; font-family: 'Kanit', sans-serif; border-radius: 30px; cursor: pointer; box-shadow: 0 6px 20px rgba(255, 117, 140, 0.4); width: 100%; transition: all 0.3s ease; }
+    .video-wrapper { width: 100%; border-radius: 28px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.2); background: #000; border: 3px solid #ffffff; animation: popUp 0.5s ease-out forwards; }
+    .video-wrapper video { width: 100%; height: auto; display: block; }
   </style>
 </head>
 <body>
@@ -242,7 +261,7 @@
   <button class="open-box-btn" onclick="openPackage()">✨ แตะเพื่อเปิดกล่อง!</button>
 </div>
 
-<!-- 🎬 โรงหนังความทรงจำ (Memory Cinema) (แก้สีแล้ว) -->
+<!-- 🎬 โรงหนังความทรงจำ (Memory Cinema) -->
 <div id="cinema-overlay">
   <div style="font-size: 24px; color: #f472b6; font-weight: 700; margin-bottom: 20px; font-family: 'Kanit';" class="magic-glow">🍿 Memory Cinema 🎬</div>
   <video id="cinema-video" controls playsinline>
@@ -260,7 +279,7 @@
     <div id="timeGreeting" class="time-greeting"></div>
     <div class="main-title magic-glow">📦 Memory Box 2026 💖</div>
     
-    <!-- 🎞️ ปุ่มตั๋วหนังความทรงจำ สีพาสเทลน่ารักๆ -->
+    <!-- 🎞️ ปุ่มตั๋วหนังความทรงจำ -->
     <button class="cinema-btn" onclick="openCinema()">
       <span style="font-size: 22px;">🎫</span> แวะดูวิดีโอความทรงจำของเราไหม? 🎬
     </button>
@@ -273,13 +292,16 @@
       </div>
     </div>
 
-    <!-- 🪙 การ์ดขูด -->
-    <div class="scratch-wrapper">
-      <div id="scratch-status" class="scratch-header">🪙 การ์ดขูดเสี่ยงทายประจำวัน (ขูดได้ 1 ครั้ง/วัน)</div>
-      <div class="scratch-container" id="scratch-container">
-        <div id="scratch-text" class="scratch-text-secret">...กำลังโหลดการ์ดเสี่ยงทาย...</div>
-        <canvas id="scratch-canvas"></canvas>
+    <!-- 🎰 มินิเกมใหม่: เซียมซีเขย่ารัก (Fortune Shake) -->
+    <div class="shake-wrapper">
+      <div class="shake-header">🎋 เซียมซีคนดื้อประจำวัน (เขย่าได้ 1 ครั้ง)</div>
+      <div class="shake-instruction">📱 จับมือถือให้แน่น แล้วลอง "เขย่า" ดูสิ!<br><span style="font-size:10px; color:#92400e;">(หรือใช้นิ้วจิ้มรัวๆ ที่กระบอกก็ได้นะ)</span></div>
+      
+      <div class="cylinder-container" id="shake-container" onclick="manualShake()">
+        <img src="https://ozonemassage.com/wp-content/uploads/2026/09/stick.png" class="stick-img" id="shake-stick" alt="ไม้เซียมซี" onerror="this.src='https://cdn-icons-png.flaticon.com/512/8646/8646487.png'">
+        <img src="https://cdn-icons-png.flaticon.com/512/3063/3063076.png" class="cylinder-img" id="shake-cylinder" alt="กระบอกเซียมซี">
       </div>
+      <div id="shake-status" class="shake-status">✨ มีคนแอบมาเขย่าไปแล้ววันนี้!</div>
     </div>
 
     <button class="choice-btn today-btn" onclick="openTodayNotes()">
@@ -297,11 +319,10 @@
       <button class="month-btn" onclick="requestMonthAccess(5)"><span class="month-icon">🌻</span>มิ.ย.</button>
       <button class="month-btn" onclick="requestMonthAccess(6)"><span class="month-icon">☀️</span>ก.ค.</button>
       <button class="month-btn" onclick="requestMonthAccess(7)"><span class="month-icon">☔</span>ส.ค.</button>
-      <!-- 🍁 เดือนกันยา เปลี่ยนเป็นอดีตแล้ว! -->
+      <!-- 🍁 เดือนกันยา อดีต -->
       <button class="month-btn past-month" onclick="requestMonthAccess(8)"><span class="month-icon">🍁</span>ก.ย. 📜</button>
-      <!-- 🎃 ไฮไลต์เดือนปัจจุบันคือตุลาคม! -->
+      <!-- 🎃 ตุลา ปัจจุบัน -->
       <button class="month-btn active-month" onclick="requestMonthAccess(9)"><span class="month-icon">🎃</span>ต.ค. ✨</button>
-      
       <button class="month-btn" onclick="requestMonthAccess(10)"><span class="month-icon">🪁</span>พ.ย.</button>
       <button class="month-btn" onclick="requestMonthAccess(11)"><span class="month-icon">🎄</span>ธ.ค.</button>
     </div>
@@ -313,7 +334,6 @@
     <p id="cal-instruction" style="font-size: 14px; color: #718096; margin-top: 0; font-weight: 500;">แตะที่ตัวเลขวันที่ เพื่อเปิดดูความทรงจำ หรือแปะกระดาษโน้ต 💌</p>
     <div class="calendar-grid" id="dynamic-cal-grid"></div>
     
-    <!-- 🔑 กล่องอธิบายสีเหลือง (Legend สำหรับวันที่มีโน้ตล็อก) -->
     <div id="locked-notes-legend" class="locked-legend-box">
       🔑 วันที่มีกรอบ <span style="display:inline-block; width:16px; height:16px; background:linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid #f59e0b; border-radius:4px; vertical-align:middle; margin:0 4px;"></span> คือวันที่มีข้อความลับซ่อนอยู่!<br>
       <span style="font-size: 12px; color:#d97706; font-weight:500;">(เดือนนี้มีโน้ตที่ล็อกรหัสไว้ทั้งหมด <span id="locked-count-text">0</span> แผ่น)</span>
@@ -325,7 +345,6 @@
     <div class="shared-note-box">
       <div class="shared-note-title" id="daily-note-title">📌 กระดานโน้ตวันที่ X</div>
       
-      <!-- ฟอร์มสร้างโน้ต -->
       <div id="note-creation-form">
         <div class="note-meta-inputs" style="justify-content: center;">
           <div class="input-col" style="max-width: 240px;">
@@ -343,7 +362,6 @@
           <label style="cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 700;">
             <input type="checkbox" id="lockCheckbox" onchange="toggleLockOptions()" style="transform: scale(1.2);"> 🔒 ล็อกรหัสผ่านให้ข้อความนี้
           </label>
-          <!-- Numpad ย่อไว้เพื่อประหยัดพื้นที่โค้ด (ใช้ชุดเดิม) -->
           <div id="lockOptions" class="lock-inputs" style="display: none;">
             <div style="text-align: center; margin-bottom: 5px; font-weight: 700; color: #e11d48; font-size: 16px;">ตั้งรหัสผ่าน 6 หลัก 🔑</div>
             <div class="pin-display" id="setup-pin-display">
@@ -362,7 +380,6 @@
         <button id="saveNoteBtn" class="save-note-btn" onclick="saveSharedNote()">💌 แปะกระดาษโน้ต</button>
       </div>
 
-      <!-- ป้ายเตือนเดือนเก่า (Nostalgia) -->
       <div id="past-note-message" class="past-note-message">
         🕰️ ไดอารี่เดือนเก่า...<br>
         <span style="font-size: 14px; color: #f43f5e; font-weight: 500;">เก็บไว้เป็นความทรงจำที่สวยงาม แปะโน้ตเพิ่มไม่ได้แล้วน้า 📜✨</span>
@@ -372,24 +389,65 @@
     </div>
     <button class="back-cal-btn" onclick="backToCalendar()">🔙 กลับไปหน้าปฏิทิน</button>
   </div>
+  
+  <!-- ✨ โซนความทรงจำวันที่ 3 กันยายน (ที่กู้คืนกลับมา!) ✨ -->
+  <div id="sept3-experience-container" class="step-box" style="display: none;">
+    <div id="step-1-intro" class="step-box">
+      <div class="envelope-box roll-in-anim"><div class="envelope-icon">✉️</div><div class="sparkle-heart pulse-anim">💖</div></div>
+      <div class="welcome-card">
+        <div class="morning-title">Morning น๊า พี่ เค ที่เป็นตัว K 💖✨</div>
+        <p class="special-today-text">✨ วันนี้พิเศษนิดนึง... เพราะว่าวันนี้หนูไม่อยู่ไปเข้าออฟฟิศน่าจะกลับค่ำๆ เลยย 🥺<br>แอบทำไว้เล่นๆ เผื่อมีคนคิดถึงและคุมคนดื้อโดยเฉพาะเลย!</p>
+        <button class="next-btn bounce-anim" onclick="startSept3Video()">✨ คลิกดูเลย... 🎬</button>
+      </div>
+    </div>
+    <div id="step-2-video" class="step-box" style="display: none;">
+      <div class="video-wrapper">
+        <video id="myVideo" playsinline muted>
+          <source src="https://ozonemassage.com/wp-content/uploads/2026/09/download-2.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- ปิด main-app-container -->
 
 <!-- 🎉 Popup สรุปความทรงจำรายเดือน (Monthly Wrap-up) -->
 <div id="monthlySummaryModal" class="popup-modal">
   <div class="popup-content summary-modal">
     <div style="font-size: 60px; margin-bottom: 10px; animation: bounce 2s infinite;">📜✨</div>
     <div class="summary-title">สรุปความทรงจำเดือน<br><span id="summaryMonthName" class="magic-glow">เดือน</span>!</div>
-    
-    <div class="summary-stat">
-      📝 เดือนนี้เราเขียนหากันไป<br>
-      <span id="summaryTotalNotes" class="summary-highlight">0</span> แผ่น
-    </div>
-    
+    <div class="summary-stat">📝 เดือนนี้เราเขียนหากันไป<br><span id="summaryTotalNotes" class="summary-highlight">0</span> แผ่น</div>
     <div id="summaryLockedText" class="summary-unlock-text" style="display: none;">
-      ✨ มหัศจรรย์แห่งกาลเวลา! ✨<br>
-      โน้ต <span id="summaryLockedCount" style="color:#e11d48; font-size:18px;">0</span> แผ่นที่เคยล็อกรหัสไว้<br>ถูกปลดล็อกให้เปิดอ่านได้ฟรีๆ แล้วนะ!<br>เข้าไปดูเฉลยรหัสลับกันเลย 🔓💖
+      ✨ มหัศจรรย์แห่งกาลเวลา! ✨<br>โน้ต <span id="summaryLockedCount" style="color:#e11d48; font-size:18px;">0</span> แผ่นที่เคยล็อกรหัสไว้<br>ถูกปลดล็อกให้เปิดอ่านได้ฟรีๆ แล้วนะ!<br>เข้าไปดูเฉลยรหัสลับกันเลย 🔓💖
     </div>
-    
     <button class="choice-btn best-btn" style="width: 100%; font-size: 16px; border-radius: 20px; padding: 14px;" onclick="closeSummaryAndProceed()">เปิดดูไดอารี่เดือนนี้ 📖</button>
+  </div>
+</div>
+
+<!-- 👑 ป๊อปอัปให้เลือกวันที่ 3 ก.ย. ว่าจะดูอะไร -->
+<div id="sept3ChoiceModal" class="popup-modal">
+  <div class="popup-content choice-3sep-modal">
+    <div style="font-size: 60px; margin-bottom: 10px; animation: pulse 2s infinite;">👑✨</div>
+    <div style="font-size: 20px; font-weight: 700; color: #e11d48; margin-bottom: 5px;">วันนี้เป็นวันพิเศษ!</div>
+    <p style="font-size: 14px; color: #4a5568; line-height: 1.5; margin-bottom: 20px;">คุณอยากจะเปิดดูหน้ากระดานโน้ตปกติ หรืออยากดูความทรงจำพิเศษที่แอบทำไว้ให้ดีคะ? 🥰</p>
+    
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <button class="choice-btn best-btn" onclick="openSept3Memory()">✨ ดูความทรงจำพิเศษ 💖</button>
+      <button class="choice-btn good-btn" onclick="openSept3Notes()">📝 ดูกระดานโน้ตปกติ</button>
+      <button class="choice-btn bad-btn" style="margin-top: 10px;" onclick="closePopup('sept3ChoiceModal')">กลับไปก่อน 🔙</button>
+    </div>
+  </div>
+</div>
+
+<!-- 🔮 ป๊อปอัปผลลัพธ์ เซียมซีเขย่ารัก (Fortune Shake Result) -->
+<div id="fortuneResultModal" class="popup-modal">
+  <div class="popup-content fortune-modal">
+    <div class="fortune-icon" id="fortuneIcon">🥠</div>
+    <div class="fortune-title" id="fortuneTitle">คำทำนายวันนี้!</div>
+    <div class="fortune-message" id="fortuneMessage">...</div>
+    <div class="fortune-coupon" id="fortuneCoupon" style="display: none;"></div>
+    
+    <button class="choice-btn best-btn" style="width: 100%; margin-top: 15px; font-size: 16px; padding: 12px; border-radius: 18px;" onclick="closePopup('fortuneResultModal')">รับทราบค่ะ! ✨</button>
   </div>
 </div>
 
@@ -446,7 +504,7 @@
   let pendingMonthIndex = null; let currentViewingMonthIndex = 9; // ค่าเริ่มต้นคือเดือน 9 (ตุลาคม)
   let currentViewingDay = null;
 
-  // Numpad Functions (Setup & Unlock)
+  // Numpad Functions 
   let setupPin = ""; let unlockPin = "";
   function addSetupPin(num) { if(setupPin.length < 6) { setupPin += num; updateSetupPinDisplay(); } }
   function delSetupPin() { setupPin = setupPin.slice(0, -1); updateSetupPinDisplay(); }
@@ -470,7 +528,7 @@
   if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
   const database = firebase.database();
   const notesRef = database.ref('memory_box_notes_v7'); 
-  const scratchRef = database.ref('memory_box_scratch_v7'); 
+  const shakeRef = database.ref('memory_box_shake_v7'); 
 
   // Init
   function updateTimeGreeting() {
@@ -483,42 +541,119 @@
   }
   updateTimeGreeting();
 
-  // Scratch Card Logic
-  const canvas = document.getElementById('scratch-canvas'); const ctx = canvas ? canvas.getContext('2d') : null;
-  let isDrawing = false; let hasScratchedTodayLocally = false; let currentScratchData = null;
-  const secretMessages = ["ขูดหาเลขเด็ดหรอ หาน้ำกินด้วย! 😜", "วันนี้ห้ามดื้อนะ รู้ไหม! ✨", "ตั้งใจทำงานนะ หนูเป็นกำลังใจให้! ✌️", "สู้ๆ นะ คนดื้อ! 😆", "พักสายตาบ้างนะ จ้องจอนานเดี๋ยวปวดตา 🥺"];
+  // 🎋 เกมเซียมซีเขย่ารัก (Fortune Shake)
+  let currentShakeData = null;
+  let hasShakedToday = false;
+  let shakeClicks = 0; // เผื่อเขย่าไม่ติด ให้กดรัวๆ แทนได้
   
-  scratchRef.on('value', (snapshot) => { currentScratchData = snapshot.val(); checkAndRenderScratchCard(); });
-  function checkAndRenderScratchCard() {
-    if(!canvas) return; const todayStr = new Date().toLocaleDateString('th-TH');
-    const textEl = document.getElementById('scratch-text'); const statusEl = document.getElementById('scratch-status');
-    if (!currentScratchData || currentScratchData.date !== todayStr) {
-      const dayIndex = new Date().getDate() - 1; 
-      scratchRef.set({ date: todayStr, message: secretMessages[dayIndex % secretMessages.length], isScratched: false }); return; 
+  const fortunes = [
+    { type: "normal", icon: "🥠", text: "คำทำนาย: วันนี้ห้ามดื้อ ห้ามเถียง 24 ชั่วโมง เริ่ม!" },
+    { type: "normal", icon: "🥠", text: "คำทำนาย: มีคนแอบคิดถึงมากกกก รีบทักไปหาด่วน! 👀" },
+    { type: "normal", icon: "🥠", text: "คำทำนาย: วันนี้อารมณ์ดี เหมาะแก่การโดนเปย์ของอร่อย 🍱" },
+    { type: "normal", icon: "🥠", text: "คำทำนาย: ไม่ต้องเครียดนะ พักสายตาแล้วยิ้มหน่อย 😊" },
+    { type: "normal", icon: "🥠", text: "คำทำนาย: ดวงความรักพุ่งปรี๊ด! วันนี้ทำอะไรก็น่ารักไปหมด 💕" },
+    { type: "coupon", icon: "🎟️", text: "แจ็คพอตแตก! คุณได้รับสิทธิ์:", coupon: "ขอรูปน่ารักๆ 1 รูป 📸 (รีบแคปจอไปทวงด่วน!)" },
+    { type: "coupon", icon: "🎟️", text: "สิทธิพิเศษคนเก่ง! คุณได้รับสิทธิ์:", coupon: "คอลหา 10 นาทีแบบห้ามบ่น 📞 (แคปจอไปใช้สิทธิ์เลย!)" },
+    { type: "coupon", icon: "🎟️", text: "รางวัลพิเศษ! คุณได้รับสิทธิ์:", coupon: "สั่งเมนูโปรด 1 อย่าง 🍜 (แคปจอส่งไปอ้อนเลย!)" }
+  ];
+
+  shakeRef.on('value', (snapshot) => { 
+    currentShakeData = snapshot.val(); 
+    checkShakeStatus(); 
+  });
+
+  function checkShakeStatus() {
+    const todayStr = new Date().toLocaleDateString('th-TH');
+    const container = document.getElementById('shake-container');
+    const statusEl = document.getElementById('shake-status');
+    
+    // รีเซ็ตวันใหม่
+    if (!currentShakeData || currentShakeData.date !== todayStr) {
+      const randomIndex = Math.floor(Math.random() * fortunes.length);
+      shakeRef.set({ date: todayStr, result: fortunes[randomIndex], isPlayed: false });
+      return; 
     }
-    textEl.innerText = currentScratchData.message;
-    if (currentScratchData.isScratched) { canvas.style.display = 'none'; textEl.classList.add('revealed'); statusEl.innerText = '🌟 มีคนแอบขูดไปแล้ววันนี้!'; statusEl.style.color = '#e11d48'; } 
-    else { canvas.style.display = 'block'; textEl.classList.remove('revealed'); statusEl.innerText = '🪙 การ์ดขูดเสี่ยงทายประจำวัน (ขูดได้วันละ 1 ครั้ง)'; statusEl.style.color = '#b45309'; initScratchCardCanvas(); }
+    
+    if (currentShakeData.isPlayed) {
+      statusEl.style.display = 'block';
+      container.style.opacity = '0.5';
+      container.style.pointerEvents = 'none';
+    } else {
+      statusEl.style.display = 'none';
+      container.style.opacity = '1';
+      container.style.pointerEvents = 'auto';
+    }
   }
-  function initScratchCardCanvas() {
-    canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; ctx.globalCompositeOperation = 'source-over';
-    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    gradient.addColorStop(0, '#ff9a9e'); gradient.addColorStop(0.5, '#fecfef'); gradient.addColorStop(1, '#fbc2eb'); 
-    ctx.fillStyle = gradient; ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.font = 'bold 18px Kanit'; ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center'; ctx.shadowColor = 'rgba(255, 71, 126, 0.5)'; ctx.shadowBlur = 4;
-    ctx.fillText('✨ ขูดดูสิคนดื้อ! ✨', canvas.width/2, canvas.height/2 + 6);
+
+  // รองรับการเขย่ามือถือ (DeviceMotion)
+  if (window.DeviceMotionEvent) {
+    window.addEventListener('devicemotion', handleMotion, false);
   }
-  function scratch(e) {
-    if (!isDrawing || !currentScratchData || currentScratchData.isScratched) return;
-    e.preventDefault(); hasScratchedTodayLocally = true; 
-    const rect = canvas.getBoundingClientRect(); const clientX = e.touches ? e.touches[0].clientX : e.clientX; const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    ctx.globalCompositeOperation = 'destination-out'; ctx.beginPath(); ctx.arc(clientX - rect.left, clientY - rect.top, 20, 0, Math.PI * 2); ctx.fill();
+
+  let lastX = 0, lastY = 0, lastZ = 0;
+  function handleMotion(e) {
+    if (hasShakedToday || !currentShakeData || currentShakeData.isPlayed) return;
+    
+    const acc = e.accelerationIncludingGravity;
+    if(!acc) return;
+    
+    const deltaX = Math.abs(acc.x - lastX);
+    const deltaY = Math.abs(acc.y - lastY);
+    const deltaZ = Math.abs(acc.z - lastZ);
+    
+    // ถ้าเขย่าแรงเกิน 15 ถือว่าผ่าน
+    if (deltaX + deltaY + deltaZ > 15) {
+      triggerShakeAnimation();
+    }
+    lastX = acc.x; lastY = acc.y; lastZ = acc.z;
   }
-  if(canvas) {
-    canvas.addEventListener('mousedown', () => isDrawing = true); canvas.addEventListener('mousemove', scratch);
-    canvas.addEventListener('mouseup', () => { isDrawing = false; if (hasScratchedTodayLocally && !currentScratchData.isScratched) scratchRef.update({ isScratched: true }); });
-    canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }, {passive: false}); canvas.addEventListener('touchmove', scratch, {passive: false});
-    canvas.addEventListener('touchend', () => { isDrawing = false; if (hasScratchedTodayLocally && !currentScratchData.isScratched) scratchRef.update({ isScratched: true }); });
+
+  // หรือใช้นิ้วจิ้มรัวๆ แทน
+  function manualShake() {
+    if (hasShakedToday || !currentShakeData || currentShakeData.isPlayed) return;
+    shakeClicks++;
+    triggerShakeAnimation();
+  }
+
+  function triggerShakeAnimation() {
+    if (hasShakedToday) return;
+    const container = document.getElementById('shake-container');
+    container.classList.add('shaking');
+    
+    // ถ้าเขย่าหรือจิ้มครบ 3 ครั้ง ให้ไม้หล่น
+    if (shakeClicks >= 3 || Math.random() > 0.5) {
+      hasShakedToday = true;
+      setTimeout(() => {
+        container.classList.remove('shaking');
+        container.classList.add('popping');
+        
+        // ดีเลย์โชว์ป๊อปอัป
+        setTimeout(() => {
+          container.classList.remove('popping');
+          showFortuneResult();
+        }, 800);
+      }, 500);
+    }
+  }
+
+  function showFortuneResult() {
+    if (!currentShakeData) return;
+    shakeRef.update({ isPlayed: true });
+    
+    const res = currentShakeData.result;
+    document.getElementById('fortuneIcon').innerText = res.icon;
+    document.getElementById('fortuneTitle').innerText = res.type === 'coupon' ? '🎉 ยินดีด้วย!' : '🔮 คำทำนายของคุณ';
+    document.getElementById('fortuneMessage').innerText = res.text;
+    
+    const couponEl = document.getElementById('fortuneCoupon');
+    if (res.type === 'coupon') {
+      couponEl.innerText = res.coupon;
+      couponEl.style.display = 'block';
+    } else {
+      couponEl.style.display = 'none';
+    }
+    
+    document.getElementById('fortuneResultModal').style.display = 'flex';
   }
 
   // Firebase Data Loading
@@ -528,7 +663,7 @@
     if (data) { for (let key in data) { allNotes.push({ id: key, ...data[key] }); } }
     document.getElementById('totalNotesCount').innerText = allNotes.length;
     let percent = (allNotes.length / 365) * 100; document.getElementById('progressBarFill').style.width = (percent > 100 ? 100 : percent) + '%';
-    updateCalendarDots(); if (currentViewingDay !== null) renderNotesForDay(currentViewingDay);
+    updateCalendarDots(); if (currentViewingDay !== null && document.getElementById('daily-notes-sec').style.display !== 'none') renderNotesForDay(currentViewingDay);
   });
 
   // 🎁 เปิดกล่องพัสดุ (ข้ามไปหน้าหลักเลย)
@@ -538,7 +673,7 @@
     setTimeout(() => {
       greeting.style.display = 'none';
       document.getElementById('main-app-container').style.display = 'flex'; 
-      createBackgroundHearts(); checkAndRenderScratchCard(); 
+      createBackgroundHearts(); checkShakeStatus();
     }, 800);
   }
 
@@ -556,9 +691,7 @@
     const today = new Date(); const realMonth = 9; // เดือนตุลาคม (index 9)
     pendingMonthIndex = mIndex;
     
-    // 🍁 เช็กว่าเป็นเดือนในอดีตหรือไม่?
     if (mIndex < realMonth) {
-      // คำนวณสรุปผลรายเดือน
       const monthNotes = allNotes.filter(n => Number(n.targetMonth) === mIndex);
       const lockedNotes = monthNotes.filter(n => n.isLocked);
       
@@ -572,15 +705,12 @@
       } else {
         lockedText.style.display = 'none';
       }
-      
       document.getElementById('monthlySummaryModal').style.display = 'flex';
     } 
-    // ⏳ เช็กว่าเป็นเดือนในอนาคตหรือไม่?
     else if (mIndex > realMonth) {
       document.getElementById('capsuleUnlockText').innerHTML = 'เดือนนี้ยังมาไม่ถึงเลยนะคนดื้อ!<br><span style="font-size:14px; color:#64748b;">แต่ถ้าอยากส่ง "โน้ตข้ามเวลา" ไปรอไว้ก่อนก็กดเพิ่มโน้ตได้เลยนะ เค้าจะไม่แอบอ่านหรอก! 🤫</span>';
       document.getElementById('timeCapsuleModal').style.display = 'flex';
     } 
-    // 🌸 เดือนปัจจุบัน (ตุลาคม)
     else { proceedToMonth(mIndex); }
   }
 
@@ -592,20 +722,19 @@
   function proceedToMonth(mIndex) {
     if(mIndex !== undefined) currentViewingMonthIndex = mIndex;
     
-    // ตั้งค่า ธีมจดหมายย้อนยุค (Nostalgia)
-    const realMonth = 9; // ปัจจุบันคือตุลาคม
+    const realMonth = 9; 
     const isPast = currentViewingMonthIndex < realMonth;
     const calCard = document.getElementById('dynamic-calendar-sec');
     const notesCard = document.getElementById('daily-notes-sec');
     if(isPast) { calCard.classList.add('theme-past'); notesCard.classList.add('theme-past'); } 
     else { calCard.classList.remove('theme-past'); notesCard.classList.remove('theme-past'); }
 
-    document.getElementById('memory-box-step').style.display = 'none'; document.getElementById('dynamic-calendar-sec').style.display = 'block';
+    document.getElementById('memory-box-step').style.display = 'none'; 
+    document.getElementById('dynamic-calendar-sec').style.display = 'block';
     document.getElementById('home-btn').style.display = 'flex'; 
     
     document.getElementById('dynamic-cal-header').innerText = `${monthNames[currentViewingMonthIndex]} 2026 ${isPast ? '📜' : '✨'}`;
-    const instruction = document.getElementById('cal-instruction');
-    instruction.innerText = isPast ? "แตะที่ตัวเลขวันที่ เพื่อเปิดอ่านไดอารี่ในวันนั้น 📖" : "แตะที่ตัวเลขวันที่ เพื่อเปิดดูความทรงจำ หรือแปะกระดาษโน้ต 💌";
+    document.getElementById('cal-instruction').innerText = isPast ? "แตะที่ตัวเลขวันที่ เพื่อเปิดอ่านไดอารี่ในวันนั้น 📖" : "แตะที่ตัวเลขวันที่ เพื่อเปิดดูความทรงจำ หรือแปะกระดาษโน้ต 💌";
     
     const grid = document.getElementById('dynamic-cal-grid');
     grid.innerHTML = '<div class="day-name">อา</div><div class="day-name">จ</div><div class="day-name">อ</div><div class="day-name">พ</div><div class="day-name">พฤ</div><div class="day-name">ศ</div><div class="day-name">ส</div>';
@@ -613,75 +742,86 @@
     for(let i=0; i<padding; i++) { grid.innerHTML += '<div></div>'; }
     const days = monthDays[currentViewingMonthIndex];
     for(let i=1; i<=days; i++) {
-      grid.innerHTML += `<div class="day" id="cal-day-${i}" onclick="proceedToNotesBoard(${i})">${i}</div>`;
+      // 🌟 ใส่มงกุฎให้วันที่ 3 กันยายน
+      let extraClass = (currentViewingMonthIndex === 8 && i === 3) ? 'special-day' : '';
+      let crownHtml = (currentViewingMonthIndex === 8 && i === 3) ? '<div class="crown-icon">👑</div>' : '';
+      grid.innerHTML += `<div class="day ${extraClass}" id="cal-day-${i}" onclick="clickDay(${i})">${crownHtml}${i}</div>`;
     }
     updateCalendarDots();
   }
 
-  // 🔑 ฟังก์ชันเช็กวันที่มีโน้ตล็อก
   function updateCalendarDots() {
     if(document.getElementById('dynamic-calendar-sec').style.display === 'none') return;
-    
-    // ลบไฮไลต์เก่าออกก่อน
     for (let i = 1; i <= 31; i++) { 
       const dayEl = document.getElementById(`cal-day-${i}`); 
-      if (dayEl) { 
-        dayEl.classList.remove('has-locked-note-day');
-        const b = dayEl.querySelector('.note-dot'); 
-        if (b) b.remove(); 
-      } 
+      if (dayEl) { dayEl.classList.remove('has-locked-note-day'); const b = dayEl.querySelector('.note-dot'); if (b) b.remove(); } 
     }
     
     const notesInMonth = allNotes.filter(n => Number(n.targetMonth) === currentViewingMonthIndex);
-    const dayCounts = {}; 
-    const dayLockedCount = {}; // นับโน้ตที่ล็อก
-    let totalLockedInMonth = 0; // ยอดรวมโน้ตล็อกทั้งเดือน
-    
+    const dayCounts = {}; const dayLockedCount = {}; let totalLockedInMonth = 0; 
     notesInMonth.forEach(n => { 
-      let d = Number(n.targetDay); 
-      dayCounts[d] = (dayCounts[d] || 0) + 1; 
-      if(n.isLocked) {
-        dayLockedCount[d] = (dayLockedCount[d] || 0) + 1;
-        totalLockedInMonth++;
-      }
+      let d = Number(n.targetDay); dayCounts[d] = (dayCounts[d] || 0) + 1; 
+      if(n.isLocked) { dayLockedCount[d] = (dayLockedCount[d] || 0) + 1; totalLockedInMonth++; }
     });
     
     for(let day in dayCounts) {
       const dayEl = document.getElementById(`cal-day-${day}`);
       if (dayEl && dayCounts[day] > 0) {
-        // แปะจุดแจ้งเตือนจำนวนโน้ต
         const badge = document.createElement('div'); badge.className = 'note-dot'; 
         if(dayCounts[day] > 1) { badge.innerText = dayCounts[day]; badge.classList.add('has-number'); }
         dayEl.appendChild(badge);
-        
-        // 🌟 ไฮไลต์ถ้าวันนั้นมีโน้ตล็อก
-        if (dayLockedCount[day] > 0) {
-          dayEl.classList.add('has-locked-note-day');
-        }
+        if (dayLockedCount[day] > 0) { dayEl.classList.add('has-locked-note-day'); }
       }
     }
     
-    // โชว์/ซ่อน กล่องคำอธิบายด้านล่าง
     const legendBox = document.getElementById('locked-notes-legend');
     if (totalLockedInMonth > 0) {
-      legendBox.style.display = 'block';
-      document.getElementById('locked-count-text').innerText = totalLockedInMonth;
+      legendBox.style.display = 'block'; document.getElementById('locked-count-text').innerText = totalLockedInMonth;
     } else {
       legendBox.style.display = 'none';
     }
   }
 
-  // เปิดหน้าโน้ต
+  // 👑 เมื่อคลิกวันที่ในปฏิทิน (เช็ก 3 ก.ย.)
+  function clickDay(day) {
+    if (currentViewingMonthIndex === 8 && day === 3) {
+      document.getElementById('sept3ChoiceModal').style.display = 'flex';
+    } else {
+      proceedToNotesBoard(day);
+    }
+  }
+  
+  // เปิดโหมดกระดานโน้ต (ปกติ)
+  function openSept3Notes() {
+    closePopup('sept3ChoiceModal');
+    proceedToNotesBoard(3);
+  }
+  
+  // เปิดโหมดความทรงจำ (วิดีโอ)
+  function openSept3Memory() {
+    closePopup('sept3ChoiceModal');
+    document.getElementById('dynamic-calendar-sec').style.display = 'none';
+    document.getElementById('sept3-experience-container').style.display = 'block';
+  }
+  
+  // เล่นวิดีโอของความทรงจำ 3 ก.ย.
+  function startSept3Video() {
+    document.getElementById('step-1-intro').style.display = 'none';
+    document.getElementById('step-2-video').style.display = 'block';
+    document.getElementById('myVideo').play().catch(e=>console.log(e));
+  }
+
   function openTodayNotes() { const today = new Date(); currentViewingMonthIndex = today.getMonth(); proceedToNotesBoard(today.getDate()); }
+  
   function proceedToNotesBoard(day) {
     currentViewingDay = day;
-    document.getElementById('dynamic-calendar-sec').style.display = 'none'; document.getElementById('memory-box-step').style.display = 'none'; 
+    document.getElementById('dynamic-calendar-sec').style.display = 'none'; 
+    document.getElementById('memory-box-step').style.display = 'none'; 
     const dailySec = document.getElementById('daily-notes-sec'); dailySec.style.display = 'block'; 
     document.getElementById('daily-note-title').innerText = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
     document.getElementById('home-btn').style.display = 'flex';
     
-    const realMonth = 9; // เดือนตุลาคม
-    const realDay = new Date().getDate();
+    const realMonth = 9; const realDay = new Date().getDate();
     const isPastDay = currentViewingMonthIndex < realMonth || (currentViewingMonthIndex === realMonth && day < realDay);
     
     if (isPastDay) { document.getElementById('note-creation-form').style.display = 'none'; document.getElementById('past-note-message').style.display = 'block'; } 
@@ -690,7 +830,11 @@
     renderNotesForDay(day); dailySec.scrollIntoView({ behavior: 'smooth' });
   }
 
-  function backToCalendar() { document.getElementById('daily-notes-sec').style.display = 'none'; proceedToMonth(currentViewingMonthIndex); }
+  function backToCalendar() { 
+    document.getElementById('daily-notes-sec').style.display = 'none'; 
+    document.getElementById('sept3-experience-container').style.display = 'none'; 
+    proceedToMonth(currentViewingMonthIndex); 
+  }
 
   function toggleLockOptions() {
     const isChecked = document.getElementById('lockCheckbox').checked;
@@ -717,7 +861,6 @@
     }, 800); 
   }
 
-  // 🖼️ เรนเดอร์กระดาษโน้ต & 🔓 Auto-Unlock Logic
   function isFutureNote(m, d) { const today = new Date(); const rM = 9; const rD = today.getDate(); return m > rM || (m === rM && d > rD); }
 
   function renderNotesForDay(day) {
@@ -725,29 +868,17 @@
     const dayNotes = allNotes.filter(n => Number(n.targetDay) === day && Number(n.targetMonth) === currentViewingMonthIndex).reverse();
     if (dayNotes.length === 0) { board.innerHTML = '<div style="width: 100%; text-align: center; color: #9ca3af; font-size: 15px; padding: 25px; font-weight: 500;">ยังไม่มีความทรงจำในวันนี้...</div>'; return; }
     
-    const realMonth = 9; // ตุลาคม
+    const realMonth = 9; 
     const isPastMonth = currentViewingMonthIndex < realMonth;
 
     dayNotes.forEach(note => {
       const noteEl = document.createElement('div'); const timeCapsule = isFutureNote(Number(note.targetMonth), Number(note.targetDay));
       let senderClass = note.from && note.from.includes('มาย') ? ' note-may' : ' note-k';
-      
-      let pinIcon = '📍'; let hintText = '(แตะเพื่อเปิดอ่าน 💌)';
-      let isUnlockedPast = false;
+      let pinIcon = '📍'; let hintText = '(แตะเพื่อเปิดอ่าน 💌)'; let isUnlockedPast = false;
 
-      if (timeCapsule) { 
-        noteEl.className = 'mini-note time-capsule' + senderClass; pinIcon = '⏳'; hintText = '(รอเปิดในอนาคต 🔒)'; 
-      } 
-      // 🔓 ถ้าเป็นโน้ตล็อก แต่มาจาก "เดือนในอดีต" -> ปลดล็อกออโต้!!
-      else if (note.isLocked && isPastMonth) { 
-        noteEl.className = 'mini-note unlocked-past-note' + senderClass; 
-        pinIcon = '🔓✨'; hintText = '(ปลดล็อกความลับแล้ว! 💖)'; 
-        isUnlockedPast = true;
-      } 
-      // 🔒 ถ้าเป็นโน้ตล็อก ในเดือนปัจจุบัน
-      else if (note.isLocked) { 
-        noteEl.className = 'mini-note locked-note' + senderClass; pinIcon = '🔒'; hintText = '(ข้อความติดล็อก 🔑)'; 
-      } 
+      if (timeCapsule) { noteEl.className = 'mini-note time-capsule' + senderClass; pinIcon = '⏳'; hintText = '(รอเปิดในอนาคต 🔒)'; } 
+      else if (note.isLocked && isPastMonth) { noteEl.className = 'mini-note unlocked-past-note' + senderClass; pinIcon = '🔓✨'; hintText = '(ปลดล็อกความลับแล้ว! 💖)'; isUnlockedPast = true; } 
+      else if (note.isLocked) { noteEl.className = 'mini-note locked-note' + senderClass; pinIcon = '🔒'; hintText = '(ข้อความติดล็อก 🔑)'; } 
       else { noteEl.className = 'mini-note' + senderClass; }
 
       noteEl.innerHTML = `<div class="mini-pin ${isUnlockedPast ? 'magic-pin' : ''}">${pinIcon}</div><div class="mini-from-text">จาก:<br>${note.from}</div><div class="mini-hint">${hintText}</div><div class="mini-time-stamp">${note.timestamp}</div>`;
@@ -756,13 +887,11 @@
         if (timeCapsule) {
           document.getElementById('capsuleUnlockText').innerText = `ข้อความนี้จะเปิดให้ดูได้ในวันที่ ${note.targetDay} ${monthNames[note.targetMonth]} เท่านั้นนะ อดใจรอหน่อยคนดื้อ!`;
           document.getElementById('timeCapsuleModal').style.display = 'flex';
-        } 
-        else if (note.isLocked && !isPastMonth) {
+        } else if (note.isLocked && !isPastMonth) {
           noteToUnlock = note; const hintStr = (note.lockHint && note.lockHint.trim() !== '') ? note.lockHint : "ไม่มีคำใบ้ (ให้เดาเอาเอง อิอิ 😜)"; 
           document.getElementById('displayUnlockHint').innerText = `คำใบ้: ${hintStr}`;
           clearUnlockPin(); document.getElementById('unlockErrorMsg').style.display = 'none'; document.getElementById('unlockModal').style.display = 'flex';
-        } 
-        else { openNoteDetail(note, isUnlockedPast); }
+        } else { openNoteDetail(note, isUnlockedPast); }
       };
       board.appendChild(noteEl);
     });
@@ -775,22 +904,17 @@
   }
   function showUnlockError(msg) { const err = document.getElementById('unlockErrorMsg'); err.innerText = msg; err.style.display = 'block'; err.classList.remove('bounce-anim'); void err.offsetWidth; err.classList.add('bounce-anim'); }
 
-  // 📖 เปิดอ่านรายละเอียดโน้ต & โชว์เฉลยรหัส
   function openNoteDetail(note, isUnlockedPast = false) {
     document.getElementById('detailFromTo').innerHTML = `ส่งความรู้สึกจาก: <span style="color:#ff477e;">${note.from}</span> 💌`;
     document.getElementById('detailText').innerText = note.text;
-    
-    // โชว์เฉลยรหัสลับถ้าเป็นโน้ตเก่าที่ถูกปลดล็อก
     const secretBox = document.getElementById('secretRevealBox');
     if (isUnlockedPast && note.lockPin) {
       secretBox.style.display = 'block';
       secretBox.innerHTML = `<div class="secret-revealed-title">✨ ความลับที่เคยซ่อนไว้ ถูกเปิดเผยแล้ว! ✨</div><div style="font-size:14px; color:#475569; margin-bottom:8px;">รหัสที่คุณมายเคยตั้งไว้ให้ทายก็คือ...</div><div class="secret-revealed-pin">${note.lockPin}</div>`;
       document.getElementById('detailPinIcon').innerText = '🔓✨';
     } else {
-      secretBox.style.display = 'none';
-      document.getElementById('detailPinIcon').innerText = '📌';
+      secretBox.style.display = 'none'; document.getElementById('detailPinIcon').innerText = '📌';
     }
-    
     document.getElementById('noteDetailModal').style.display = 'flex';
   }
   
@@ -798,8 +922,11 @@
 
   function goHome() {
     document.getElementById('home-btn').style.display = 'none'; currentViewingDay = null; noteToUnlock = null; 
-    document.getElementById('daily-notes-sec').style.display = 'none'; document.getElementById('dynamic-calendar-sec').style.display = 'none';
-    document.getElementById('memory-box-step').style.display = 'block'; document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' }); 
+    document.getElementById('daily-notes-sec').style.display = 'none'; 
+    document.getElementById('dynamic-calendar-sec').style.display = 'none';
+    document.getElementById('sept3-experience-container').style.display = 'none';
+    document.getElementById('memory-box-step').style.display = 'block'; 
+    document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' }); 
   }
 
   function createBackgroundHearts() { const container = document.getElementById('heart-bg-container'); const hearts = ['💖', '✨', '🌟', '💕']; for(let i=0; i<12; i++) { const heart = document.createElement('div'); heart.classList.add('floating-heart-bg'); heart.innerText = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 4 + 4) + 's'; container.appendChild(heart); } }
