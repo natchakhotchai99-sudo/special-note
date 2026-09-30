@@ -78,7 +78,7 @@
     .glass-liquid { height: 100%; width: 0%; background: linear-gradient(90deg, #ff758c, #ff0055); box-shadow: 0 0 20px #ff477e, inset 0 2px 5px rgba(255,255,255,0.6); border-radius: 18px; transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); position: relative; }
     .glass-liquid::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.6) 15%, transparent 20%), radial-gradient(circle, rgba(255,255,255,0.4) 15%, transparent 20%); background-size: 15px 15px, 20px 20px; background-position: 0 0, 10px 10px; animation: bubbles 2s linear infinite; border-radius: 18px; }
 
-    /* 🎰 กิมมิคใหม่: เซียมซีเขย่ารัก (Fortune Shake) */
+    /* 🎰 กิมมิคเซียมซีเขย่ารัก (Fortune Shake) */
     .shake-wrapper { margin-bottom: 25px; position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; background: #fffdf0; padding: 20px; border-radius: 20px; border: 2px dashed #fcd34d; box-shadow: inset 0 0 15px rgba(245, 158, 11, 0.1); }
     .shake-header { font-size: 15px; font-weight: 700; color: #d97706; margin-bottom: 15px; }
     .shake-instruction { font-size: 12px; color: #b45309; margin-bottom: 15px; background: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 12px; }
@@ -95,11 +95,11 @@
 
     .shake-status { font-size: 13px; font-weight: 600; color: #059669; margin-top: 10px; display: none; background: #d1fae5; padding: 5px 12px; border-radius: 12px; border: 1px dashed #34d399; }
 
-    /* ป๊อปอัปผลลัพธ์เซียมซี (คูปอง) */
+    /* ป๊อปอัปผลลัพธ์เซียมซี */
     .fortune-modal { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 4px solid #f59e0b; padding: 35px 25px; }
     .fortune-icon { font-size: 50px; margin-bottom: 10px; animation: bounce 2s infinite; }
     .fortune-title { font-size: 22px; font-weight: 700; color: #d97706; margin-bottom: 15px; }
-    .fortune-message { font-size: 16px; color: #4a5568; font-weight: 600; line-height: 1.5; background: white; padding: 20px; border-radius: 16px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); margin-bottom: 20px; border: 2px dashed #fcd34d; }
+    .fortune-message { font-size: 15px; color: #4a5568; font-weight: 600; line-height: 1.5; background: white; padding: 20px; border-radius: 16px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); margin-bottom: 20px; border: 2px dashed #fcd34d; }
     .fortune-coupon { color: #e11d48; font-size: 18px; font-weight: 700; animation: pulse 1.5s infinite; }
 
     .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
@@ -234,7 +234,7 @@
     .unlock-icon { font-size: 55px; margin-bottom: 10px; filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15)); }
     .unlock-title { font-size: 20px; font-weight: 700; color: #334155; margin-bottom: 8px; }
 
-    /* ✨ ซ่อนโซนประสบการณ์ 3 ก.ย. และทำดีไซน์ให้เหมือนเดิม ✨ */
+    /* ✨ โซนความทรงจำ 3 ก.ย. ✨ */
     #sept3-experience-container { position: relative; z-index: 50; }
     .envelope-box { position: relative; display: inline-block; margin-bottom: 20px; }
     .roll-in-anim { animation: rollIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
@@ -273,18 +273,15 @@
 <!-- 📦 Main Application -->
 <div id="main-app-container" class="cute-container" style="display: none;">
   
-  <!-- หน้า Memory Box -->
   <div id="memory-box-step" class="step-box card-base float-anim">
     
     <div id="timeGreeting" class="time-greeting"></div>
     <div class="main-title magic-glow">📦 Memory Box 2026 💖</div>
     
-    <!-- 🎞️ ปุ่มตั๋วหนังความทรงจำ -->
     <button class="cinema-btn" onclick="openCinema()">
       <span style="font-size: 22px;">🎫</span> แวะดูวิดีโอความทรงจำของเราไหม? 🎬
     </button>
 
-    <!-- 🧪 หลอดแก้วเรืองแสง -->
     <div class="memory-counter-box">
       <div class="counter-text">หลอดแก้วเก็บความทรงจำ 📝<br>สะสมโน้ตไปแล้ว <span id="totalNotesCount" style="font-size: 20px; color: #ff477e; text-shadow: 0 0 5px #ffccd5;">0</span> แผ่น ✨</div>
       <div class="glass-tube">
@@ -294,14 +291,15 @@
 
     <!-- 🎰 มินิเกมใหม่: เซียมซีเขย่ารัก (Fortune Shake) -->
     <div class="shake-wrapper">
-      <div class="shake-header">🎋 เซียมซีคนดื้อประจำวัน (เขย่าได้ 1 ครั้ง)</div>
-      <div class="shake-instruction">📱 จับมือถือให้แน่น แล้วลอง "เขย่า" ดูสิ!<br><span style="font-size:10px; color:#92400e;">(หรือใช้นิ้วจิ้มรัวๆ ที่กระบอกก็ได้นะ)</span></div>
+      <div class="shake-header">🎋 เซียมซีคนดื้อประจำวัน</div>
+      <div class="shake-instruction">📱 จับมือถือให้แน่น แล้วลอง "เขย่า" ดูสิ!<br><span style="font-size:10px; color:#92400e;">(หรือใช้นิ้วจิ้มรัวๆ ที่กระบอกก็ได้นะ เขย่าเล่นกี่รอบก็ได้!)</span></div>
       
       <div class="cylinder-container" id="shake-container" onclick="manualShake()">
         <img src="https://ozonemassage.com/wp-content/uploads/2026/09/stick.png" class="stick-img" id="shake-stick" alt="ไม้เซียมซี" onerror="this.src='https://cdn-icons-png.flaticon.com/512/8646/8646487.png'">
         <img src="https://cdn-icons-png.flaticon.com/512/3063/3063076.png" class="cylinder-img" id="shake-cylinder" alt="กระบอกเซียมซี">
       </div>
-      <div id="shake-status" class="shake-status">✨ มีคนแอบมาเขย่าไปแล้ววันนี้!</div>
+      <!-- เปลี่ยนดีไซน์สถานะนิดหน่อยให้รู้ว่าเขย่าซ้ำได้ -->
+      <div id="shake-status" class="shake-status">✨ ลองเขย่าดูสิ!</div>
     </div>
 
     <button class="choice-btn today-btn" onclick="openTodayNotes()">
@@ -319,9 +317,7 @@
       <button class="month-btn" onclick="requestMonthAccess(5)"><span class="month-icon">🌻</span>มิ.ย.</button>
       <button class="month-btn" onclick="requestMonthAccess(6)"><span class="month-icon">☀️</span>ก.ค.</button>
       <button class="month-btn" onclick="requestMonthAccess(7)"><span class="month-icon">☔</span>ส.ค.</button>
-      <!-- 🍁 เดือนกันยา อดีต -->
       <button class="month-btn past-month" onclick="requestMonthAccess(8)"><span class="month-icon">🍁</span>ก.ย. 📜</button>
-      <!-- 🎃 ตุลา ปัจจุบัน -->
       <button class="month-btn active-month" onclick="requestMonthAccess(9)"><span class="month-icon">🎃</span>ต.ค. ✨</button>
       <button class="month-btn" onclick="requestMonthAccess(10)"><span class="month-icon">🪁</span>พ.ย.</button>
       <button class="month-btn" onclick="requestMonthAccess(11)"><span class="month-icon">🎄</span>ธ.ค.</button>
@@ -381,7 +377,7 @@
       </div>
 
       <div id="past-note-message" class="past-note-message">
-        🕰️ ไดอารี่เดือนเก่า...<br>
+        🕰️️ ไดอารี่เดือนเก่า...<br>
         <span style="font-size: 14px; color: #f43f5e; font-weight: 500;">เก็บไว้เป็นความทรงจำที่สวยงาม แปะโน้ตเพิ่มไม่ได้แล้วน้า 📜✨</span>
       </div>
 
@@ -390,7 +386,7 @@
     <button class="back-cal-btn" onclick="backToCalendar()">🔙 กลับไปหน้าปฏิทิน</button>
   </div>
   
-  <!-- ✨ โซนความทรงจำวันที่ 3 กันยายน (ที่กู้คืนกลับมา!) ✨ -->
+  <!-- ✨ โซนความทรงจำวันที่ 3 กันยายน ✨ -->
   <div id="sept3-experience-container" class="step-box" style="display: none;">
     <div id="step-1-intro" class="step-box">
       <div class="envelope-box roll-in-anim"><div class="envelope-icon">✉️</div><div class="sparkle-heart pulse-anim">💖</div></div>
@@ -501,7 +497,7 @@
 <script>
   const monthNames = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
   const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  let pendingMonthIndex = null; let currentViewingMonthIndex = 9; // ค่าเริ่มต้นคือเดือน 9 (ตุลาคม)
+  let pendingMonthIndex = null; let currentViewingMonthIndex = 9; 
   let currentViewingDay = null;
 
   // Numpad Functions 
@@ -541,10 +537,10 @@
   }
   updateTimeGreeting();
 
-  // 🎋 เกมเซียมซีเขย่ารัก (Fortune Shake)
+  // 🎋 เกมเซียมซีเขย่ารัก (Fortune Shake) - แบบล็อคผลลัพธ์แรกของวัน
   let currentShakeData = null;
-  let hasShakedToday = false;
-  let shakeClicks = 0; // เผื่อเขย่าไม่ติด ให้กดรัวๆ แทนได้
+  let shakeClicks = 0; 
+  let isAnimatingShake = false;
   
   const fortunes = [
     { type: "normal", icon: "🥠", text: "คำทำนาย: วันนี้ห้ามดื้อ ห้ามเถียง 24 ชั่วโมง เริ่ม!" },
@@ -564,91 +560,90 @@
 
   function checkShakeStatus() {
     const todayStr = new Date().toLocaleDateString('th-TH');
-    const container = document.getElementById('shake-container');
     const statusEl = document.getElementById('shake-status');
     
-    // รีเซ็ตวันใหม่
     if (!currentShakeData || currentShakeData.date !== todayStr) {
+      // สร้างคำทำนายใหม่ แต่ยังไม่นับว่าเล่นแล้ว (รอเขย่า)
       const randomIndex = Math.floor(Math.random() * fortunes.length);
       shakeRef.set({ date: todayStr, result: fortunes[randomIndex], isPlayed: false });
       return; 
     }
     
+    // ไม่มีการปิดกั้น container แล้ว เขย่าใหม่ได้เสมอ
+    shakeClicks = 0; 
     if (currentShakeData.isPlayed) {
       statusEl.style.display = 'block';
-      container.style.opacity = '0.5';
-      container.style.pointerEvents = 'none';
+      statusEl.innerText = '✨ วันนี้ได้คำทำนายไปแล้ว (ลองเขย่าซ้ำดูสิ!)';
     } else {
-      statusEl.style.display = 'none';
-      container.style.opacity = '1';
-      container.style.pointerEvents = 'auto';
+      statusEl.style.display = 'block';
+      statusEl.innerText = '✨ ลองเขย่าดูสิ!';
     }
   }
 
-  // รองรับการเขย่ามือถือ (DeviceMotion)
-  if (window.DeviceMotionEvent) {
-    window.addEventListener('devicemotion', handleMotion, false);
-  }
+  if (window.DeviceMotionEvent) { window.addEventListener('devicemotion', handleMotion, false); }
 
   let lastX = 0, lastY = 0, lastZ = 0;
   function handleMotion(e) {
-    if (hasShakedToday || !currentShakeData || currentShakeData.isPlayed) return;
-    
-    const acc = e.accelerationIncludingGravity;
-    if(!acc) return;
-    
-    const deltaX = Math.abs(acc.x - lastX);
-    const deltaY = Math.abs(acc.y - lastY);
-    const deltaZ = Math.abs(acc.z - lastZ);
-    
-    // ถ้าเขย่าแรงเกิน 15 ถือว่าผ่าน
-    if (deltaX + deltaY + deltaZ > 15) {
-      triggerShakeAnimation();
-    }
+    if (isAnimatingShake || !currentShakeData) return;
+    const acc = e.accelerationIncludingGravity; if(!acc) return;
+    const deltaX = Math.abs(acc.x - lastX); const deltaY = Math.abs(acc.y - lastY); const deltaZ = Math.abs(acc.z - lastZ);
+    if (deltaX + deltaY + deltaZ > 15) { triggerShakeAnimation(); }
     lastX = acc.x; lastY = acc.y; lastZ = acc.z;
   }
 
-  // หรือใช้นิ้วจิ้มรัวๆ แทน
   function manualShake() {
-    if (hasShakedToday || !currentShakeData || currentShakeData.isPlayed) return;
+    if (isAnimatingShake || !currentShakeData) return;
     shakeClicks++;
     triggerShakeAnimation();
   }
 
   function triggerShakeAnimation() {
-    if (hasShakedToday) return;
+    if (isAnimatingShake) return;
+    isAnimatingShake = true;
     const container = document.getElementById('shake-container');
     container.classList.add('shaking');
     
-    // ถ้าเขย่าหรือจิ้มครบ 3 ครั้ง ให้ไม้หล่น
+    // เขย่าครบ 3 ครั้ง หรือ ดวงดีหล่นเลย
     if (shakeClicks >= 3 || Math.random() > 0.5) {
-      hasShakedToday = true;
       setTimeout(() => {
         container.classList.remove('shaking');
         container.classList.add('popping');
         
-        // ดีเลย์โชว์ป๊อปอัป
         setTimeout(() => {
           container.classList.remove('popping');
           showFortuneResult();
+          isAnimatingShake = false;
+          shakeClicks = 0;
         }, 800);
       }, 500);
+    } else {
+       setTimeout(() => {
+          container.classList.remove('shaking');
+          isAnimatingShake = false;
+       }, 300);
     }
   }
 
   function showFortuneResult() {
     if (!currentShakeData) return;
-    shakeRef.update({ isPlayed: true });
+    
+    // บันทึกว่าเล่นแล้ว (ล็อกผลลัพธ์แรก)
+    const wasPlayedBefore = currentShakeData.isPlayed;
+    if (!wasPlayedBefore) {
+      shakeRef.update({ isPlayed: true });
+    }
     
     const res = currentShakeData.result;
     document.getElementById('fortuneIcon').innerText = res.icon;
     document.getElementById('fortuneTitle').innerText = res.type === 'coupon' ? '🎉 ยินดีด้วย!' : '🔮 คำทำนายของคุณ';
-    document.getElementById('fortuneMessage').innerText = res.text;
+    
+    // ✨ ถ้าเล่นซ้ำ ให้เพิ่มข้อความปั่นๆ เข้าไป
+    let extraText = wasPlayedBefore ? "\n\n(เขย่ากี่รอบก็ได้คำนี้แหละคนดื้อ! ชะตาวันนี้ลิขิตมาแบบนี้แล้ว 😜)" : "";
+    document.getElementById('fortuneMessage').innerText = res.text + extraText;
     
     const couponEl = document.getElementById('fortuneCoupon');
     if (res.type === 'coupon') {
-      couponEl.innerText = res.coupon;
-      couponEl.style.display = 'block';
+      couponEl.innerText = res.coupon; couponEl.style.display = 'block';
     } else {
       couponEl.style.display = 'none';
     }
@@ -666,14 +661,14 @@
     updateCalendarDots(); if (currentViewingDay !== null && document.getElementById('daily-notes-sec').style.display !== 'none') renderNotesForDay(currentViewingDay);
   });
 
-  // 🎁 เปิดกล่องพัสดุ (ข้ามไปหน้าหลักเลย)
+  // 🎁 เปิดกล่องพัสดุ
   function openPackage() {
     const greeting = document.getElementById('greeting-overlay');
     greeting.style.opacity = '0'; greeting.style.transform = 'scale(1.2)';
     setTimeout(() => {
       greeting.style.display = 'none';
       document.getElementById('main-app-container').style.display = 'flex'; 
-      createBackgroundHearts(); checkShakeStatus();
+      createBackgroundHearts(); 
     }, 800);
   }
 
@@ -686,9 +681,9 @@
     document.getElementById('cinema-overlay').style.display = 'none'; document.getElementById('cinema-video').pause();
   }
 
-  // 📅 ระบบจัดการเดือน & ธีม Nostalgia
+  // 📅 ระบบจัดการเดือน
   function requestMonthAccess(mIndex) {
-    const today = new Date(); const realMonth = 9; // เดือนตุลาคม (index 9)
+    const today = new Date(); const realMonth = 9; 
     pendingMonthIndex = mIndex;
     
     if (mIndex < realMonth) {
@@ -742,7 +737,6 @@
     for(let i=0; i<padding; i++) { grid.innerHTML += '<div></div>'; }
     const days = monthDays[currentViewingMonthIndex];
     for(let i=1; i<=days; i++) {
-      // 🌟 ใส่มงกุฎให้วันที่ 3 กันยายน
       let extraClass = (currentViewingMonthIndex === 8 && i === 3) ? 'special-day' : '';
       let crownHtml = (currentViewingMonthIndex === 8 && i === 3) ? '<div class="crown-icon">👑</div>' : '';
       grid.innerHTML += `<div class="day ${extraClass}" id="cal-day-${i}" onclick="clickDay(${i})">${crownHtml}${i}</div>`;
@@ -782,29 +776,18 @@
     }
   }
 
-  // 👑 เมื่อคลิกวันที่ในปฏิทิน (เช็ก 3 ก.ย.)
   function clickDay(day) {
     if (currentViewingMonthIndex === 8 && day === 3) {
       document.getElementById('sept3ChoiceModal').style.display = 'flex';
-    } else {
-      proceedToNotesBoard(day);
-    }
+    } else { proceedToNotesBoard(day); }
   }
   
-  // เปิดโหมดกระดานโน้ต (ปกติ)
-  function openSept3Notes() {
-    closePopup('sept3ChoiceModal');
-    proceedToNotesBoard(3);
-  }
-  
-  // เปิดโหมดความทรงจำ (วิดีโอ)
+  function openSept3Notes() { closePopup('sept3ChoiceModal'); proceedToNotesBoard(3); }
   function openSept3Memory() {
     closePopup('sept3ChoiceModal');
     document.getElementById('dynamic-calendar-sec').style.display = 'none';
     document.getElementById('sept3-experience-container').style.display = 'block';
   }
-  
-  // เล่นวิดีโอของความทรงจำ 3 ก.ย.
   function startSept3Video() {
     document.getElementById('step-1-intro').style.display = 'none';
     document.getElementById('step-2-video').style.display = 'block';
