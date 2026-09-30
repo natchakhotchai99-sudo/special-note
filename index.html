@@ -62,7 +62,7 @@
     .step-box { width: 100%; }
     .card-base { background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 25px 20px; margin-bottom: 18px; box-shadow: 0 10px 35px rgba(255, 182, 193, 0.35); border: 2px solid #ffffff; width: 100%; position: relative; transition: all 0.5s ease; }
     
-    /* 📜 ธีมจดหมายย้อนยุค (Nostalgia Theme) สำหรับเดือนเก่า */
+    /* 📜 ธีมจดหมายย้อนยุค (Nostalgia Theme) */
     .theme-past.card-base { background: #fffdf0; border-color: #fcd34d; box-shadow: 0 10px 35px rgba(217, 119, 6, 0.2); }
     .theme-past .calendar-header { color: #b45309; }
     .theme-past .day:hover { background: #fef3c7; border-color: #f59e0b; }
@@ -78,29 +78,44 @@
     .glass-liquid { height: 100%; width: 0%; background: linear-gradient(90deg, #ff758c, #ff0055); box-shadow: 0 0 20px #ff477e, inset 0 2px 5px rgba(255,255,255,0.6); border-radius: 18px; transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); position: relative; }
     .glass-liquid::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.6) 15%, transparent 20%), radial-gradient(circle, rgba(255,255,255,0.4) 15%, transparent 20%); background-size: 15px 15px, 20px 20px; background-position: 0 0, 10px 10px; animation: bubbles 2s linear infinite; border-radius: 18px; }
 
-    /* 🎰 กิมมิคเซียมซีเขย่ารัก (Fortune Shake) */
-    .shake-wrapper { margin-bottom: 25px; position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; background: #fffdf0; padding: 20px; border-radius: 20px; border: 2px dashed #fcd34d; box-shadow: inset 0 0 15px rgba(245, 158, 11, 0.1); }
-    .shake-header { font-size: 15px; font-weight: 700; color: #d97706; margin-bottom: 15px; }
-    .shake-instruction { font-size: 12px; color: #b45309; margin-bottom: 15px; background: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 12px; }
-    .cylinder-container { position: relative; width: 100px; height: 130px; cursor: pointer; display: flex; justify-content: center; align-items: flex-end; margin-bottom: 10px; }
-    .cylinder-img { width: 80px; height: auto; z-index: 2; transition: transform 0.1s; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15)); }
-    .stick-img { position: absolute; top: 20px; width: 15px; height: auto; z-index: 1; transition: top 0.3s ease-out; opacity: 0; }
+    /* 🎋 กิมมิคเซียมซีเขย่ารักโฉมใหม่ (CSS Siam-See) */
+    .shake-wrapper { margin-bottom: 25px; position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; background: #fffdf0; padding: 25px 20px 15px 20px; border-radius: 20px; border: 2px dashed #fcd34d; box-shadow: inset 0 0 15px rgba(245, 158, 11, 0.1); }
+    .shake-header { font-size: 16px; font-weight: 700; color: #d97706; margin-bottom: 10px; }
+    .shake-instruction { font-size: 13px; color: #b45309; margin-bottom: 20px; background: rgba(255,255,255,0.7); padding: 5px 15px; border-radius: 12px; font-weight: 500; }
     
-    /* อนิเมชันตอนเขย่า */
-    .shaking .cylinder-img { animation: shakeHard 0.3s infinite; }
-    .popping .stick-img { top: -30px; opacity: 1; animation: popUpStick 0.5s ease-out forwards; }
+    .siam-see-container { position: relative; width: 100px; height: 140px; cursor: pointer; display: flex; justify-content: center; align-items: flex-end; margin-bottom: 15px; }
+    
+    .css-cylinder { width: 75px; height: 100px; background: linear-gradient(135deg, #dc2626 0%, #991b1b 50%, #dc2626 100%); border-radius: 10px 10px 20px 20px; border: 4px solid #fbbf24; position: absolute; bottom: 0; z-index: 5; box-shadow: 0 10px 15px rgba(0,0,0,0.2), inset 0 0 10px rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; }
+    .css-cylinder::after { content: 'เซียมซี'; font-weight: 700; color: #fef3c7; font-size: 14px; writing-mode: vertical-rl; text-orientation: upright; letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+    
+    .css-stick { position: absolute; bottom: 20px; width: 22px; height: 90px; background: linear-gradient(to right, #fde68a, #f59e0b, #fde68a); border-radius: 10px 10px 2px 2px; z-index: 1; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; justify-content: center; padding-top: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); opacity: 0; }
+    .css-stick-text { font-weight: 700; color: #991b1b; font-size: 15px; display: flex; flex-direction: column; align-items: center; line-height: 1.1; }
+    
+    .shaking .css-cylinder { animation: shakeHard 0.3s infinite; }
+    .popping .css-stick { transform: translateY(-75px) rotate(8deg); opacity: 1; z-index: 6; }
     
     @keyframes shakeHard { 0% { transform: translate(2px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-5deg); } 20% { transform: translate(-3px, 0px) rotate(5deg); } 30% { transform: translate(0px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(5deg); } 50% { transform: translate(-1px, 2px) rotate(-5deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(2px, 1px) rotate(-5deg); } 80% { transform: translate(-1px, -1px) rotate(5deg); } 90% { transform: translate(2px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-5deg); } }
-    @keyframes popUpStick { 0% { top: 20px; opacity: 1; } 50% { top: -50px; transform: rotate(15deg); } 100% { top: -20px; transform: rotate(10deg); opacity: 1; } }
 
-    .shake-status { font-size: 13px; font-weight: 600; color: #059669; margin-top: 10px; display: none; background: #d1fae5; padding: 5px 12px; border-radius: 12px; border: 1px dashed #34d399; }
+    .shake-status { font-size: 14px; font-weight: 600; color: #059669; margin-bottom: 10px; display: none; background: #d1fae5; padding: 6px 14px; border-radius: 12px; border: 1px dashed #34d399; animation: popUp 0.3s; }
+    .read-fortune-btn { display: none; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 12px 20px; border-radius: 18px; font-size: 15px; font-weight: 700; font-family: 'Kanit'; cursor: pointer; box-shadow: 0 4px 10px rgba(217,119,6,0.3); animation: pulse 1.5s infinite; margin-top: 5px; }
+    
+    /* 🌟 ปุ่มส่วนรวม (หน้าบ้าน) สำหรับจัดการเซียมซี */
+    .shared-fortune-controls { display: flex; gap: 10px; width: 100%; margin-top: 15px; border-top: 1px dashed #fcd34d; padding-top: 15px; }
+    .shared-btn { flex: 1; background: #fffbeb; border: 2px dashed #f59e0b; color: #d97706; border-radius: 14px; padding: 10px 5px; font-size: 13px; font-weight: 700; font-family: 'Kanit'; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 5px rgba(245,158,11,0.1); }
+    .shared-btn:active { transform: scale(0.95); background: #fef3c7; }
 
     /* ป๊อปอัปผลลัพธ์เซียมซี */
     .fortune-modal { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 4px solid #f59e0b; padding: 35px 25px; }
-    .fortune-icon { font-size: 50px; margin-bottom: 10px; animation: bounce 2s infinite; }
+    .fortune-number-badge { font-size: 20px; font-weight: bold; color: white; background: #e11d48; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 10px; box-shadow: 0 4px 8px rgba(225,29,72,0.3); }
     .fortune-title { font-size: 22px; font-weight: 700; color: #d97706; margin-bottom: 15px; }
-    .fortune-message { font-size: 15px; color: #4a5568; font-weight: 600; line-height: 1.5; background: white; padding: 20px; border-radius: 16px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); margin-bottom: 20px; border: 2px dashed #fcd34d; }
+    .fortune-message { font-size: 16px; color: #4a5568; font-weight: 600; line-height: 1.5; background: white; padding: 20px; border-radius: 16px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); margin-bottom: 20px; border: 2px dashed #fcd34d; }
     .fortune-coupon { color: #e11d48; font-size: 18px; font-weight: 700; animation: pulse 1.5s infinite; }
+
+    /* ป๊อปอัปจัดการเซียมซี (เพิ่ม/ดู) */
+    .admin-modal-content { background: white; border-radius: 24px; padding: 25px; width: 100%; max-width: 360px; text-align: left; position: relative; max-height: 85vh; overflow-y: auto; }
+    .admin-title { font-size: 18px; font-weight: 700; color: #d97706; margin-bottom: 10px; border-bottom: 2px dashed #fcd34d; padding-bottom: 10px; text-align: center; }
+    .fortune-list-item { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 12px; margin-bottom: 10px; font-size: 14px; position: relative;}
+    .fortune-list-num { font-weight: bold; color: #e11d48; margin-bottom: 4px; font-size: 15px;}
 
     .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .choice-btn:active { transform: scale(0.95); }
@@ -289,17 +304,27 @@
       </div>
     </div>
 
-    <!-- 🎰 มินิเกมใหม่: เซียมซีเขย่ารัก (Fortune Shake) -->
+    <!-- 🎰 มินิเกมใหม่: เซียมซีเขย่ารัก (Fortune Shake CSS) -->
     <div class="shake-wrapper">
       <div class="shake-header">🎋 เซียมซีคนดื้อประจำวัน</div>
-      <div class="shake-instruction">📱 จับมือถือให้แน่น แล้วลอง "เขย่า" ดูสิ!<br><span style="font-size:10px; color:#92400e;">(หรือใช้นิ้วจิ้มรัวๆ ที่กระบอกก็ได้นะ เขย่าเล่นกี่รอบก็ได้!)</span></div>
+      <div class="shake-instruction">📱 จับมือถือให้แน่น แล้วลอง "เขย่า" ดูสิ!<br><span style="font-size:10px; color:#92400e;">(หรือใช้นิ้วจิ้มรัวๆ ที่กระบอกก็ได้ เขย่าเล่นกี่รอบก็ได้!)</span></div>
       
-      <div class="cylinder-container" id="shake-container" onclick="manualShake()">
-        <img src="https://ozonemassage.com/wp-content/uploads/2026/09/stick.png" class="stick-img" id="shake-stick" alt="ไม้เซียมซี" onerror="this.src='https://cdn-icons-png.flaticon.com/512/8646/8646487.png'">
-        <img src="https://cdn-icons-png.flaticon.com/512/3063/3063076.png" class="cylinder-img" id="shake-cylinder" alt="กระบอกเซียมซี">
+      <!-- กระบอกเซียมซีแบบ CSS สวยๆ -->
+      <div class="siam-see-container" id="shake-container" onclick="manualShake()">
+        <div class="css-stick" id="siam-see-stick">
+          <span class="css-stick-text">เบอร์<br><span id="shake-stick-number" style="font-size: 24px;">?</span></span>
+        </div>
+        <div class="css-cylinder"></div>
       </div>
-      <!-- เปลี่ยนดีไซน์สถานะนิดหน่อยให้รู้ว่าเขย่าซ้ำได้ -->
+      
       <div id="shake-status" class="shake-status">✨ ลองเขย่าดูสิ!</div>
+      <button id="read-fortune-btn" class="read-fortune-btn" onclick="showFortuneResult()">📖 เปิดดูคำทำนายเบอร์นี้เลย!</button>
+      
+      <!-- 🌟 ปุ่มส่วนรวม หน้าบ้าน (เพิ่มคำทำนาย / ดูทั้งหมด) -->
+      <div class="shared-fortune-controls">
+        <button class="shared-btn" onclick="openAddFortuneModal()">✍️ เขียนคำทำนายใส่กระบอก</button>
+        <button class="shared-btn" onclick="openAllFortunesModal()">📜 แอบดูใบเซียมซีทั้งหมด</button>
+      </div>
     </div>
 
     <button class="choice-btn today-btn" onclick="openTodayNotes()">
@@ -377,7 +402,7 @@
       </div>
 
       <div id="past-note-message" class="past-note-message">
-        🕰️️ ไดอารี่เดือนเก่า...<br>
+        🕰 ไดอารี่เดือนเก่า...<br>
         <span style="font-size: 14px; color: #f43f5e; font-weight: 500;">เก็บไว้เป็นความทรงจำที่สวยงาม แปะโน้ตเพิ่มไม่ได้แล้วน้า 📜✨</span>
       </div>
 
@@ -407,6 +432,51 @@
 
 </div> <!-- ปิด main-app-container -->
 
+<!-- ➕ ป๊อปอัป ร่วมเขียนคำทำนายใส่กระบอก (Shared Feature) -->
+<div id="addFortuneModal" class="popup-modal">
+  <div class="admin-modal-content">
+    <div class="admin-title">✍️ เขียนคำทำนายใส่กระบอกเซียมซี</div>
+    <div style="font-size: 13px; color: #4a5568; margin-bottom: 10px; line-height: 1.5; text-align: center; background: #fffbeb; padding: 10px; border-radius: 10px;">
+      เขียนคำทำนายปั่นๆ หรือสิทธิพิเศษใส่ลงไป<br>ให้อีกคนสุ่มได้เลย! (ระบบจะสุ่มเบอร์ให้เองน้า)
+    </div>
+    
+    <div class="hint-input-wrapper">
+      <label style="font-size: 14px; font-weight: bold; color: #b45309;">📝 ข้อความคำทำนาย / คำสั่ง:</label>
+      <textarea id="newFortuneText" class="note-input" style="height: 70px; margin-top: 5px;" placeholder="เช่น: วันนี้มีคนแอบคิดถึง... / วันนี้โดนทำโทษให้เลี้ยงข้าว 1 มื้อ!"></textarea>
+    </div>
+    
+    <div class="hint-input-wrapper" style="margin-top: 15px;">
+      <label style="font-size: 14px; font-weight: bold; color: #b45309;">🎁 ประเภทของเซียมซีใบนี้:</label>
+      <select id="newFortuneType" class="note-input-small" style="margin-top: 5px; width: 100%;" onchange="toggleCouponInput()">
+        <option value="normal">🥠 คำทำนาย / คำสั่งทั่วไป</option>
+        <option value="coupon">🎟️ คูปองสิทธิพิเศษ (ตัวแดง)</option>
+      </select>
+    </div>
+    
+    <div id="couponInputDiv" class="hint-input-wrapper" style="display: none; margin-top: 15px;">
+      <label style="font-size: 14px; font-weight: bold; color: #e11d48;">🎟️ ข้อความคูปอง (ตัวหนังสือสีแดงให้แคปจอ):</label>
+      <input type="text" id="newFortuneCoupon" style="margin-top: 5px;" placeholder="เช่น: ขอรูปน่ารักๆ 1 รูป 📸">
+    </div>
+    
+    <div style="display: flex; gap: 10px; margin-top: 20px;">
+      <button class="choice-btn bad-btn" style="flex: 1;" onclick="closePopup('addFortuneModal')">พับเก็บไว้ก่อน</button>
+      <button class="choice-btn best-btn" style="flex: 1;" onclick="saveNewFortune()">หย่อนใส่กระบอก 🎋</button>
+    </div>
+  </div>
+</div>
+
+<!-- 📜 ป๊อปอัป แอบดูใบเซียมซีทั้งหมด (Shared Feature) -->
+<div id="allFortunesModal" class="popup-modal">
+  <div class="admin-modal-content">
+    <div class="admin-title">📜 คำทำนายทั้งหมดที่เรามี</div>
+    <div style="font-size: 13px; color: #4a5568; margin-bottom: 10px; text-align: center;">มาแอบดูว่าในกระบอกมีสิทธิพิเศษอะไรซ่อนอยู่บ้าง 👀</div>
+    <div id="fortuneListContainer" style="margin-top: 10px; margin-bottom: 15px;">
+      <!-- รายการจะโหลดมาที่นี่ -->
+    </div>
+    <button class="choice-btn bad-btn" style="width: 100%;" onclick="closePopup('allFortunesModal')">ปิดหน้าต่าง ❌</button>
+  </div>
+</div>
+
 <!-- 🎉 Popup สรุปความทรงจำรายเดือน (Monthly Wrap-up) -->
 <div id="monthlySummaryModal" class="popup-modal">
   <div class="popup-content summary-modal">
@@ -426,7 +496,6 @@
     <div style="font-size: 60px; margin-bottom: 10px; animation: pulse 2s infinite;">👑✨</div>
     <div style="font-size: 20px; font-weight: 700; color: #e11d48; margin-bottom: 5px;">วันนี้เป็นวันพิเศษ!</div>
     <p style="font-size: 14px; color: #4a5568; line-height: 1.5; margin-bottom: 20px;">คุณอยากจะเปิดดูหน้ากระดานโน้ตปกติ หรืออยากดูความทรงจำพิเศษที่แอบทำไว้ให้ดีคะ? 🥰</p>
-    
     <div style="display: flex; flex-direction: column; gap: 10px;">
       <button class="choice-btn best-btn" onclick="openSept3Memory()">✨ ดูความทรงจำพิเศษ 💖</button>
       <button class="choice-btn good-btn" onclick="openSept3Notes()">📝 ดูกระดานโน้ตปกติ</button>
@@ -438,6 +507,7 @@
 <!-- 🔮 ป๊อปอัปผลลัพธ์ เซียมซีเขย่ารัก (Fortune Shake Result) -->
 <div id="fortuneResultModal" class="popup-modal">
   <div class="popup-content fortune-modal">
+    <div class="fortune-number-badge" id="fortuneNumberBadge">ใบเซียมซีเบอร์ ?</div>
     <div class="fortune-icon" id="fortuneIcon">🥠</div>
     <div class="fortune-title" id="fortuneTitle">คำทำนายวันนี้!</div>
     <div class="fortune-message" id="fortuneMessage">...</div>
@@ -525,6 +595,7 @@
   const database = firebase.database();
   const notesRef = database.ref('memory_box_notes_v7'); 
   const shakeRef = database.ref('memory_box_shake_v7'); 
+  const fortunesPoolRef = database.ref('memory_box_fortunes_pool_v7');
 
   // Init
   function updateTimeGreeting() {
@@ -537,22 +608,36 @@
   }
   updateTimeGreeting();
 
-  // 🎋 เกมเซียมซีเขย่ารัก (Fortune Shake) - แบบล็อคผลลัพธ์แรกของวัน
+  // ==========================================
+  // 🎋 ระบบเซียมซีเขย่ารัก (เชื่อมฐานข้อมูลเต็มรูปแบบ)
+  // ==========================================
   let currentShakeData = null;
   let shakeClicks = 0; 
   let isAnimatingShake = false;
-  
-  const fortunes = [
-    { type: "normal", icon: "🥠", text: "คำทำนาย: วันนี้ห้ามดื้อ ห้ามเถียง 24 ชั่วโมง เริ่ม!" },
-    { type: "normal", icon: "🥠", text: "คำทำนาย: มีคนแอบคิดถึงมากกกก รีบทักไปหาด่วน! 👀" },
-    { type: "normal", icon: "🥠", text: "คำทำนาย: วันนี้อารมณ์ดี เหมาะแก่การโดนเปย์ของอร่อย 🍱" },
-    { type: "normal", icon: "🥠", text: "คำทำนาย: ไม่ต้องเครียดนะ พักสายตาแล้วยิ้มหน่อย 😊" },
-    { type: "normal", icon: "🥠", text: "คำทำนาย: ดวงความรักพุ่งปรี๊ด! วันนี้ทำอะไรก็น่ารักไปหมด 💕" },
-    { type: "coupon", icon: "🎟️", text: "แจ็คพอตแตก! คุณได้รับสิทธิ์:", coupon: "ขอรูปน่ารักๆ 1 รูป 📸 (รีบแคปจอไปทวงด่วน!)" },
-    { type: "coupon", icon: "🎟️", text: "สิทธิพิเศษคนเก่ง! คุณได้รับสิทธิ์:", coupon: "คอลหา 10 นาทีแบบห้ามบ่น 📞 (แคปจอไปใช้สิทธิ์เลย!)" },
-    { type: "coupon", icon: "🎟️", text: "รางวัลพิเศษ! คุณได้รับสิทธิ์:", coupon: "สั่งเมนูโปรด 1 อย่าง 🍜 (แคปจอส่งไปอ้อนเลย!)" }
-  ];
+  let fortunesPool = []; // เก็บสระคำทำนายทั้งหมด
+  let drawnNumber = null; // เบอร์ที่สุ่มได้
 
+  // 1. โหลดข้อมูลคำทำนายทั้งหมดจาก Firebase
+  fortunesPoolRef.on('value', (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      fortunesPool = Object.values(data);
+    } else {
+      // ถ้ายังไม่มีในฐานข้อมูลเลย ให้สร้างชุดเริ่มต้น (Seed default)
+      const defaultFortunes = [
+        { number: 1, type: "normal", icon: "🥠", text: "คำทำนาย: วันนี้ห้ามดื้อ ห้ามเถียง 24 ชั่วโมง เริ่ม!" },
+        { number: 2, type: "normal", icon: "🥠", text: "คำทำนาย: มีคนแอบคิดถึงมากกกก รีบทักไปหาด่วน! 👀" },
+        { number: 3, type: "normal", icon: "🥠", text: "คำทำนาย: วันนี้อารมณ์ดี เหมาะแก่การโดนเปย์ของอร่อย 🍱" },
+        { number: 4, type: "normal", icon: "🥠", text: "คำทำนาย: ไม่ต้องเครียดนะ พักสายตาแล้วยิ้มหน่อย 😊" },
+        { number: 5, type: "normal", icon: "🥠", text: "คำทำนาย: ดวงความรักพุ่งปรี๊ด! วันนี้ทำอะไรก็น่ารักไปหมด 💕" },
+        { number: 6, type: "coupon", icon: "🎟️", text: "แจ็คพอตแตก! คุณได้รับสิทธิ์:", coupon: "ขอรูปน่ารักๆ 1 รูป 📸 (รีบแคปจอไปทวงด่วน!)" },
+        { number: 7, type: "coupon", icon: "🎟️", text: "สิทธิพิเศษคนเก่ง! คุณได้รับสิทธิ์:", coupon: "คอลหา 10 นาทีแบบห้ามบ่น 📞 (แคปจอไปใช้สิทธิ์เลย!)" }
+      ];
+      defaultFortunes.forEach(f => fortunesPoolRef.push(f));
+    }
+  });
+
+  // 2. เช็กสถานะการเขย่าของวันนี้
   shakeRef.on('value', (snapshot) => { 
     currentShakeData = snapshot.val(); 
     checkShakeStatus(); 
@@ -561,15 +646,23 @@
   function checkShakeStatus() {
     const todayStr = new Date().toLocaleDateString('th-TH');
     const statusEl = document.getElementById('shake-status');
+    const readBtn = document.getElementById('read-fortune-btn');
     
+    // รีเซ็ตไม้ให้ลงไปหลบอยู่ข้างล่างเสมอตอนโหลดใหม่
+    document.getElementById('shake-container').classList.remove('popping');
+    readBtn.style.display = 'none';
+
     if (!currentShakeData || currentShakeData.date !== todayStr) {
-      // สร้างคำทำนายใหม่ แต่ยังไม่นับว่าเล่นแล้ว (รอเขย่า)
-      const randomIndex = Math.floor(Math.random() * fortunes.length);
-      shakeRef.set({ date: todayStr, result: fortunes[randomIndex], isPlayed: false });
+      // ถ้าเปลี่ยนวัน ให้สุ่มเบอร์ใหม่เตรียมไว้เลย
+      setTimeout(() => {
+        if(fortunesPool.length > 0) {
+          const randomIndex = Math.floor(Math.random() * fortunesPool.length);
+          shakeRef.set({ date: todayStr, result: fortunesPool[randomIndex], isPlayed: false });
+        }
+      }, 1000);
       return; 
     }
     
-    // ไม่มีการปิดกั้น container แล้ว เขย่าใหม่ได้เสมอ
     shakeClicks = 0; 
     if (currentShakeData.isPlayed) {
       statusEl.style.display = 'block';
@@ -580,8 +673,8 @@
     }
   }
 
+  // เซ็นเซอร์เขย่ามือถือ
   if (window.DeviceMotionEvent) { window.addEventListener('devicemotion', handleMotion, false); }
-
   let lastX = 0, lastY = 0, lastZ = 0;
   function handleMotion(e) {
     if (isAnimatingShake || !currentShakeData) return;
@@ -593,29 +686,40 @@
 
   function manualShake() {
     if (isAnimatingShake || !currentShakeData) return;
-    shakeClicks++;
-    triggerShakeAnimation();
+    shakeClicks++; triggerShakeAnimation();
   }
 
+  // อนิเมชันกระบอก & ไม้เด้ง
   function triggerShakeAnimation() {
     if (isAnimatingShake) return;
     isAnimatingShake = true;
     const container = document.getElementById('shake-container');
-    container.classList.add('shaking');
+    const readBtn = document.getElementById('read-fortune-btn');
+    const statusEl = document.getElementById('shake-status');
     
-    // เขย่าครบ 3 ครั้ง หรือ ดวงดีหล่นเลย
+    container.classList.remove('popping'); // เอาไม้ลงก่อน
+    readBtn.style.display = 'none';
+    container.classList.add('shaking'); // เริ่มเขย่า
+    
     if (shakeClicks >= 3 || Math.random() > 0.5) {
       setTimeout(() => {
         container.classList.remove('shaking');
-        container.classList.add('popping');
+        
+        // เซ็ตตัวเลขบนไม้เซียมซี
+        drawnNumber = currentShakeData.result.number;
+        document.getElementById('shake-stick-number').innerText = drawnNumber;
+        
+        container.classList.add('popping'); // ไม้เด้งขึ้นมา!
         
         setTimeout(() => {
-          container.classList.remove('popping');
-          showFortuneResult();
+          readBtn.innerHTML = `📖 เปิดดูคำทำนายใบที่ ${drawnNumber} เลย!`;
+          readBtn.style.display = 'block'; // โชว์ปุ่มเปิดอ่าน
+          statusEl.innerText = `✨ ได้ไม้เซียมซีใบที่ ${drawnNumber} แล้ว!`;
+          
           isAnimatingShake = false;
           shakeClicks = 0;
-        }, 800);
-      }, 500);
+        }, 500); // รอไม้เด้งสุด
+      }, 600); // ระยะเวลาเขย่า
     } else {
        setTimeout(() => {
           container.classList.remove('shaking');
@@ -624,20 +728,18 @@
     }
   }
 
+  // เปิดดูผลลัพธ์การ์ด
   function showFortuneResult() {
     if (!currentShakeData) return;
     
-    // บันทึกว่าเล่นแล้ว (ล็อกผลลัพธ์แรก)
     const wasPlayedBefore = currentShakeData.isPlayed;
-    if (!wasPlayedBefore) {
-      shakeRef.update({ isPlayed: true });
-    }
+    if (!wasPlayedBefore) { shakeRef.update({ isPlayed: true }); }
     
     const res = currentShakeData.result;
+    document.getElementById('fortuneNumberBadge').innerText = `ใบเซียมซีเบอร์ ${res.number}`;
     document.getElementById('fortuneIcon').innerText = res.icon;
     document.getElementById('fortuneTitle').innerText = res.type === 'coupon' ? '🎉 ยินดีด้วย!' : '🔮 คำทำนายของคุณ';
     
-    // ✨ ถ้าเล่นซ้ำ ให้เพิ่มข้อความปั่นๆ เข้าไป
     let extraText = wasPlayedBefore ? "\n\n(เขย่ากี่รอบก็ได้คำนี้แหละคนดื้อ! ชะตาวันนี้ลิขิตมาแบบนี้แล้ว 😜)" : "";
     document.getElementById('fortuneMessage').innerText = res.text + extraText;
     
@@ -651,7 +753,64 @@
     document.getElementById('fortuneResultModal').style.display = 'flex';
   }
 
-  // Firebase Data Loading
+  // ==========================================
+  // ⚙️ ระบบส่วนรวม (เพิ่ม / ดูคำทำนาย) หน้าบ้าน
+  // ==========================================
+  function openAddFortuneModal() {
+    document.getElementById('newFortuneText').value = '';
+    document.getElementById('newFortuneCoupon').value = '';
+    document.getElementById('newFortuneType').value = 'normal';
+    toggleCouponInput();
+    document.getElementById('addFortuneModal').style.display = 'flex';
+  }
+  
+  function toggleCouponInput() {
+    const type = document.getElementById('newFortuneType').value;
+    document.getElementById('couponInputDiv').style.display = (type === 'coupon') ? 'block' : 'none';
+  }
+
+  function saveNewFortune() {
+    const text = document.getElementById('newFortuneText').value;
+    const type = document.getElementById('newFortuneType').value;
+    const coupon = document.getElementById('newFortuneCoupon').value;
+    
+    if(text.trim() === '') { alert('กรุณาพิมพ์ข้อความคำทำนายก่อนนะคะ 🥺'); return; }
+    if(type === 'coupon' && coupon.trim() === '') { alert('กรุณาพิมพ์ข้อความสิทธิพิเศษด้วยนะคะ 🎟️'); return; }
+    
+    // รันหมายเลขถัดไป
+    const nextNumber = fortunesPool.length + 1;
+    const newFortune = {
+      number: nextNumber,
+      type: type,
+      icon: type === 'coupon' ? '🎟️' : '🥠',
+      text: text,
+      coupon: type === 'coupon' ? coupon : ""
+    };
+    
+    fortunesPoolRef.push(newFortune);
+    alert(`หย่อนคำทำนาย "เบอร์ ${nextNumber}" ลงกระบอกเรียบร้อย! 🎉 รอให้อีกคนมาเขย่าได้เลยยย`);
+    closePopup('addFortuneModal');
+  }
+
+  function openAllFortunesModal() {
+    const container = document.getElementById('fortuneListContainer');
+    container.innerHTML = '';
+    
+    if(fortunesPool.length === 0) {
+      container.innerHTML = '<div style="text-align:center; color:#94a3b8;">ยังไม่มีคำทำนายในกระบอกเลยค่ะ</div>';
+    } else {
+      fortunesPool.forEach(f => {
+        let div = document.createElement('div');
+        div.className = 'fortune-list-item';
+        let couponHtml = f.type === 'coupon' ? `<br><span style="color:#e11d48; font-weight:bold;">สิทธิพิเศษ: ${f.coupon}</span>` : '';
+        div.innerHTML = `<div class="fortune-list-num">เซียมซีเบอร์ ${f.number} ${f.icon}</div><div>${f.text}${couponHtml}</div>`;
+        container.appendChild(div);
+      });
+    }
+    document.getElementById('allFortunesModal').style.display = 'flex';
+  }
+
+  // Firebase Note Data Loading
   let allNotes = []; let noteToUnlock = null;
   notesRef.on('value', (snapshot) => {
     const data = snapshot.val(); allNotes = [];
