@@ -50,12 +50,12 @@
     .floating-heart-bg { position: fixed; font-size: 22px; color: rgba(255, 117, 140, 0.35); pointer-events: none; z-index: 0; animation: floatUp 6s linear infinite; }
     @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } }
 
-    /* 🎬 Memory Cinema */
-    .cinema-btn { background: linear-gradient(135deg, #1e293b, #0f172a); color: #fbbf24; border: 2px solid #f59e0b; padding: 15px; font-size: 16px; font-weight: 700; font-family: 'Kanit'; border-radius: 16px; width: 100%; cursor: pointer; margin-bottom: 25px; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); display: flex; justify-content: center; align-items: center; gap: 10px; animation: pulseGlowGold 2s infinite; }
-    @keyframes pulseGlowGold { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
-    #cinema-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); z-index: 10010; display: none; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(8px); animation: fadeIn 1s; }
+    /* 🎬 Memory Cinema (เปลี่ยนสีให้คิวท์ขึ้น) */
+    .cinema-btn { background: linear-gradient(135deg, #fdf4ff, #fae8ff); color: #d946ef; border: 2px dashed #f0abfc; padding: 15px; font-size: 16px; font-weight: 700; font-family: 'Kanit'; border-radius: 16px; width: 100%; cursor: pointer; margin-bottom: 25px; box-shadow: 0 6px 20px rgba(240, 171, 252, 0.4); display: flex; justify-content: center; align-items: center; gap: 10px; animation: pulseGlowCinema 2s infinite; }
+    @keyframes pulseGlowCinema { 0% { box-shadow: 0 0 0 0 rgba(240, 171, 252, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(240, 171, 252, 0); } 100% { box-shadow: 0 0 0 0 rgba(240, 171, 252, 0); } }
+    #cinema-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 10010; display: none; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(8px); animation: fadeIn 1s; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    #cinema-video { width: 90%; max-width: 400px; border-radius: 20px; box-shadow: 0 10px 40px rgba(245, 158, 11, 0.5); border: 4px solid #f59e0b; }
+    #cinema-video { width: 90%; max-width: 400px; border-radius: 20px; box-shadow: 0 10px 40px rgba(240, 171, 252, 0.5); border: 4px solid #f0abfc; }
     .close-cinema-btn { margin-top: 25px; background: #ef4444; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 16px; font-family: 'Kanit'; font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); }
 
     .cute-container { width: 100%; max-width: 440px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px 16px; text-align: center; position: relative; z-index: 1; }
@@ -87,12 +87,6 @@
     .scratch-text-secret.revealed { transform: scale(1.05); }
     #scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; cursor: pointer; transition: opacity 0.5s ease; }
 
-    /* 🐱 น้องแมวเฝ้าเว็บ (Mascot) */
-    #mascot-container { position: fixed; bottom: 20px; right: 15px; z-index: 10000; display: none; flex-direction: column; align-items: flex-end; cursor: pointer; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.2)); }
-    .mascot-bubble { background: white; border: 2px solid #cbd5e1; padding: 10px 14px; border-radius: 18px 18px 4px 18px; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 8px; display: none; max-width: 170px; text-align: right; box-shadow: 0 6px 15px rgba(0,0,0,0.15); font-family: 'Kanit'; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-    .mascot-img { width: 80px; height: 80px; object-fit: contain; transition: transform 0.2s; }
-    .mascot-img:active { transform: scale(0.85); }
-
     .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .choice-btn:active { transform: scale(0.95); }
     
@@ -102,7 +96,11 @@
     .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 5px; }
     .month-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 5px; border-radius: 16px; border: 2px solid #ffe4e8; background: #fff; font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; color: #4a5568; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative;}
     .month-btn:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3); border-color: #ffb6c1; color: #ff477e; }
-    .month-btn.active-sept { background: linear-gradient(135deg, #ff477e, #ff758c); color: white; border-color: #ff477e; box-shadow: 0 6px 20px rgba(255, 71, 126, 0.5); }
+    
+    /* สไตล์ปุ่มเดือนปัจจุบัน และเดือนอดีต */
+    .active-month { background: linear-gradient(135deg, #ff477e, #ff758c); color: white; border-color: #ff477e; box-shadow: 0 6px 20px rgba(255, 71, 126, 0.5); }
+    .active-month:hover { color: white; }
+    .past-month { background: #fffdf0; border-color: #fcd34d; color: #b45309; box-shadow: inset 0 0 10px rgba(245,158,11,0.1); }
     .month-icon { font-size: 18px; margin-bottom: 4px; }
 
     /* 🗓️ ปฏิทินแบบไดนามิก */
@@ -113,8 +111,14 @@
     .day:hover { background: #fff0f3; border-color: #ffccd5; transform: scale(1.08); z-index: 10; box-shadow: 0 6px 15px rgba(255, 182, 193, 0.4); }
     .special-day { background: linear-gradient(135deg, #ff477e, #ff758c) !important; color: white !important; font-weight: bold; border-radius: 50%; box-shadow: 0 6px 15px rgba(255, 71, 126, 0.5); animation: pulse 1.5s infinite; border: none; }
     
+    /* ไฮไลต์วันที่มีโน้ตถูกล็อก */
+    .has-locked-note-day { background: linear-gradient(135deg, #fef3c7, #fde68a) !important; border: 2px solid #f59e0b !important; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important; color: #92400e !important; }
+
     .note-dot { position: absolute; bottom: 3px; right: 3px; background: #fcd34d; border-radius: 50%; box-shadow: 0 2px 5px rgba(245,158,11,0.6); z-index: 5; width: 12px; height: 12px; animation: pulse 2s infinite; pointer-events: none; }
     .note-dot.has-number { width: 18px; height: 18px; font-size: 11px; font-weight: bold; color: #92400e; display: flex; justify-content: center; align-items: center; border: 2px solid white; bottom: -3px; right: -3px; animation: bounce 1.5s infinite; }
+
+    /* ป้ายบอกสถานะวันที่มีโน้ตลับ (ใต้ปฏิทิน) */
+    .locked-legend-box { display: none; margin-top: 20px; padding: 15px; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 16px; font-size: 14px; color: #b45309; font-weight: 600; text-align: center; box-shadow: 0 4px 10px rgba(245,158,11,0.1); animation: popUp 0.5s; }
 
     /* 📝 กระดานโน้ตเฉพาะวัน */
     .shared-note-box { background: #fffdf0; border: 2px dashed #fcd34d; border-radius: 20px; padding: 18px; text-align: left; margin-bottom: 15px; position: relative; box-shadow: inset 0 0 15px rgba(245,158,11,0.1); transition: background 0.3s; }
@@ -231,12 +235,6 @@
 <div id="heart-bg-container"></div>
 <button id="home-btn" class="home-btn" onclick="goHome()">🏠</button>
 
-<!-- 🐱 น้องแมวเฝ้าเว็บ (Mascot) รูปภาพ GIF -->
-<div id="mascot-container" onclick="pokeMascot()">
-  <div id="mascot-bubble" class="mascot-bubble">...</div>
-  <img id="mascot-emoji" class="mascot-img" src="https://ozonemassage.com/wp-content/uploads/2026/09/ดีไซน์ที่ยังไม่ได้ตั้งชื่อ-1.gif" alt="Cat Mascot">
-</div>
-
 <!-- 🎁 หน้าต้อนรับ (Greeting Screen) -->
 <div id="greeting-overlay">
   <div class="greeting-box-icon">📦<div class="sparkle" style="top:-10px; right:-10px;">✨</div></div>
@@ -244,9 +242,9 @@
   <button class="open-box-btn" onclick="openPackage()">✨ แตะเพื่อเปิดกล่อง!</button>
 </div>
 
-<!-- 🎬 โรงหนังความทรงจำ (Memory Cinema) -->
+<!-- 🎬 โรงหนังความทรงจำ (Memory Cinema) (แก้สีแล้ว) -->
 <div id="cinema-overlay">
-  <div style="font-size: 24px; color: #fbbf24; font-weight: 700; margin-bottom: 20px; font-family: 'Kanit';" class="magic-glow">🍿 Memory Cinema 🎬</div>
+  <div style="font-size: 24px; color: #f472b6; font-weight: 700; margin-bottom: 20px; font-family: 'Kanit';" class="magic-glow">🍿 Memory Cinema 🎬</div>
   <video id="cinema-video" controls playsinline>
     <source src="https://ozonemassage.com/wp-content/uploads/2026/09/download-3.mp4" type="video/mp4">
   </video>
@@ -262,7 +260,7 @@
     <div id="timeGreeting" class="time-greeting"></div>
     <div class="main-title magic-glow">📦 Memory Box 2026 💖</div>
     
-    <!-- 🎞️ ปุ่มตั๋วหนังความทรงจำ -->
+    <!-- 🎞️ ปุ่มตั๋วหนังความทรงจำ สีพาสเทลน่ารักๆ -->
     <button class="cinema-btn" onclick="openCinema()">
       <span style="font-size: 22px;">🎫</span> แวะดูวิดีโอความทรงจำของเราไหม? 🎬
     </button>
@@ -299,8 +297,11 @@
       <button class="month-btn" onclick="requestMonthAccess(5)"><span class="month-icon">🌻</span>มิ.ย.</button>
       <button class="month-btn" onclick="requestMonthAccess(6)"><span class="month-icon">☀️</span>ก.ค.</button>
       <button class="month-btn" onclick="requestMonthAccess(7)"><span class="month-icon">☔</span>ส.ค.</button>
-      <button class="month-btn active-sept" onclick="requestMonthAccess(8)"><span class="month-icon">🍁</span>ก.ย. ✨</button>
-      <button class="month-btn" onclick="requestMonthAccess(9)"><span class="month-icon">🎃</span>ต.ค.</button>
+      <!-- 🍁 เดือนกันยา เปลี่ยนเป็นอดีตแล้ว! -->
+      <button class="month-btn past-month" onclick="requestMonthAccess(8)"><span class="month-icon">🍁</span>ก.ย. 📜</button>
+      <!-- 🎃 ไฮไลต์เดือนปัจจุบันคือตุลาคม! -->
+      <button class="month-btn active-month" onclick="requestMonthAccess(9)"><span class="month-icon">🎃</span>ต.ค. ✨</button>
+      
       <button class="month-btn" onclick="requestMonthAccess(10)"><span class="month-icon">🪁</span>พ.ย.</button>
       <button class="month-btn" onclick="requestMonthAccess(11)"><span class="month-icon">🎄</span>ธ.ค.</button>
     </div>
@@ -311,6 +312,12 @@
     <div class="calendar-header" id="dynamic-cal-header">Month 2026 🍁</div>
     <p id="cal-instruction" style="font-size: 14px; color: #718096; margin-top: 0; font-weight: 500;">แตะที่ตัวเลขวันที่ เพื่อเปิดดูความทรงจำ หรือแปะกระดาษโน้ต 💌</p>
     <div class="calendar-grid" id="dynamic-cal-grid"></div>
+    
+    <!-- 🔑 กล่องอธิบายสีเหลือง (Legend สำหรับวันที่มีโน้ตล็อก) -->
+    <div id="locked-notes-legend" class="locked-legend-box">
+      🔑 วันที่มีกรอบ <span style="display:inline-block; width:16px; height:16px; background:linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid #f59e0b; border-radius:4px; vertical-align:middle; margin:0 4px;"></span> คือวันที่มีข้อความลับซ่อนอยู่!<br>
+      <span style="font-size: 12px; color:#d97706; font-weight:500;">(เดือนนี้มีโน้ตที่ล็อกรหัสไว้ทั้งหมด <span id="locked-count-text">0</span> แผ่น)</span>
+    </div>
   </div>
 
   <!-- 📝 กระดานโน้ตเฉพาะวัน -->
@@ -331,12 +338,6 @@
         </div>
 
         <textarea id="sharedNoteInput" class="note-input" placeholder="พิมพ์ความรู้สึกไว้ตรงนี้นะ 💌..."></textarea>
-        
-        <div class="media-buttons">
-          <button id="recordBtn" class="record-btn" onclick="toggleRecording()">🎤 อัดเสียง</button>
-          <label for="imageInput" class="image-upload-btn">📸 ใส่รูปภาพ</label>
-          <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImageUpload(event)">
-        </div>
         
         <div class="lock-toggle-box">
           <label style="cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 700;">
@@ -442,7 +443,8 @@
 <script>
   const monthNames = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
   const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  let pendingMonthIndex = null; let currentViewingMonthIndex = 8; let currentViewingDay = null;
+  let pendingMonthIndex = null; let currentViewingMonthIndex = 9; // ค่าเริ่มต้นคือเดือน 9 (ตุลาคม)
+  let currentViewingDay = null;
 
   // Numpad Functions (Setup & Unlock)
   let setupPin = ""; let unlockPin = "";
@@ -480,21 +482,6 @@
     document.getElementById('timeGreeting').innerText = text;
   }
   updateTimeGreeting();
-
-  let isMascotAwake = false;
-  function initMascot() {
-    const hour = new Date().getHours();
-    const emojiEl = document.getElementById('mascot-emoji');
-    if(hour >= 6 && hour < 22) { isMascotAwake = true; emojiEl.src = 'https://ozonemassage.com/wp-content/uploads/2026/09/ดีไซน์ที่ยังไม่ได้ตั้งชื่อ-1.gif'; } 
-    else { isMascotAwake = false; emojiEl.src = 'https://ozonemassage.com/wp-content/uploads/2026/09/download-2.gif'; }
-  }
-  initMascot(); 
-  function pokeMascot() {
-    const bubble = document.getElementById('mascot-bubble');
-    let phrases = isMascotAwake ? ["วันนี้ดื้อหรือเปล่าเนี่ย? 🐱", "ทำงานสู้ๆ น้าา 💖", "แอบดูอยู่นะ! 👀", "หาน้ำกินด้วยยย 🥤"] : ["มาจิ้มทำไม คนจะนอน! 😾", "ง่วงงงง 💤", "ดึกแล้วไปนอนได้แล้ว! 🌙"];
-    bubble.innerText = phrases[Math.floor(Math.random() * phrases.length)];
-    bubble.style.display = 'block'; setTimeout(() => { bubble.style.display = 'none'; }, 3000);
-  }
 
   // Scratch Card Logic
   const canvas = document.getElementById('scratch-canvas'); const ctx = canvas ? canvas.getContext('2d') : null;
@@ -551,7 +538,6 @@
     setTimeout(() => {
       greeting.style.display = 'none';
       document.getElementById('main-app-container').style.display = 'flex'; 
-      document.getElementById('mascot-container').style.display = 'flex'; 
       createBackgroundHearts(); checkAndRenderScratchCard(); 
     }, 800);
   }
@@ -567,7 +553,7 @@
 
   // 📅 ระบบจัดการเดือน & ธีม Nostalgia
   function requestMonthAccess(mIndex) {
-    const today = new Date(); const realMonth = today.getMonth(); // เดือนปัจจุบัน (เช่น ต.ค. = 9)
+    const today = new Date(); const realMonth = 9; // เดือนตุลาคม (index 9)
     pendingMonthIndex = mIndex;
     
     // 🍁 เช็กว่าเป็นเดือนในอดีตหรือไม่?
@@ -594,7 +580,7 @@
       document.getElementById('capsuleUnlockText').innerHTML = 'เดือนนี้ยังมาไม่ถึงเลยนะคนดื้อ!<br><span style="font-size:14px; color:#64748b;">แต่ถ้าอยากส่ง "โน้ตข้ามเวลา" ไปรอไว้ก่อนก็กดเพิ่มโน้ตได้เลยนะ เค้าจะไม่แอบอ่านหรอก! 🤫</span>';
       document.getElementById('timeCapsuleModal').style.display = 'flex';
     } 
-    // 🌸 เดือนปัจจุบัน
+    // 🌸 เดือนปัจจุบัน (ตุลาคม)
     else { proceedToMonth(mIndex); }
   }
 
@@ -607,7 +593,7 @@
     if(mIndex !== undefined) currentViewingMonthIndex = mIndex;
     
     // ตั้งค่า ธีมจดหมายย้อนยุค (Nostalgia)
-    const realMonth = new Date().getMonth();
+    const realMonth = 9; // ปัจจุบันคือตุลาคม
     const isPast = currentViewingMonthIndex < realMonth;
     const calCard = document.getElementById('dynamic-calendar-sec');
     const notesCard = document.getElementById('daily-notes-sec');
@@ -615,9 +601,9 @@
     else { calCard.classList.remove('theme-past'); notesCard.classList.remove('theme-past'); }
 
     document.getElementById('memory-box-step').style.display = 'none'; document.getElementById('dynamic-calendar-sec').style.display = 'block';
-    document.getElementById('home-btn').style.display = 'flex'; document.getElementById('mascot-container').style.display = 'flex'; 
+    document.getElementById('home-btn').style.display = 'flex'; 
     
-    document.getElementById('dynamic-cal-header').innerText = `${monthNames[currentViewingMonthIndex]} 2026 ${isPast ? '📜' : '🍁'}`;
+    document.getElementById('dynamic-cal-header').innerText = `${monthNames[currentViewingMonthIndex]} 2026 ${isPast ? '📜' : '✨'}`;
     const instruction = document.getElementById('cal-instruction');
     instruction.innerText = isPast ? "แตะที่ตัวเลขวันที่ เพื่อเปิดอ่านไดอารี่ในวันนั้น 📖" : "แตะที่ตัวเลขวันที่ เพื่อเปิดดูความทรงจำ หรือแปะกระดาษโน้ต 💌";
     
@@ -627,24 +613,61 @@
     for(let i=0; i<padding; i++) { grid.innerHTML += '<div></div>'; }
     const days = monthDays[currentViewingMonthIndex];
     for(let i=1; i<=days; i++) {
-      let extraClass = (currentViewingMonthIndex === 8 && (i === 3 || i === 8)) ? 'special-day' : '';
-      grid.innerHTML += `<div class="day ${extraClass}" id="cal-day-${i}" onclick="proceedToNotesBoard(${i})">${i}</div>`;
+      grid.innerHTML += `<div class="day" id="cal-day-${i}" onclick="proceedToNotesBoard(${i})">${i}</div>`;
     }
     updateCalendarDots();
   }
 
+  // 🔑 ฟังก์ชันเช็กวันที่มีโน้ตล็อก
   function updateCalendarDots() {
     if(document.getElementById('dynamic-calendar-sec').style.display === 'none') return;
-    for (let i = 1; i <= 31; i++) { const dayEl = document.getElementById(`cal-day-${i}`); if (dayEl) { const b = dayEl.querySelector('.note-dot'); if (b) b.remove(); } }
+    
+    // ลบไฮไลต์เก่าออกก่อน
+    for (let i = 1; i <= 31; i++) { 
+      const dayEl = document.getElementById(`cal-day-${i}`); 
+      if (dayEl) { 
+        dayEl.classList.remove('has-locked-note-day');
+        const b = dayEl.querySelector('.note-dot'); 
+        if (b) b.remove(); 
+      } 
+    }
+    
     const notesInMonth = allNotes.filter(n => Number(n.targetMonth) === currentViewingMonthIndex);
-    const dayCounts = {}; notesInMonth.forEach(n => { let d = Number(n.targetDay); dayCounts[d] = (dayCounts[d] || 0) + 1; });
+    const dayCounts = {}; 
+    const dayLockedCount = {}; // นับโน้ตที่ล็อก
+    let totalLockedInMonth = 0; // ยอดรวมโน้ตล็อกทั้งเดือน
+    
+    notesInMonth.forEach(n => { 
+      let d = Number(n.targetDay); 
+      dayCounts[d] = (dayCounts[d] || 0) + 1; 
+      if(n.isLocked) {
+        dayLockedCount[d] = (dayLockedCount[d] || 0) + 1;
+        totalLockedInMonth++;
+      }
+    });
+    
     for(let day in dayCounts) {
       const dayEl = document.getElementById(`cal-day-${day}`);
       if (dayEl && dayCounts[day] > 0) {
+        // แปะจุดแจ้งเตือนจำนวนโน้ต
         const badge = document.createElement('div'); badge.className = 'note-dot'; 
         if(dayCounts[day] > 1) { badge.innerText = dayCounts[day]; badge.classList.add('has-number'); }
         dayEl.appendChild(badge);
+        
+        // 🌟 ไฮไลต์ถ้าวันนั้นมีโน้ตล็อก
+        if (dayLockedCount[day] > 0) {
+          dayEl.classList.add('has-locked-note-day');
+        }
       }
+    }
+    
+    // โชว์/ซ่อน กล่องคำอธิบายด้านล่าง
+    const legendBox = document.getElementById('locked-notes-legend');
+    if (totalLockedInMonth > 0) {
+      legendBox.style.display = 'block';
+      document.getElementById('locked-count-text').innerText = totalLockedInMonth;
+    } else {
+      legendBox.style.display = 'none';
     }
   }
 
@@ -652,12 +675,13 @@
   function openTodayNotes() { const today = new Date(); currentViewingMonthIndex = today.getMonth(); proceedToNotesBoard(today.getDate()); }
   function proceedToNotesBoard(day) {
     currentViewingDay = day;
-    document.getElementById('dynamic-calendar-sec').style.display = 'none'; document.getElementById('memory-box-step').style.display = 'none'; document.getElementById('mascot-container').style.display = 'none'; 
+    document.getElementById('dynamic-calendar-sec').style.display = 'none'; document.getElementById('memory-box-step').style.display = 'none'; 
     const dailySec = document.getElementById('daily-notes-sec'); dailySec.style.display = 'block'; 
     document.getElementById('daily-note-title').innerText = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
     document.getElementById('home-btn').style.display = 'flex';
     
-    const realMonth = new Date().getMonth(); const realDay = new Date().getDate();
+    const realMonth = 9; // เดือนตุลาคม
+    const realDay = new Date().getDate();
     const isPastDay = currentViewingMonthIndex < realMonth || (currentViewingMonthIndex === realMonth && day < realDay);
     
     if (isPastDay) { document.getElementById('note-creation-form').style.display = 'none'; document.getElementById('past-note-message').style.display = 'block'; } 
@@ -694,14 +718,14 @@
   }
 
   // 🖼️ เรนเดอร์กระดาษโน้ต & 🔓 Auto-Unlock Logic
-  function isFutureNote(m, d) { const today = new Date(); const rM = today.getMonth(); const rD = today.getDate(); return m > rM || (m === rM && d > rD); }
+  function isFutureNote(m, d) { const today = new Date(); const rM = 9; const rD = today.getDate(); return m > rM || (m === rM && d > rD); }
 
   function renderNotesForDay(day) {
     const board = document.getElementById('notesBoard'); board.innerHTML = ''; 
     const dayNotes = allNotes.filter(n => Number(n.targetDay) === day && Number(n.targetMonth) === currentViewingMonthIndex).reverse();
     if (dayNotes.length === 0) { board.innerHTML = '<div style="width: 100%; text-align: center; color: #9ca3af; font-size: 15px; padding: 25px; font-weight: 500;">ยังไม่มีความทรงจำในวันนี้...</div>'; return; }
     
-    const realMonth = new Date().getMonth();
+    const realMonth = 9; // ตุลาคม
     const isPastMonth = currentViewingMonthIndex < realMonth;
 
     dayNotes.forEach(note => {
@@ -775,7 +799,7 @@
   function goHome() {
     document.getElementById('home-btn').style.display = 'none'; currentViewingDay = null; noteToUnlock = null; 
     document.getElementById('daily-notes-sec').style.display = 'none'; document.getElementById('dynamic-calendar-sec').style.display = 'none';
-    document.getElementById('memory-box-step').style.display = 'block'; document.getElementById('mascot-container').style.display = 'flex'; document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' }); initMascot(); 
+    document.getElementById('memory-box-step').style.display = 'block'; document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' }); 
   }
 
   function createBackgroundHearts() { const container = document.getElementById('heart-bg-container'); const hearts = ['💖', '✨', '🌟', '💕']; for(let i=0; i<12; i++) { const heart = document.createElement('div'); heart.classList.add('floating-heart-bg'); heart.innerText = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 4 + 4) + 's'; container.appendChild(heart); } }
