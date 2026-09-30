@@ -83,18 +83,31 @@
     .shake-header { font-size: 16px; font-weight: 700; color: #d97706; margin-bottom: 10px; }
     .shake-instruction { font-size: 13px; color: #b45309; margin-bottom: 20px; background: rgba(255,255,255,0.7); padding: 5px 15px; border-radius: 12px; font-weight: 500; }
     
-    .siam-see-container { position: relative; width: 100px; height: 140px; cursor: pointer; display: flex; justify-content: center; align-items: flex-end; margin-bottom: 15px; }
+    .siam-see-container { position: relative; width: 160px; height: 180px; cursor: pointer; display: flex; justify-content: center; align-items: flex-end; margin-bottom: 15px; }
     
-    .css-cylinder { width: 75px; height: 100px; background: linear-gradient(135deg, #dc2626 0%, #991b1b 50%, #dc2626 100%); border-radius: 10px 10px 20px 20px; border: 4px solid #fbbf24; position: absolute; bottom: 0; z-index: 5; box-shadow: 0 10px 15px rgba(0,0,0,0.2), inset 0 0 10px rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; }
-    .css-cylinder::after { content: 'เซียมซี'; font-weight: 700; color: #fef3c7; font-size: 14px; writing-mode: vertical-rl; text-orientation: upright; letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+    /* ตัวกระบอกเซียมซี */
+    .css-cylinder { width: 85px; height: 110px; background: linear-gradient(135deg, #dc2626 0%, #991b1b 50%, #dc2626 100%); border-radius: 8px 8px 25px 25px; border: 4px solid #fbbf24; position: absolute; bottom: 10px; z-index: 5; box-shadow: 0 10px 15px rgba(0,0,0,0.2), inset 0 0 10px rgba(0,0,0,0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .css-cylinder-text { font-weight: 700; color: #fef3c7; font-size: 18px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); line-height: 1.1; text-align: center; }
     
-    .css-stick { position: absolute; bottom: 20px; width: 22px; height: 90px; background: linear-gradient(to right, #fde68a, #f59e0b, #fde68a); border-radius: 10px 10px 2px 2px; z-index: 1; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; justify-content: center; padding-top: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); opacity: 0; }
-    .css-stick-text { font-weight: 700; color: #991b1b; font-size: 15px; display: flex; flex-direction: column; align-items: center; line-height: 1.1; }
+    /* ไม้เซียมซีที่หล่นขึ้นมา */
+    .css-stick { position: absolute; bottom: 30px; width: 28px; height: 100px; background: linear-gradient(to right, #fef3c7, #f59e0b, #fef3c7); border-radius: 14px 14px 2px 2px; z-index: 1; display: flex; justify-content: center; padding-top: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); opacity: 0; }
+    .css-stick-text { font-weight: 800; color: #7f1d1d; font-size: 12px; display: flex; flex-direction: column; align-items: center; line-height: 1.1; }
     
+    /* อนิเมชันตอนเขย่า */
     .shaking .css-cylinder { animation: shakeHard 0.3s infinite; }
-    .popping .css-stick { transform: translateY(-75px) rotate(8deg); opacity: 1; z-index: 6; }
+    /* อนิเมชันไม้เซียมซีหล่นตกลงมาและเด้งขึ้นมา */
+    .popping .css-stick { animation: popAndDrop 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
     
     @keyframes shakeHard { 0% { transform: translate(2px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-5deg); } 20% { transform: translate(-3px, 0px) rotate(5deg); } 30% { transform: translate(0px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(5deg); } 50% { transform: translate(-1px, 2px) rotate(-5deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(2px, 1px) rotate(-5deg); } 80% { transform: translate(-1px, -1px) rotate(5deg); } 90% { transform: translate(2px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-5deg); } }
+    
+    @keyframes popAndDrop {
+      0% { transform: translateY(0) scale(0.5); opacity: 0; z-index: 1; }
+      15% { transform: translateY(-100px) scale(1) rotate(15deg); opacity: 1; z-index: 1; } /* กระเด็นขึ้นจากกระบอก */
+      30% { transform: translateY(-130px) scale(1.1) rotate(45deg); opacity: 1; z-index: 10; } /* ข้ามขอบกระบอกมาด้านหน้า */
+      60% { transform: translateY(40px) scale(1.3) rotate(90deg); opacity: 1; z-index: 10; } /* หล่นตกลงมากระแทกพื้น */
+      80% { transform: translateY(15px) scale(1.4) rotate(85deg); opacity: 1; z-index: 10; } /* เด้งขึ้นมาเล็กน้อย */
+      100% { transform: translateY(30px) scale(1.5) rotate(90deg); opacity: 1; z-index: 10; } /* วางนิ่งขยายให้เห็นเลขชัดๆ */
+    }
 
     .shake-status { font-size: 14px; font-weight: 600; color: #059669; margin-bottom: 10px; display: none; background: #d1fae5; padding: 6px 14px; border-radius: 12px; border: 1px dashed #34d399; animation: popUp 0.3s; }
     .read-fortune-btn { display: none; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 12px 20px; border-radius: 18px; font-size: 15px; font-weight: 700; font-family: 'Kanit'; cursor: pointer; box-shadow: 0 4px 10px rgba(217,119,6,0.3); animation: pulse 1.5s infinite; margin-top: 5px; }
@@ -309,16 +322,18 @@
       <div class="shake-header">🎋 เซียมซีคนดื้อประจำวัน</div>
       <div class="shake-instruction">📱 จับมือถือให้แน่น แล้วลอง "เขย่า" ดูสิ!<br><span style="font-size:10px; color:#92400e;">(หรือใช้นิ้วจิ้มรัวๆ ที่กระบอกก็ได้ เขย่าเล่นกี่รอบก็ได้!)</span></div>
       
-      <!-- กระบอกเซียมซีแบบ CSS สวยๆ -->
+      <!-- กระบอกเซียมซีแบบ CSS สวยๆ (แก้ไขข้อความไม่ให้ล้นแล้ว) -->
       <div class="siam-see-container" id="shake-container" onclick="manualShake()">
         <div class="css-stick" id="siam-see-stick">
-          <span class="css-stick-text">เบอร์<br><span id="shake-stick-number" style="font-size: 24px;">?</span></span>
+          <span class="css-stick-text">เบอร์<br><span id="shake-stick-number" style="font-size: 26px;">?</span></span>
         </div>
-        <div class="css-cylinder"></div>
+        <div class="css-cylinder">
+          <div class="css-cylinder-text">เซียม<br>ซี</div>
+        </div>
       </div>
       
       <div id="shake-status" class="shake-status">✨ ลองเขย่าดูสิ!</div>
-      <button id="read-fortune-btn" class="read-fortune-btn" onclick="showFortuneResult()">📖 เปิดดูคำทำนายเบอร์นี้เลย!</button>
+      <button id="read-fortune-btn" class="read-fortune-btn" onclick="showFortuneResult()">📖 เปิดดูคำทำนายเลย!</button>
       
       <!-- 🌟 ปุ่มส่วนรวม หน้าบ้าน (เพิ่มคำทำนาย / ดูทั้งหมด) -->
       <div class="shared-fortune-controls">
@@ -689,7 +704,7 @@
     shakeClicks++; triggerShakeAnimation();
   }
 
-  // อนิเมชันกระบอก & ไม้เด้ง
+  // อนิเมชันกระบอก & ไม้กระเด็นตกพื้น
   function triggerShakeAnimation() {
     if (isAnimatingShake) return;
     isAnimatingShake = true;
@@ -705,21 +720,22 @@
       setTimeout(() => {
         container.classList.remove('shaking');
         
-        // เซ็ตตัวเลขบนไม้เซียมซี
-        drawnNumber = currentShakeData.result.number;
+        // เซ็ตตัวเลขบนไม้เซียมซี (เพิ่ม fallback กันบั๊ก undefined)
+        drawnNumber = currentShakeData.result.number || Math.floor(Math.random() * 20) + 1;
         document.getElementById('shake-stick-number').innerText = drawnNumber;
         
-        container.classList.add('popping'); // ไม้เด้งขึ้นมา!
+        container.classList.add('popping'); // ปล่อยอนิเมชันไม้กระเด็นตกพื้น!
         
+        // รอให้อนิเมชันแสดงจบ (1.5 วินาที) ค่อยโชว์ปุ่มเปิดอ่าน
         setTimeout(() => {
-          readBtn.innerHTML = `📖 เปิดดูคำทำนายใบที่ ${drawnNumber} เลย!`;
+          readBtn.innerHTML = `📖 เปิดดูคำทำนายเบอร์ ${drawnNumber} เลย!`;
           readBtn.style.display = 'block'; // โชว์ปุ่มเปิดอ่าน
-          statusEl.innerText = `✨ ได้ไม้เซียมซีใบที่ ${drawnNumber} แล้ว!`;
+          statusEl.innerText = `✨ ได้ไม้เซียมซีเบอร์ ${drawnNumber} แล้ว!`;
           
           isAnimatingShake = false;
           shakeClicks = 0;
-        }, 500); // รอไม้เด้งสุด
-      }, 600); // ระยะเวลาเขย่า
+        }, 1500); 
+      }, 600); // ระยะเวลาเขย่าขวด
     } else {
        setTimeout(() => {
           container.classList.remove('shaking');
@@ -736,15 +752,16 @@
     if (!wasPlayedBefore) { shakeRef.update({ isPlayed: true }); }
     
     const res = currentShakeData.result;
-    document.getElementById('fortuneNumberBadge').innerText = `ใบเซียมซีเบอร์ ${res.number}`;
-    document.getElementById('fortuneIcon').innerText = res.icon;
+    document.getElementById('fortuneNumberBadge').innerText = `ใบเซียมซีเบอร์ ${drawnNumber}`;
+    document.getElementById('fortuneIcon').innerText = res.icon || '🥠';
     document.getElementById('fortuneTitle').innerText = res.type === 'coupon' ? '🎉 ยินดีด้วย!' : '🔮 คำทำนายของคุณ';
     
+    // ✨ ถ้าเล่นซ้ำ ให้เพิ่มข้อความปั่นๆ เข้าไป
     let extraText = wasPlayedBefore ? "\n\n(เขย่ากี่รอบก็ได้คำนี้แหละคนดื้อ! ชะตาวันนี้ลิขิตมาแบบนี้แล้ว 😜)" : "";
-    document.getElementById('fortuneMessage').innerText = res.text + extraText;
+    document.getElementById('fortuneMessage').innerText = (res.text || "คุณได้เซียมซีความรัก!") + extraText;
     
     const couponEl = document.getElementById('fortuneCoupon');
-    if (res.type === 'coupon') {
+    if (res.type === 'coupon' && res.coupon) {
       couponEl.innerText = res.coupon; couponEl.style.display = 'block';
     } else {
       couponEl.style.display = 'none';
