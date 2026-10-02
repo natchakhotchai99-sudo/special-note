@@ -85,29 +85,17 @@
     
     .siam-see-container { position: relative; width: 160px; height: 180px; cursor: pointer; display: flex; justify-content: center; align-items: flex-end; margin-bottom: 15px; }
     
-    /* ตัวกระบอกเซียมซี */
     .css-cylinder { width: 85px; height: 110px; background: linear-gradient(135deg, #dc2626 0%, #991b1b 50%, #dc2626 100%); border-radius: 8px 8px 25px 25px; border: 4px solid #fbbf24; position: absolute; bottom: 10px; z-index: 5; box-shadow: 0 10px 15px rgba(0,0,0,0.2), inset 0 0 10px rgba(0,0,0,0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; }
     .css-cylinder-text { font-weight: 700; color: #fef3c7; font-size: 18px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); line-height: 1.1; text-align: center; }
     
-    /* ไม้เซียมซีที่หล่นขึ้นมา */
     .css-stick { position: absolute; bottom: 30px; width: 28px; height: 100px; background: linear-gradient(to right, #fef3c7, #f59e0b, #fef3c7); border-radius: 14px 14px 2px 2px; z-index: 1; display: flex; justify-content: center; padding-top: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); opacity: 0; }
     .css-stick-text { font-weight: 800; color: #7f1d1d; font-size: 12px; display: flex; flex-direction: column; align-items: center; line-height: 1.1; }
     
-    /* อนิเมชันตอนเขย่า */
     .shaking .css-cylinder { animation: shakeHard 0.3s infinite; }
-    /* อนิเมชันไม้เซียมซีหล่นตกลงมาและเด้งขึ้นมา */
     .popping .css-stick { animation: popAndDrop 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
     
     @keyframes shakeHard { 0% { transform: translate(2px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-5deg); } 20% { transform: translate(-3px, 0px) rotate(5deg); } 30% { transform: translate(0px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(5deg); } 50% { transform: translate(-1px, 2px) rotate(-5deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(2px, 1px) rotate(-5deg); } 80% { transform: translate(-1px, -1px) rotate(5deg); } 90% { transform: translate(2px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-5deg); } }
-    
-    @keyframes popAndDrop {
-      0% { transform: translateY(0) scale(0.5); opacity: 0; z-index: 1; }
-      15% { transform: translateY(-100px) scale(1) rotate(15deg); opacity: 1; z-index: 1; } /* กระเด็นขึ้นจากกระบอก */
-      30% { transform: translateY(-130px) scale(1.1) rotate(45deg); opacity: 1; z-index: 10; } /* ข้ามขอบกระบอกมาด้านหน้า */
-      60% { transform: translateY(40px) scale(1.3) rotate(90deg); opacity: 1; z-index: 10; } /* หล่นตกลงมากระแทกพื้น */
-      80% { transform: translateY(15px) scale(1.4) rotate(85deg); opacity: 1; z-index: 10; } /* เด้งขึ้นมาเล็กน้อย */
-      100% { transform: translateY(30px) scale(1.5) rotate(90deg); opacity: 1; z-index: 10; } /* วางนิ่งขยายให้เห็นเลขชัดๆ */
-    }
+    @keyframes popAndDrop { 0% { transform: translateY(0) scale(0.5); opacity: 0; z-index: 1; } 15% { transform: translateY(-100px) scale(1) rotate(15deg); opacity: 1; z-index: 1; } 30% { transform: translateY(-130px) scale(1.1) rotate(45deg); opacity: 1; z-index: 10; } 60% { transform: translateY(40px) scale(1.3) rotate(90deg); opacity: 1; z-index: 10; } 80% { transform: translateY(15px) scale(1.4) rotate(85deg); opacity: 1; z-index: 10; } 100% { transform: translateY(30px) scale(1.5) rotate(90deg); opacity: 1; z-index: 10; } }
 
     .shake-status { font-size: 14px; font-weight: 600; color: #059669; margin-bottom: 10px; display: none; background: #d1fae5; padding: 6px 14px; border-radius: 12px; border: 1px dashed #34d399; animation: popUp 0.3s; }
     .read-fortune-btn { display: none; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 12px 20px; border-radius: 18px; font-size: 15px; font-weight: 700; font-family: 'Kanit'; cursor: pointer; box-shadow: 0 4px 10px rgba(217,119,6,0.3); animation: pulse 1.5s infinite; margin-top: 5px; }
@@ -158,9 +146,7 @@
     .note-dot { position: absolute; bottom: 3px; right: 3px; background: #fcd34d; border-radius: 50%; box-shadow: 0 2px 5px rgba(245,158,11,0.6); z-index: 5; width: 12px; height: 12px; animation: pulse 2s infinite; pointer-events: none; }
     .note-dot.has-number { width: 18px; height: 18px; font-size: 11px; font-weight: bold; color: #92400e; display: flex; justify-content: center; align-items: center; border: 2px solid white; bottom: -3px; right: -3px; animation: bounce 1.5s infinite; }
     
-    /* ไอคอนมงกุฎสำหรับวันพิเศษ (3 ก.ย.) */
     .crown-icon { position: absolute; top: -10px; font-size: 16px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); z-index: 6; animation: floatBox 2s infinite; }
-
     .locked-legend-box { display: none; margin-top: 20px; padding: 15px; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 16px; font-size: 14px; color: #b45309; font-weight: 600; text-align: center; box-shadow: 0 4px 10px rgba(245,158,11,0.1); animation: popUp 0.5s; }
 
     /* 📝 กระดานโน้ตเฉพาะวัน */
@@ -185,6 +171,9 @@
     .record-btn.recording { background: #fca5a5; border-color: #ef4444; color: white; animation: pulse 1s infinite; }
     .image-upload-btn { background: #fce7f3; border-color: #fbcfe8; color: #be185d; }
     .image-upload-btn:hover { background: #fbcfe8; transform: translateY(-2px); }
+    
+    .media-preview-box { display: none; background: #fffbeb; border: 1px dashed #f59e0b; padding: 10px; border-radius: 12px; margin-top: 10px; text-align: center; }
+    .media-preview-box img { max-width: 100%; max-height: 150px; border-radius: 8px; object-fit: contain; margin-bottom: 5px; border: 1px solid #fcd34d; }
 
     .lock-toggle-box { background: #ffffff; border: 2px dashed #fcd34d; border-radius: 14px; padding: 18px; margin: 15px 0; font-size: 15px; color: #b45309; transition: all 0.3s; }
     .lock-inputs { display: flex; flex-direction: column; align-items: center; margin-top: 15px; }
@@ -219,6 +208,7 @@
     .mini-pin { position: absolute; top: -18px; font-size: 30px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3)); z-index: 4; }
     .mini-pin.magic-pin { animation: floatBox 2s ease-in-out infinite, glowing 1.5s infinite alternate; font-size: 35px; }
     .mini-from-text { font-size: 16px; font-weight: 700; word-break: break-word; line-height: 1.3; }
+    .mini-icons { font-size: 14px; margin-top: 4px; }
     .mini-hint { font-size: 12px; margin-top: 8px; padding: 3px 10px; border-radius: 12px; font-weight: 600; background: rgba(255,255,255,0.5); }
     .mini-note.unlocked-past-note .mini-hint { background: #d1fae5; color: #059669; border: 1px solid #34d399; }
     .mini-time-stamp { font-size: 10px; margin-top: 10px; opacity: 0.8; font-weight: 500; }
@@ -237,11 +227,12 @@
     .summary-highlight { font-size: 26px; color: #ff477e; font-weight: bold; }
     .summary-unlock-text { font-size: 15px; color: #059669; font-weight: 700; background: #d1fae5; padding: 12px; border-radius: 12px; border: 2px dashed #10b981; margin-bottom: 20px; animation: pulse 2s infinite; line-height: 1.5; }
 
-    /* 💌 Popup อ่านโน้ต */
+    /* 💌 Popup อ่านโน้ต (รูปภาพ & เสียงกลับมาแล้ว!) */
     .read-note-content { background: #fffdf0; border: 3px solid #fcd34d; border-radius: 24px; padding: 40px 24px 24px 24px; text-align: left; max-width: 380px; width: 100%; box-shadow: 0 20px 50px rgba(217, 119, 6, 0.4); animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; max-height: 90vh; overflow-y: auto; }
     .read-note-pin { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 45px; filter: drop-shadow(0 5px 8px rgba(0,0,0,0.3)); z-index: 5; }
     .read-note-fromto { font-weight: 700; color: #b45309; font-size: 18px; margin-bottom: 15px; border-bottom: 2px dashed #fcd34d; padding-bottom: 12px; text-align: center; }
     .read-note-text { font-size: 16px; color: #374151; line-height: 1.6; margin-bottom: 20px; min-height: 50px; word-break: break-word; font-weight: 500; }
+    .detail-image { width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; border: 2px solid #fff; }
     
     /* กล่องเฉลยความลับ */
     .secret-revealed-box { margin-top: 20px; background: #ecfdf5; border: 2px dashed #10b981; padding: 15px; border-radius: 16px; text-align: center; display: none; animation: popUp 0.5s; box-shadow: 0 4px 15px rgba(16,185,129,0.2); }
@@ -262,7 +253,7 @@
     .unlock-icon { font-size: 55px; margin-bottom: 10px; filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15)); }
     .unlock-title { font-size: 20px; font-weight: 700; color: #334155; margin-bottom: 8px; }
 
-    /* ✨ โซนความทรงจำ 3 ก.ย. ✨ */
+    /* ✨ โซนความทรงจำ 3 ก.ย. (CSS เกม เครื่องจับเท็จ แผ่นเสียง กลับมาแล้ว!) ✨ */
     #sept3-experience-container { position: relative; z-index: 50; }
     .envelope-box { position: relative; display: inline-block; margin-bottom: 20px; }
     .roll-in-anim { animation: rollIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
@@ -275,6 +266,39 @@
     .next-btn { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); color: #ffffff; border: none; padding: 14px 28px; font-size: 16px; font-weight: 600; font-family: 'Kanit', sans-serif; border-radius: 30px; cursor: pointer; box-shadow: 0 6px 20px rgba(255, 117, 140, 0.4); width: 100%; transition: all 0.3s ease; }
     .video-wrapper { width: 100%; border-radius: 28px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.2); background: #000; border: 3px solid #ffffff; animation: popUp 0.5s ease-out forwards; }
     .video-wrapper video { width: 100%; height: auto; display: block; }
+    
+    .big-rain-card { background: rgba(255, 255, 255, 0.95); border-radius: 28px; padding: 35px 20px; box-shadow: 0 15px 35px rgba(147, 197, 253, 0.4); border: 2px solid #ffffff; animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    .rain-icon { font-size: 60px; margin-bottom: 12px; }
+    .big-rain-title { font-size: 21px; font-weight: 700; color: #2563eb; margin: 0 0 10px 0; }
+    .sub-rain-text { font-size: 15px; color: #475569; margin: 0; }
+    .fade-item { opacity: 0; transform: translateY(40px) scale(0.95); transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); }
+    .fade-item.show { opacity: 1; transform: translateY(0) scale(1); }
+    
+    .vinyl-player { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+    .vinyl-disc { width: 50px; height: 50px; background: radial-gradient(circle, #333 30%, #111 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 3px solid #ffb6c1; flex-shrink: 0; }
+    .vinyl-disc.spinning { animation: spin 3s linear infinite; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .vinyl-info { text-align: left; display: flex; flex-direction: column; }
+    .song-title { font-weight: 700; font-size: 15px; color: #2d3748; }
+    .play-status { font-size: 12px; color: #718096; margin-top: 2px; }
+    
+    .note-card { background: #fffdf0; border-radius: 22px; padding: 22px 18px; margin-bottom: 18px; position: relative; box-shadow: 0 8px 25px rgba(217, 119, 6, 0.15); border: 2px solid #fef3c7; text-align: left; width: 100%; }
+    .note-header { font-weight: 700; color: #d97706; margin-bottom: 10px; text-align: center; font-size: 15px; }
+    .note-text { font-size: 14.5px; line-height: 1.6; color: #374151; margin: 0; min-height: 50px; font-weight: 500; }
+    .result-box { margin-top: 12px; font-size: 14.5px; font-weight: 600; color: #ff477e; }
+    
+    .slider-box { margin-top: 15px; background: #f8fafc; padding: 16px; border-radius: 18px; border: 1px dashed #cbd5e1; }
+    .time-display { font-size: 20px; font-weight: 700; color: #ff477e; margin: 6px 0 12px 0; }
+    .time-slider { width: 100%; -webkit-appearance: none; height: 8px; border-radius: 5px; background: #ffccd5; outline: none; }
+    .time-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #ff477e; cursor: pointer; }
+    .countdown-timer-text { font-size: 24px; font-weight: 700; color: #ff477e; background: #fff0f3; padding: 10px 18px; border-radius: 16px; display: inline-block; margin-top: 8px; border: 1px dashed #ff758c; }
+    
+    .scanner-box { position: relative; width: 130px; height: 130px; margin: 15px auto; background: linear-gradient(145deg, #ffe0e9, #ffd1dc); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; overflow: hidden; border: 3px solid #ffffff; touch-action: manipulation; user-select: none; }
+    .scanner-img { width: 100%; height: 100%; object-fit: cover; }
+    .laser-line { position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: #ff0055; box-shadow: 0 0 12px #ff0055; display: none; z-index: 5; }
+    .laser-line.scanning { display: block; animation: scanAnim 1.2s ease-in-out infinite alternate; }
+    @keyframes scanAnim { 0% { top: 10%; } 100% { top: 90%; } }
+    .final-card { background: rgba(255, 255, 255, 0.95); border-radius: 28px; padding: 35px 20px; box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4); border: 2px solid #ffffff; width: 100%; animation: popUp 0.8s forwards; }
   </style>
 </head>
 <body>
@@ -322,7 +346,6 @@
       <div class="shake-header">🎋 เซียมซีคนดื้อประจำวัน</div>
       <div class="shake-instruction">📱 จับมือถือให้แน่น แล้วลอง "เขย่า" ดูสิ!<br><span style="font-size:10px; color:#92400e;">(หรือใช้นิ้วจิ้มรัวๆ ที่กระบอกก็ได้ เขย่าเล่นกี่รอบก็ได้!)</span></div>
       
-      <!-- กระบอกเซียมซีแบบ CSS สวยๆ (แก้ไขข้อความไม่ให้ล้นแล้ว) -->
       <div class="siam-see-container" id="shake-container" onclick="manualShake()">
         <div class="css-stick" id="siam-see-stick">
           <span class="css-stick-text">เบอร์<br><span id="shake-stick-number" style="font-size: 26px;">?</span></span>
@@ -394,6 +417,25 @@
 
         <textarea id="sharedNoteInput" class="note-input" placeholder="พิมพ์ความรู้สึกไว้ตรงนี้นะ 💌..."></textarea>
         
+        <!-- กลับมาแล้ว: ปุ่มอัดเสียงและใส่รูป -->
+        <div class="media-buttons">
+          <button id="recordBtn" class="record-btn" onclick="toggleRecording()">🎤 อัดเสียง</button>
+          <label for="imageInput" class="image-upload-btn">📸 ใส่รูปภาพ</label>
+          <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImageUpload(event)">
+        </div>
+        
+        <div id="audioPreviewBox" class="media-preview-box">
+          <div style="font-size: 12px; color: #92400e; font-weight: 600; margin-bottom: 5px;">ฟังเสียงที่อัดไว้ 🎵</div>
+          <audio id="audioPreview" controls style="width: 100%; height: 35px; outline: none;"></audio>
+          <button class="choice-btn bad-btn" style="padding: 4px 12px; font-size: 12px; margin-top: 8px; width: 100%;" onclick="discardAudio()">❌ ลบเสียงทิ้ง</button>
+        </div>
+
+        <div id="imagePreviewBox" class="media-preview-box">
+          <div style="font-size: 12px; color: #be185d; font-weight: 600; margin-bottom: 5px;">รูปภาพที่เลือก 📸</div>
+          <img id="imagePreview" src="">
+          <button class="choice-btn bad-btn" style="padding: 4px 12px; font-size: 12px; margin-top: 5px; width: 100%; border-color:#fda4af; color:#be185d; background:#fdf2f8;" onclick="discardImage()">❌ ลบรูปทิ้ง</button>
+        </div>
+
         <div class="lock-toggle-box">
           <label style="cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 700;">
             <input type="checkbox" id="lockCheckbox" onchange="toggleLockOptions()" style="transform: scale(1.2);"> 🔒 ล็อกรหัสผ่านให้ข้อความนี้
@@ -426,14 +468,14 @@
     <button class="back-cal-btn" onclick="backToCalendar()">🔙 กลับไปหน้าปฏิทิน</button>
   </div>
   
-  <!-- ✨ โซนความทรงจำวันที่ 3 กันยายน ✨ -->
+  <!-- ✨ โซนความทรงจำวันที่ 3 กันยายน (กลับมาครบทุกด่านแล้ว!) ✨ -->
   <div id="sept3-experience-container" class="step-box" style="display: none;">
     <div id="step-1-intro" class="step-box">
       <div class="envelope-box roll-in-anim"><div class="envelope-icon">✉️</div><div class="sparkle-heart pulse-anim">💖</div></div>
       <div class="welcome-card">
         <div class="morning-title">Morning น๊า พี่ เค ที่เป็นตัว K 💖✨</div>
         <p class="special-today-text">✨ วันนี้พิเศษนิดนึง... เพราะว่าวันนี้หนูไม่อยู่ไปเข้าออฟฟิศน่าจะกลับค่ำๆ เลยย 🥺<br>แอบทำไว้เล่นๆ เผื่อมีคนคิดถึงและคุมคนดื้อโดยเฉพาะเลย!</p>
-        <button class="next-btn bounce-anim" onclick="startSept3Video()">✨ คลิกดูเลย... 🎬</button>
+        <button class="next-btn bounce-anim" onclick="startExperience()">✨ คลิกหน้าต่อไปสิ... 🎬</button>
       </div>
     </div>
     <div id="step-2-video" class="step-box" style="display: none;">
@@ -443,6 +485,87 @@
         </video>
       </div>
     </div>
+    <div id="step-3-rain-text" class="step-box" style="display: none;">
+      <div class="big-rain-card pulse-anim"><div class="rain-icon">🌧️</div><h1 class="big-rain-title">ไม่อยากให้เปียกฝนคนเดียวแล้ว</h1><p class="sub-rain-text">เดี๋ยวไม่สบายหรอกคนดื้อ!</p></div>
+    </div>
+    <div id="step-4-main" class="step-box" style="display: none;">
+      <div class="card-base fade-item" id="card-1">
+        <div class="calendar-header">September 🍁</div>
+        <div class="calendar-grid">
+          <div class="day-name">อา</div><div class="day-name">จ</div><div class="day-name">อ</div><div class="day-name">พ</div><div class="day-name">พฤ</div><div class="day-name">ศ</div><div class="day-name">ส</div>
+          <div></div><div></div><div class="day">1</div><div class="day">2</div><div class="day special-day" style="background: linear-gradient(135deg, #ff477e, #ff758c); color: white;">3</div><div class="day">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div><div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day">23</div><div class="day">24</div><div class="day">25</div><div class="day">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div>
+        </div>
+      </div>
+      <div class="card-base fade-item" id="card-2">
+        <div class="vinyl-player" onclick="toggleAudio()">
+          <div id="vinyl-disc" class="vinyl-disc spinning"><div class="vinyl-center">🎵</div></div>
+          <div class="vinyl-info"><span class="song-title">Song for You ✨</span><span id="play-status" class="play-status">▶️ แตะที่แผ่นเสียงเพื่อเปิด/ปิดเพลง</span></div>
+        </div>
+      </div>
+      <div class="note-card fade-item" id="card-3">
+        <div class="pin-icon">📌</div><div class="heart-sticker pulse-anim">💖</div>
+        <div class="note-header">✨ Daily Note for K ✨</div><p id="typewriter-text" class="note-text"></p>
+      </div>
+      <div class="card-base fade-item" id="card-4">
+        <h3 style="font-size: 16px; color: #ff477e; margin-top: 0;">☕ วันนี้คนดื้อจะกินน้ำอะไรดีคะ?</h3>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <button id="bad-btn" class="choice-btn bad-btn" onmouseover="dodgeBadDrink()" onclick="dodgeBadDrink()" ontouchstart="dodgeBadDrink()">🥛 กาแฟใส่นม</button>
+          <button class="choice-btn good-btn" onclick="selectDrink('ชาเขียวหวานน้อย')">🍵 ชาเขียวหวานน้อย</button>
+          <button class="choice-btn best-btn" onclick="selectDrink('น้ำเปล่าเย็นๆ')">💧 น้ำเปล่าเย็นๆ</button>
+        </div>
+        <div id="drink-result" class="result-box"></div>
+      </div>
+      <div class="card-base fade-item" id="lunch-countdown-card" style="display: none;">
+        <h3 style="font-size: 16px; color: #ff477e; margin-top: 0;">🍱 การ์ดถัดไปปลดล็อกเวลาเที่ยงตรงน้า</h3>
+        <p style="font-size: 14px; color: #4a5568; margin: 0;">รออีกแป๊บนึงนะคนดื้อ... เหลือเวลาอีก:</p>
+        <div id="countdown-timer" class="countdown-timer-text">00:00:00</div>
+      </div>
+      <div class="card-base fade-item" id="card-5" style="display: none;">
+        <h3 style="font-size: 16px; color: #ff477e; margin-top: 0;">🍱 ทานข้าวเที่ยงหรือยังคะ?</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <button class="choice-btn good-btn" onclick="answerLunch(true)">ทานแล้ว 😋</button>
+          <button class="choice-btn bad-btn" style="position: static; transform: none;" onclick="answerLunch(false)">ยังเลย 🥺</button>
+        </div>
+        <div id="lunch-result" class="result-box"></div>
+      </div>
+      <div class="card-base fade-item" id="card-6" style="display: none;">
+        <h3 style="font-size: 16px; color: #ff477e; margin-top: 0;">💼 วันนี้ทำงานที่ 3 ไหมคะ?</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <button class="choice-btn good-btn" onclick="answerWork(true)">ทำครับ ✌️</button>
+          <button class="choice-btn best-btn" onclick="answerWork(false)">ไม่ได้ทำครับ 🏠</button>
+        </div>
+        <div id="time-picker-wrapper" class="slider-box" style="display: none;">
+          <div class="slider-label">⏰ วันนี้เลิกงานกี่โมงคะ?</div>
+          <div id="time-display" class="time-display">17:00 น.</div>
+          <input type="range" min="17" max="24" value="17" class="time-slider" id="time-slider" oninput="updateTimeText(this.value)">
+          <button class="choice-btn good-btn" style="width: 100%; margin-top: 10px;" onclick="confirmTime()">ยืนยันเวลา 👍</button>
+        </div>
+        <div id="work-result" class="result-box"></div>
+      </div>
+      <div class="card-base fade-item" id="card-7" style="display: none;">
+        <h3 style="font-size: 16px; color: #ff477e; margin-top: 0;">🕵️‍♂️ เครื่องตรวจจับคนโกหกประจําวัน</h3>
+        <div style="font-size: 15px; color: #4a5568; font-weight: 600; margin-bottom: 8px;">โจทย์: "แอบคิดถึงหนูล่ะสิ 👀✨"</div>
+        <p style="font-size: 12px; color: #a0aec0; margin: 0;">แตะที่รูปค้างไว้ 3 วินาทีเพื่อสแกน!</p>
+        <div class="scanner-box" id="scanner-btn" onmousedown="startScan()" onmouseup="stopScan()" ontouchstart="startScan(event)" ontouchend="stopScan()">
+          <div class="laser-line" id="laser"></div>
+          <img src="https://ozonemassage.com/wp-content/uploads/2026/09/479.jpg" alt="scanner image" class="scanner-img">
+        </div>
+        <div id="heartbeat-status" style="font-size: 18px; color: #ff477e; margin-top: 5px;"></div>
+        <div id="lie-result" class="result-box" style="font-size: 15px; line-height: 1.5;"></div>
+      </div>
+      <div id="final-btn-wrapper" class="fade-item" style="display: none; margin-top: 10px;">
+        <button class="next-btn bounce-anim" onclick="goToNextSection()">✨ คลิกเปิดดูข้อความสุดท้าย 💌</button>
+      </div>
+    </div>
+    <div id="step-5-final" class="step-box" style="display: none;">
+      <div class="final-card">
+        <div style="font-size: 50px; margin-bottom: 12px;" class="pulse-anim">🥰💖✨</div>
+        <h2 style="font-size: 20px; font-weight: 700; color: #ff477e; margin: 0 0 8px 0;">โอเค... ไว้คุยกันตอนเย็นนะ</h2>
+        <p style="font-size: 15px; color: #4a5568; margin: 0 0 20px 0; font-weight: 500;">หาเวลาพักด้วย หนูเป็นห่วง 🌸</p>
+        <button class="choice-btn best-btn" style="width: 100%; border-radius: 20px;" onclick="goHome()">🏠 กลับไปหน้าปฏิทิน</button>
+      </div>
+    </div>
+    <audio id="bgMusic" src="https://ozonemassage.com/wp-content/uploads/2026/09/Y2Mate.is-RIFF-Offical-Audio.mp3" loop></audio>
   </div>
 
 </div> <!-- ปิด main-app-container -->
@@ -565,12 +688,19 @@
   </div>
 </div>
 
-<!-- 💌 Popup สำหรับเปิดอ่านโน้ต -->
+<!-- 💌 Popup สำหรับเปิดอ่านโน้ต (รูปภาพ & เสียงกลับมาแล้ว!) -->
 <div id="noteDetailModal" class="popup-modal">
   <div class="read-note-content">
     <div class="read-note-pin" id="detailPinIcon">📌</div>
     <div class="read-note-fromto" id="detailFromTo"></div>
+    
+    <img id="detailImage" class="detail-image" src="" style="display: none;">
     <div class="read-note-text" id="detailText"></div>
+    
+    <div id="detailAudioContainer" style="display: none; margin-bottom: 15px; background: #fffbeb; padding: 10px; border-radius: 12px; border: 1px dashed #fcd34d;">
+      <div style="font-size: 12px; color: #b45309; font-weight: 700; margin-bottom: 5px; text-align: center;">🎵 กดเพื่อฟังเสียงจากเค้าสิ:</div>
+      <audio id="detailAudio" controls style="width: 100%; height: 35px; outline: none;"></audio>
+    </div>
     
     <!-- 🔓 เฉลยรหัสสำหรับโน้ตอดีตที่ปลดล็อกอัตโนมัติ -->
     <div id="secretRevealBox" class="secret-revealed-box"></div>
@@ -624,21 +754,18 @@
   updateTimeGreeting();
 
   // ==========================================
-  // 🎋 ระบบเซียมซีเขย่ารัก (เชื่อมฐานข้อมูลเต็มรูปแบบ)
+  // 🎋 ระบบเซียมซีเขย่ารัก
   // ==========================================
   let currentShakeData = null;
   let shakeClicks = 0; 
   let isAnimatingShake = false;
-  let fortunesPool = []; // เก็บสระคำทำนายทั้งหมด
-  let drawnNumber = null; // เบอร์ที่สุ่มได้
+  let fortunesPool = []; 
+  let drawnNumber = null; 
 
-  // 1. โหลดข้อมูลคำทำนายทั้งหมดจาก Firebase
   fortunesPoolRef.on('value', (snapshot) => {
     const data = snapshot.val();
-    if (data) {
-      fortunesPool = Object.values(data);
-    } else {
-      // ถ้ายังไม่มีในฐานข้อมูลเลย ให้สร้างชุดเริ่มต้น (Seed default)
+    if (data) { fortunesPool = Object.values(data); } 
+    else {
       const defaultFortunes = [
         { number: 1, type: "normal", icon: "🥠", text: "คำทำนาย: วันนี้ห้ามดื้อ ห้ามเถียง 24 ชั่วโมง เริ่ม!" },
         { number: 2, type: "normal", icon: "🥠", text: "คำทำนาย: มีคนแอบคิดถึงมากกกก รีบทักไปหาด่วน! 👀" },
@@ -652,23 +779,17 @@
     }
   });
 
-  // 2. เช็กสถานะการเขย่าของวันนี้
-  shakeRef.on('value', (snapshot) => { 
-    currentShakeData = snapshot.val(); 
-    checkShakeStatus(); 
-  });
+  shakeRef.on('value', (snapshot) => { currentShakeData = snapshot.val(); checkShakeStatus(); });
 
   function checkShakeStatus() {
     const todayStr = new Date().toLocaleDateString('th-TH');
     const statusEl = document.getElementById('shake-status');
     const readBtn = document.getElementById('read-fortune-btn');
     
-    // รีเซ็ตไม้ให้ลงไปหลบอยู่ข้างล่างเสมอตอนโหลดใหม่
     document.getElementById('shake-container').classList.remove('popping');
     readBtn.style.display = 'none';
 
     if (!currentShakeData || currentShakeData.date !== todayStr) {
-      // ถ้าเปลี่ยนวัน ให้สุ่มเบอร์ใหม่เตรียมไว้เลย
       setTimeout(() => {
         if(fortunesPool.length > 0) {
           const randomIndex = Math.floor(Math.random() * fortunesPool.length);
@@ -680,15 +801,12 @@
     
     shakeClicks = 0; 
     if (currentShakeData.isPlayed) {
-      statusEl.style.display = 'block';
-      statusEl.innerText = '✨ วันนี้ได้คำทำนายไปแล้ว (ลองเขย่าซ้ำดูสิ!)';
+      statusEl.style.display = 'block'; statusEl.innerText = '✨ วันนี้ได้คำทำนายไปแล้ว (ลองเขย่าซ้ำดูสิ!)';
     } else {
-      statusEl.style.display = 'block';
-      statusEl.innerText = '✨ ลองเขย่าดูสิ!';
+      statusEl.style.display = 'block'; statusEl.innerText = '✨ ลองเขย่าดูสิ!';
     }
   }
 
-  // เซ็นเซอร์เขย่ามือถือ
   if (window.DeviceMotionEvent) { window.addEventListener('devicemotion', handleMotion, false); }
   let lastX = 0, lastY = 0, lastZ = 0;
   function handleMotion(e) {
@@ -704,7 +822,6 @@
     shakeClicks++; triggerShakeAnimation();
   }
 
-  // อนิเมชันกระบอก & ไม้กระเด็นตกพื้น
   function triggerShakeAnimation() {
     if (isAnimatingShake) return;
     isAnimatingShake = true;
@@ -712,42 +829,30 @@
     const readBtn = document.getElementById('read-fortune-btn');
     const statusEl = document.getElementById('shake-status');
     
-    container.classList.remove('popping'); // เอาไม้ลงก่อน
-    readBtn.style.display = 'none';
-    container.classList.add('shaking'); // เริ่มเขย่า
+    container.classList.remove('popping'); readBtn.style.display = 'none'; container.classList.add('shaking');
     
     if (shakeClicks >= 3 || Math.random() > 0.5) {
       setTimeout(() => {
         container.classList.remove('shaking');
-        
-        // เซ็ตตัวเลขบนไม้เซียมซี (เพิ่ม fallback กันบั๊ก undefined)
         drawnNumber = currentShakeData.result.number || Math.floor(Math.random() * 20) + 1;
         document.getElementById('shake-stick-number').innerText = drawnNumber;
         
-        container.classList.add('popping'); // ปล่อยอนิเมชันไม้กระเด็นตกพื้น!
+        container.classList.add('popping'); 
         
-        // รอให้อนิเมชันแสดงจบ (1.5 วินาที) ค่อยโชว์ปุ่มเปิดอ่าน
         setTimeout(() => {
           readBtn.innerHTML = `📖 เปิดดูคำทำนายเบอร์ ${drawnNumber} เลย!`;
-          readBtn.style.display = 'block'; // โชว์ปุ่มเปิดอ่าน
+          readBtn.style.display = 'block'; 
           statusEl.innerText = `✨ ได้ไม้เซียมซีเบอร์ ${drawnNumber} แล้ว!`;
-          
-          isAnimatingShake = false;
-          shakeClicks = 0;
+          isAnimatingShake = false; shakeClicks = 0;
         }, 1500); 
-      }, 600); // ระยะเวลาเขย่าขวด
+      }, 600); 
     } else {
-       setTimeout(() => {
-          container.classList.remove('shaking');
-          isAnimatingShake = false;
-       }, 300);
+       setTimeout(() => { container.classList.remove('shaking'); isAnimatingShake = false; }, 300);
     }
   }
 
-  // เปิดดูผลลัพธ์การ์ด
   function showFortuneResult() {
     if (!currentShakeData) return;
-    
     const wasPlayedBefore = currentShakeData.isPlayed;
     if (!wasPlayedBefore) { shakeRef.update({ isPlayed: true }); }
     
@@ -756,29 +861,21 @@
     document.getElementById('fortuneIcon').innerText = res.icon || '🥠';
     document.getElementById('fortuneTitle').innerText = res.type === 'coupon' ? '🎉 ยินดีด้วย!' : '🔮 คำทำนายของคุณ';
     
-    // ✨ ถ้าเล่นซ้ำ ให้เพิ่มข้อความปั่นๆ เข้าไป
     let extraText = wasPlayedBefore ? "\n\n(เขย่ากี่รอบก็ได้คำนี้แหละคนดื้อ! ชะตาวันนี้ลิขิตมาแบบนี้แล้ว 😜)" : "";
     document.getElementById('fortuneMessage').innerText = (res.text || "คุณได้เซียมซีความรัก!") + extraText;
     
     const couponEl = document.getElementById('fortuneCoupon');
-    if (res.type === 'coupon' && res.coupon) {
-      couponEl.innerText = res.coupon; couponEl.style.display = 'block';
-    } else {
-      couponEl.style.display = 'none';
-    }
-    
+    if (res.type === 'coupon' && res.coupon) { couponEl.innerText = res.coupon; couponEl.style.display = 'block'; } 
+    else { couponEl.style.display = 'none'; }
     document.getElementById('fortuneResultModal').style.display = 'flex';
   }
 
   // ==========================================
-  // ⚙️ ระบบส่วนรวม (เพิ่ม / ดูคำทำนาย) หน้าบ้าน
+  // ⚙️ ระบบส่วนรวม หน้าบ้าน (เพิ่ม / ดูคำทำนาย)
   // ==========================================
   function openAddFortuneModal() {
-    document.getElementById('newFortuneText').value = '';
-    document.getElementById('newFortuneCoupon').value = '';
-    document.getElementById('newFortuneType').value = 'normal';
-    toggleCouponInput();
-    document.getElementById('addFortuneModal').style.display = 'flex';
+    document.getElementById('newFortuneText').value = ''; document.getElementById('newFortuneCoupon').value = '';
+    document.getElementById('newFortuneType').value = 'normal'; toggleCouponInput(); document.getElementById('addFortuneModal').style.display = 'flex';
   }
   
   function toggleCouponInput() {
@@ -787,38 +884,22 @@
   }
 
   function saveNewFortune() {
-    const text = document.getElementById('newFortuneText').value;
-    const type = document.getElementById('newFortuneType').value;
-    const coupon = document.getElementById('newFortuneCoupon').value;
-    
+    const text = document.getElementById('newFortuneText').value; const type = document.getElementById('newFortuneType').value; const coupon = document.getElementById('newFortuneCoupon').value;
     if(text.trim() === '') { alert('กรุณาพิมพ์ข้อความคำทำนายก่อนนะคะ 🥺'); return; }
     if(type === 'coupon' && coupon.trim() === '') { alert('กรุณาพิมพ์ข้อความสิทธิพิเศษด้วยนะคะ 🎟️'); return; }
     
-    // รันหมายเลขถัดไป
     const nextNumber = fortunesPool.length + 1;
-    const newFortune = {
-      number: nextNumber,
-      type: type,
-      icon: type === 'coupon' ? '🎟️' : '🥠',
-      text: text,
-      coupon: type === 'coupon' ? coupon : ""
-    };
-    
+    const newFortune = { number: nextNumber, type: type, icon: type === 'coupon' ? '🎟️' : '🥠', text: text, coupon: type === 'coupon' ? coupon : "" };
     fortunesPoolRef.push(newFortune);
-    alert(`หย่อนคำทำนาย "เบอร์ ${nextNumber}" ลงกระบอกเรียบร้อย! 🎉 รอให้อีกคนมาเขย่าได้เลยยย`);
-    closePopup('addFortuneModal');
+    alert(`หย่อนคำทำนาย "เบอร์ ${nextNumber}" ลงกระบอกเรียบร้อย! 🎉 รอให้อีกคนมาเขย่าได้เลยยย`); closePopup('addFortuneModal');
   }
 
   function openAllFortunesModal() {
-    const container = document.getElementById('fortuneListContainer');
-    container.innerHTML = '';
-    
-    if(fortunesPool.length === 0) {
-      container.innerHTML = '<div style="text-align:center; color:#94a3b8;">ยังไม่มีคำทำนายในกระบอกเลยค่ะ</div>';
-    } else {
+    const container = document.getElementById('fortuneListContainer'); container.innerHTML = '';
+    if(fortunesPool.length === 0) { container.innerHTML = '<div style="text-align:center; color:#94a3b8;">ยังไม่มีคำทำนายในกระบอกเลยค่ะ</div>'; } 
+    else {
       fortunesPool.forEach(f => {
-        let div = document.createElement('div');
-        div.className = 'fortune-list-item';
+        let div = document.createElement('div'); div.className = 'fortune-list-item';
         let couponHtml = f.type === 'coupon' ? `<br><span style="color:#e11d48; font-weight:bold;">สิทธิพิเศษ: ${f.coupon}</span>` : '';
         div.innerHTML = `<div class="fortune-list-num">เซียมซีเบอร์ ${f.number} ${f.icon}</div><div>${f.text}${couponHtml}</div>`;
         container.appendChild(div);
@@ -827,7 +908,46 @@
     document.getElementById('allFortunesModal').style.display = 'flex';
   }
 
-  // Firebase Note Data Loading
+  // ==========================================
+  // 📸 ระบบอัปโหลดรูปภาพและอัดเสียง
+  // ==========================================
+  let imageBase64 = null;
+  function handleImageUpload(event) {
+    const file = event.target.files[0]; if(!file) return;
+    const previewBox = document.getElementById('imagePreviewBox'); previewBox.style.display = 'block'; document.getElementById('imagePreview').src = 'https://i.gifer.com/ZZ5H.gif'; 
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement('canvas'); const MAX_WIDTH = 800; let width = img.width; let height = img.height;
+        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+        canvas.width = width; canvas.height = height; const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, width, height);
+        imageBase64 = canvas.toDataURL('image/jpeg', 0.7); document.getElementById('imagePreview').src = imageBase64;
+      }; img.src = e.target.result;
+    }; reader.readAsDataURL(file);
+  }
+  function discardImage() { imageBase64 = null; document.getElementById('imageInput').value = ''; document.getElementById('imagePreviewBox').style.display = 'none'; }
+
+  let mediaRecorder; let audioChunks = []; let audioBase64 = null; let isRecording = false;
+  async function toggleRecording() {
+    const btn = document.getElementById('recordBtn');
+    if (!isRecording) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream); audioChunks = [];
+        mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' }); const reader = new FileReader(); reader.readAsDataURL(audioBlob);
+          reader.onloadend = () => { audioBase64 = reader.result; document.getElementById('audioPreview').src = audioBase64; document.getElementById('audioPreviewBox').style.display = 'block'; btn.style.display = 'none'; };
+          stream.getTracks().forEach(track => track.stop());
+        };
+        mediaRecorder.start(); isRecording = true; btn.innerHTML = '<span style="font-size:18px;">⏹️</span> กำลังอัด...'; btn.classList.add('recording');
+      } catch (err) { alert('เข้าถึงไมค์ไม่ได้ค่ะ รบกวนกดอนุญาตไมโครโฟนก่อนนะคะ 🥺'); }
+    } else { mediaRecorder.stop(); isRecording = false; btn.classList.remove('recording'); btn.innerHTML = '<span style="font-size:18px;">🎤</span> อัดเสียง'; }
+  }
+  function discardAudio() { audioBase64 = null; audioChunks = []; document.getElementById('audioPreviewBox').style.display = 'none'; const btn = document.getElementById('recordBtn'); btn.style.display = 'flex'; btn.innerHTML = '<span style="font-size:18px;">🎤</span> อัดเสียง'; }
+
+  // Firebase Notes
   let allNotes = []; let noteToUnlock = null;
   notesRef.on('value', (snapshot) => {
     const data = snapshot.val(); allNotes = [];
@@ -853,29 +973,19 @@
     const overlay = document.getElementById('cinema-overlay'); const video = document.getElementById('cinema-video');
     overlay.style.display = 'flex'; video.play().catch(e=>console.log(e));
   }
-  function closeCinema() {
-    document.getElementById('cinema-overlay').style.display = 'none'; document.getElementById('cinema-video').pause();
-  }
+  function closeCinema() { document.getElementById('cinema-overlay').style.display = 'none'; document.getElementById('cinema-video').pause(); }
 
   // 📅 ระบบจัดการเดือน
   function requestMonthAccess(mIndex) {
-    const today = new Date(); const realMonth = 9; 
-    pendingMonthIndex = mIndex;
-    
+    const today = new Date(); const realMonth = 9; pendingMonthIndex = mIndex;
     if (mIndex < realMonth) {
       const monthNotes = allNotes.filter(n => Number(n.targetMonth) === mIndex);
       const lockedNotes = monthNotes.filter(n => n.isLocked);
-      
       document.getElementById('summaryMonthName').innerText = monthNames[mIndex];
       document.getElementById('summaryTotalNotes').innerText = monthNotes.length;
-      
       const lockedText = document.getElementById('summaryLockedText');
-      if (lockedNotes.length > 0) {
-        document.getElementById('summaryLockedCount').innerText = lockedNotes.length;
-        lockedText.style.display = 'block';
-      } else {
-        lockedText.style.display = 'none';
-      }
+      if (lockedNotes.length > 0) { document.getElementById('summaryLockedCount').innerText = lockedNotes.length; lockedText.style.display = 'block'; } 
+      else { lockedText.style.display = 'none'; }
       document.getElementById('monthlySummaryModal').style.display = 'flex';
     } 
     else if (mIndex > realMonth) {
@@ -885,18 +995,12 @@
     else { proceedToMonth(mIndex); }
   }
 
-  function closeSummaryAndProceed() {
-    closePopup('monthlySummaryModal');
-    proceedToMonth(pendingMonthIndex);
-  }
+  function closeSummaryAndProceed() { closePopup('monthlySummaryModal'); proceedToMonth(pendingMonthIndex); }
 
   function proceedToMonth(mIndex) {
     if(mIndex !== undefined) currentViewingMonthIndex = mIndex;
-    
-    const realMonth = 9; 
-    const isPast = currentViewingMonthIndex < realMonth;
-    const calCard = document.getElementById('dynamic-calendar-sec');
-    const notesCard = document.getElementById('daily-notes-sec');
+    const realMonth = 9; const isPast = currentViewingMonthIndex < realMonth;
+    const calCard = document.getElementById('dynamic-calendar-sec'); const notesCard = document.getElementById('daily-notes-sec');
     if(isPast) { calCard.classList.add('theme-past'); notesCard.classList.add('theme-past'); } 
     else { calCard.classList.remove('theme-past'); notesCard.classList.remove('theme-past'); }
 
@@ -945,17 +1049,13 @@
     }
     
     const legendBox = document.getElementById('locked-notes-legend');
-    if (totalLockedInMonth > 0) {
-      legendBox.style.display = 'block'; document.getElementById('locked-count-text').innerText = totalLockedInMonth;
-    } else {
-      legendBox.style.display = 'none';
-    }
+    if (totalLockedInMonth > 0) { legendBox.style.display = 'block'; document.getElementById('locked-count-text').innerText = totalLockedInMonth; } 
+    else { legendBox.style.display = 'none'; }
   }
 
   function clickDay(day) {
-    if (currentViewingMonthIndex === 8 && day === 3) {
-      document.getElementById('sept3ChoiceModal').style.display = 'flex';
-    } else { proceedToNotesBoard(day); }
+    if (currentViewingMonthIndex === 8 && day === 3) { document.getElementById('sept3ChoiceModal').style.display = 'flex'; } 
+    else { proceedToNotesBoard(day); }
   }
   
   function openSept3Notes() { closePopup('sept3ChoiceModal'); proceedToNotesBoard(3); }
@@ -963,11 +1063,6 @@
     closePopup('sept3ChoiceModal');
     document.getElementById('dynamic-calendar-sec').style.display = 'none';
     document.getElementById('sept3-experience-container').style.display = 'block';
-  }
-  function startSept3Video() {
-    document.getElementById('step-1-intro').style.display = 'none';
-    document.getElementById('step-2-video').style.display = 'block';
-    document.getElementById('myVideo').play().catch(e=>console.log(e));
   }
 
   function openTodayNotes() { const today = new Date(); currentViewingMonthIndex = today.getMonth(); proceedToNotesBoard(today.getDate()); }
@@ -1006,16 +1101,17 @@
     const text = document.getElementById('sharedNoteInput').value;
     const from = document.getElementById('noteFrom').options[document.getElementById('noteFrom').selectedIndex].text; 
     const isLocked = document.getElementById('lockCheckbox').checked; const lockHint = document.getElementById('lockHint').value;
-    if (text.trim() === '') { alert("ต้องพิมพ์ข้อความก่อนส่งน้า! 🥺"); return; }
+    if (text.trim() === '' && !imageBase64 && !audioBase64) { alert("ต้องพิมพ์ข้อความ ใส่รูป หรืออัดเสียงก่อนส่งน้า! 🥺"); return; }
     if (isLocked && setupPin.length !== 6) { alert("ต้องใส่รหัส 6 หลักให้ครบก่อนนะคะ! 🔑"); return; }
 
     const btn = document.getElementById('saveNoteBtn'); const originalText = btn.innerText; btn.innerHTML = '⏳ กำลังแพ็กกระดาษโน้ต...'; btn.disabled = true;
     const timeStr = new Date().toLocaleDateString('th-TH') + ' เวลา ' + new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.';
-    notesRef.push({ targetMonth: Number(currentViewingMonthIndex), targetDay: Number(currentViewingDay), text: text, from: from, timestamp: timeStr, isLocked: isLocked, lockPin: setupPin, lockHint: lockHint });
+    notesRef.push({ targetMonth: Number(currentViewingMonthIndex), targetDay: Number(currentViewingDay), text: text, from: from, timestamp: timeStr, isLocked: isLocked, lockPin: setupPin, lockHint: lockHint, imageData: imageBase64 || null, audioData: audioBase64 || null });
     
     setTimeout(() => {
       document.getElementById('sharedNoteInput').value = ''; document.getElementById('lockHint').value = ''; clearSetupPin();
       document.getElementById('lockCheckbox').checked = false; toggleLockOptions();
+      discardImage(); discardAudio();
       btn.innerText = originalText; btn.disabled = false; backToCalendar();
     }, 800); 
   }
@@ -1027,8 +1123,7 @@
     const dayNotes = allNotes.filter(n => Number(n.targetDay) === day && Number(n.targetMonth) === currentViewingMonthIndex).reverse();
     if (dayNotes.length === 0) { board.innerHTML = '<div style="width: 100%; text-align: center; color: #9ca3af; font-size: 15px; padding: 25px; font-weight: 500;">ยังไม่มีความทรงจำในวันนี้...</div>'; return; }
     
-    const realMonth = 9; 
-    const isPastMonth = currentViewingMonthIndex < realMonth;
+    const realMonth = 9; const isPastMonth = currentViewingMonthIndex < realMonth;
 
     dayNotes.forEach(note => {
       const noteEl = document.createElement('div'); const timeCapsule = isFutureNote(Number(note.targetMonth), Number(note.targetDay));
@@ -1040,7 +1135,9 @@
       else if (note.isLocked) { noteEl.className = 'mini-note locked-note' + senderClass; pinIcon = '🔒'; hintText = '(ข้อความติดล็อก 🔑)'; } 
       else { noteEl.className = 'mini-note' + senderClass; }
 
-      noteEl.innerHTML = `<div class="mini-pin ${isUnlockedPast ? 'magic-pin' : ''}">${pinIcon}</div><div class="mini-from-text">จาก:<br>${note.from}</div><div class="mini-hint">${hintText}</div><div class="mini-time-stamp">${note.timestamp}</div>`;
+      let mediaIcons = ''; if (note.audioData) mediaIcons += '🎵 '; if (note.imageData) mediaIcons += '📸 ';
+
+      noteEl.innerHTML = `<div class="mini-pin ${isUnlockedPast ? 'magic-pin' : ''}">${pinIcon}</div><div class="mini-from-text">จาก:<br>${note.from}</div><div class="mini-icons">${mediaIcons}</div><div class="mini-hint">${hintText}</div><div class="mini-time-stamp">${note.timestamp}</div>`;
       
       noteEl.onclick = () => {
         if (timeCapsule) {
@@ -1063,9 +1160,19 @@
   }
   function showUnlockError(msg) { const err = document.getElementById('unlockErrorMsg'); err.innerText = msg; err.style.display = 'block'; err.classList.remove('bounce-anim'); void err.offsetWidth; err.classList.add('bounce-anim'); }
 
+  // 📖 เปิดอ่านรายละเอียดโน้ต (แสดงรูปและเสียง)
   function openNoteDetail(note, isUnlockedPast = false) {
     document.getElementById('detailFromTo').innerHTML = `ส่งความรู้สึกจาก: <span style="color:#ff477e;">${note.from}</span> 💌`;
-    document.getElementById('detailText').innerText = note.text;
+    
+    const textEl = document.getElementById('detailText');
+    if(note.text && note.text.trim() !== '') { textEl.innerText = note.text; textEl.style.display = 'block'; } else { textEl.style.display = 'none'; }
+    
+    const imgEl = document.getElementById('detailImage');
+    if (note.imageData) { imgEl.src = note.imageData; imgEl.style.display = 'block'; } else { imgEl.style.display = 'none'; }
+    
+    const audioContainer = document.getElementById('detailAudioContainer'); const audioEl = document.getElementById('detailAudio');
+    if (note.audioData) { audioEl.src = note.audioData; audioContainer.style.display = 'block'; } else { audioContainer.style.display = 'none'; }
+
     const secretBox = document.getElementById('secretRevealBox');
     if (isUnlockedPast && note.lockPin) {
       secretBox.style.display = 'block';
@@ -1077,16 +1184,59 @@
     document.getElementById('noteDetailModal').style.display = 'flex';
   }
   
-  function closePopup(modalId) { document.getElementById(modalId).style.display = 'none'; }
+  function closePopup(modalId) { 
+    document.getElementById(modalId).style.display = 'none'; 
+    if(modalId === 'noteDetailModal') { document.getElementById('detailAudio').pause(); }
+  }
 
   function goHome() {
     document.getElementById('home-btn').style.display = 'none'; currentViewingDay = null; noteToUnlock = null; 
     document.getElementById('daily-notes-sec').style.display = 'none'; 
     document.getElementById('dynamic-calendar-sec').style.display = 'none';
+    
+    // รีเซ็ต 3 ก.ย. และปิดเพลง
+    const bgMusic = document.getElementById('bgMusic'); const video = document.getElementById('myVideo');
+    if (bgMusic) bgMusic.pause(); if (video) video.pause();
     document.getElementById('sept3-experience-container').style.display = 'none';
+    document.getElementById('step-1-intro').style.display = 'block'; document.getElementById('step-2-video').style.display = 'none'; document.getElementById('step-3-rain-text').style.display = 'none'; document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'none'; document.getElementById('typewriter-text').innerHTML = ''; typeIndex = 0; 
+    
     document.getElementById('memory-box-step').style.display = 'block'; 
     document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' }); 
   }
+
+  // ==========================================
+  // 🎮 ระบบประสบการณ์ 3 ก.ย. (โค้ดเกมกลับมาแล้ว!)
+  // ==========================================
+  let btnScale = 1; let drinkSelected = false; let timerInterval = null; let typeIndex = 0;
+  const noteText = "ถึงคนดื้อ... วันนี้ตั้งใจทำงานน๊า อย่าลืมหาอะไรอร่อยๆ กินด้วยล่ะ ดื่มน้ำเยอะๆ พักผ่อนมากๆ! 💖";
+  
+  function startExperience() {
+    const bgMusic = document.getElementById('bgMusic'); const video = document.getElementById('myVideo'); const step1 = document.getElementById('step-1-intro'); const step2 = document.getElementById('step-2-video');
+    bgMusic.currentTime = 15; bgMusic.play().catch(err => console.log(err)); step1.style.display = 'none'; step2.style.display = 'block'; video.play().catch(err => console.log(err));
+    video.onended = function() { step2.style.display = 'none'; const step3 = document.getElementById('step-3-rain-text'); step3.style.display = 'block'; setTimeout(function() { step3.style.display = 'none'; const step4 = document.getElementById('step-4-main'); step4.style.display = 'block'; revealCardsSequentially(); }, 3500); };
+  }
+  function revealCardsSequentially() { setTimeout(() => { document.getElementById('card-1').classList.add('show'); }, 600); setTimeout(() => { document.getElementById('card-2').classList.add('show'); }, 1800); setTimeout(() => { document.getElementById('card-3').classList.add('show'); startTypewriter(); }, 3000); setTimeout(() => { document.getElementById('card-4').classList.add('show'); }, 4200); }
+  function toggleAudio() { const bgMusic = document.getElementById('bgMusic'); const disc = document.getElementById('vinyl-disc'); const status = document.getElementById('play-status'); if (bgMusic.paused) { bgMusic.play(); disc.classList.add('spinning'); status.textContent = '⏸️ กำลังเล่นเพลงอยู่...'; } else { bgMusic.pause(); disc.classList.remove('spinning'); status.textContent = '▶️ แตะเพื่อเปิดเพลง'; } }
+  function startTypewriter() { const el = document.getElementById('typewriter-text'); if (typeIndex < noteText.length) { el.innerHTML += noteText.charAt(typeIndex); typeIndex++; setTimeout(startTypewriter, 50); } }
+  function dodgeBadDrink() { const badBtn = document.getElementById('bad-btn'); const card = document.getElementById('card-4'); const cardRect = card.getBoundingClientRect(); const x = Math.floor(Math.random() * (cardRect.width - 120)) - (cardRect.width / 2 - 60); const y = Math.floor(Math.random() * 80) - 40; if (btnScale > 0.35) { btnScale -= 0.15; } badBtn.style.position = 'relative'; badBtn.style.transform = `translate(${x}px, ${y}px) scale(${btnScale})`; document.getElementById('drink-result').innerText = '😜 ปุ่มนี้กดไม่ได้หรอก! เลือกอันอื่นสิคะ'; }
+  function selectDrink(drinkName) { drinkSelected = true; document.getElementById('drink-result').innerText = (drinkName === 'น้ำเปล่าเย็นๆ') ? 'เก่งมาก! ❤️' : 'ดีมาก! ✨'; checkLunchTimeAccess(); }
+  function checkLunchTimeAccess() {
+    if (!drinkSelected) return; const now = new Date(); const currentDay = now.getDate(); const currentMonth = now.getMonth(); const currentHour = now.getHours(); const countdownCard = document.getElementById('lunch-countdown-card'); const card5 = document.getElementById('card-5');
+    if (currentMonth > 8 || currentDay > 3 || (currentDay === 3 && currentHour >= 12)) { countdownCard.style.display = 'none'; if (timerInterval) clearInterval(timerInterval); card5.style.display = 'block'; setTimeout(() => { card5.classList.add('show'); }, 400); } 
+    else { countdownCard.style.display = 'block'; setTimeout(() => { countdownCard.classList.add('show'); }, 400); updateCountdown(); if (!timerInterval) { timerInterval = setInterval(updateCountdown, 1000); } }
+  }
+  function updateCountdown() { const now = new Date(); const target = new Date(); target.setDate(3); target.setHours(12, 0, 0, 0); const diff = target - now; if (diff <= 0) { checkLunchTimeAccess(); return; } const hours = Math.floor((diff / (1000 * 60 * 60)) % 24); const minutes = Math.floor((diff / (1000 * 60)) % 60); const seconds = Math.floor((diff / 1000) % 60); document.getElementById('countdown-timer').innerText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`; }
+  function answerLunch(eaten) { document.getElementById('lunch-result').innerText = eaten ? 'ดีแล้วค่ะ อิ่มแล้วก็มีแรงทำงานต่อเนอะ ✨' : 'อย่าลืมรีบไปหาอะไรทานด้วยน้า เดี๋ยวปวดท้องนะ! 🥺'; const card6 = document.getElementById('card-6'); card6.style.display = 'block'; setTimeout(() => { card6.classList.add('show'); }, 600); }
+  function answerWork(working) { const timePicker = document.getElementById('time-picker-wrapper'); const resultEl = document.getElementById('work-result'); if (working) { timePicker.style.display = 'block'; resultEl.innerText = ''; } else { timePicker.style.display = 'none'; resultEl.innerText = 'รีบกลับบ้านพักผ่อนหาอะไรกินด้วยนะ 🌸'; showLieDetectorSection(); } }
+  function updateTimeText(val) { document.getElementById('time-display').innerText = val + ':00 น.'; }
+  function confirmTime() { document.getElementById('work-result').innerText = 'โอเค ดูแลตัวเองดีๆนะ 💖'; showLieDetectorSection(); }
+  function showLieDetectorSection() { const card7 = document.getElementById('card-7'); card7.style.display = 'block'; setTimeout(() => { card7.classList.add('show'); }, 600); }
+  
+  let scanTimer = null; let heartbeatInterval = null; let hasCompletedScan = false;
+  function startScan(e) { if (e) e.preventDefault(); if (hasCompletedScan) return; document.getElementById('laser').classList.add('scanning'); document.getElementById('lie-result').innerText = ''; const statusEl = document.getElementById('heartbeat-status'); const beats = ['💓 75 BPM', '💓 88 BPM', '💓 102 BPM', '💓 120 BPM 🔥']; let beatIdx = 0; heartbeatInterval = setInterval(() => { statusEl.innerText = beats[beatIdx % beats.length]; beatIdx++; }, 400); scanTimer = setTimeout(() => { finishScan(); }, 2500); }
+  function stopScan() { if (hasCompletedScan) return; document.getElementById('laser').classList.remove('scanning'); clearTimeout(scanTimer); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerText = ''; document.getElementById('lie-result').innerHTML = '<span style="color: #e53e3e;">⚠️ สแกนยังไม่เสร็จ! แตะค้างไว้จนกว่าจะเสร็จน้า</span>'; }
+  function finishScan() { hasCompletedScan = true; document.getElementById('laser').classList.remove('scanning'); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerHTML = '💓 135 BPM (หัวใจเต้นแรงมาก!)'; document.getElementById('lie-result').innerHTML = `🚨 <strong>RESULT: DETECTED!</strong><br><span style="color: #ff477e;">"ตรวจพบความคิดถึง 100% (ห้ามปฏิเสธเด็ดขาด!)" 🥰✨</span>`; const finalBtn = document.getElementById('final-btn-wrapper'); finalBtn.style.display = 'block'; setTimeout(() => { finalBtn.classList.add('show'); }, 600); }
+  function goToNextSection() { document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'block'; }
 
   function createBackgroundHearts() { const container = document.getElementById('heart-bg-container'); const hearts = ['💖', '✨', '🌟', '💕']; for(let i=0; i<12; i++) { const heart = document.createElement('div'); heart.classList.add('floating-heart-bg'); heart.innerText = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 4 + 4) + 's'; container.appendChild(heart); } }
 </script>
