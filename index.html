@@ -52,7 +52,7 @@
 
     /* 📺 ปุ่มทีวีเรโทร (Floating TV Button) */
     .floating-tv-btn {
-      position: fixed; bottom: 120px; right: 15px; 
+      position: fixed; bottom: 30px; right: 15px; 
       background: linear-gradient(135deg, #fcd34d, #f59e0b);
       border: 3px solid #fff; border-radius: 50%;
       width: 60px; height: 60px; font-size: 30px;
@@ -111,7 +111,7 @@
     .glass-liquid::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.6) 15%, transparent 20%), radial-gradient(circle, rgba(255,255,255,0.4) 15%, transparent 20%); background-size: 15px 15px, 20px 20px; background-position: 0 0, 10px 10px; animation: bubbles 2s linear infinite; border-radius: 18px; }
 
     /* 🎋 กิมมิคเซียมซีเขย่ารักโฉมใหม่ (CSS Siam-See) */
-    .shake-wrapper { margin-bottom: 25px; position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; background: #fffdf0; padding: 25px 20px 15px 20px; border-radius: 20px; border: 2px dashed #fcd34d; box-shadow: inset 0 0 15px rgba(245, 158, 11, 0.1); }
+    .shake-wrapper { margin-bottom: 15px; position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; background: #fffdf0; padding: 25px 20px 15px 20px; border-radius: 20px; border: 2px dashed #fcd34d; box-shadow: inset 0 0 15px rgba(245, 158, 11, 0.1); }
     .shake-header { font-size: 16px; font-weight: 700; color: #d97706; margin-bottom: 10px; }
     .shake-instruction { font-size: 13px; color: #b45309; margin-bottom: 20px; background: rgba(255,255,255,0.7); padding: 5px 15px; border-radius: 12px; font-weight: 500; }
     
@@ -132,29 +132,26 @@
     .shake-status { font-size: 14px; font-weight: 600; color: #059669; margin-bottom: 10px; display: none; background: #d1fae5; padding: 6px 14px; border-radius: 12px; border: 1px dashed #34d399; animation: popUp 0.3s; }
     .read-fortune-btn { display: none; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 12px 20px; border-radius: 18px; font-size: 15px; font-weight: 700; font-family: 'Kanit'; cursor: pointer; box-shadow: 0 4px 10px rgba(217,119,6,0.3); animation: pulse 1.5s infinite; margin-top: 5px; }
     
-    /* 🌟 ปุ่มส่วนรวม (หน้าบ้าน) สำหรับจัดการเซียมซี */
     .shared-fortune-controls { display: flex; gap: 10px; width: 100%; margin-top: 15px; border-top: 1px dashed #fcd34d; padding-top: 15px; }
     .shared-btn { flex: 1; background: #fffbeb; border: 2px dashed #f59e0b; color: #d97706; border-radius: 14px; padding: 10px 5px; font-size: 13px; font-weight: 700; font-family: 'Kanit'; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 5px rgba(245,158,11,0.1); }
     .shared-btn:active { transform: scale(0.95); background: #fef3c7; }
 
-    /* ป๊อปอัปผลลัพธ์เซียมซี */
-    .fortune-modal { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 4px solid #f59e0b; padding: 35px 25px; }
-    .fortune-number-badge { font-size: 20px; font-weight: bold; color: white; background: #e11d48; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 10px; box-shadow: 0 4px 8px rgba(225,29,72,0.3); }
-    .fortune-title { font-size: 22px; font-weight: 700; color: #d97706; margin-bottom: 15px; }
-    .fortune-message { font-size: 16px; color: #4a5568; font-weight: 600; line-height: 1.5; background: white; padding: 20px; border-radius: 16px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); margin-bottom: 20px; border: 2px dashed #fcd34d; }
-    .fortune-coupon { color: #e11d48; font-size: 18px; font-weight: 700; animation: pulse 1.5s infinite; }
-
-    /* ป๊อปอัปจัดการเซียมซี (เพิ่ม/ดู) */
-    .admin-modal-content { background: white; border-radius: 24px; padding: 25px; width: 100%; max-width: 360px; text-align: left; position: relative; max-height: 85vh; overflow-y: auto; }
-    .admin-title { font-size: 18px; font-weight: 700; color: #d97706; margin-bottom: 10px; border-bottom: 2px dashed #fcd34d; padding-bottom: 10px; text-align: center; }
-    .fortune-list-item { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 12px; margin-bottom: 10px; font-size: 14px; position: relative;}
-    .fortune-list-num { font-weight: bold; color: #e11d48; margin-bottom: 4px; font-size: 15px;}
+    /* 🎮 ปุ่มเกม Cookie Run */
+    .game-play-btn {
+      background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+      color: white; border: 2px dashed #c4b5fd; border-radius: 18px;
+      padding: 15px; font-size: 16px; font-weight: 700; font-family: 'Kanit';
+      cursor: pointer; width: 100%; margin-bottom: 25px;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      animation: pulseGlowGame 2s infinite;
+    }
+    @keyframes pulseGlowGame { 0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(139, 92, 246, 0); } 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); } }
 
     .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .choice-btn:active { transform: scale(0.95); }
     
-    .today-btn { background: linear-gradient(135deg, #fef08a, #f59e0b); color: #78350f; border-color: #fcd34d; width: 100%; margin-bottom: 20px; font-size: 17px; box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); animation: pulseGlow 2s infinite; display: flex; align-items: center; justify-content: center; gap: 8px;}
-    @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
+    .today-btn { background: linear-gradient(135deg, #fef08a, #f59e0b); color: #78350f; border-color: #fcd34d; width: 100%; margin-bottom: 20px; font-size: 17px; box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); display: flex; align-items: center; justify-content: center; gap: 8px;}
 
     .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 5px; }
     .month-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 5px; border-radius: 16px; border: 2px solid #ffe4e8; background: #fff; font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; color: #4a5568; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative;}
@@ -178,9 +175,7 @@
     .note-dot { position: absolute; bottom: 3px; right: 3px; background: #fcd34d; border-radius: 50%; box-shadow: 0 2px 5px rgba(245,158,11,0.6); z-index: 5; width: 12px; height: 12px; animation: pulse 2s infinite; pointer-events: none; }
     .note-dot.has-number { width: 18px; height: 18px; font-size: 11px; font-weight: bold; color: #92400e; display: flex; justify-content: center; align-items: center; border: 2px solid white; bottom: -3px; right: -3px; animation: bounce 1.5s infinite; }
     
-    /* ไอคอนมงกุฎสำหรับวันพิเศษ (3 ก.ย.) */
     .crown-icon { position: absolute; top: -10px; font-size: 16px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); z-index: 6; animation: floatBox 2s infinite; }
-
     .locked-legend-box { display: none; margin-top: 20px; padding: 15px; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 16px; font-size: 14px; color: #b45309; font-weight: 600; text-align: center; box-shadow: 0 4px 10px rgba(245,158,11,0.1); animation: popUp 0.5s; }
 
     /* 📝 กระดานโน้ตเฉพาะวัน */
@@ -251,6 +246,10 @@
     .popup-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 10000; padding: 20px; backdrop-filter: blur(6px); }
     .popup-content { background: white; border-radius: 28px; padding: 30px; max-width: 340px; width: 100%; text-align: center; box-shadow: 0 15px 50px rgba(0,0,0,0.3); animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
     
+    /* 🎮 ป๊อปอัปมินิเกม Cookie Run */
+    .game-modal-content { max-width: 400px; padding: 25px 20px; background: linear-gradient(135deg, #1e1b4b, #312e81); border: 4px solid #8b5cf6; border-radius: 28px; width: 100%; text-align: center; position: relative; animation: popUp 0.4s ease-out; }
+    .game-canvas-wrapper { width: 100%; max-width: 340px; margin: 0 auto; border-radius: 12px; overflow: hidden; border: 3px solid #6d28d9; box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
+    
     /* ป๊อปอัปเลือก 3 ก.ย. */
     .choice-3sep-modal { background: linear-gradient(135deg, #fff0f3, #ffe4e8); border: 4px solid #ffb6c1; }
     
@@ -287,7 +286,7 @@
     .unlock-icon { font-size: 55px; margin-bottom: 10px; filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15)); }
     .unlock-title { font-size: 20px; font-weight: 700; color: #334155; margin-bottom: 8px; }
 
-    /* ✨ โซนความทรงจำ 3 ก.ย. (CSS เกม เครื่องจับเท็จ แผ่นเสียง กลับมาแล้ว!) ✨ */
+    /* ✨ โซนความทรงจำ 3 ก.ย. ✨ */
     #sept3-experience-container { position: relative; z-index: 50; }
     .envelope-box { position: relative; display: inline-block; margin-bottom: 20px; }
     .roll-in-anim { animation: rollIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
@@ -298,6 +297,7 @@
     .morning-title { font-size: 20px; font-weight: 700; color: #ff477e; margin-bottom: 12px; }
     .special-today-text { font-size: 15px; line-height: 1.6; color: #4a5568; margin-bottom: 24px; }
     .next-btn { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); color: #ffffff; border: none; padding: 14px 28px; font-size: 16px; font-weight: 600; font-family: 'Kanit', sans-serif; border-radius: 30px; cursor: pointer; box-shadow: 0 6px 20px rgba(255, 117, 140, 0.4); width: 100%; transition: all 0.3s ease; }
+    
     .video-wrapper { width: 100%; border-radius: 28px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.2); background: #000; border: 3px solid #ffffff; animation: popUp 0.5s ease-out forwards; }
     .video-wrapper video { width: 100%; height: auto; display: block; }
     
@@ -347,7 +347,7 @@
   <button class="open-box-btn" onclick="openPackage()">✨ แตะเพื่อเปิดกล่อง!</button>
 </div>
 
-<!-- 📺 ทีวีเรโทรป๊อปอัป (Memory Cinema โฉมใหม่) -->
+<!-- 📺 ทีวีเรโทรป๊อปอัป (Memory Cinema) -->
 <div id="tv-overlay">
   <div style="color: #fcd34d; font-family: 'Kanit'; font-weight: 700; font-size: 22px; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">✨ Memory Channel ✨</div>
   <div class="tv-frame">
@@ -383,12 +383,11 @@
       </div>
     </div>
 
-    <!-- 🎰 มินิเกมใหม่: เซียมซีเขย่ารัก (Fortune Shake CSS) -->
+    <!-- 🎰 มินิเกมเซียมซีเขย่ารัก (Fortune Shake) -->
     <div class="shake-wrapper">
       <div class="shake-header">🎋 เซียมซีคนดื้อประจำวัน</div>
       <div class="shake-instruction">📱 จับมือถือให้แน่น แล้วลอง "เขย่า" ดูสิ!<br><span style="font-size:10px; color:#92400e;">(หรือใช้นิ้วจิ้มรัวๆ ที่กระบอกก็ได้ เขย่าเล่นกี่รอบก็ได้!)</span></div>
       
-      <!-- กระบอกเซียมซีแบบ CSS สวยๆ -->
       <div class="siam-see-container" id="shake-container" onclick="manualShake()">
         <div class="css-stick" id="siam-see-stick">
           <span class="css-stick-text">เบอร์<br><span id="shake-stick-number" style="font-size: 26px;">?</span></span>
@@ -401,12 +400,17 @@
       <div id="shake-status" class="shake-status">✨ ลองเขย่าดูสิ!</div>
       <button id="read-fortune-btn" class="read-fortune-btn" onclick="showFortuneResult()">📖 เปิดดูคำทำนายเลย!</button>
       
-      <!-- 🌟 ปุ่มส่วนรวม หน้าบ้าน (เพิ่มคำทำนาย / ดูทั้งหมด) -->
+      <!-- 🌟 ปุ่มส่วนรวม หน้าบ้าน -->
       <div class="shared-fortune-controls">
         <button class="shared-btn" onclick="openAddFortuneModal()">✍️ เขียนคำทำนายใส่กระบอก</button>
         <button class="shared-btn" onclick="openAllFortunesModal()">📜 แอบดูใบเซียมซีทั้งหมด</button>
       </div>
     </div>
+
+    <!-- 🎮 ปุ่มเข้ามินิเกม Cookie Run -->
+    <button class="game-play-btn" onclick="openMiniGame()">
+      <span style="font-size: 24px;">🏃‍♀️</span> แวะเล่นมินิเกม: วิ่งตะลุยหัวใจคนดื้อ!
+    </button>
 
     <button class="choice-btn today-btn" onclick="openTodayNotes()">
       <span style="font-size: 20px;">💛</span> กดเพื่อเพิ่มกระดาษโน้ตของวันนี้เลย!
@@ -460,7 +464,6 @@
 
         <textarea id="sharedNoteInput" class="note-input" placeholder="พิมพ์ความรู้สึกไว้ตรงนี้นะ 💌..."></textarea>
         
-        <!-- กลับมาแล้ว: ปุ่มอัดเสียงและใส่รูป -->
         <div class="media-buttons">
           <button id="recordBtn" class="record-btn" onclick="toggleRecording()">🎤 อัดเสียง</button>
           <label for="imageInput" class="image-upload-btn">📸 ใส่รูปภาพ</label>
@@ -511,7 +514,7 @@
     <button class="back-cal-btn" onclick="backToCalendar()">🔙 กลับไปหน้าปฏิทิน</button>
   </div>
   
-  <!-- ✨ โซนความทรงจำวันที่ 3 กันยายน (กลับมาครบทุกด่านแล้ว!) ✨ -->
+  <!-- ✨ โซนความทรงจำวันที่ 3 กันยายน ✨ -->
   <div id="sept3-experience-container" class="step-box" style="display: none;">
     <div id="step-1-intro" class="step-box">
       <div class="envelope-box roll-in-anim"><div class="envelope-icon">✉️</div><div class="sparkle-heart pulse-anim">💖</div></div>
@@ -613,7 +616,7 @@
 
 </div> <!-- ปิด main-app-container -->
 
-<!-- ➕ ป๊อปอัป ร่วมเขียนคำทำนายใส่กระบอก (Shared Feature) -->
+<!-- ➕ ป๊อปอัป ร่วมเขียนคำทำนายใส่กระบอก -->
 <div id="addFortuneModal" class="popup-modal">
   <div class="admin-modal-content">
     <div class="admin-title">✍️ เขียนคำทำนายใส่กระบอกเซียมซี</div>
@@ -646,19 +649,17 @@
   </div>
 </div>
 
-<!-- 📜 ป๊อปอัป แอบดูใบเซียมซีทั้งหมด (Shared Feature) -->
+<!-- 📜 ป๊อปอัป แอบดูใบเซียมซีทั้งหมด -->
 <div id="allFortunesModal" class="popup-modal">
   <div class="admin-modal-content">
     <div class="admin-title">📜 คำทำนายทั้งหมดที่เรามี</div>
     <div style="font-size: 13px; color: #4a5568; margin-bottom: 10px; text-align: center;">มาแอบดูว่าในกระบอกมีสิทธิพิเศษอะไรซ่อนอยู่บ้าง 👀</div>
-    <div id="fortuneListContainer" style="margin-top: 10px; margin-bottom: 15px;">
-      <!-- รายการจะโหลดมาที่นี่ -->
-    </div>
+    <div id="fortuneListContainer" style="margin-top: 10px; margin-bottom: 15px;"></div>
     <button class="choice-btn bad-btn" style="width: 100%;" onclick="closePopup('allFortunesModal')">ปิดหน้าต่าง ❌</button>
   </div>
 </div>
 
-<!-- 🎉 Popup สรุปความทรงจำรายเดือน (Monthly Wrap-up) -->
+<!-- 🎉 Popup สรุปความทรงจำรายเดือน -->
 <div id="monthlySummaryModal" class="popup-modal">
   <div class="popup-content summary-modal">
     <div style="font-size: 60px; margin-bottom: 10px; animation: bounce 2s infinite;">📜✨</div>
@@ -671,7 +672,7 @@
   </div>
 </div>
 
-<!-- 👑 ป๊อปอัปให้เลือกวันที่ 3 ก.ย. ว่าจะดูอะไร -->
+<!-- 👑 ป๊อปอัปให้เลือกวันที่ 3 ก.ย. -->
 <div id="sept3ChoiceModal" class="popup-modal">
   <div class="popup-content choice-3sep-modal">
     <div style="font-size: 60px; margin-bottom: 10px; animation: pulse 2s infinite;">👑✨</div>
@@ -685,7 +686,7 @@
   </div>
 </div>
 
-<!-- 🔮 ป๊อปอัปผลลัพธ์ เซียมซีเขย่ารัก (Fortune Shake Result) -->
+<!-- 🔮 ป๊อปอัปผลลัพธ์ เซียมซี -->
 <div id="fortuneResultModal" class="popup-modal">
   <div class="popup-content fortune-modal">
     <div class="fortune-number-badge" id="fortuneNumberBadge">ใบเซียมซีเบอร์ ?</div>
@@ -693,7 +694,6 @@
     <div class="fortune-title" id="fortuneTitle">คำทำนายวันนี้!</div>
     <div class="fortune-message" id="fortuneMessage">...</div>
     <div class="fortune-coupon" id="fortuneCoupon" style="display: none;"></div>
-    
     <button class="choice-btn best-btn" style="width: 100%; margin-top: 15px; font-size: 16px; padding: 12px; border-radius: 18px;" onclick="closePopup('fortuneResultModal')">รับทราบค่ะ! ✨</button>
   </div>
 </div>
@@ -708,7 +708,7 @@
   </div>
 </div>
 
-<!-- 🔒 ป๊อปอัปเกมทายรหัส (Numpad) -->
+<!-- 🔒 ป๊อปอัปเกมทายรหัส -->
 <div id="unlockModal" class="popup-modal">
   <div class="unlock-box">
     <div class="unlock-icon">🔒</div>
@@ -731,7 +731,7 @@
   </div>
 </div>
 
-<!-- 💌 Popup สำหรับเปิดอ่านโน้ต (รูปภาพ & เสียงกลับมาแล้ว!) -->
+<!-- 💌 Popup สำหรับเปิดอ่านโน้ต (รูปภาพ & เสียง) -->
 <div id="noteDetailModal" class="popup-modal">
   <div class="read-note-content">
     <div class="read-note-pin" id="detailPinIcon">📌</div>
@@ -747,8 +747,28 @@
     
     <!-- 🔓 เฉลยรหัสสำหรับโน้ตอดีตที่ปลดล็อกอัตโนมัติ -->
     <div id="secretRevealBox" class="secret-revealed-box"></div>
-    
     <button class="choice-btn bad-btn" style="width: 100%; margin-top: 15px; border-radius: 16px; padding: 14px; font-size: 16px;" onclick="closePopup('noteDetailModal')">พับเก็บกระดาษโน้ต 💌</button>
+  </div>
+</div>
+
+<!-- 🏃‍♀️ ป๊อปอัป มินิเกมวิ่ง (Cookie Run Style) -->
+<div id="miniGameModal" class="popup-modal">
+  <div class="game-modal-content">
+    <div style="font-size: 22px; color: #ddd6fe; font-weight: bold; margin-bottom: 5px; font-family: 'Kanit';">🏃‍♀️ วิ่งตะลุยไปหาคนดื้อ!</div>
+    <p style="font-size: 14px; color: #a5b4fc; margin-bottom: 15px; line-height: 1.4;">แตะที่หน้าจอเพื่อกระโดดหลบอุปสรรค (📚, ⏰)<br>เก็บหัวใจและของอร่อย (💖, 🧋, ☕) ให้ครบ <span style="color:#f472b6; font-weight:bold;">100 คะแนน</span>!</p>
+    
+    <div class="game-canvas-wrapper">
+      <canvas id="runGameCanvas" width="340" height="250" style="background: #0f172a; display: block; touch-action: none;"></canvas>
+    </div>
+    
+    <div id="gameWinMsg" style="display:none; margin-top: 15px; color: #fdf2f8; background: #be185d; padding: 12px; border-radius: 12px; font-size: 15px; font-weight: bold; animation: pulse 1s infinite;">
+      🎉 เก่งมาก! วิ่งมาถึงหัวใจเค้าแล้ว<br>แคปจอไปรับรางวัลเลย 1 กอด! 🥰
+    </div>
+    
+    <div style="display: flex; gap: 10px; margin-top: 15px;">
+      <button class="choice-btn bad-btn" style="flex:1; border-color:#f43f5e; color:#f43f5e; background:transparent;" onclick="closeMiniGame()">ปิดเกม ❌</button>
+      <button id="startGameBtn" class="choice-btn best-btn" style="flex:1; background: #8b5cf6; border-color:#8b5cf6; color: white;" onclick="startMiniGame()">เริ่มวิ่ง! ▶️</button>
+    </div>
   </div>
 </div>
 
@@ -795,6 +815,144 @@
     document.getElementById('timeGreeting').innerText = text;
   }
   updateTimeGreeting();
+
+  // ==========================================
+  // 🏃‍♀️ มินิเกมวิ่ง (Cookie Run Style) HTML5 Canvas
+  // ==========================================
+  const canvasGame = document.getElementById('runGameCanvas');
+  const ctxGame = canvasGame.getContext('2d');
+  let gameLoop;
+  let isGameRunning = false;
+  let runScore = 0;
+  
+  let p1 = { x: 40, y: 190, width: 30, height: 30, velocityY: 0, gravity: 0.6, jumpPower: -11, isGrounded: true };
+  let gameObstacles = [];
+  let gameItems = [];
+  let gameSpeed = 3.5;
+  let gameFrameCount = 0;
+
+  function openMiniGame() {
+    document.getElementById('miniGameModal').style.display = 'flex';
+    drawInitialScreen();
+  }
+  
+  function closeMiniGame() {
+    document.getElementById('miniGameModal').style.display = 'none';
+    cancelAnimationFrame(gameLoop);
+    isGameRunning = false;
+  }
+  
+  function drawInitialScreen() {
+     ctxGame.clearRect(0, 0, canvasGame.width, canvasGame.height);
+     ctxGame.fillStyle = '#f8fafc';
+     ctxGame.font = '18px Kanit';
+     ctxGame.textAlign = 'center';
+     ctxGame.fillText('กด "เริ่มวิ่ง!" เพื่อเล่นเกม', canvasGame.width/2, canvasGame.height/2);
+  }
+  
+  function startMiniGame() {
+    p1.y = 190; p1.velocityY = 0; p1.isGrounded = true;
+    gameObstacles = []; gameItems = [];
+    runScore = 0; gameFrameCount = 0; gameSpeed = 3.5;
+    isGameRunning = true;
+    document.getElementById('gameWinMsg').style.display = 'none';
+    document.getElementById('startGameBtn').innerText = 'เริ่มใหม่ 🔄';
+    cancelAnimationFrame(gameLoop);
+    updateGame();
+  }
+  
+  function playerJump() {
+    if (p1.isGrounded && isGameRunning) {
+      p1.velocityY = p1.jumpPower;
+      p1.isGrounded = false;
+    }
+  }
+  
+  canvasGame.addEventListener('touchstart', (e) => { e.preventDefault(); playerJump(); });
+  canvasGame.addEventListener('mousedown', playerJump);
+  
+  function updateGame() {
+    if (!isGameRunning) return;
+    ctxGame.clearRect(0, 0, canvasGame.width, canvasGame.height);
+    
+    // วาดพื้น
+    ctxGame.fillStyle = '#334155';
+    ctxGame.fillRect(0, 220, canvasGame.width, 30);
+    
+    // ระบบฟิสิกส์ตัวละคร (แรงโน้มถ่วง)
+    p1.velocityY += p1.gravity;
+    p1.y += p1.velocityY;
+    if (p1.y >= 190) { p1.y = 190; p1.isGrounded = true; p1.velocityY = 0; }
+    
+    // วาดตัวละคร
+    ctxGame.font = '32px Arial';
+    ctxGame.textAlign = 'left';
+    ctxGame.fillText('👧', p1.x, p1.y + 28); 
+    
+    // สุ่มสร้างอุปสรรคและไอเทม
+    gameFrameCount++;
+    if (gameFrameCount % 100 === 0) { // อุปสรรค (ศัตรู)
+       let obType = Math.random() > 0.5 ? '📚' : '⏰';
+       gameObstacles.push({ x: canvasGame.width, y: 195, width: 28, height: 28, emoji: obType });
+    }
+    if (gameFrameCount % 60 === 0) { // ไอเทมคะแนน
+       let itType = Math.random() > 0.6 ? '💖' : (Math.random() > 0.5 ? '🧋' : '☕');
+       let itY = Math.random() > 0.5 ? 120 : 195; // สุ่มลอยข้างบน หรืออยู่ข้างล่าง
+       gameItems.push({ x: canvasGame.width, y: itY, width: 28, height: 28, emoji: itType });
+    }
+    
+    // อัปเดตอุปสรรค
+    for (let i = 0; i < gameObstacles.length; i++) {
+       let obs = gameObstacles[i];
+       obs.x -= gameSpeed;
+       ctxGame.fillText(obs.emoji, obs.x, obs.y + 25);
+       
+       // เชนการชนอุปสรรค (Game Over)
+       if (p1.x < obs.x + obs.width && p1.x + p1.width > obs.x && p1.y < obs.y + obs.height && p1.y + p1.height > obs.y) {
+           isGameRunning = false;
+           ctxGame.fillStyle = 'rgba(0,0,0,0.7)'; ctxGame.fillRect(0,0,canvasGame.width,canvasGame.height);
+           ctxGame.fillStyle = '#fef08a'; ctxGame.textAlign = 'center'; ctxGame.font = 'bold 24px Kanit';
+           ctxGame.fillText('ชนอุปสรรค! 😭', canvasGame.width/2, canvasGame.height/2 - 10);
+           ctxGame.fillStyle = 'white'; ctxGame.font = '16px Kanit';
+           ctxGame.fillText(`ได้คะแนนความรักไป: ${runScore}`, canvasGame.width/2, canvasGame.height/2 + 20);
+           return; 
+       }
+    }
+    
+    // อัปเดตไอเทม
+    for (let i = 0; i < gameItems.length; i++) {
+       let it = gameItems[i];
+       it.x -= gameSpeed;
+       
+       if (!it.collected) {
+          ctxGame.fillText(it.emoji, it.x, it.y + 25);
+          // เช็คการเก็บไอเทม
+          if (p1.x < it.x + it.width && p1.x + p1.width > it.x && p1.y < it.y + it.height && p1.y + p1.height > it.y) {
+              it.collected = true;
+              runScore += (it.emoji === '💖' ? 10 : 5); // หัวใจ 10 คะแนน, น้ำ 5 คะแนน
+          }
+       }
+    }
+    
+    // แสดงคะแนน
+    ctxGame.fillStyle = '#f472b6';
+    ctxGame.font = 'bold 18px Kanit';
+    ctxGame.textAlign = 'left';
+    ctxGame.fillText(`ความรัก: ${runScore} / 100`, 10, 30);
+    
+    // เช็กชนะ
+    if (runScore >= 100) {
+       isGameRunning = false;
+       document.getElementById('gameWinMsg').style.display = 'block';
+       ctxGame.fillStyle = 'rgba(0,0,0,0.7)'; ctxGame.fillRect(0,0,canvasGame.width,canvasGame.height);
+       ctxGame.fillStyle = '#34d399'; ctxGame.textAlign = 'center'; ctxGame.font = 'bold 26px Kanit';
+       ctxGame.fillText('ชนะแล้ว! 🎉', canvasGame.width/2, canvasGame.height/2);
+       return;
+    }
+    
+    gameSpeed += 0.002; // เกมจะค่อยๆ เร็วขึ้น
+    gameLoop = requestAnimationFrame(updateGame);
+  }
 
   // ==========================================
   // 🎋 ระบบเซียมซีเขย่ารัก
@@ -1206,7 +1364,6 @@
   }
   function showUnlockError(msg) { const err = document.getElementById('unlockErrorMsg'); err.innerText = msg; err.style.display = 'block'; err.classList.remove('bounce-anim'); void err.offsetWidth; err.classList.add('bounce-anim'); }
 
-  // 📖 เปิดอ่านรายละเอียดโน้ต (แสดงรูปและเสียง)
   function openNoteDetail(note, isUnlockedPast = false) {
     document.getElementById('detailFromTo').innerHTML = `ส่งความรู้สึกจาก: <span style="color:#ff477e;">${note.from}</span> 💌`;
     
