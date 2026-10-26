@@ -12,17 +12,27 @@
 
   <style>
     * { box-sizing: border-box; }
+    
+    /* 🌌 พื้นหลังขยับได้ ให้ดูละมุนขึ้น */
     body {
-      margin: 0; padding: 0; background: linear-gradient(135deg, #fff0f3 0%, #ffe4e8 50%, #f0f4ff 100%);
+      margin: 0; padding: 0; 
+      background: linear-gradient(135deg, #fff0f3, #ffe4e8, #fce7f3, #f0f9ff);
+      background-size: 300% 300%;
+      animation: gradientBG 15s ease infinite;
       font-family: 'Kanit', sans-serif; color: #333333; min-height: 100vh; display: flex; justify-content: center; align-items: center;
       overflow-x: hidden; position: relative;
     }
+    @keyframes gradientBG { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
+
+    /* ✨ เอฟเฟกต์หน้าจอสั่น (ตอนทุบกระจก) ✨ */
+    .shake-screen { animation: shakeScreenAnim 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+    @keyframes shakeScreenAnim { 0% { transform: translate(3px, 2px) rotate(0deg); } 20% { transform: translate(-3px, -2px) rotate(-1deg); } 40% { transform: translate(-3px, 2px) rotate(1deg); } 60% { transform: translate(3px, -2px) rotate(0deg); } 80% { transform: translate(1px, -1px) rotate(1deg); } 100% { transform: translate(0, 0) rotate(0deg); } }
 
     /* ✨ เอฟเฟกต์วิ้งวับ & มหัศจรรย์ ✨ */
     .magic-glow { animation: glowing 2s infinite alternate; }
-    @keyframes glowing { from { text-shadow: 0 0 5px #fff, 0 0 10px #ff477e, 0 0 15px #ff477e; } to { text-shadow: 0 0 10px #fff, 0 0 20px #ff758c, 0 0 30px #ff758c; } }
+    @keyframes glowing { from { text-shadow: 0 0 5px #fff, 0 0 10px #ff477e; } to { text-shadow: 0 0 10px #fff, 0 0 20px #ff758c, 0 0 30px #ff758c; } }
     .float-anim { animation: floatBox 3s ease-in-out infinite; }
-    @keyframes floatBox { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes floatBox { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
     .sparkle { position: absolute; font-size: 20px; pointer-events: none; animation: sparkleAnim 1.5s infinite; z-index: 10; }
     @keyframes sparkleAnim { 0% { transform: scale(0) rotate(0deg); opacity: 0; } 50% { transform: scale(1.5) rotate(180deg); opacity: 1; } 100% { transform: scale(0) rotate(360deg); opacity: 0; } }
 
@@ -33,7 +43,7 @@
       z-index: 10005; display: flex; flex-direction: column; justify-content: center; align-items: center;
       transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
     }
-    .greeting-box-icon { font-size: 100px; margin-bottom: 15px; filter: drop-shadow(0 10px 25px rgba(255, 71, 126, 0.4)); animation: wiggleBox 1.5s infinite; position: relative; }
+    .greeting-box-icon { font-size: 100px; margin-bottom: 15px; filter: drop-shadow(0 15px 25px rgba(255, 71, 126, 0.5)); animation: wiggleBox 1.5s infinite; position: relative; }
     @keyframes wiggleBox { 0%, 10% { transform: rotate(-10deg) scale(1); } 20% { transform: rotate(10deg) scale(1.1); } 30% { transform: rotate(-10deg) scale(1); } 40% { transform: rotate(10deg) scale(1.1); } 50%, 100% { transform: rotate(0deg) scale(1); } }
     .greeting-text { font-size: 26px; font-weight: 700; color: #ff477e; margin-bottom: 35px; text-shadow: 0 2px 4px rgba(255,71,126,0.2); text-align: center; padding: 0 20px; }
     .open-box-btn { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); color: #ffffff; border: 3px solid #fff; padding: 16px 35px; font-size: 20px; font-weight: 700; font-family: 'Kanit', sans-serif; border-radius: 40px; cursor: pointer; box-shadow: 0 8px 30px rgba(255, 117, 140, 0.6); transition: transform 0.2s; animation: pulseGlowPink 2s infinite; position: relative; overflow: hidden; }
@@ -52,7 +62,7 @@
 
     .cute-container { width: 100%; max-width: 440px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px 16px; text-align: center; position: relative; z-index: 1; }
     .step-box { width: 100%; }
-    .card-base { background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 25px 20px; margin-bottom: 18px; box-shadow: 0 10px 35px rgba(255, 182, 193, 0.35); border: 2px solid #ffffff; width: 100%; position: relative; transition: all 0.5s ease; }
+    .card-base { background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 25px 20px; margin-bottom: 18px; box-shadow: 0 15px 40px rgba(255, 182, 193, 0.4); border: 2px solid #ffffff; width: 100%; position: relative; transition: all 0.5s ease; }
     
     /* 📜 ธีมจดหมายย้อนยุค (Nostalgia Theme) */
     .theme-past.card-base { background: #fffdf0; border-color: #fcd34d; box-shadow: 0 10px 35px rgba(217, 119, 6, 0.2); }
@@ -70,21 +80,41 @@
     .glass-liquid { height: 100%; width: 0%; background: linear-gradient(90deg, #ff758c, #ff0055); box-shadow: 0 0 20px #ff477e, inset 0 2px 5px rgba(255,255,255,0.6); border-radius: 18px; transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); position: relative; }
     .glass-liquid::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.6) 15%, transparent 20%), radial-gradient(circle, rgba(255,255,255,0.4) 15%, transparent 20%); background-size: 15px 15px, 20px 20px; background-position: 0 0, 10px 10px; animation: bubbles 2s linear infinite; border-radius: 18px; }
 
-    /* 🚨 ตู้กระจกทุบเมื่อคิดถึงฉุกเฉิน (Emergency Miss You) */
-    .emergency-wrapper { margin-bottom: 25px; background: linear-gradient(135deg, #fff1f2, #ffe4e6); padding: 20px; border-radius: 24px; border: 3px dashed #fda4af; box-shadow: inset 0 0 15px rgba(244, 63, 94, 0.1); display: flex; flex-direction: column; align-items: center; }
-    .emergency-title { font-size: 16px; font-weight: 700; color: #e11d48; margin-bottom: 12px; }
+    /* 🚨 ตู้กระจกทุบเมื่อคิดถึงฉุกเฉิน (Emergency Miss You 3D) 🚨 */
+    .emergency-wrapper { margin-bottom: 25px; background: #ffffff; padding: 25px 20px; border-radius: 28px; border: 4px solid #ffe4e6; box-shadow: 0 15px 35px rgba(225, 29, 72, 0.15); display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; }
+    .emergency-wrapper::before { content:''; position: absolute; top:0; left:0; right:0; height: 8px; background: repeating-linear-gradient(45deg, #fbbf24, #fbbf24 10px, #000 10px, #000 20px); }
     
-    .emergency-box { width: 130px; height: 130px; background: linear-gradient(135deg, #e11d48, #be185d); border-radius: 16px; padding: 12px; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(225, 29, 72, 0.4), inset 0 0 10px rgba(0,0,0,0.3); cursor: pointer; transition: transform 0.1s; position: relative; animation: pulseGlowEmergency 2s infinite; }
-    @keyframes pulseGlowEmergency { 0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(225, 29, 72, 0); } 100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); } }
-    .emergency-box:active { transform: scale(0.92); }
+    .emergency-title { font-size: 16px; font-weight: 700; color: #e11d48; margin-bottom: 25px; margin-top: 10px; }
     
-    .glass-pane { width: 100%; height: 100%; background: rgba(255,255,255,0.85); border-radius: 8px; border: 2px solid #fda4af; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 15px; font-weight: 700; color: #9f1239; box-shadow: inset 0 0 15px rgba(255,255,255,0.8); transition: all 0.2s ease-out; backdrop-filter: blur(2px); user-select: none; }
-    .emergency-warning { font-size: 13px; color: #be185d; font-weight: 600; margin-top: 15px; background: rgba(255,255,255,0.7); padding: 6px 12px; border-radius: 12px; }
+    .emergency-box-container { position: relative; display: inline-block; }
+    .siren-light { position: absolute; top: -35px; left: 50%; transform: translateX(-50%); font-size: 35px; z-index: 10; animation: sirenPulse 1s infinite alternate; filter: drop-shadow(0 0 10px rgba(255,0,0,0.8)); }
+    @keyframes sirenPulse { from { filter: drop-shadow(0 0 5px rgba(255,0,0,0.5)); transform: translateX(-50%) scale(1); } to { filter: drop-shadow(0 0 25px rgba(255,0,0,1)); transform: translateX(-50%) scale(1.1); } }
+    
+    .emergency-box { width: 140px; height: 140px; background: linear-gradient(135deg, #e11d48, #9f1239); border-radius: 16px; border: 6px solid #881337; box-shadow: inset 0 10px 20px rgba(0,0,0,0.4), 0 10px 25px rgba(225, 29, 72, 0.6); display: flex; justify-content: center; align-items: center; cursor: pointer; position: relative; overflow: hidden; transition: transform 0.1s; }
+    .emergency-box:active { transform: scale(0.95); }
+    
+    .emergency-box-text { color: white; font-weight: 800; font-size: 17px; text-align: center; line-height: 1.2; text-shadow: 1px 2px 4px rgba(0,0,0,0.6); z-index: 1; letter-spacing: 1px;}
+    
+    /* กระจกสะท้อนแสง */
+    .glass-pane { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 30%, transparent 50%, rgba(255,255,255,0.1) 70%, rgba(255,255,255,0.3) 100%); border-radius: 8px; z-index: 5; backdrop-filter: blur(1.5px); pointer-events: none; border: 1px solid rgba(255,255,255,0.4); }
+    
+    /* รอยร้าว SVG แบบสมจริง */
+    .crack-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 6; pointer-events: none; opacity: 0; transition: opacity 0.2s; filter: drop-shadow(1px 1px 0px rgba(255,255,255,0.5)); }
+    
+    .hammer-icon { position: absolute; right: -30px; bottom: 10px; font-size: 35px; animation: hammerSwing 2s infinite; pointer-events: none; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3)); }
+    @keyframes hammerSwing { 0%, 100% { transform: rotate(10deg); } 50% { transform: rotate(-30deg); } }
 
-    /* 🎬 โอเวอร์เลย์วิดีโอฉุกเฉิน (เปิดหลังทุบกระจก) */
-    #emergency-video-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); z-index: 10020; display: none; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(8px); animation: fadeIn 1s; padding: 20px; }
-    #emergency-video { width: 100%; max-width: 420px; border-radius: 20px; box-shadow: 0 10px 40px rgba(225, 29, 72, 0.5); border: 4px solid #fda4af; }
-    .close-video-btn { margin-top: 25px; background: #e11d48; color: white; border: 2px dashed #fda4af; padding: 12px 30px; border-radius: 25px; font-size: 16px; font-family: 'Kanit'; font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(225, 29, 72, 0.4); }
+    .emergency-warning { font-size: 13px; color: #be185d; font-weight: 600; margin-top: 25px; background: rgba(255,228,230,0.8); padding: 8px 15px; border-radius: 12px; border: 1px dashed #fda4af; text-align: center;}
+
+    /* 🎬 โอเวอร์เลย์วิดีโอโฮโลแกรม (Hologram Reveal) */
+    #emergency-video-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.95); z-index: 10020; display: none; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(15px); animation: fadeIn 1.5s; padding: 20px; }
+    
+    .video-glow-box { position: relative; padding: 6px; background: linear-gradient(135deg, #ff7eb3, #ff758c); border-radius: 24px; box-shadow: 0 0 40px rgba(255, 117, 140, 0.6), 0 0 80px rgba(255, 126, 179, 0.4); animation: pulseGlowBox 2s infinite alternate; width: 100%; max-width: 420px; }
+    @keyframes pulseGlowBox { from { box-shadow: 0 0 30px rgba(255, 117, 140, 0.5); } to { box-shadow: 0 0 60px rgba(255, 117, 140, 0.8), 0 0 100px rgba(255, 126, 179, 0.6); } }
+    
+    #emergency-video { width: 100%; display: block; border-radius: 18px; border: 4px solid #fff; background: #000; }
+    .close-video-btn { margin-top: 30px; background: transparent; color: #ff7eb3; border: 2px solid #ff7eb3; padding: 12px 35px; border-radius: 30px; font-size: 16px; font-family: 'Kanit'; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+    .close-video-btn:hover { background: #ff7eb3; color: #fff; box-shadow: 0 0 20px rgba(255, 126, 179, 0.5); }
 
     /* 🎋 กิมมิคเซียมซีเขย่ารักโฉมใหม่ (CSS Siam-See) */
     .shake-wrapper { margin-bottom: 25px; position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; background: #fffdf0; padding: 25px 20px 15px 20px; border-radius: 20px; border: 2px dashed #fcd34d; box-shadow: inset 0 0 15px rgba(245, 158, 11, 0.1); }
@@ -108,7 +138,6 @@
     .shake-status { font-size: 14px; font-weight: 600; color: #059669; margin-bottom: 10px; display: none; background: #d1fae5; padding: 6px 14px; border-radius: 12px; border: 1px dashed #34d399; animation: popUp 0.3s; }
     .read-fortune-btn { display: none; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 12px 20px; border-radius: 18px; font-size: 15px; font-weight: 700; font-family: 'Kanit'; cursor: pointer; box-shadow: 0 4px 10px rgba(217,119,6,0.3); animation: pulse 1.5s infinite; margin-top: 5px; }
     
-    /* 🌟 ปุ่มส่วนรวม (หน้าบ้าน) สำหรับจัดการเซียมซี */
     .shared-fortune-controls { display: flex; gap: 10px; width: 100%; margin-top: 15px; border-top: 1px dashed #fcd34d; padding-top: 15px; }
     .shared-btn { flex: 1; background: #fffbeb; border: 2px dashed #f59e0b; color: #d97706; border-radius: 14px; padding: 10px 5px; font-size: 13px; font-weight: 700; font-family: 'Kanit'; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 5px rgba(245,158,11,0.1); }
     .shared-btn:active { transform: scale(0.95); background: #fef3c7; }
@@ -129,7 +158,8 @@
     .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .choice-btn:active { transform: scale(0.95); }
     
-    .today-btn { background: linear-gradient(135deg, #fef08a, #f59e0b); color: #78350f; border-color: #fcd34d; width: 100%; margin-bottom: 20px; font-size: 17px; box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); display: flex; align-items: center; justify-content: center; gap: 8px;}
+    .today-btn { background: linear-gradient(135deg, #fef08a, #f59e0b); color: #78350f; border-color: #fcd34d; width: 100%; margin-bottom: 20px; font-size: 17px; box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); animation: pulseGlow 2s infinite; display: flex; align-items: center; justify-content: center; gap: 8px;}
+    @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
 
     .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 5px; }
     .month-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 5px; border-radius: 16px; border: 2px solid #ffe4e8; background: #fff; font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; color: #4a5568; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative;}
@@ -321,12 +351,14 @@
   <button class="open-box-btn" onclick="openPackage()">✨ แตะเพื่อเปิดกล่อง!</button>
 </div>
 
-<!-- 🚨 โอเวอร์เลย์วิดีโอฉุกเฉิน -->
+<!-- 🚨 โอเวอร์เลย์วิดีโอฉุกเฉิน (โรงหนังโฮโลแกรม) -->
 <div id="emergency-video-overlay">
-  <div style="font-size: 24px; color: #fda4af; font-weight: 700; margin-bottom: 20px; font-family: 'Kanit';" class="magic-glow">💖 Emergency Miss You 💖</div>
-  <video id="emergency-video" controls playsinline>
-    <source src="ae59483c-7771-4b6c-a736-d52859c39d23.mp4" type="video/mp4">
-  </video>
+  <div style="font-size: 24px; color: #ff7eb3; font-weight: 700; margin-bottom: 20px; font-family: 'Kanit';" class="magic-glow">💖 Emergency Miss You 💖</div>
+  <div class="video-glow-box">
+    <video id="emergency-video" controls playsinline>
+      <source src="ae59483c-7771-4b6c-a736-d52859c39d23.mp4" type="video/mp4">
+    </video>
+  </div>
   <button class="close-video-btn" onclick="closeEmergencyVideo()">ปิดวิดีโอ ❌</button>
 </div>
 
@@ -338,13 +370,26 @@
     <div id="timeGreeting" class="time-greeting"></div>
     <div class="main-title magic-glow">📦 Memory Box 2026 💖</div>
 
-    <!-- 🚨 กล่องกระจกฉุกเฉิน (ทุบเมื่อคิดถึง) -->
+    <!-- 🚨 กล่องกระจกฉุกเฉิน (ทุบเมื่อคิดถึงแบบ 3D) -->
     <div class="emergency-wrapper">
-      <div class="emergency-title">🚨 กล่องฉุกเฉิน (Emergency Miss You) 🚨</div>
-      <div class="emergency-box" onclick="smashGlass()">
-        <div id="emergency-glass" class="glass-pane">🔨<br>ทุบกระจก</div>
+      <div class="emergency-title">🚨 Emergency Miss You 🚨</div>
+      <div class="emergency-box-container">
+        <div class="siren-light">🚨</div>
+        <div class="emergency-box" id="emergency-box-element" onclick="smashGlass()">
+          <div class="emergency-box-text">MISS YOU<br><span style="font-size:12px; font-weight:500;">(ทุบกระจกฉุกเฉิน)</span></div>
+          
+          <div id="emergency-glass" class="glass-pane"></div>
+          <!-- รอยร้าว SVG สวยๆ ซ่อนอยู่ -->
+          <svg id="crack-1" class="crack-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M50 50 L10 10 M50 50 L90 20 M50 50 L40 90" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" fill="none" />
+          </svg>
+          <svg id="crack-2" class="crack-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M50 50 L20 80 M50 50 L80 80 M50 50 L0 50 M50 50 L100 60 M20 20 L30 50 L80 30" stroke="rgba(255,255,255,0.8)" stroke-width="1" fill="none" />
+          </svg>
+        </div>
+        <div class="hammer-icon">🔨</div>
       </div>
-      <div class="emergency-warning">คำเตือน: ห้ามเปิด ยกเว้นแต่จะคิดถึงมายมากๆ เท่านั้น! (ต้องทุบ 3 ครั้ง)</div>
+      <div class="emergency-warning">คำเตือน: ห้ามเปิด ยกเว้นแต่จะคิดถึงมายมากๆ เท่านั้น! (ทุบ 3 ครั้ง)</div>
     </div>
 
     <div class="memory-counter-box">
@@ -761,37 +806,46 @@
   updateTimeGreeting();
 
   // ==========================================
-  // 🚨 ระบบทุบกระจกฉุกเฉิน (Emergency Miss You)
+  // 🚨 ระบบทุบกระจกฉุกเฉิน (Emergency Miss You 3D)
   // ==========================================
   let smashCount = 0;
   
   function smashGlass() {
     smashCount++;
+    const box = document.getElementById('emergency-box-element');
     const glass = document.getElementById('emergency-glass');
     
+    // แอนิเมชันสั่นหน้าจอแบบแรงๆ
+    document.body.classList.remove('shake-screen');
+    void document.body.offsetWidth; // trigger reflow
+    document.body.classList.add('shake-screen');
+    
     if (smashCount === 1) {
-      glass.innerHTML = '💥<br>ร้าวแล้ว!';
-      glass.style.background = 'rgba(255,255,255,0.4)';
+      document.getElementById('crack-1').style.opacity = '1';
+      glass.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 50%, transparent 100%)';
     } else if (smashCount === 2) {
-      glass.innerHTML = '💥💥<br>ใกล้แตกแล้ว!';
-      glass.style.background = 'rgba(255,255,255,0.2)';
+      document.getElementById('crack-2').style.opacity = '1';
+      glass.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, transparent 50%)';
     } else if (smashCount >= 3) {
-      glass.innerHTML = '✨ แตก! ✨';
-      glass.style.background = 'transparent';
-      glass.style.border = 'none';
+      // แตกเพล้ง!
+      glass.style.display = 'none';
+      document.getElementById('crack-1').style.display = 'none';
+      document.getElementById('crack-2').style.display = 'none';
       
-      // หน่วงเวลาแป๊บนึงให้เห็นเอฟเฟกต์แตก แล้วค่อยเปิดวิดีโอ
       setTimeout(() => {
         const overlay = document.getElementById('emergency-video-overlay'); 
         const video = document.getElementById('emergency-video');
         overlay.style.display = 'flex'; 
         video.play().catch(e=>console.log(e));
         
-        // รีเซ็ตกระจกกลับเป็นเหมือนเดิม เผื่ออยากทุบใหม่
+        // รีเซ็ตกระจกกลับเป็นเหมือนเดิมเงียบๆ เผื่ออยากทุบใหม่
         smashCount = 0;
-        glass.innerHTML = '🔨<br>ทุบกระจก';
-        glass.style.background = 'rgba(255,255,255,0.85)';
-        glass.style.border = '2px solid #fda4af';
+        glass.style.display = 'block';
+        glass.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 30%, transparent 50%, rgba(255,255,255,0.1) 70%, rgba(255,255,255,0.3) 100%)';
+        document.getElementById('crack-1').style.opacity = '0';
+        document.getElementById('crack-2').style.opacity = '0';
+        document.getElementById('crack-1').style.display = 'block';
+        document.getElementById('crack-2').style.display = 'block';
       }, 500);
     }
   }
@@ -1244,40 +1298,6 @@
     document.getElementById('memory-box-step').style.display = 'block'; 
     document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' }); 
   }
-
-  // ==========================================
-  // 🎮 ระบบประสบการณ์ 3 ก.ย.
-  // ==========================================
-  let btnScale = 1; let drinkSelected = false; let timerInterval = null; let typeIndex = 0;
-  const noteText = "ถึงคนดื้อ... วันนี้ตั้งใจทำงานน๊า อย่าลืมหาอะไรอร่อยๆ กินด้วยล่ะ ดื่มน้ำเยอะๆ พักผ่อนมากๆ! 💖";
-  
-  function startExperience() {
-    const bgMusic = document.getElementById('bgMusic'); const video = document.getElementById('myVideo'); const step1 = document.getElementById('step-1-intro'); const step2 = document.getElementById('step-2-video');
-    bgMusic.currentTime = 15; bgMusic.play().catch(err => console.log(err)); step1.style.display = 'none'; step2.style.display = 'block'; video.play().catch(err => console.log(err));
-    video.onended = function() { step2.style.display = 'none'; const step3 = document.getElementById('step-3-rain-text'); step3.style.display = 'block'; setTimeout(function() { step3.style.display = 'none'; const step4 = document.getElementById('step-4-main'); step4.style.display = 'block'; revealCardsSequentially(); }, 3500); };
-  }
-  function revealCardsSequentially() { setTimeout(() => { document.getElementById('card-1').classList.add('show'); }, 600); setTimeout(() => { document.getElementById('card-2').classList.add('show'); }, 1800); setTimeout(() => { document.getElementById('card-3').classList.add('show'); startTypewriter(); }, 3000); setTimeout(() => { document.getElementById('card-4').classList.add('show'); }, 4200); }
-  function toggleAudio() { const bgMusic = document.getElementById('bgMusic'); const disc = document.getElementById('vinyl-disc'); const status = document.getElementById('play-status'); if (bgMusic.paused) { bgMusic.play(); disc.classList.add('spinning'); status.textContent = '⏸️ กำลังเล่นเพลงอยู่...'; } else { bgMusic.pause(); disc.classList.remove('spinning'); status.textContent = '▶️ แตะเพื่อเปิดเพลง'; } }
-  function startTypewriter() { const el = document.getElementById('typewriter-text'); if (typeIndex < noteText.length) { el.innerHTML += noteText.charAt(typeIndex); typeIndex++; setTimeout(startTypewriter, 50); } }
-  function dodgeBadDrink() { const badBtn = document.getElementById('bad-btn'); const card = document.getElementById('card-4'); const cardRect = card.getBoundingClientRect(); const x = Math.floor(Math.random() * (cardRect.width - 120)) - (cardRect.width / 2 - 60); const y = Math.floor(Math.random() * 80) - 40; if (btnScale > 0.35) { btnScale -= 0.15; } badBtn.style.position = 'relative'; badBtn.style.transform = `translate(${x}px, ${y}px) scale(${btnScale})`; document.getElementById('drink-result').innerText = '😜 ปุ่มนี้กดไม่ได้หรอก! เลือกอันอื่นสิคะ'; }
-  function selectDrink(drinkName) { drinkSelected = true; document.getElementById('drink-result').innerText = (drinkName === 'น้ำเปล่าเย็นๆ') ? 'เก่งมาก! ❤️' : 'ดีมาก! ✨'; checkLunchTimeAccess(); }
-  function checkLunchTimeAccess() {
-    if (!drinkSelected) return; const now = new Date(); const currentDay = now.getDate(); const currentMonth = now.getMonth(); const currentHour = now.getHours(); const countdownCard = document.getElementById('lunch-countdown-card'); const card5 = document.getElementById('card-5');
-    if (currentMonth > 8 || currentDay > 3 || (currentDay === 3 && currentHour >= 12)) { countdownCard.style.display = 'none'; if (timerInterval) clearInterval(timerInterval); card5.style.display = 'block'; setTimeout(() => { card5.classList.add('show'); }, 400); } 
-    else { countdownCard.style.display = 'block'; setTimeout(() => { countdownCard.classList.add('show'); }, 400); updateCountdown(); if (!timerInterval) { timerInterval = setInterval(updateCountdown, 1000); } }
-  }
-  function updateCountdown() { const now = new Date(); const target = new Date(); target.setDate(3); target.setHours(12, 0, 0, 0); const diff = target - now; if (diff <= 0) { checkLunchTimeAccess(); return; } const hours = Math.floor((diff / (1000 * 60 * 60)) % 24); const minutes = Math.floor((diff / (1000 * 60)) % 60); const seconds = Math.floor((diff / 1000) % 60); document.getElementById('countdown-timer').innerText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`; }
-  function answerLunch(eaten) { document.getElementById('lunch-result').innerText = eaten ? 'ดีแล้วค่ะ อิ่มแล้วก็มีแรงทำงานต่อเนอะ ✨' : 'อย่าลืมรีบไปหาอะไรทานด้วยน้า เดี๋ยวปวดท้องนะ! 🥺'; const card6 = document.getElementById('card-6'); card6.style.display = 'block'; setTimeout(() => { card6.classList.add('show'); }, 600); }
-  function answerWork(working) { const timePicker = document.getElementById('time-picker-wrapper'); const resultEl = document.getElementById('work-result'); if (working) { timePicker.style.display = 'block'; resultEl.innerText = ''; } else { timePicker.style.display = 'none'; resultEl.innerText = 'รีบกลับบ้านพักผ่อนหาอะไรกินด้วยนะ 🌸'; showLieDetectorSection(); } }
-  function updateTimeText(val) { document.getElementById('time-display').innerText = val + ':00 น.'; }
-  function confirmTime() { document.getElementById('work-result').innerText = 'โอเค ดูแลตัวเองดีๆนะ 💖'; showLieDetectorSection(); }
-  function showLieDetectorSection() { const card7 = document.getElementById('card-7'); card7.style.display = 'block'; setTimeout(() => { card7.classList.add('show'); }, 600); }
-  
-  let scanTimer = null; let heartbeatInterval = null; let hasCompletedScan = false;
-  function startScan(e) { if (e) e.preventDefault(); if (hasCompletedScan) return; document.getElementById('laser').classList.add('scanning'); document.getElementById('lie-result').innerText = ''; const statusEl = document.getElementById('heartbeat-status'); const beats = ['💓 75 BPM', '💓 88 BPM', '💓 102 BPM', '💓 120 BPM 🔥']; let beatIdx = 0; heartbeatInterval = setInterval(() => { statusEl.innerText = beats[beatIdx % beats.length]; beatIdx++; }, 400); scanTimer = setTimeout(() => { finishScan(); }, 2500); }
-  function stopScan() { if (hasCompletedScan) return; document.getElementById('laser').classList.remove('scanning'); clearTimeout(scanTimer); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerText = ''; document.getElementById('lie-result').innerHTML = '<span style="color: #e53e3e;">⚠️ สแกนยังไม่เสร็จ! แตะค้างไว้จนกว่าจะเสร็จน้า</span>'; }
-  function finishScan() { hasCompletedScan = true; document.getElementById('laser').classList.remove('scanning'); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerHTML = '💓 135 BPM (หัวใจเต้นแรงมาก!)'; document.getElementById('lie-result').innerHTML = `🚨 <strong>RESULT: DETECTED!</strong><br><span style="color: #ff477e;">"ตรวจพบความคิดถึง 100% (ห้ามปฏิเสธเด็ดขาด!)" 🥰✨</span>`; const finalBtn = document.getElementById('final-btn-wrapper'); finalBtn.style.display = 'block'; setTimeout(() => { finalBtn.classList.add('show'); }, 600); }
-  function goToNextSection() { document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'block'; }
 
   function createBackgroundHearts() { const container = document.getElementById('heart-bg-container'); const hearts = ['💖', '✨', '🌟', '💕']; for(let i=0; i<12; i++) { const heart = document.createElement('div'); heart.classList.add('floating-heart-bg'); heart.innerText = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 4 + 4) + 's'; container.appendChild(heart); } }
 </script>
