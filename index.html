@@ -50,13 +50,45 @@
     .floating-heart-bg { position: fixed; font-size: 22px; color: rgba(255, 117, 140, 0.35); pointer-events: none; z-index: 0; animation: floatUp 6s linear infinite; }
     @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } }
 
-    /* 🎬 Memory Cinema */
-    .cinema-btn { background: linear-gradient(135deg, #fdf4ff, #fae8ff); color: #d946ef; border: 2px dashed #f0abfc; padding: 15px; font-size: 16px; font-weight: 700; font-family: 'Kanit'; border-radius: 16px; width: 100%; cursor: pointer; margin-bottom: 25px; box-shadow: 0 6px 20px rgba(240, 171, 252, 0.4); display: flex; justify-content: center; align-items: center; gap: 10px; animation: pulseGlowCinema 2s infinite; }
-    @keyframes pulseGlowCinema { 0% { box-shadow: 0 0 0 0 rgba(240, 171, 252, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(240, 171, 252, 0); } 100% { box-shadow: 0 0 0 0 rgba(240, 171, 252, 0); } }
-    #cinema-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 10010; display: none; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(8px); animation: fadeIn 1s; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    #cinema-video { width: 90%; max-width: 400px; border-radius: 20px; box-shadow: 0 10px 40px rgba(240, 171, 252, 0.5); border: 4px solid #f0abfc; }
-    .close-cinema-btn { margin-top: 25px; background: #ef4444; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 16px; font-family: 'Kanit'; font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); }
+    /* 📺 ปุ่มทีวีเรโทร (Floating TV Button) */
+    .floating-tv-btn {
+      position: fixed; bottom: 120px; right: 15px; 
+      background: linear-gradient(135deg, #fcd34d, #f59e0b);
+      border: 3px solid #fff; border-radius: 50%;
+      width: 60px; height: 60px; font-size: 30px;
+      display: none; justify-content: center; align-items: center;
+      cursor: pointer; box-shadow: 0 6px 15px rgba(245, 158, 11, 0.4);
+      z-index: 9999; animation: floatTV 3s ease-in-out infinite, pulseGlowTV 2s infinite;
+    }
+    .floating-tv-btn:active { transform: scale(0.9) rotate(-10deg); }
+    @keyframes floatTV { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-10px) rotate(5deg); } }
+    @keyframes pulseGlowTV { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
+
+    /* 📺 กรอบทีวีวินเทจ (TV Overlay) */
+    #tv-overlay {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.85); z-index: 10020;
+      display: none; flex-direction: column; justify-content: center; align-items: center;
+      backdrop-filter: blur(8px); animation: fadeIn 0.5s; padding: 20px;
+    }
+    .tv-frame {
+      background: #d97706; padding: 20px 20px 35px 20px;
+      border-radius: 24px; border: 5px solid #92400e;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6), inset 0 0 15px rgba(255,255,255,0.2);
+      position: relative; width: 100%; max-width: 400px;
+      display: flex; flex-direction: column;
+    }
+    .tv-screen {
+      background: #000; border-radius: 16px; overflow: hidden;
+      border: 4px solid #451a03; position: relative;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    }
+    .tv-video { width: 100%; display: block; border-radius: 12px; }
+    .tv-knobs { position: absolute; bottom: 10px; right: 20px; display: flex; gap: 12px; }
+    .knob { width: 18px; height: 18px; background: #451a03; border-radius: 50%; border: 2px solid #78350f; box-shadow: inset 0 2px 4px rgba(255,255,255,0.2); }
+    .tv-antenna { position: absolute; top: -35px; left: 50%; transform: translateX(-50%); font-size: 28px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); animation: floatBox 2s infinite; }
+    .close-tv-btn { margin-top: 25px; background: #ef4444; color: white; border: 3px solid #b91c1c; padding: 12px 30px; border-radius: 25px; font-size: 16px; font-family: 'Kanit'; font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); transition: transform 0.2s; }
+    .close-tv-btn:active { transform: scale(0.95); }
 
     .cute-container { width: 100%; max-width: 440px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px 16px; text-align: center; position: relative; z-index: 1; }
     .step-box { width: 100%; }
@@ -146,7 +178,9 @@
     .note-dot { position: absolute; bottom: 3px; right: 3px; background: #fcd34d; border-radius: 50%; box-shadow: 0 2px 5px rgba(245,158,11,0.6); z-index: 5; width: 12px; height: 12px; animation: pulse 2s infinite; pointer-events: none; }
     .note-dot.has-number { width: 18px; height: 18px; font-size: 11px; font-weight: bold; color: #92400e; display: flex; justify-content: center; align-items: center; border: 2px solid white; bottom: -3px; right: -3px; animation: bounce 1.5s infinite; }
     
+    /* ไอคอนมงกุฎสำหรับวันพิเศษ (3 ก.ย.) */
     .crown-icon { position: absolute; top: -10px; font-size: 16px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); z-index: 6; animation: floatBox 2s infinite; }
+
     .locked-legend-box { display: none; margin-top: 20px; padding: 15px; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 16px; font-size: 14px; color: #b45309; font-weight: 600; text-align: center; box-shadow: 0 4px 10px rgba(245,158,11,0.1); animation: popUp 0.5s; }
 
     /* 📝 กระดานโน้ตเฉพาะวัน */
@@ -227,7 +261,7 @@
     .summary-highlight { font-size: 26px; color: #ff477e; font-weight: bold; }
     .summary-unlock-text { font-size: 15px; color: #059669; font-weight: 700; background: #d1fae5; padding: 12px; border-radius: 12px; border: 2px dashed #10b981; margin-bottom: 20px; animation: pulse 2s infinite; line-height: 1.5; }
 
-    /* 💌 Popup อ่านโน้ต (รูปภาพ & เสียงกลับมาแล้ว!) */
+    /* 💌 Popup อ่านโน้ต */
     .read-note-content { background: #fffdf0; border: 3px solid #fcd34d; border-radius: 24px; padding: 40px 24px 24px 24px; text-align: left; max-width: 380px; width: 100%; box-shadow: 0 20px 50px rgba(217, 119, 6, 0.4); animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; max-height: 90vh; overflow-y: auto; }
     .read-note-pin { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 45px; filter: drop-shadow(0 5px 8px rgba(0,0,0,0.3)); z-index: 5; }
     .read-note-fromto { font-weight: 700; color: #b45309; font-size: 18px; margin-bottom: 15px; border-bottom: 2px dashed #fcd34d; padding-bottom: 12px; text-align: center; }
@@ -313,14 +347,26 @@
   <button class="open-box-btn" onclick="openPackage()">✨ แตะเพื่อเปิดกล่อง!</button>
 </div>
 
-<!-- 🎬 โรงหนังความทรงจำ (Memory Cinema) -->
-<div id="cinema-overlay">
-  <div style="font-size: 24px; color: #f472b6; font-weight: 700; margin-bottom: 20px; font-family: 'Kanit';" class="magic-glow">🍿 Memory Cinema 🎬</div>
-  <video id="cinema-video" controls playsinline>
-    <source src="https://ozonemassage.com/wp-content/uploads/2026/09/download-3.mp4" type="video/mp4">
-  </video>
-  <button class="close-cinema-btn" onclick="closeCinema()">ปิดโรงหนัง ❌</button>
+<!-- 📺 ทีวีเรโทรป๊อปอัป (Memory Cinema โฉมใหม่) -->
+<div id="tv-overlay">
+  <div style="color: #fcd34d; font-family: 'Kanit'; font-weight: 700; font-size: 22px; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">✨ Memory Channel ✨</div>
+  <div class="tv-frame">
+    <div class="tv-antenna">📡</div>
+    <div class="tv-screen">
+      <video id="retro-tv-video" class="tv-video" controls playsinline>
+        <source src="ae59483c-7771-4b6c-a736-d52859c39d23.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="tv-knobs">
+      <div class="knob"></div>
+      <div class="knob"></div>
+    </div>
+  </div>
+  <button class="close-tv-btn" onclick="closeRetroTV()">ปิดทีวี ❌</button>
 </div>
+
+<!-- 📺 ปุ่มกดเปิดทีวีที่หน้าจอหลัก -->
+<div id="floating-tv-btn" class="floating-tv-btn" onclick="openRetroTV()">📺</div>
 
 <!-- 📦 Main Application -->
 <div id="main-app-container" class="cute-container" style="display: none;">
@@ -329,10 +375,6 @@
     
     <div id="timeGreeting" class="time-greeting"></div>
     <div class="main-title magic-glow">📦 Memory Box 2026 💖</div>
-    
-    <button class="cinema-btn" onclick="openCinema()">
-      <span style="font-size: 22px;">🎫</span> แวะดูวิดีโอความทรงจำของเราไหม? 🎬
-    </button>
 
     <div class="memory-counter-box">
       <div class="counter-text">หลอดแก้วเก็บความทรงจำ 📝<br>สะสมโน้ตไปแล้ว <span id="totalNotesCount" style="font-size: 20px; color: #ff477e; text-shadow: 0 0 5px #ffccd5;">0</span> แผ่น ✨</div>
@@ -346,6 +388,7 @@
       <div class="shake-header">🎋 เซียมซีคนดื้อประจำวัน</div>
       <div class="shake-instruction">📱 จับมือถือให้แน่น แล้วลอง "เขย่า" ดูสิ!<br><span style="font-size:10px; color:#92400e;">(หรือใช้นิ้วจิ้มรัวๆ ที่กระบอกก็ได้ เขย่าเล่นกี่รอบก็ได้!)</span></div>
       
+      <!-- กระบอกเซียมซีแบบ CSS สวยๆ -->
       <div class="siam-see-container" id="shake-container" onclick="manualShake()">
         <div class="css-stick" id="siam-see-stick">
           <span class="css-stick-text">เบอร์<br><span id="shake-stick-number" style="font-size: 26px;">?</span></span>
@@ -964,16 +1007,17 @@
     setTimeout(() => {
       greeting.style.display = 'none';
       document.getElementById('main-app-container').style.display = 'flex'; 
+      document.getElementById('floating-tv-btn').style.display = 'flex'; // โชว์ปุ่มทีวีจิ๋ว
       createBackgroundHearts(); 
     }, 800);
   }
 
-  // 🎬 เปิด/ปิด Memory Cinema
-  function openCinema() {
-    const overlay = document.getElementById('cinema-overlay'); const video = document.getElementById('cinema-video');
+  // 🎬 เปิด/ปิด ทีวีวินเทจ (Retro TV)
+  function openRetroTV() {
+    const overlay = document.getElementById('tv-overlay'); const video = document.getElementById('retro-tv-video');
     overlay.style.display = 'flex'; video.play().catch(e=>console.log(e));
   }
-  function closeCinema() { document.getElementById('cinema-overlay').style.display = 'none'; document.getElementById('cinema-video').pause(); }
+  function closeRetroTV() { document.getElementById('tv-overlay').style.display = 'none'; document.getElementById('retro-tv-video').pause(); }
 
   // 📅 ระบบจัดการเดือน
   function requestMonthAccess(mIndex) {
@@ -1007,6 +1051,7 @@
     document.getElementById('memory-box-step').style.display = 'none'; 
     document.getElementById('dynamic-calendar-sec').style.display = 'block';
     document.getElementById('home-btn').style.display = 'flex'; 
+    document.getElementById('floating-tv-btn').style.display = 'none'; // ซ่อนปุ่มทีวีจิ๋วตอนเปิดปฏิทิน
     
     document.getElementById('dynamic-cal-header').innerText = `${monthNames[currentViewingMonthIndex]} 2026 ${isPast ? '📜' : '✨'}`;
     document.getElementById('cal-instruction').innerText = isPast ? "แตะที่ตัวเลขวันที่ เพื่อเปิดอ่านไดอารี่ในวันนั้น 📖" : "แตะที่ตัวเลขวันที่ เพื่อเปิดดูความทรงจำ หรือแปะกระดาษโน้ต 💌";
@@ -1071,6 +1116,7 @@
     currentViewingDay = day;
     document.getElementById('dynamic-calendar-sec').style.display = 'none'; 
     document.getElementById('memory-box-step').style.display = 'none'; 
+    document.getElementById('floating-tv-btn').style.display = 'none'; // ซ่อนปุ่มทีวีจิ๋วตอนเปิดปฏิทิน
     const dailySec = document.getElementById('daily-notes-sec'); dailySec.style.display = 'block'; 
     document.getElementById('daily-note-title').innerText = `📌 กระดานโน้ตวันที่ ${day} ${monthNames[currentViewingMonthIndex]}`;
     document.getElementById('home-btn').style.display = 'flex';
@@ -1201,6 +1247,7 @@
     document.getElementById('step-1-intro').style.display = 'block'; document.getElementById('step-2-video').style.display = 'none'; document.getElementById('step-3-rain-text').style.display = 'none'; document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'none'; document.getElementById('typewriter-text').innerHTML = ''; typeIndex = 0; 
     
     document.getElementById('memory-box-step').style.display = 'block'; 
+    document.getElementById('floating-tv-btn').style.display = 'flex'; // โชว์ปุ่มทีวีจิ๋วกลับมาตอนอยู่หน้าแรก
     document.getElementById('memory-box-step').scrollIntoView({ behavior: 'smooth' }); 
   }
 
