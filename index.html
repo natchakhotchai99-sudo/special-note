@@ -41,7 +41,7 @@
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background: linear-gradient(135deg, #ffccd5 0%, #ffe4e8 100%);
       z-index: 10005; display: flex; flex-direction: column; justify-content: center; align-items: center;
-      transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
     .greeting-box-icon { font-size: 100px; margin-bottom: 15px; filter: drop-shadow(0 15px 25px rgba(255, 71, 126, 0.5)); animation: wiggleBox 1.5s infinite; position: relative; }
     @keyframes wiggleBox { 0%, 10% { transform: rotate(-10deg) scale(1); } 20% { transform: rotate(10deg) scale(1.1); } 30% { transform: rotate(-10deg) scale(1); } 40% { transform: rotate(10deg) scale(1.1); } 50%, 100% { transform: rotate(0deg) scale(1); } }
@@ -50,7 +50,7 @@
     .open-box-btn:active { transform: scale(0.95); }
     @keyframes pulseGlowPink { 0% { box-shadow: 0 0 0 0 rgba(255, 117, 140, 0.6); } 70% { box-shadow: 0 0 0 20px rgba(255, 117, 140, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 117, 140, 0); } }
 
-    /* 🏠 ปุ่มต่างๆ */
+    /* 🏠 ปุ่ม Home */
     .home-btn { position: fixed; top: 15px; left: 15px; background: rgba(255, 255, 255, 0.95); border: 2px solid #ff477e; border-radius: 50%; width: 45px; height: 45px; font-size: 20px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 71, 126, 0.3); z-index: 10000; display: none; justify-content: center; align-items: center; transition: transform 0.2s ease; }
     .home-btn:hover, .home-btn:active { transform: scale(0.9) rotate(-10deg); }
     
@@ -60,11 +60,12 @@
     .floating-heart-bg { position: fixed; font-size: 22px; color: rgba(255, 117, 140, 0.35); pointer-events: none; z-index: 0; animation: floatUp 6s linear infinite; }
     @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } }
 
+    /* โครงสร้างแอป */
     .cute-container { width: 100%; max-width: 440px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px 16px; text-align: center; position: relative; z-index: 1; }
     .step-box { width: 100%; }
     .card-base { background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 25px 20px; margin-bottom: 18px; box-shadow: 0 15px 40px rgba(255, 182, 193, 0.4); border: 2px solid #ffffff; width: 100%; position: relative; transition: all 0.5s ease; }
     
-    /* 📜 ธีมจดหมายย้อนยุค (Nostalgia Theme) */
+    /* 📜 ธีมจดหมายย้อนยุค */
     .theme-past.card-base { background: #fffdf0; border-color: #fcd34d; box-shadow: 0 10px 35px rgba(217, 119, 6, 0.2); }
     .theme-past .calendar-header { color: #b45309; }
     .theme-past .day:hover { background: #fef3c7; border-color: #f59e0b; }
@@ -73,14 +74,14 @@
     .time-greeting { font-size: 13px; font-weight: 700; color: #d97706; background: #fef3c7; padding: 6px 16px; border-radius: 20px; display: inline-block; margin-bottom: 12px; border: 1px dashed #f59e0b; animation: bounce 2s infinite; }
     .main-title { font-size: 26px; font-weight: 700; color: #ff477e; margin-bottom: 15px; display: inline-block; }
 
-    /* 🧪 หลอดแก้วเรืองแสงสะสมโน้ต */
+    /* 🧪 หลอดแก้วเรืองแสง */
     .memory-counter-box { width: 100%; margin-bottom: 25px; padding: 0 10px; }
     .counter-text { font-size: 15px; color: #4a5568; font-weight: 700; margin-bottom: 12px; }
     .glass-tube { width: 100%; height: 28px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 255, 255, 0.9); border-radius: 20px; box-shadow: inset 0 3px 6px rgba(0,0,0,0.1), 0 4px 15px rgba(255,182,193,0.3); position: relative; overflow: hidden; backdrop-filter: blur(2px); }
     .glass-liquid { height: 100%; width: 0%; background: linear-gradient(90deg, #ff758c, #ff0055); box-shadow: 0 0 20px #ff477e, inset 0 2px 5px rgba(255,255,255,0.6); border-radius: 18px; transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); position: relative; }
     .glass-liquid::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.6) 15%, transparent 20%), radial-gradient(circle, rgba(255,255,255,0.4) 15%, transparent 20%); background-size: 15px 15px, 20px 20px; background-position: 0 0, 10px 10px; animation: bubbles 2s linear infinite; border-radius: 18px; }
 
-    /* 🚨 ตู้กระจกทุบเมื่อคิดถึงฉุกเฉิน (Emergency Miss You 3D) */
+    /* 🚨 ตู้กระจกทุบเมื่อคิดถึง (Emergency Miss You 3D) */
     .emergency-wrapper { margin-bottom: 25px; background: #ffffff; padding: 25px 20px; border-radius: 28px; border: 4px solid #ffe4e6; box-shadow: 0 15px 35px rgba(225, 29, 72, 0.15); display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; }
     .emergency-wrapper::before { content:''; position: absolute; top:0; left:0; right:0; height: 8px; background: repeating-linear-gradient(45deg, #fbbf24, #fbbf24 10px, #000 10px, #000 20px); }
     .emergency-title { font-size: 16px; font-weight: 700; color: #e11d48; margin-bottom: 25px; margin-top: 10px; }
@@ -97,7 +98,7 @@
     .emergency-warning { font-size: 13px; color: #be185d; font-weight: 600; margin-top: 25px; background: rgba(255,228,230,0.8); padding: 8px 15px; border-radius: 12px; border: 1px dashed #fda4af; text-align: center;}
 
     /* 🎬 โอเวอร์เลย์วิดีโอ (ล็อกหน้าจอ 100%) */
-    #emergency-video-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.98); z-index: 10020; display: none; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(20px); animation: fadeIn 0.8s; padding: 20px; }
+    #emergency-video-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.98); z-index: 10020; display: none; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(20px); animation: fadeIn 0.8s; padding: 20px; overflow: hidden; }
     .video-glow-box { position: relative; padding: 6px; background: linear-gradient(135deg, #ff7eb3, #ff758c); border-radius: 24px; box-shadow: 0 0 40px rgba(255, 117, 140, 0.6), 0 0 80px rgba(255, 126, 179, 0.4); animation: pulseGlowBox 2s infinite alternate; width: 100%; max-width: 420px; }
     @keyframes pulseGlowBox { from { box-shadow: 0 0 30px rgba(255, 117, 140, 0.5); } to { box-shadow: 0 0 60px rgba(255, 117, 140, 0.8), 0 0 100px rgba(255, 126, 179, 0.6); } }
     #emergency-video { width: 100%; display: block; border-radius: 18px; border: 4px solid #fff; background: #000; }
@@ -112,7 +113,6 @@
     .claw-machine-box { width: 220px; height: 200px; background: linear-gradient(to bottom, #bae6fd 0%, #e0f2fe 100%); border: 6px solid #fbbf24; border-radius: 16px 16px 4px 4px; position: relative; overflow: hidden; box-shadow: inset 0 10px 20px rgba(0,0,0,0.1), 0 8px 15px rgba(0,0,0,0.1); margin-bottom: 15px; display: flex; flex-direction: column; }
     .claw-roof { position: absolute; top: 0; left: 0; width: 100%; height: 12px; background: #f59e0b; z-index: 15; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
     
-    /* ขาตู้คีบ */
     .claw-arm-container { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; z-index: 10; transition: left 0.5s ease-out; }
     .claw-moving { animation: clawSwing 2.5s ease-in-out infinite alternate; }
     @keyframes clawSwing { 0% { left: 20%; } 100% { left: 80%; } }
@@ -121,10 +121,8 @@
     .claw-hand { font-size: 40px; line-height: 0.8; margin-top: -2px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3)); position: relative; z-index: 12;}
     .grabbed-capsule { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 25px; display: none; z-index: 11; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));}
     
-    /* กองแคปซูล */
     .capsule-pile { position: absolute; bottom: -10px; left: 0; width: 100%; text-align: center; font-size: 38px; line-height: 0.6; z-index: 5; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3)); user-select: none; letter-spacing: -8px;}
     
-    /* ปุ่มกดเล่นตู้คีบ */
     .claw-btn { background: linear-gradient(135deg, #ec4899, #be185d); color: white; border: 3px solid #fbcfe8; padding: 12px 35px; border-radius: 25px; font-size: 18px; font-weight: 700; font-family: 'Kanit'; cursor: pointer; box-shadow: 0 6px 15px rgba(236, 72, 153, 0.4); transition: transform 0.2s; animation: pulseGlowPink 2s infinite; margin-bottom: 5px; }
     .claw-btn:active { transform: scale(0.92); box-shadow: 0 2px 5px rgba(236, 72, 153, 0.4); }
     .claw-btn:disabled { background: #94a3b8; border-color: #cbd5e1; box-shadow: none; cursor: not-allowed; animation: none; transform: none; }
@@ -136,65 +134,45 @@
     .shared-btn { flex: 1; background: #fffbeb; border: 2px dashed #f59e0b; color: #d97706; border-radius: 14px; padding: 10px 5px; font-size: 13px; font-weight: 700; font-family: 'Kanit'; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 5px rgba(245,158,11,0.1); }
     .shared-btn:active { transform: scale(0.95); background: #fef3c7; }
 
-    /* ป๊อปอัปผลลัพธ์ตู้คีบ */
-    .fortune-modal { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 4px solid #f59e0b; padding: 35px 25px; }
-    .fortune-number-badge { font-size: 20px; font-weight: bold; color: white; background: #e11d48; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 10px; box-shadow: 0 4px 8px rgba(225,29,72,0.3); }
-    .fortune-title { font-size: 22px; font-weight: 700; color: #d97706; margin-bottom: 15px; }
-    .fortune-message { font-size: 16px; color: #4a5568; font-weight: 600; line-height: 1.5; background: white; padding: 20px; border-radius: 16px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); margin-bottom: 20px; border: 2px dashed #fcd34d; }
-    .fortune-coupon { color: #e11d48; font-size: 18px; font-weight: 700; animation: pulse 1.5s infinite; }
-
-    /* ป๊อปอัปจัดการตู้คีบ (เพิ่ม/ดู) */
-    .admin-modal-content { background: white; border-radius: 24px; padding: 25px; width: 100%; max-width: 360px; text-align: left; position: relative; max-height: 85vh; overflow-y: auto; }
-    .admin-title { font-size: 18px; font-weight: 700; color: #d97706; margin-bottom: 10px; border-bottom: 2px dashed #fcd34d; padding-bottom: 10px; text-align: center; }
-    .fortune-list-item { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 12px; margin-bottom: 10px; font-size: 14px; position: relative;}
-    .fortune-list-num { font-weight: bold; color: #e11d48; margin-bottom: 4px; font-size: 15px;}
-
+    /* ปุ่มเปิดใช้งานต่างๆ */
     .choice-btn { padding: 12px 16px; border-radius: 14px; border: 2px solid #ffe4e8; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .choice-btn:active { transform: scale(0.95); }
-    
     .today-btn { background: linear-gradient(135deg, #fef08a, #f59e0b); color: #78350f; border-color: #fcd34d; width: 100%; margin-bottom: 20px; font-size: 17px; box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); animation: pulseGlow 2s infinite; display: flex; align-items: center; justify-content: center; gap: 8px;}
     @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
 
+    /* 🗓️ ปฏิทิน */
     .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 5px; }
-    .month-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 5px; border-radius: 16px; border: 2px solid #ffe4e8; background: #fff; font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; color: #4a5568; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative;}
+    .month-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 5px; border-radius: 16px; border: 2px solid #ffe4e8; background: #fff; font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; color: #4a5568; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative;}
     .month-btn:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3); border-color: #ffb6c1; color: #ff477e; }
-    
     .active-month { background: linear-gradient(135deg, #ff477e, #ff758c); color: white; border-color: #ff477e; box-shadow: 0 6px 20px rgba(255, 71, 126, 0.5); }
     .active-month:hover { color: white; }
     .past-month { background: #fffdf0; border-color: #fcd34d; color: #b45309; box-shadow: inset 0 0 10px rgba(245,158,11,0.1); }
     .month-icon { font-size: 18px; margin-bottom: 4px; }
-
-    /* 🗓️ ปฏิทินแบบไดนามิก */
+    
     .calendar-header { font-size: 20px; font-weight: 700; color: #ff477e; margin-bottom: 15px; text-transform: uppercase; transition: color 0.3s;}
     .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; font-size: 14px; }
     .day-name { font-weight: 600; color: #a0aec0; padding-bottom: 5px; border-bottom: 1px dashed #e2e8f0; margin-bottom: 6px; }
     .day { padding: 8px 0; border-radius: 12px; color: #4a5568; font-weight: 600; cursor: pointer; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 50px; background: #f8fafc; border: 2px solid #f1f5f9; transition: all 0.2s; }
     .day:hover { background: #fff0f3; border-color: #ffccd5; transform: scale(1.08); z-index: 10; box-shadow: 0 6px 15px rgba(255, 182, 193, 0.4); }
     .special-day { background: linear-gradient(135deg, #ff477e, #ff758c) !important; color: white !important; font-weight: bold; border-radius: 50%; box-shadow: 0 6px 15px rgba(255, 71, 126, 0.5); animation: pulse 1.5s infinite; border: none; }
-    
     .has-locked-note-day { background: linear-gradient(135deg, #fef3c7, #fde68a) !important; border: 2px solid #f59e0b !important; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3) !important; color: #92400e !important; }
 
     .note-dot { position: absolute; bottom: 3px; right: 3px; background: #fcd34d; border-radius: 50%; box-shadow: 0 2px 5px rgba(245,158,11,0.6); z-index: 5; width: 12px; height: 12px; animation: pulse 2s infinite; pointer-events: none; }
     .note-dot.has-number { width: 18px; height: 18px; font-size: 11px; font-weight: bold; color: #92400e; display: flex; justify-content: center; align-items: center; border: 2px solid white; bottom: -3px; right: -3px; animation: bounce 1.5s infinite; }
-    
     .crown-icon { position: absolute; top: -10px; font-size: 16px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); z-index: 6; animation: floatBox 2s infinite; }
     .locked-legend-box { display: none; margin-top: 20px; padding: 15px; background: #fffbeb; border: 2px dashed #f59e0b; border-radius: 16px; font-size: 14px; color: #b45309; font-weight: 600; text-align: center; box-shadow: 0 4px 10px rgba(245,158,11,0.1); animation: popUp 0.5s; }
 
     /* 📝 กระดานโน้ตเฉพาะวัน */
     .shared-note-box { background: #fffdf0; border: 2px dashed #fcd34d; border-radius: 20px; padding: 18px; text-align: left; margin-bottom: 15px; position: relative; box-shadow: inset 0 0 15px rgba(245,158,11,0.1); transition: background 0.3s; }
     .shared-note-title { font-size: 17px; font-weight: 700; color: #d97706; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; border-bottom: 1px dashed #fcd34d; padding-bottom: 12px; }
-    
     .past-note-message { display: none; text-align: center; padding: 22px; background: #fff0f3; border-radius: 18px; margin-bottom: 15px; border: 2px dashed #ffb6c1; color: #e11d48; font-weight: 600; box-shadow: inset 0 0 12px rgba(255,182,193,0.3); animation: popUp 0.4s; }
-    
     .note-meta-inputs { display: flex; justify-content: center; margin-bottom: 15px; width: 100%; }
     .input-col { flex: 1; max-width: 240px; display: flex; flex-direction: column; text-align: center; }
     .input-label { font-size: 14px; color: #b45309; font-weight: 700; margin-bottom: 8px; }
     .note-input-small { width: 100%; border: 2px solid #fcd34d; border-radius: 12px; padding: 12px; font-family: 'Kanit', sans-serif; font-size: 16px; outline: none; background: #ffffff; color: #4a5568; cursor: pointer; font-weight: 600; text-align: center; transition: border 0.3s, box-shadow 0.3s; }
     .note-input-small:focus { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.2); }
-    
     .note-input { width: 100%; height: 90px; border: 2px solid #fef08a; border-radius: 14px; padding: 15px; font-family: 'Kanit', sans-serif; font-size: 15px; resize: none; background: #ffffff; outline: none; transition: border 0.3s, box-shadow 0.3s; }
     .note-input:focus { border-color: #f59e0b; box-shadow: 0 0 0 4px rgba(245,158,11,0.15); }
-    
     .media-buttons { display: flex; gap: 10px; margin-top: 12px; }
     .record-btn, .image-upload-btn { flex: 1; border: 2px solid; padding: 12px; border-radius: 14px; font-family: 'Kanit'; font-weight: 600; cursor: pointer; transition: 0.3s; text-align: center; font-size: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     .record-btn { background: #fef08a; border-color: #fcd34d; color: #92400e; }
@@ -202,10 +180,8 @@
     .record-btn.recording { background: #fca5a5; border-color: #ef4444; color: white; animation: pulse 1s infinite; }
     .image-upload-btn { background: #fce7f3; border-color: #fbcfe8; color: #be185d; }
     .image-upload-btn:hover { background: #fbcfe8; transform: translateY(-2px); }
-    
     .media-preview-box { display: none; background: #fffbeb; border: 1px dashed #f59e0b; padding: 10px; border-radius: 12px; margin-top: 10px; text-align: center; }
     .media-preview-box img { max-width: 100%; max-height: 150px; border-radius: 8px; object-fit: contain; margin-bottom: 5px; border: 1px solid #fcd34d; }
-
     .lock-toggle-box { background: #ffffff; border: 2px dashed #fcd34d; border-radius: 14px; padding: 18px; margin: 15px 0; font-size: 15px; color: #b45309; transition: all 0.3s; }
     .lock-inputs { display: flex; flex-direction: column; align-items: center; margin-top: 15px; }
     .pin-display { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
@@ -216,7 +192,6 @@
     .pin-keypad button:active { transform: scale(0.9); background: #ffccd5; box-shadow: none; }
     .hint-input-wrapper { width: 100%; margin-top: 10px; }
     .hint-input-wrapper input { width: 100%; border: 2px dashed #f59e0b; border-radius: 12px; padding: 14px; font-family: 'Kanit', sans-serif; font-size: 15px; outline: none; background: #fffbeb; transition: background 0.3s; text-align: center; }
-
     .save-note-btn { margin-top: 15px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 15px 20px; border-radius: 16px; font-family: 'Kanit', sans-serif; font-size: 17px; font-weight: 700; cursor: pointer; width: 100%; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 15px rgba(217, 119, 6, 0.4); }
     .save-note-btn:active { transform: translateY(2px); box-shadow: 0 2px 8px rgba(217, 119, 6, 0.4); }
 
@@ -225,7 +200,6 @@
     .mini-note::before { content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%) rotate(-3deg); width: 45px; height: 16px; background: rgba(255,255,255,0.5); box-shadow: 0 2px 5px rgba(0,0,0,0.08); z-index: 3; border-radius: 3px; }
     .mini-note:hover { transform: scale(1.08) rotate(-3deg); box-shadow: 6px 12px 20px rgba(0,0,0,0.18); z-index: 10; }
     @keyframes stickNoteAnim { 0% { transform: translateY(-50px) scale(1.2) rotate(10deg); opacity: 0; } 100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; } }
-    
     .mini-note.note-may { background: linear-gradient(135deg, #e0f2fe, #bae6fd); }
     .mini-note.note-may .mini-from-text { color: #075985; }
     .mini-note.note-k { background: linear-gradient(135deg, #fef08a, #fde047); }
@@ -235,7 +209,6 @@
     .mini-note.unlocked-past-note .mini-from-text { color: #b45309 !important; font-size: 16px;}
     .mini-note.locked-note { background: linear-gradient(135deg, #f8fafc, #f1f5f9) !important; border: 2px dashed #cbd5e1; }
     .mini-note.time-capsule { background: linear-gradient(135deg, #e2e8f0, #cbd5e1) !important; border: 2px dashed #94a3b8; }
-    
     .mini-pin { position: absolute; top: -18px; font-size: 30px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3)); z-index: 4; }
     .mini-pin.magic-pin { animation: floatBox 2s ease-in-out infinite, glowing 1.5s infinite alternate; font-size: 35px; }
     .mini-from-text { font-size: 16px; font-weight: 700; word-break: break-word; line-height: 1.3; }
@@ -244,31 +217,43 @@
     .mini-note.unlocked-past-note .mini-hint { background: #d1fae5; color: #059669; border: 1px solid #34d399; }
     .mini-time-stamp { font-size: 10px; margin-top: 10px; opacity: 0.8; font-weight: 500; }
 
-    /* 🌟 Modals (ป๊อปอัปต่างๆ - ล็อกหน้าจอ) */
-    .popup-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 10000; padding: 20px; backdrop-filter: blur(6px); }
+    /* 🌟 Modals (ป๊อปอัปต่างๆ) */
+    .popup-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 10000; padding: 20px; backdrop-filter: blur(6px); overflow: hidden; }
     .popup-content { background: white; border-radius: 28px; padding: 30px; max-width: 340px; width: 100%; text-align: center; box-shadow: 0 15px 50px rgba(0,0,0,0.3); animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
     
-    /* ป๊อปอัปเลือก 3 ก.ย. */
     .choice-3sep-modal { background: linear-gradient(135deg, #fff0f3, #ffe4e8); border: 4px solid #ffb6c1; }
-    
-    /* 🎉 ป๊อปอัปสรุปเดือนเก่า */
     .summary-modal { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 4px solid #fcd34d; overflow: hidden; }
     .summary-title { font-size: 24px; font-weight: 700; color: #d97706; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(217,119,6,0.2); }
     .summary-stat { font-size: 18px; color: #4a5568; font-weight: 600; margin: 15px 0; background: white; padding: 15px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
     .summary-highlight { font-size: 26px; color: #ff477e; font-weight: bold; }
     .summary-unlock-text { font-size: 15px; color: #059669; font-weight: 700; background: #d1fae5; padding: 12px; border-radius: 12px; border: 2px dashed #10b981; margin-bottom: 20px; animation: pulse 2s infinite; line-height: 1.5; }
 
-    /* 💌 Popup อ่านโน้ต */
+    /* ป๊อปอัปผลลัพธ์ตู้คีบ */
+    .fortune-modal { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 4px solid #f59e0b; padding: 35px 25px; }
+    .fortune-number-badge { font-size: 20px; font-weight: bold; color: white; background: #e11d48; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 10px; box-shadow: 0 4px 8px rgba(225,29,72,0.3); }
+    .fortune-title { font-size: 22px; font-weight: 700; color: #d97706; margin-bottom: 15px; }
+    .fortune-message { font-size: 16px; color: #4a5568; font-weight: 600; line-height: 1.5; background: white; padding: 20px; border-radius: 16px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); margin-bottom: 20px; border: 2px dashed #fcd34d; }
+    .fortune-coupon { color: #e11d48; font-size: 18px; font-weight: 700; animation: pulse 1.5s infinite; }
+
+    /* ป๊อปอัปแอดมินตู้คีบ */
+    .admin-modal-content { background: white; border-radius: 24px; padding: 25px; width: 100%; max-width: 360px; text-align: left; position: relative; max-height: 85vh; overflow-y: auto; animation: popUp 0.3s; }
+    .admin-title { font-size: 18px; font-weight: 700; color: #d97706; margin-bottom: 10px; border-bottom: 2px dashed #fcd34d; padding-bottom: 10px; text-align: center; }
+    .fortune-list-item { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 12px; margin-bottom: 10px; font-size: 14px; position: relative;}
+    .fortune-list-num { font-weight: bold; color: #e11d48; margin-bottom: 4px; font-size: 15px;}
+
+    /* Popup อ่านโน้ต */
     .read-note-content { background: #fffdf0; border: 3px solid #fcd34d; border-radius: 24px; padding: 40px 24px 24px 24px; text-align: left; max-width: 380px; width: 100%; box-shadow: 0 20px 50px rgba(217, 119, 6, 0.4); animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; max-height: 90vh; overflow-y: auto; }
     .read-note-pin { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 45px; filter: drop-shadow(0 5px 8px rgba(0,0,0,0.3)); z-index: 5; }
     .read-note-fromto { font-weight: 700; color: #b45309; font-size: 18px; margin-bottom: 15px; border-bottom: 2px dashed #fcd34d; padding-bottom: 12px; text-align: center; }
     .read-note-text { font-size: 16px; color: #374151; line-height: 1.6; margin-bottom: 20px; min-height: 50px; word-break: break-word; font-weight: 500; }
     .detail-image { width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; border: 2px solid #fff; }
-    
-    /* กล่องเฉลยความลับ */
     .secret-revealed-box { margin-top: 20px; background: #ecfdf5; border: 2px dashed #10b981; padding: 15px; border-radius: 16px; text-align: center; display: none; animation: popUp 0.5s; box-shadow: 0 4px 15px rgba(16,185,129,0.2); }
     .secret-revealed-title { font-size: 15px; font-weight: 700; color: #059669; margin-bottom: 5px; }
     .secret-revealed-pin { font-size: 24px; font-weight: bold; color: #e11d48; letter-spacing: 4px; background: white; padding: 5px 15px; border-radius: 10px; display: inline-block; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); }
+
+    .unlock-box { background: #f8fafc; border: 3px solid #cbd5e1; border-radius: 24px; padding: 30px 20px; text-align: center; max-width: 340px; width: 100%; animation: popUp 0.3s ease-out; }
+    .unlock-icon { font-size: 55px; margin-bottom: 10px; filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15)); }
+    .unlock-title { font-size: 20px; font-weight: 700; color: #334155; margin-bottom: 8px; }
 
     @keyframes popUp { from { opacity: 0; transform: scale(0.8) translateY(30px); } to { opacity: 1; transform: scale(1) translateY(0); } }
     .pulse-anim { animation: pulse 1.5s infinite; }
@@ -279,10 +264,6 @@
     .bad-btn { background-color: #fff5f5; border-color: #fed7d7; color: #e53e3e; }
     .good-btn { background-color: #f0fdf4; border-color: #bbf7d0; color: #16a34a; }
     .best-btn { background-color: #f0f9ff; border-color: #bae6fd; color: #0284c7; }
-    
-    .unlock-box { background: #f8fafc; border: 3px solid #cbd5e1; border-radius: 24px; padding: 30px 20px; text-align: center; max-width: 340px; width: 100%; animation: popUp 0.3s ease-out; }
-    .unlock-icon { font-size: 55px; margin-bottom: 10px; filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15)); }
-    .unlock-title { font-size: 20px; font-weight: 700; color: #334155; margin-bottom: 8px; }
 
     /* ✨ โซนความทรงจำ 3 ก.ย. ✨ */
     #sept3-experience-container { position: relative; z-index: 50; }
@@ -295,17 +276,14 @@
     .morning-title { font-size: 20px; font-weight: 700; color: #ff477e; margin-bottom: 12px; }
     .special-today-text { font-size: 15px; line-height: 1.6; color: #4a5568; margin-bottom: 24px; }
     .next-btn { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); color: #ffffff; border: none; padding: 14px 28px; font-size: 16px; font-weight: 600; font-family: 'Kanit', sans-serif; border-radius: 30px; cursor: pointer; box-shadow: 0 6px 20px rgba(255, 117, 140, 0.4); width: 100%; transition: all 0.3s ease; }
-    
     .video-wrapper { width: 100%; border-radius: 28px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.2); background: #000; border: 3px solid #ffffff; animation: popUp 0.5s ease-out forwards; }
     .video-wrapper video { width: 100%; height: auto; display: block; }
-    
     .big-rain-card { background: rgba(255, 255, 255, 0.95); border-radius: 28px; padding: 35px 20px; box-shadow: 0 15px 35px rgba(147, 197, 253, 0.4); border: 2px solid #ffffff; animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
     .rain-icon { font-size: 60px; margin-bottom: 12px; }
     .big-rain-title { font-size: 21px; font-weight: 700; color: #2563eb; margin: 0 0 10px 0; }
     .sub-rain-text { font-size: 15px; color: #475569; margin: 0; }
     .fade-item { opacity: 0; transform: translateY(40px) scale(0.95); transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); }
     .fade-item.show { opacity: 1; transform: translateY(0) scale(1); }
-    
     .vinyl-player { display: flex; align-items: center; gap: 14px; cursor: pointer; }
     .vinyl-disc { width: 50px; height: 50px; background: radial-gradient(circle, #333 30%, #111 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 3px solid #ffb6c1; flex-shrink: 0; }
     .vinyl-disc.spinning { animation: spin 3s linear infinite; }
@@ -313,18 +291,15 @@
     .vinyl-info { text-align: left; display: flex; flex-direction: column; }
     .song-title { font-weight: 700; font-size: 15px; color: #2d3748; }
     .play-status { font-size: 12px; color: #718096; margin-top: 2px; }
-    
     .note-card { background: #fffdf0; border-radius: 22px; padding: 22px 18px; margin-bottom: 18px; position: relative; box-shadow: 0 8px 25px rgba(217, 119, 6, 0.15); border: 2px solid #fef3c7; text-align: left; width: 100%; }
     .note-header { font-weight: 700; color: #d97706; margin-bottom: 10px; text-align: center; font-size: 15px; }
     .note-text { font-size: 14.5px; line-height: 1.6; color: #374151; margin: 0; min-height: 50px; font-weight: 500; }
     .result-box { margin-top: 12px; font-size: 14.5px; font-weight: 600; color: #ff477e; }
-    
     .slider-box { margin-top: 15px; background: #f8fafc; padding: 16px; border-radius: 18px; border: 1px dashed #cbd5e1; }
     .time-display { font-size: 20px; font-weight: 700; color: #ff477e; margin: 6px 0 12px 0; }
     .time-slider { width: 100%; -webkit-appearance: none; height: 8px; border-radius: 5px; background: #ffccd5; outline: none; }
     .time-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #ff477e; cursor: pointer; }
     .countdown-timer-text { font-size: 24px; font-weight: 700; color: #ff477e; background: #fff0f3; padding: 10px 18px; border-radius: 16px; display: inline-block; margin-top: 8px; border: 1px dashed #ff758c; }
-    
     .scanner-box { position: relative; width: 130px; height: 130px; margin: 15px auto; background: linear-gradient(145deg, #ffe0e9, #ffd1dc); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; overflow: hidden; border: 3px solid #ffffff; touch-action: manipulation; user-select: none; }
     .scanner-img { width: 100%; height: 100%; object-fit: cover; }
     .laser-line { position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: #ff0055; box-shadow: 0 0 12px #ff0055; display: none; z-index: 5; }
@@ -345,7 +320,7 @@
   <button class="open-box-btn" onclick="openPackage()">✨ แตะเพื่อเปิดกล่อง!</button>
 </div>
 
-<!-- 🚨 โอเวอร์เลย์วิดีโอฉุกเฉิน (โรงหนังโฮโลแกรม - ป้องกันการเลื่อนจอ 100%) -->
+<!-- 🚨 โอเวอร์เลย์วิดีโอฉุกเฉิน (ล็อกหน้าจอ 100%) -->
 <div id="emergency-video-overlay">
   <div style="font-size: 24px; color: #ff7eb3; font-weight: 700; margin-bottom: 20px; font-family: 'Kanit';" class="magic-glow">💖 Emergency Miss You 💖</div>
   <div class="video-glow-box">
@@ -353,7 +328,7 @@
       <source src="ae59483c-7771-4b6c-a736-d52859c39d23.mp4" type="video/mp4">
     </video>
   </div>
-  <button class="close-video-btn" onclick="closeEmergencyVideo()">ปิดวิดีโอ ❌</button>
+  <button class="close-video-btn" onclick="closeEmergencyVideo()">พับเก็บความทรงจำ ❌</button>
 </div>
 
 <!-- 📦 Main Application -->
@@ -371,7 +346,6 @@
         <div class="siren-light">🚨</div>
         <div class="emergency-box" id="emergency-box-element" onclick="smashGlass()">
           <div class="emergency-box-text">MISS YOU<br><span style="font-size:12px; font-weight:500;">(ทุบกระจกฉุกเฉิน)</span></div>
-          
           <div id="emergency-glass" class="glass-pane"></div>
           <svg id="crack-1" class="crack-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d="M50 50 L10 10 M50 50 L90 20 M50 50 L40 90" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" fill="none" />
@@ -409,10 +383,9 @@
         </div>
       </div>
       
-      <div id="shake-status" class="shake-status">✨ ลองคีบดูสิ!</div>
+      <div id="claw-status" class="shake-status">✨ ลองคีบดูสิ!</div>
       <button id="clawBtn" class="claw-btn" onclick="playClawMachine()">🕹️ กดคีบเลย!</button>
       
-      <!-- 🌟 ปุ่มส่วนรวม หน้าบ้าน -->
       <div class="shared-fortune-controls">
         <button class="shared-btn" onclick="openAddFortuneModal()">✍️ ใส่ของรางวัลเพิ่มลงตู้</button>
         <button class="shared-btn" onclick="openAllFortunesModal()">📜 แอบดูของในตู้ทั้งหมด</button>
@@ -623,7 +596,7 @@
 
 </div> <!-- ปิด main-app-container -->
 
-<!-- ➕ ป๊อปอัป ร่วมเขียนคำทำนาย/ใส่ตู้คีบ -->
+<!-- ➕ ป๊อปอัป ร่วมเขียนคำทำนายใส่ตู้คีบ (ล็อกหน้าจอ 100%) -->
 <div id="addFortuneModal" class="popup-modal">
   <div class="admin-modal-content">
     <div class="admin-title">✍️ ใส่ของรางวัลเพิ่มลงตู้คีบ</div>
@@ -656,7 +629,7 @@
   </div>
 </div>
 
-<!-- 📜 ป๊อปอัป แอบดูของในตู้ทั้งหมด -->
+<!-- 📜 ป๊อปอัป แอบดูของในตู้ทั้งหมด (ล็อกหน้าจอ 100%) -->
 <div id="allFortunesModal" class="popup-modal">
   <div class="admin-modal-content">
     <div class="admin-title">📜 ของรางวัลทั้งหมดที่เรามี</div>
@@ -693,7 +666,7 @@
   </div>
 </div>
 
-<!-- 🔮 ป๊อปอัปผลลัพธ์ ตู้คีบ -->
+<!-- 🔮 ป๊อปอัปผลลัพธ์ ตู้คีบ (ล็อกหน้าจอ 100%) -->
 <div id="fortuneResultModal" class="popup-modal">
   <div class="popup-content fortune-modal">
     <div class="fortune-number-badge" id="fortuneNumberBadge">แคปซูลเบอร์ ?</div>
@@ -715,7 +688,7 @@
   </div>
 </div>
 
-<!-- 🔒 ป๊อปอัปเกมทายรหัส -->
+<!-- 🔒 ป๊อปอัปเกมทายรหัส (ล็อกหน้าจอ 100%) -->
 <div id="unlockModal" class="popup-modal">
   <div class="unlock-box">
     <div class="unlock-icon">🔒</div>
@@ -738,7 +711,7 @@
   </div>
 </div>
 
-<!-- 💌 Popup สำหรับเปิดอ่านโน้ต (รูปภาพ & เสียง) -->
+<!-- 💌 Popup สำหรับเปิดอ่านโน้ต (ล็อกหน้าจอ 100%) -->
 <div id="noteDetailModal" class="popup-modal">
   <div class="read-note-content">
     <div class="read-note-pin" id="detailPinIcon">📌</div>
@@ -813,9 +786,9 @@
   
   function smashGlass() {
     smashCount++;
-    const box = document.getElementById('emergency-box-element');
     const glass = document.getElementById('emergency-glass');
     
+    // แอนิเมชันสั่นหน้าจอแบบแรงๆ
     document.body.classList.remove('shake-screen');
     void document.body.offsetWidth; 
     document.body.classList.add('shake-screen');
@@ -827,6 +800,7 @@
       document.getElementById('crack-2').style.opacity = '1';
       glass.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, transparent 50%)';
     } else if (smashCount >= 3) {
+      // แตกเพล้ง!
       glass.style.display = 'none';
       document.getElementById('crack-1').style.display = 'none';
       document.getElementById('crack-2').style.display = 'none';
@@ -842,6 +816,7 @@
         overlay.style.display = 'flex'; 
         video.play().catch(e=>console.log(e));
         
+        // รีเซ็ตกระจกกลับเป็นเหมือนเดิมเงียบๆ เผื่ออยากทุบใหม่
         smashCount = 0;
         glass.style.display = 'block';
         glass.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 30%, transparent 50%, rgba(255,255,255,0.1) 70%, rgba(255,255,255,0.3) 100%)';
@@ -855,6 +830,8 @@
 
   function closeEmergencyVideo() { 
     document.getElementById('emergency-video-overlay').style.display = 'none'; 
+    
+    // ✨ คืนค่าหน้าเว็บหลักให้กลับมา ✨
     document.getElementById('main-app-container').style.display = 'flex';
     unlockScroll();
     
@@ -866,7 +843,7 @@
   // ==========================================
   // 🕹️🧸 ระบบตู้คีบแคปซูลสื่อรัก (Love Claw Machine)
   // ==========================================
-  let currentShakeData = null; // ใช้เก็บสถานะการเล่นประจำวันเหมือนเดิม
+  let currentShakeData = null; 
   let isClawPlaying = false;
   let fortunesPool = []; 
   let drawnNumber = null; 
@@ -894,6 +871,7 @@
   function checkClawStatus() {
     const todayStr = new Date().toLocaleDateString('th-TH');
     const btn = document.getElementById('clawBtn');
+    const statusEl = document.getElementById('claw-status');
     
     if (!currentShakeData || currentShakeData.date !== todayStr) {
       setTimeout(() => {
@@ -906,9 +884,13 @@
     }
     
     if (currentShakeData.isPlayed) {
-      btn.innerHTML = '🕹️ คีบไปแล้ว (ลองคีบใหม่สิ!)';
+      btn.innerHTML = '🕹️ คีบใหม่ซ้ำอีกรอบ!';
+      statusEl.style.display = 'block';
+      statusEl.innerText = '✨ วันนี้ได้ของรางวัลไปแล้ว (ลองคีบซ้ำดูสิ!)';
     } else {
       btn.innerHTML = '🕹️ กดคีบเลย!';
+      statusEl.style.display = 'block';
+      statusEl.innerText = '✨ ลองคีบดูสิ!';
     }
   }
 
@@ -935,7 +917,6 @@
       
       // 3. จับแคปซูล
       setTimeout(() => {
-        // สุ่มรูปร่างแคปซูล
         grabbedCap.innerText = capsuleEmojis[Math.floor(Math.random() * capsuleEmojis.length)];
         grabbedCap.style.display = 'block';
         
@@ -952,11 +933,11 @@
             grabbedCap.style.display = 'none';
             btn.disabled = false;
             arm.classList.add('claw-moving');
-            arm.style.left = '50%'; // รีเซ็ตตำแหน่งเริ่ม
+            arm.style.left = '50%'; 
             
-          }, 1000); // รอตอนดึงขึ้นสุด
-        }, 800); // รอจับแป๊บนึง
-      }, 800); // รอตอนปล่อยลงไปถึงพื้น
+          }, 1000); 
+        }, 800); 
+      }, 800); 
     }, 100);
   }
 
@@ -977,8 +958,11 @@
     document.getElementById('fortuneMessage').innerText = (res.text || "คุณได้แคปซูลความรัก!") + extraText;
     
     const couponEl = document.getElementById('fortuneCoupon');
-    if (res.type === 'coupon' && res.coupon) { couponEl.innerText = res.coupon; couponEl.style.display = 'block'; } 
-    else { couponEl.style.display = 'none'; }
+    if (res.type === 'coupon' && res.coupon) { 
+       couponEl.innerText = res.coupon; couponEl.style.display = 'block'; 
+    } else { 
+       couponEl.style.display = 'none'; 
+    }
     
     document.getElementById('fortuneResultModal').style.display = 'flex';
     lockScroll();
@@ -1357,4 +1341,8 @@
   function finishScan() { hasCompletedScan = true; document.getElementById('laser').classList.remove('scanning'); clearInterval(heartbeatInterval); document.getElementById('heartbeat-status').innerHTML = '💓 135 BPM (หัวใจเต้นแรงมาก!)'; document.getElementById('lie-result').innerHTML = `🚨 <strong>RESULT: DETECTED!</strong><br><span style="color: #ff477e;">"ตรวจพบความคิดถึง 100% (ห้ามปฏิเสธเด็ดขาด!)" 🥰✨</span>`; const finalBtn = document.getElementById('final-btn-wrapper'); finalBtn.style.display = 'block'; setTimeout(() => { finalBtn.classList.add('show'); }, 600); }
   function goToNextSection() { document.getElementById('step-4-main').style.display = 'none'; document.getElementById('step-5-final').style.display = 'block'; }
 
-  function createBackgroundHearts() { const container = document.getElementById('heart-bg-container'); const hearts = ['💖', '✨', '🌟', '💕']; for(let i=0; i<12; i++) { const heart = document.createElement('div'); heart.classList.add('floating-heart-bg'); heart.innerText = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 +
+  function createBackgroundHearts() { const container = document.getElementById('heart-bg-container'); const hearts = ['💖', '✨', '🌟', '💕']; for(let i=0; i<12; i++) { const heart = document.createElement('div'); heart.classList.add('floating-heart-bg'); heart.innerText = hearts[Math.floor(Math.random() * hearts.length)]; heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = (Math.random() * 4 + 4) + 's'; container.appendChild(heart); } }
+</script>
+
+</body>
+</html>
